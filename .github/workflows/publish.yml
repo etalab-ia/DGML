@@ -1,4 +1,4 @@
-name: deploy-book
+name: publish
 
 # Only run this when the master branch changes
 on:
@@ -8,7 +8,7 @@ on:
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
-  deploy-book:
+  publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
