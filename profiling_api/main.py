@@ -30,10 +30,9 @@ def get_profile(csv_path: Path, resource_metadata: Dict[str, str],
     target_df = pd.read_csv(csv_path.as_posix(), sep=csv_metadata["separator"],
                             encoding=csv_metadata["encoding"])
 
-    profile = ProfileReport(target_df, title='Pandas Profiling Report',
+    profile = ProfileReport(target_df, title=f"{dataset_name}:\t{csv_id}",
                             config_file="config_profiler.yml")
 
-    profile.set_variables(title=f"{dataset_name}:\t{csv_id}")
     profile.set_variables(dataset={"url": csv_url, "description": dataset_name})
     html_str = profile.to_html()
     return html_str
@@ -44,7 +43,7 @@ def get_url(resource_id: str):
         resource_info = resources_df[resources_df.id == resource_id].to_dict("records")
         return resource_info[0]
     except IndexError as e:
-        # logger
+        logger.error(f"Could not find an url for this resource {resource_id}. Error: {e}")
         raise e
 
 
@@ -52,7 +51,7 @@ def download_file(resource_metadata: str):
     try:
         file_name, headers = urllib.request.urlretrieve(resource_metadata["url"])
     except Exception as e:
-        logger.error(f"Could not download resource file. Error {e}")
+        logger.error(f"Could not download resource file. Error: {e}")
         raise e
     # TODO: check if download was successful
     return Path(file_name)
