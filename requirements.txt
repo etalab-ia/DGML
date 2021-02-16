@@ -70,7 +70,7 @@ qtconsole @ file:///tmp/build/80754af9/qtconsole_1600870028330/work
 QtPy==1.9.0
 requests==2.25.1
 scipy==1.6.0
-seaborn==0.11.1
+seaborn
 Send2Trash @ file:///tmp/build/80754af9/send2trash_1607525499227/work
 six @ file:///tmp/build/80754af9/six_1605205313296/work
 tangled-up-in-unicode==0.0.6
