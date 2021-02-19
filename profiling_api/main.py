@@ -35,7 +35,7 @@ def get_profile(csv_path: Path, resource_metadata: Dict[str, str],
 
     profile.set_variables(dataset={"url": csv_url, "description": dataset_name})
     html_str = profile.to_html()
-    return html_str
+    return {"html": html_str, "json": profile.to_json()}
 
 
 def get_resource_metadata(resource_id: str):
@@ -61,7 +61,7 @@ def get_report(resource_id: str, resource_url: str = None):
     try:
 
         # 1. Check if it is not in the cache
-        if resource_id in cache:
+        if resource_id in cache and False:
             logger.info(f"Great! We found csv {resource_id} in cache")
             return cache[resource_id]
 
@@ -80,22 +80,22 @@ def get_report(resource_id: str, resource_url: str = None):
         csv_detective_info = get_csv_metadata(file_path)
         logger.info(f"Got csv-detective metadata")
         # 5. Get and cache profile
-        html_report = get_profile(file_path, resource_metadata=resource_metadata,
-                                  csv_metadata=csv_detective_info)
+        report = get_profile(file_path, resource_metadata=resource_metadata,
+                             csv_metadata=csv_detective_info)
         logger.info(f"Got csv profile")
 
         # 6. Save report in cache
-        cache[resource_id] = html_report
+        cache[resource_id] = report
         logger.info(f"Saved csv profile in sqlite db")
-        return html_report
+        return report
     except Exception as e:
         logger.error(f"Could not get pandas profiling of file {resource_id}. Error {e}")
-        return str(e)
+        raise e
     finally:
         cache.close()
 
 
 @app.get("/{resource_id}", response_class=HTMLResponse)
 def read_item(resource_id: str, resource_url: str = None):
-    report_html = get_report(resource_id=resource_id, resource_url=resource_url)
+    report_html = get_report(resource_id=resource_id, resource_url=resource_url)["html"]
     return report_html
