@@ -1,0 +1,8 @@
+dataset_id,dataset_title,dataset_description,topic,task,nb_lines,nb_features,missing_cells_pct,target_variable,model_metric,best_value,best_model,automl_url,profile_url,dict_url,own_xp_url,other_xp_url
+,Airbnb Bordeaux,,,Regression,5237,61,,PrixNuitee,r2,0.648815,,AutoML_airbnb_expl,,,,
+,Airbnb Bordeaux,,,Regression,5237,61,,PrixNuitee,r2,0.597615,,AutoML_airbnb_perf,,,,
+,Donnes carroyees,,,Regression,142921,31,,Log_soc,r2,0.946354,,AutoML_donnes_carr,,,,
+,Emissions v�hicules (2013),,,Regression,44850,26,,CO2,r2,0.998739,,AutoML_emissions_veh,,,,
+,Accidents routiers,,,Classification,253488,56,,grav,accuracy,,,,,,,
+,Agrybalise,,,Regression,2479,27,,DQR - Note de qualit� de la donn�e (1 excellente ; 5 tr�s faible),r2,0.735745,,AutoML_agrybalise,,,,
+,Demande valeurs foncieres,,,Regression,827105,43,,valeur fonciere,r2,0.339495,,AutoML_dvf,,,,
