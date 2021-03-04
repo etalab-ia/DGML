@@ -1,0 +1,278 @@
+{
+    "uid": "7bd822fc-e286-443c-973f-caa543e1aa23",
+    "name": "3_Linear",
+    "preprocessing": [
+        {
+            "remove_columns": [
+                "minute_debut",
+                "minute_fin"
+            ],
+            "scale": [
+                {
+                    "scale": [
+                        0.5494995012370496,
+                        0.5494995012370496,
+                        1.160235369430711,
+                        1.2511648729612774,
+                        0.2563995790282257,
+                        1.307758319359642,
+                        1.2432680504070857,
+                        0.04023575302387167,
+                        0.031159429803186183,
+                        1.0678258467976371,
+                        1.0678258467976371,
+                        1.0678258467976374,
+                        1.0678258467976374,
+                        7.1246031893999096,
+                        7.1246031893999096
+                    ],
+                    "mean": [
+                        1.2007648183556405,
+                        1.2007648183556405,
+                        1.321223709369025,
+                        1.508604206500956,
+                        0.9292543021032504,
+                        1.5239005736137667,
+                        1.9063097514340344,
+                        47.888235848948376,
+                        1.9423627858508605,
+                        4.275334608030593,
+                        4.275334608030593,
+                        8.275334608030592,
+                        8.275334608030592,
+                        10.917782026768643,
+                        10.917782026768643
+                    ],
+                    "var": [
+                        0.3019497018597663,
+                        0.3019497018597663,
+                        1.3461461124780187,
+                        1.5654135393322097,
+                        0.06574074412585136,
+                        1.7102318218543553,
+                        1.5457154451630357,
+                        0.0016189158213979983,
+                        0.0009709100656596873,
+                        1.140252039089091,
+                        1.140252039089091,
+                        1.1402520390890911,
+                        1.1402520390890911,
+                        50.759970606407364,
+                        50.759970606407364
+                    ],
+                    "n_samples_seen": 523,
+                    "n_features_in": 15,
+                    "columns": [
+                        "nom_com",
+                        "insee_com",
+                        "nom_station",
+                        "code_station",
+                        "typologie",
+                        "nom_poll",
+                        "id_poll_ue",
+                        "lat",
+                        "long",
+                        "jour_semaine_debut",
+                        "jour_semaine_fin",
+                        "jour_debut",
+                        "jour_fin",
+                        "heure_debut",
+                        "heure_fin"
+                    ],
+                    "scale_method": "scale_normal"
+                }
+            ],
+            "scale_y": {
+                "scale": [
+                    0.9613209483364554
+                ],
+                "mean": [
+                    2.655911921867544
+                ],
+                "var": [
+                    0.9241379657105021
+                ],
+                "n_samples_seen": 523,
+                "n_features_in": 1,
+                "columns": [
+                    "target"
+                ],
+                "scale_method": "scale_log_and_normal",
+                "X_min_values": [
+                    -0.3
+                ]
+            },
+            "ml_task": "regression",
+            "params": {
+                "columns_preprocessing": {
+                    "nom_com": [
+                        "scale_normal"
+                    ],
+                    "insee_com": [
+                        "scale_normal"
+                    ],
+                    "nom_station": [
+                        "scale_normal"
+                    ],
+                    "code_station": [
+                        "scale_normal"
+                    ],
+                    "typologie": [
+                        "scale_normal"
+                    ],
+                    "nom_poll": [
+                        "scale_normal"
+                    ],
+                    "id_poll_ue": [
+                        "scale_normal"
+                    ],
+                    "lat": [
+                        "scale_normal"
+                    ],
+                    "long": [
+                        "scale_normal"
+                    ],
+                    "jour_semaine_debut": [
+                        "scale_normal"
+                    ],
+                    "jour_semaine_fin": [
+                        "scale_normal"
+                    ],
+                    "jour_debut": [
+                        "scale_normal"
+                    ],
+                    "jour_fin": [
+                        "scale_normal"
+                    ],
+                    "heure_debut": [
+                        "scale_normal"
+                    ],
+                    "heure_fin": [
+                        "scale_normal"
+                    ],
+                    "minute_debut": [
+                        "remove_column"
+                    ],
+                    "minute_fin": [
+                        "remove_column"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "scale_log_and_normal"
+                ],
+                "ml_task": "regression"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "0.24.1",
+            "algorithm_name": "Linear Regression",
+            "algorithm_short_name": "Linear",
+            "uid": "d502ae14-d594-4510-94e6-174d8bcf62e2",
+            "params": {
+                "model_type": "Linear",
+                "ml_task": "regression",
+                "seed": 43,
+                "explain_level": 2
+            }
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_steps": 1,
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "nom_com": [
+                    "scale_normal"
+                ],
+                "insee_com": [
+                    "scale_normal"
+                ],
+                "nom_station": [
+                    "scale_normal"
+                ],
+                "code_station": [
+                    "scale_normal"
+                ],
+                "typologie": [
+                    "scale_normal"
+                ],
+                "nom_poll": [
+                    "scale_normal"
+                ],
+                "id_poll_ue": [
+                    "scale_normal"
+                ],
+                "lat": [
+                    "scale_normal"
+                ],
+                "long": [
+                    "scale_normal"
+                ],
+                "jour_semaine_debut": [
+                    "scale_normal"
+                ],
+                "jour_semaine_fin": [
+                    "scale_normal"
+                ],
+                "jour_debut": [
+                    "scale_normal"
+                ],
+                "jour_fin": [
+                    "scale_normal"
+                ],
+                "heure_debut": [
+                    "scale_normal"
+                ],
+                "heure_fin": [
+                    "scale_normal"
+                ],
+                "minute_debut": [
+                    "remove_column"
+                ],
+                "minute_fin": [
+                    "remove_column"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "scale_log_and_normal"
+            ],
+            "ml_task": "regression"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "X_path": "AutoML_13/X.parquet",
+            "y_path": "AutoML_13/y.parquet",
+            "results_path": "AutoML_13"
+        },
+        "learner": {
+            "model_type": "Linear",
+            "ml_task": "regression",
+            "seed": 43,
+            "explain_level": 2
+        },
+        "ml_task": "regression",
+        "explain_level": 2,
+        "name": "3_Linear",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "max_time_for_learner": 60
+    },
+    "saved": [
+        "AutoML_13/3_Linear/learner_fold_0.linear"
+    ],
+    "predictions_fname": "AutoML_13/3_Linear/predictions_validation.csv",
+    "metric_name": "rmse",
+    "final_loss": 17.334080103305578,
+    "train_time": 1.995629072189331,
+    "is_stacked": false
+}

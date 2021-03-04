@@ -1,0 +1,17 @@
+feature,shap_importance
+nom_poll,3.7049263530079632
+jour_semaine_debut,2.33721472356519
+code_station,2.292369451729918
+nom_station,2.045536635171069
+jour_debut,2.005901874487544
+jour_semaine_fin,0.8725251839817753
+jour_fin,0.7346975977420828
+heure_debut,0.3546220046936512
+nom_com,0.3329396171376154
+heure_fin,0.12540796915810204
+insee_com,0.0
+typologie,0.0
+influence,0.0
+id_poll_ue,0.0
+lat,0.0
+long,0.0

@@ -1,0 +1,16 @@
+{
+    "name": "Ensemble",
+    "ml_task": "regression",
+    "optimize_metric": "rmse",
+    "selected_models": [
+        {
+            "model": "4_Default_Xgboost",
+            "repeat": 3.0
+        }
+    ],
+    "predictions_fname": "AutoML_13/Ensemble/predictions_ensemble.csv",
+    "metric_name": "rmse",
+    "final_loss": 1.4182049729367308,
+    "train_time": 0.11325860023498535,
+    "is_stacked": false
+}
