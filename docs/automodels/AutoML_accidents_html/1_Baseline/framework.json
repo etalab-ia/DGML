@@ -1,0 +1,84 @@
+{
+    "uid": "0c243ec3-138d-4317-a4ac-90f587581ef3",
+    "name": "1_Baseline",
+    "preprocessing": [
+        {
+            "categorical_y": {
+                "1": 0,
+                "2": 1,
+                "3": 2,
+                "4": 3
+            },
+            "ml_task": "multiclass_classification",
+            "params": {
+                "columns_preprocessing": {},
+                "target_preprocessing": [
+                    "na_exclude",
+                    "categorical_to_int"
+                ],
+                "ml_task": "multiclass_classification"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "0.24.1",
+            "algorithm_name": "Baseline Classifier",
+            "algorithm_short_name": "Baseline",
+            "uid": "e5bada35-d6b5-4feb-abc0-81690566b022",
+            "params": {
+                "model_type": "Baseline",
+                "ml_task": "multiclass_classification",
+                "seed": 43,
+                "num_class": 4,
+                "explain_level": 0
+            }
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_steps": 1,
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {},
+            "target_preprocessing": [
+                "na_exclude",
+                "categorical_to_int"
+            ],
+            "ml_task": "multiclass_classification"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "stratify": true,
+            "X_path": "AutoML_14/X.parquet",
+            "y_path": "AutoML_14/y.parquet",
+            "results_path": "AutoML_14"
+        },
+        "learner": {
+            "model_type": "Baseline",
+            "ml_task": "multiclass_classification",
+            "seed": 43,
+            "num_class": 4,
+            "explain_level": 0
+        },
+        "ml_task": "multiclass_classification",
+        "explain_level": 0,
+        "name": "1_Baseline",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "max_time_for_learner": 360.0
+    },
+    "saved": [
+        "AutoML_14/1_Baseline/learner_fold_0.baseline"
+    ],
+    "predictions_fname": "AutoML_14/1_Baseline/predictions_validation.csv",
+    "metric_name": "logloss",
+    "final_loss": 1.0775248050487318,
+    "train_time": 1.5677096843719482,
+    "is_stacked": false
+}

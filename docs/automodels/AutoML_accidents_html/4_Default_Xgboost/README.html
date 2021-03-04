@@ -1,0 +1,134 @@
+<link rel="stylesheet" href="../style.css">
+
+<h1>Summary of 4_Default_Xgboost</h1>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
+<h2>Extreme Gradient Boosting (Xgboost)</h2>
+<ul>
+<li><strong>objective</strong>: multi:softprob</li>
+<li><strong>eval_metric</strong>: mlogloss</li>
+<li><strong>eta</strong>: 0.075</li>
+<li><strong>max_depth</strong>: 6</li>
+<li><strong>min_child_weight</strong>: 1</li>
+<li><strong>subsample</strong>: 1.0</li>
+<li><strong>colsample_bytree</strong>: 1.0</li>
+<li><strong>num_class</strong>: 4</li>
+<li><strong>explain_level</strong>: 0</li>
+</ul>
+<h2>Validation</h2>
+<ul>
+<li><strong>validation_type</strong>: split</li>
+<li><strong>train_ratio</strong>: 0.75</li>
+<li><strong>shuffle</strong>: True</li>
+<li><strong>stratify</strong>: True</li>
+</ul>
+<h2>Optimized metric</h2>
+<p>logloss</p>
+<h2>Training time</h2>
+<p>450.3 seconds</p>
+<h3>Metric details</h3>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">4</th>
+<th align="right">accuracy</th>
+<th align="right">macro avg</th>
+<th align="right">weighted avg</th>
+<th align="right">logloss</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">precision</td>
+<td align="right">0.809543</td>
+<td align="right">0.707635</td>
+<td align="right">0.65814</td>
+<td align="right">0.751014</td>
+<td align="right">0.767573</td>
+<td align="right">0.731583</td>
+<td align="right">0.764039</td>
+<td align="right">0.615246</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">recall</td>
+<td align="right">0.852688</td>
+<td align="right">0.371094</td>
+<td align="right">0.568497</td>
+<td align="right">0.759412</td>
+<td align="right">0.767573</td>
+<td align="right">0.637923</td>
+<td align="right">0.767573</td>
+<td align="right">0.615246</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">f1-score</td>
+<td align="right">0.830556</td>
+<td align="right">0.486867</td>
+<td align="right">0.610043</td>
+<td align="right">0.75519</td>
+<td align="right">0.767573</td>
+<td align="right">0.670664</td>
+<td align="right">0.763977</td>
+<td align="right">0.615246</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">support</td>
+<td align="right">21390</td>
+<td align="right">1024</td>
+<td align="right">6336</td>
+<td align="right">18779</td>
+<td align="right">0.767573</td>
+<td align="right">47529</td>
+<td align="right">47529</td>
+<td align="right">0.615246</td>
+</tr>
+</tbody>
+</table>
+<h2>Confusion matrix</h2>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">Predicted as 1</th>
+<th align="right">Predicted as 2</th>
+<th align="right">Predicted as 3</th>
+<th align="right">Predicted as 4</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">Labeled as 1</td>
+<td align="right">18239</td>
+<td align="right">35</td>
+<td align="right">447</td>
+<td align="right">2669</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 2</td>
+<td align="right">98</td>
+<td align="right">380</td>
+<td align="right">338</td>
+<td align="right">208</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 3</td>
+<td align="right">789</td>
+<td align="right">94</td>
+<td align="right">3602</td>
+<td align="right">1851</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 4</td>
+<td align="right">3404</td>
+<td align="right">28</td>
+<td align="right">1086</td>
+<td align="right">14261</td>
+</tr>
+</tbody>
+</table>
+<h2>Learning curves</h2>
+<p><img style="width:80%" alt="Learning curves" src="learning_curves.png" /></p>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
