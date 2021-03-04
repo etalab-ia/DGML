@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="style.css">
+
+<img src="https://raw.githubusercontent.com/mljar/visual-identity/main/media/mljar_AutomatedML.png" style="height:128px; margin-left: auto;
+margin-right: auto;display: block;"/>
+
+<h1>AutoML Leaderboard</h1>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left">Best model</th>
+<th align="left">name</th>
+<th align="left">model_type</th>
+<th align="left">metric_type</th>
+<th align="right">metric_value</th>
+<th align="right">train_time</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="1_Baseline/README.html">1_Baseline</a></td>
+<td align="left">Baseline</td>
+<td align="left">logloss</td>
+<td align="right">1.07752</td>
+<td align="right">2.09</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="2_DecisionTree/README.html">2_DecisionTree</a></td>
+<td align="left">Decision Tree</td>
+<td align="left">logloss</td>
+<td align="right">0.892098</td>
+<td align="right">2.69</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="3_Linear/README.html">3_Linear</a></td>
+<td align="left">Linear</td>
+<td align="left">logloss</td>
+<td align="right">0.990101</td>
+<td align="right">19.78</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="4_Default_Xgboost/README.html">4_Default_Xgboost</a></td>
+<td align="left">Xgboost</td>
+<td align="left">logloss</td>
+<td align="right">0.615246</td>
+<td align="right">450.64</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="5_Default_RandomForest/README.html">5_Default_RandomForest</a></td>
+<td align="left">Random Forest</td>
+<td align="left">logloss</td>
+<td align="right">0.888669</td>
+<td align="right">15.97</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"><strong>the best</strong></td>
+<td align="left"><a href="Ensemble/README.html">Ensemble</a></td>
+<td align="left">Ensemble</td>
+<td align="left">logloss</td>
+<td align="right">0.607605</td>
+<td align="right">1.3</td>
+</tr>
+</tbody>
+</table>
+<h3>AutoML Performance</h3>
+<p><img style="width:80%" alt="AutoML Performance" src="ldb_performance.png" /></p>
+<h3>AutoML Performance Boxplot</h3>
+<p><img style="width:80%" alt="AutoML Performance Boxplot" src="ldb_performance_boxplot.png" /></p>
