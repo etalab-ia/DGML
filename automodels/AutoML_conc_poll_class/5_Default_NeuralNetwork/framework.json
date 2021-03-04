@@ -1,0 +1,263 @@
+{
+    "uid": "ac4968e2-526d-4b35-afc5-f8175f6fe345",
+    "name": "5_Default_NeuralNetwork",
+    "preprocessing": [
+        {
+            "remove_columns": [
+                "minute_debut",
+                "minute_fin"
+            ],
+            "scale": [
+                {
+                    "scale": [
+                        0.5606241145991325,
+                        0.5606241145991325,
+                        1.169947115929511,
+                        1.2454098826361684,
+                        0.27469652001633604,
+                        20.040618438640156,
+                        0.04006243133757983,
+                        0.03247352302871351,
+                        1.0500248556060017,
+                        1.0500248556060017,
+                        1.0500248556060017,
+                        1.0500248556060017,
+                        7.210184342971828,
+                        7.210184342971828
+                    ],
+                    "mean": [
+                        1.1835564053537284,
+                        1.1835564053537284,
+                        1.3001912045889101,
+                        1.445506692160612,
+                        0.9177820267686424,
+                        20.74282982791587,
+                        47.89062734799236,
+                        1.942065019120459,
+                        4.260038240917782,
+                        4.260038240917782,
+                        8.260038240917781,
+                        8.260038240917781,
+                        11.042065009560229,
+                        11.042065009560229
+                    ],
+                    "var": [
+                        0.3142993978700613,
+                        0.3142993978700613,
+                        1.3687762540717805,
+                        1.5510457757678344,
+                        0.07545817810908531,
+                        401.6263874031638,
+                        0.0016049984046782983,
+                        0.0010545296978963863,
+                        1.1025521973904047,
+                        1.1025521973904047,
+                        1.1025521973904044,
+                        1.1025521973904044,
+                        51.98675825963609,
+                        51.98675825963609
+                    ],
+                    "n_samples_seen": 523,
+                    "n_features_in": 14,
+                    "columns": [
+                        "nom_com",
+                        "insee_com",
+                        "nom_station",
+                        "code_station",
+                        "typologie",
+                        "valeur",
+                        "lat",
+                        "long",
+                        "jour_semaine_debut",
+                        "jour_semaine_fin",
+                        "jour_debut",
+                        "jour_fin",
+                        "heure_debut",
+                        "heure_fin"
+                    ],
+                    "scale_method": "scale_normal"
+                }
+            ],
+            "categorical_y": {
+                "0": 0,
+                "1": 1,
+                "2": 2,
+                "3": 3,
+                "4": 4
+            },
+            "ml_task": "multiclass_classification",
+            "params": {
+                "columns_preprocessing": {
+                    "nom_com": [
+                        "scale_normal"
+                    ],
+                    "insee_com": [
+                        "scale_normal"
+                    ],
+                    "nom_station": [
+                        "scale_normal"
+                    ],
+                    "code_station": [
+                        "scale_normal"
+                    ],
+                    "typologie": [
+                        "scale_normal"
+                    ],
+                    "valeur": [
+                        "scale_normal"
+                    ],
+                    "lat": [
+                        "scale_normal"
+                    ],
+                    "long": [
+                        "scale_normal"
+                    ],
+                    "jour_semaine_debut": [
+                        "scale_normal"
+                    ],
+                    "jour_semaine_fin": [
+                        "scale_normal"
+                    ],
+                    "jour_debut": [
+                        "scale_normal"
+                    ],
+                    "jour_fin": [
+                        "scale_normal"
+                    ],
+                    "heure_debut": [
+                        "scale_normal"
+                    ],
+                    "heure_fin": [
+                        "scale_normal"
+                    ],
+                    "minute_debut": [
+                        "remove_column"
+                    ],
+                    "minute_fin": [
+                        "remove_column"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "categorical_to_int"
+                ],
+                "ml_task": "multiclass_classification"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "0.24.1",
+            "algorithm_name": "Neural Network",
+            "algorithm_short_name": "Neural Network",
+            "uid": "79b019d1-d7f4-4635-9ec5-179a1c202cb9",
+            "params": {
+                "model_type": "Neural Network",
+                "ml_task": "multiclass_classification",
+                "dense_1_size": 32,
+                "dense_2_size": 16,
+                "learning_rate": 0.05,
+                "seed": 5,
+                "num_class": 5,
+                "explain_level": 2
+            }
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "nom_com": [
+                    "scale_normal"
+                ],
+                "insee_com": [
+                    "scale_normal"
+                ],
+                "nom_station": [
+                    "scale_normal"
+                ],
+                "code_station": [
+                    "scale_normal"
+                ],
+                "typologie": [
+                    "scale_normal"
+                ],
+                "valeur": [
+                    "scale_normal"
+                ],
+                "lat": [
+                    "scale_normal"
+                ],
+                "long": [
+                    "scale_normal"
+                ],
+                "jour_semaine_debut": [
+                    "scale_normal"
+                ],
+                "jour_semaine_fin": [
+                    "scale_normal"
+                ],
+                "jour_debut": [
+                    "scale_normal"
+                ],
+                "jour_fin": [
+                    "scale_normal"
+                ],
+                "heure_debut": [
+                    "scale_normal"
+                ],
+                "heure_fin": [
+                    "scale_normal"
+                ],
+                "minute_debut": [
+                    "remove_column"
+                ],
+                "minute_fin": [
+                    "remove_column"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "categorical_to_int"
+            ],
+            "ml_task": "multiclass_classification"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "stratify": true,
+            "X_path": "AutoML_14/X.parquet",
+            "y_path": "AutoML_14/y.parquet",
+            "results_path": "AutoML_14"
+        },
+        "learner": {
+            "model_type": "Neural Network",
+            "ml_task": "multiclass_classification",
+            "dense_1_size": 32,
+            "dense_2_size": 16,
+            "learning_rate": 0.05,
+            "seed": 5,
+            "num_class": 5,
+            "explain_level": 2
+        },
+        "ml_task": "multiclass_classification",
+        "explain_level": 2,
+        "name": "5_Default_NeuralNetwork",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "max_time_for_learner": 60
+    },
+    "saved": [
+        "AutoML_14/5_Default_NeuralNetwork/learner_fold_0.neural_network"
+    ],
+    "predictions_fname": "AutoML_14/5_Default_NeuralNetwork/predictions_validation.csv",
+    "metric_name": "logloss",
+    "final_loss": 0.8744613209528062,
+    "train_time": 0.28655552864074707,
+    "is_stacked": false
+}

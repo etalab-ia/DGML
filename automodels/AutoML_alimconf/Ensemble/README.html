@@ -1,0 +1,130 @@
+<link rel="stylesheet" href="../style.css">
+
+<h1>Summary of Ensemble</h1>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
+<h2>Ensemble structure</h2>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left">Model</th>
+<th align="right">Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">4_Default_Xgboost</td>
+<td align="right">5</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">6_Default_RandomForest</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<h3>Metric details</h3>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">0</th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">accuracy</th>
+<th align="right">macro avg</th>
+<th align="right">weighted avg</th>
+<th align="right">logloss</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">precision</td>
+<td align="right">0.444444</td>
+<td align="right">1</td>
+<td align="right">0.639539</td>
+<td align="right">0.662692</td>
+<td align="right">0.649019</td>
+<td align="right">0.686669</td>
+<td align="right">0.64099</td>
+<td align="right">0.758822</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">recall</td>
+<td align="right">0.0283688</td>
+<td align="right">0.0526316</td>
+<td align="right">0.723714</td>
+<td align="right">0.643241</td>
+<td align="right">0.649019</td>
+<td align="right">0.361989</td>
+<td align="right">0.649019</td>
+<td align="right">0.758822</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">f1-score</td>
+<td align="right">0.0533333</td>
+<td align="right">0.1</td>
+<td align="right">0.679027</td>
+<td align="right">0.652821</td>
+<td align="right">0.649019</td>
+<td align="right">0.371296</td>
+<td align="right">0.632593</td>
+<td align="right">0.758822</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">support</td>
+<td align="right">282</td>
+<td align="right">19</td>
+<td align="right">2682</td>
+<td align="right">2419</td>
+<td align="right">0.649019</td>
+<td align="right">5402</td>
+<td align="right">5402</td>
+<td align="right">0.758822</td>
+</tr>
+</tbody>
+</table>
+<h2>Confusion matrix</h2>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">Predicted as 0</th>
+<th align="right">Predicted as 1</th>
+<th align="right">Predicted as 2</th>
+<th align="right">Predicted as 3</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">Labeled as 0</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">221</td>
+<td align="right">53</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">14</td>
+<td align="right">4</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 2</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">1941</td>
+<td align="right">735</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 3</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">859</td>
+<td align="right">1556</td>
+</tr>
+</tbody>
+</table>
+<h2>Learning curves</h2>
+<p><img style="width:80%" alt="Learning curves" src="learning_curves.png" /></p>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
