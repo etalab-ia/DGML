@@ -26,7 +26,7 @@ app.config.suppress_callback_exceptions = True
 
 # Path
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
-DATA_PATH = BASE_PATH.joinpath("data").resolve()
+DATA_PATH = BASE_PATH.joinpath("assets/data").resolve()
 
 # Read data
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
@@ -166,7 +166,7 @@ def generate_kpi_card(title: str, value: Union[int, str], color: Optional = None
                 ]
             )
         ],
-        color="primary" if not color else color, outline=True
+        color="primary" if not color else color, outline=True, style={"width": "10rem"}
     )
     return dataset_kpi_card
 
@@ -180,54 +180,82 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
 
     for index, dataset in chosen_topics_df.iterrows():
         # get all required info
-        dataset_id = dataset["dataset_id"]
-        dataset_title = dataset["title"]
-        dataset_description = dataset["description"]
+        dataset_id = dataset.resource_id
+        dataset_title = dataset.title
+        dataset_description = dataset.description
+        dataset_task = dataset.task
+        dataset_topic = dataset.topic
+        dataset_label = dataset.label
+        # descriptive stats
         dataset_nb_lines = dataset.nb_lines
         dataset_nb_features = dataset.nb_features
-        dataset_topic = dataset.topic
-        dataset_missing_cells_pct = float(dataset.missing_cells_pct.replace(",", ".")) * 100
-        dataset_best_model = dataset.best_model
-        dataset_best_value = float(dataset.best_value.replace(",", "."))
-        dataset_model_metric = dataset.model_metric
-        dataset_task = dataset.task
+        dataset_missing_cells_pct = dataset.missing_cells_pct
         dataset_profile_url = dataset.profile_url
-        dataset_automl_url = dataset.automl_url
 
+
+        # machine learning
+        dataset_target_variable = dataset.target_variable
+        dataset_model_metric = dataset.model_metric
+        dataset_best_value = dataset.best_value
+        dataset_best_model = dataset.best_model
+        # resources
+
+        dataset_automl_url = dataset.automl_url
+        dataset_pprofiling_url = dataset.profile_url
+        dataset_dict_data = dataset.dict_url
+
+        # dataset_etalab_xp_url = dataset.etalab_xp_url
         main_dataset_card = html.Div(dbc.Card(
             [
                 dbc.CardBody(
                     [
-                        html.H5(f"{dataset_title}", className="card-title"),
+                        html.H4(
+                            [
+                                f"{dataset_title}",
+                                dbc.Badge(dataset_task, color="dark", pill=True, style={"marginLeft": "20px"}),
+                                dbc.Badge(dataset_topic, color="info", pill=True, className="ml-1")
+                            ],
+                            className="card-title"),
                         html.P(
                             f"{dataset_description}",
                             className="card-text",
                         ),
-                        dbc.CardDeck(
-                            [
-                                # profiling
-                                generate_kpi_card("Features", dataset_nb_features),
-                                generate_kpi_card("Lines", dataset_nb_lines),
-                                generate_kpi_card("Missing Cells", f"{dataset_missing_cells_pct:.0f} %"),
-                                dbc.Card(dbc.CardBody(
-                                    dbc.Button("See Pandas Profile Here", href=dataset_profile_url, external_link=True,
-                                               target='_blank', size="lg", color="primary")
-                                ), className='align-self-center'),
+                        dbc.CardGroup([
+                            # profiling
+                            generate_kpi_card("Features", dataset_nb_features),
+                            generate_kpi_card("Lines", dataset_nb_lines),
+                            generate_kpi_card("Missing Cells", f"{dataset_missing_cells_pct:.2f} %"),
+                            # models
+                            generate_kpi_card("Target Var", dataset_target_variable, color="info"),
+                            generate_kpi_card("Best Model", dataset_best_model, color="info"),
+                            generate_kpi_card("Metric", dataset_model_metric, color="info"),
+                            generate_kpi_card("Best Perf", f"{dataset_best_value:.2f}", color="info"),
 
-                                # models
-                                generate_kpi_card("Best Model", dataset_best_model, color="info"),
-                                generate_kpi_card("Best Perf", f"{dataset_best_value:.2f}", color="info"),
-                                generate_kpi_card("Metric", dataset_model_metric, color="info"),
-                                dbc.Card(dbc.CardBody(
-                                    dbc.Button("See AutoML Profile Here", href=dataset_profile_url, external_link=True,
-                                               size="lg", color="info")
-                                ), className='align-self-center')]
+
+                            # dbc.Card(dbc.CardBody(
+                            #     dbc.Button("Pandas Profile", href=dataset_profile_url, external_link=True,
+                            #                target='_blank', size="lg", color="primary")
+                            # ), className='align-self-center'),
+                            #
+                            # dbc.Card(dbc.CardBody(
+                            #     dbc.Button("AutoML Profile", href=dataset_automl_url, external_link=True,
+                            #                target="_blank", size="lg", color="info")
+                            # ), className='align-self-center'),
+                            #
+
+                        ], style={"marginTop": "20px"}
                         ),
                         html.Br(),
                         dbc.CardFooter([
-                            dbc.Badge("classification", color="dark"),
-                            dbc.Badge("agriculture", color="info")
-                        ])
+                            html.H5("Resources:"),
+                            dbc.Badge("Descriptive Profile", href=dataset_pprofiling_url,
+                                      target="_blank", color="dark", pill=True),
+                            dbc.Badge("AutoML Profile", href=dataset_automl_url,
+                                      color="teal", pill=True, className="ml-2"),
+                            dbc.Badge("Data Dictionary", href="www.google",
+                                      color="info", pill=True, className="ml-2"),
+
+                        ], style={"font-family": "Acumin", "font-size": "20px"})
                     ]
                 ),
             ],
@@ -235,6 +263,8 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
         ),
             style={"marginTop": "20px"}
         )
+        # dataset_external_xp_url = dataset.external_xp_url
+
 
         # card = html.Div([row_1], className="dataset-card")
         cards_list.append(main_dataset_card)
