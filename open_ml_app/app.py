@@ -39,24 +39,6 @@ topic_list = df["topic"].unique()
 add_nb_features_category(df)
 add_nb_lines_category(df)
 
-
-# Read datasets sqlite db
-# if not os.getenv("DATASETS_DB"):
-#     raise FileExistsError("Could not found the datasets DB file! Set a path"
-#                           "in the DATASETS_DB env var in .env file!")
-# else:
-#     DATASET_DB_PATH = os.getenv("DATASETS_DB")
-#     DATASET_DB = SqliteDict(DATASET_DB_PATH, autocommit=True)
-
-
-# Register all departments for callbacks
-# all_departments = df["Department"].unique().tolist()
-# wait_time_inputs = [
-#     Input((i + "_wait_time_graph"), "selectedData") for i in all_departments
-# ]
-# score_inputs = [Input((i + "_score_graph"), "selectedData") for i in all_departments]
-
-
 def description_card():
     """
 
@@ -69,7 +51,9 @@ def description_card():
             html.H3("Welcome to the FODML Repository"),
             html.Div(
                 id="intro",
-                children=["Explore French Open Datasets", html.A(" from data.gouv.fr"),
+                children=["Explore French Open Datasets from",
+                          html.A(" data.gouv.fr (DGF)", href="https://www.data.gouv.fr",
+                                 target="_blank"),
                           " by task, number of features, number of examples, and topic."
                           " Click on the chosen dataset to visualize its properties and its possible use cases."],
             ),
@@ -155,18 +139,28 @@ app.layout = html.Div(
 )
 
 
+def generate_badge(title: str, url: str, color: str):
+    if pd.isna(url):
+        return []
+    badge = dbc.Badge(title, href=url,
+                      target="_blank", style={"backgroundColor": color, "color": "#333333"},
+                      pill=True, className="ml-2")
+    return badge
+
+
 def generate_kpi_card(title: str, value: Union[int, str], color: Optional = None):
     dataset_kpi_card = dbc.Card(
         [
-            dbc.CardHeader(html.B(title), className="card-title", style={"textAlign": "center"}),
+            dbc.CardHeader(html.B(title), style={"textAlign": "center", "font-family": "Acumin"}),
             dbc.CardBody(
                 [
-                    # html.H5(title, className="card-title"),
-                    html.P(value, className="card-text", style={"textAlign": "center"}),
+                    html.P(value, style={"textAlign": "center", "font-family": "AcuminL"}),
                 ]
             )
         ],
-        color="primary" if not color else color, outline=True, style={"width": "10rem"}
+        color="primary" if not color else color, outline=True,
+        style={"width": "10rem"},
+
     )
     return dataset_kpi_card
 
@@ -185,26 +179,27 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
         dataset_description = dataset.description
         dataset_task = dataset.task
         dataset_topic = dataset.topic
-        dataset_label = dataset.label
+        dataset_label = dataset.has_label
+
         # descriptive stats
         dataset_nb_lines = dataset.nb_lines
         dataset_nb_features = dataset.nb_features
         dataset_missing_cells_pct = dataset.missing_cells_pct
         dataset_profile_url = dataset.profile_url
 
-
         # machine learning
         dataset_target_variable = dataset.target_variable
         dataset_model_metric = dataset.model_metric
         dataset_best_value = dataset.best_value
         dataset_best_model = dataset.best_model
+        dataset_automl_url = dataset.automl_url
+
         # resources
 
-        dataset_automl_url = dataset.automl_url
-        dataset_pprofiling_url = dataset.profile_url
         dataset_dict_data = dataset.dict_url
+        dataset_dgf_dataset_url = dataset.dgf_dataset_url
+        dataset_dgf_resource_url = dataset.dgf_resource_url
 
-        # dataset_etalab_xp_url = dataset.etalab_xp_url
         main_dataset_card = html.Div(dbc.Card(
             [
                 dbc.CardBody(
@@ -212,61 +207,53 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
                         html.H4(
                             [
                                 f"{dataset_title}",
-                                dbc.Badge(dataset_task, color="dark", pill=True, style={"marginLeft": "20px"}),
-                                dbc.Badge(dataset_topic, color="info", pill=True, className="ml-1")
+                                dbc.Badge(dataset_task, color="dark", pill=True,
+                                          style={"font-family": "Acumin", "font-size": "15px",
+                                                 "marginLeft": "5px"}),
+                                dbc.Badge(dataset_topic, color="info", pill=True, className="ml-1",
+                                          style={"font-family": "Acumin", "font-size": "15px"})
                             ],
                             className="card-title"),
                         html.P(
                             f"{dataset_description}",
-                            className="card-text",
+                            style={"font-family": "AcuminL"},
                         ),
-                        dbc.CardGroup([
+                        html.H6("Descriptive Stats"),
+                        html.Hr(style={"marginBottom": "20px"}),
+                        dbc.CardDeck([
                             # profiling
                             generate_kpi_card("Features", dataset_nb_features),
                             generate_kpi_card("Lines", dataset_nb_lines),
-                            generate_kpi_card("Missing Cells", f"{dataset_missing_cells_pct:.2f} %"),
+                            generate_kpi_card("Missing Cells", f"{dataset_missing_cells_pct:.2f} %")]),
+                        html.H6("AutoML Stats", style={"marginTop": "20px"}),
+                        html.Hr(style={"marginBottom": "20px"}),
+                        dbc.CardDeck([
+
                             # models
                             generate_kpi_card("Target Var", dataset_target_variable, color="info"),
                             generate_kpi_card("Best Model", dataset_best_model, color="info"),
                             generate_kpi_card("Metric", dataset_model_metric, color="info"),
                             generate_kpi_card("Best Perf", f"{dataset_best_value:.2f}", color="info"),
 
-
-                            # dbc.Card(dbc.CardBody(
-                            #     dbc.Button("Pandas Profile", href=dataset_profile_url, external_link=True,
-                            #                target='_blank', size="lg", color="primary")
-                            # ), className='align-self-center'),
-                            #
-                            # dbc.Card(dbc.CardBody(
-                            #     dbc.Button("AutoML Profile", href=dataset_automl_url, external_link=True,
-                            #                target="_blank", size="lg", color="info")
-                            # ), className='align-self-center'),
-                            #
-
                         ], style={"marginTop": "20px"}
                         ),
                         html.Br(),
                         dbc.CardFooter([
                             html.H5("Resources:"),
-                            dbc.Badge("Descriptive Profile", href=dataset_pprofiling_url,
-                                      target="_blank", color="dark", pill=True),
-                            dbc.Badge("AutoML Profile", href=dataset_automl_url,
-                                      color="teal", pill=True, className="ml-2"),
-                            dbc.Badge("Data Dictionary", href="www.google",
-                                      color="info", pill=True, className="ml-2"),
+                            generate_badge("DGF Dataset", url=dataset_dgf_dataset_url, color="#5783B7"),
+                            generate_badge("File", url=dataset_dgf_resource_url, color="#D8D5D4"),
+                            generate_badge("Descriptive Profile", url=dataset_profile_url, color="#A4B494"),
+                            generate_badge("AutoML Profile", url=dataset_automl_url, color="#EAB464"),
+                            generate_badge("Data Dictionary", url=dataset_dict_data, color="#F49390"),
 
                         ], style={"font-family": "Acumin", "font-size": "20px"})
                     ]
                 ),
             ],
-            # style={"width": "rem"}
         ),
             style={"marginTop": "20px"}
         )
-        # dataset_external_xp_url = dataset.external_xp_url
 
-
-        # card = html.Div([row_1], className="dataset-card")
         cards_list.append(main_dataset_card)
 
     return cards_list
