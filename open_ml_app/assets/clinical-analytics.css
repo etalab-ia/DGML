@@ -4,6 +4,13 @@
     src: url("Acumin-BdPro.otf") format("opentype");
 }
 
+@font-face {
+    font-family: AcuminL;
+    font-weight: bold;
+    src: url("Acumin-RPro.otf") format("opentype");
+}
+
+
 #app-container {
     width: 100%;
     max-width: none;
@@ -41,7 +48,11 @@ H5 {
     font-weight: 300;
 }
 
-H5, H4, H3 {
+a:link {
+    text-decoration: none;
+}
+
+H5, H4, H3, H6 {
     font-family: Acumin, "Helvetica Neue", sans-serif;
 }
 
@@ -59,6 +70,11 @@ H5, H4, H3 {
     padding: 0rem 2rem;
     min-height: calc(100vh - 5.5rem);
 }
+
+#card-kpi {
+    font-family: Acumin, "Helvetica Neue", sans-serif;
+}
+
 
 .table-row {
     height: 63px;
@@ -84,7 +100,7 @@ H5, H4, H3 {
 
 #intro {
     margin: 20px 0px;
-    font-family: "Helvetica Neue", sans-serif;
+    font-family: AcuminL, "Helvetica Neue", sans-serif;
     text-align: justify;
 }
 
