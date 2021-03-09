@@ -19,6 +19,7 @@ app = dash.Dash(
     external_stylesheets=[dbc.themes.BOOTSTRAP],
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
+
 app.title = "FODML"
 
 server = app.server
@@ -284,4 +285,4 @@ def update_dataset_block(task, feature, line, topic, reset_click):
 
 # Run the server
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True, port=8050)

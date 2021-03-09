@@ -1,140 +1,141 @@
-csv-detective
-dash-bootstrap-components
-dash
-fastapi
-imagehash
-jupyter
-mkl-fft
-mkl-random
-mkl-service
-mljar-supervised
-pandas-profiling
-python-dotenv
-sqlitedict
-uvicorn
-# argon2-cffi # Installed as dependency for notebook
-# async-generator # Installed as dependency for nbclient
-# attrs # Installed as dependency for pytest, visions, jsonschema, pandas-profiling
-# backcall # Installed as dependency for ipython
-# bleach # Installed as dependency for nbconvert
-# brotli # Installed as dependency for flask-compress
-# catboost # Installed as dependency for mljar-supervised
-# category-encoders # Installed as dependency for mljar-supervised
-# cchardet # Installed as dependency for csv-detective
-# certifi # Installed as dependency for requests
-# cffi # Installed as dependency for argon2-cffi
-# chardet # Installed as dependency for requests, csv-detective
-# click # Installed as dependency for uvicorn, flask
-# cloudpickle # Installed as dependency for mljar-supervised
-# colour # Installed as dependency for dtreeviz
-# confuse # Installed as dependency for pandas-profiling
-# cycler # Installed as dependency for matplotlib
-# dash # Installed as dependency for dash-bootstrap-components
-# dash-core-components # Installed as dependency for dash
-# dash-html-components # Installed as dependency for dash
-# dash-renderer # Installed as dependency for dash
-# dash-table # Installed as dependency for dash
-# decorator # Installed as dependency for networkx, ipython
-# defusedxml # Installed as dependency for nbconvert
-# dtreeviz # Installed as dependency for mljar-supervised
-# entrypoints # Installed as dependency for nbconvert
-# fastparquet # Installed as dependency for mljar-supervised
-# flask # Installed as dependency for dash, flask-compress
-# flask-compress # Installed as dependency for dash
-# future # Installed as dependency for dash
-# graphviz # Installed as dependency for dtreeviz, catboost
-# h11 # Installed as dependency for uvicorn
-# htmlmin # Installed as dependency for pandas-profiling
-# idna # Installed as dependency for requests
-# importlib-metadata # Installed as dependency for pytest, pluggy, jsonschema
-# iniconfig # Installed as dependency for pytest
-# ipykernel # Installed as dependency for ipywidgets, jupyter-console, notebook, qtconsole, jupyter
-# ipython # Installed as dependency for ipywidgets, jupyter-console, ipykernel
-# ipython-genutils # Installed as dependency for qtconsole, nbformat, notebook, traitlets
-# ipywidgets # Installed as dependency for jupyter, pandas-profiling
-# itsdangerous # Installed as dependency for flask
-# jedi # Installed as dependency for ipython
-# jinja2 # Installed as dependency for notebook, flask, pandas-profiling, nbconvert
-# joblib # Installed as dependency for scikit-learn, mljar-supervised, phik, pandas-profiling
-# jsonschema # Installed as dependency for nbformat
-# jupyter-client # Installed as dependency for jupyter-console, nbclient, notebook, ipykernel, qtconsole
-# jupyter-console # Installed as dependency for jupyter
-# jupyter-core # Installed as dependency for nbformat, notebook, nbconvert, qtconsole, jupyter-client
-# jupyterlab-pygments # Installed as dependency for nbconvert
-# jupyterlab-widgets # Installed as dependency for ipywidgets
-# kiwisolver # Installed as dependency for matplotlib
-# lightgbm # Installed as dependency for mljar-supervised
-# llvmlite # Installed as dependency for numba
-# markupsafe # Installed as dependency for jinja2
-# matplotlib # Installed as dependency for catboost, seaborn, pandas-profiling, mljar-supervised, wordcloud, phik, dtreeviz, missingno
-# missingno # Installed as dependency for pandas-profiling
-# mistune # Installed as dependency for nbconvert
-# nbclient # Installed as dependency for nbconvert
-# nbconvert # Installed as dependency for jupyter, notebook
-# nbformat # Installed as dependency for ipywidgets, nbclient, notebook, nbconvert
-# nest-asyncio # Installed as dependency for nbclient
-# networkx # Installed as dependency for visions
-# notebook # Installed as dependency for widgetsnbextension, jupyter
-# numba # Installed as dependency for shap, phik, fastparquet
-# numpy # Installed as dependency for mkl-fft, mljar-supervised, scipy, visions, matplotlib, scikit-learn, pyarrow, lightgbm, seaborn, pywavelets, phik, mkl-random, catboost, category-encoders, xgboost, imagehash, statsmodels, patsy, shap, pandas-profiling, pandas, numba, wordcloud, dtreeviz, missingno, fastparquet
-# packaging # Installed as dependency for pytest, bleach, fastparquet
-# pandas # Installed as dependency for dtreeviz, visions, shap, catboost, seaborn, pandas-profiling, category-encoders, csv-detective, mljar-supervised, phik, statsmodels, fastparquet
-# pandocfilters # Installed as dependency for nbconvert
-# parso # Installed as dependency for jedi
-# patsy # Installed as dependency for category-encoders, statsmodels
-# pexpect # Installed as dependency for ipython
-# phik # Installed as dependency for pandas-profiling
-# pickleshare # Installed as dependency for ipython
-# pillow # Installed as dependency for wordcloud, imagehash, matplotlib
-# plotly # Installed as dependency for dash, catboost
-# pluggy # Installed as dependency for pytest
-# prometheus-client # Installed as dependency for notebook
-# prompt-toolkit # Installed as dependency for jupyter-console, ipython
-# ptyprocess # Installed as dependency for terminado, pexpect
-# py # Installed as dependency for pytest
-# pyarrow # Installed as dependency for mljar-supervised
-# pycparser # Installed as dependency for cffi
-# pydantic # Installed as dependency for fastapi
-# pygments # Installed as dependency for jupyter-console, jupyterlab-pygments, ipython, nbconvert, qtconsole
-# pyparsing # Installed as dependency for matplotlib, packaging
-# pyrsistent # Installed as dependency for jsonschema
-# pytest # Installed as dependency for dtreeviz
-# python-dateutil # Installed as dependency for jupyter-client, matplotlib, pandas
-# pytz # Installed as dependency for pandas
-# pywavelets # Installed as dependency for imagehash
-# pyyaml # Installed as dependency for confuse
-# pyzmq # Installed as dependency for qtconsole, jupyter-client, notebook
-# qtconsole # Installed as dependency for jupyter
-# qtpy # Installed as dependency for qtconsole
-# requests # Installed as dependency for pandas-profiling
-# retrying # Installed as dependency for plotly
-# scikit-learn # Installed as dependency for shap, lightgbm, category-encoders, mljar-supervised, dtreeviz
-# scipy # Installed as dependency for scikit-learn, shap, catboost, lightgbm, seaborn, pandas-profiling, category-encoders, xgboost, mljar-supervised, imagehash, phik, statsmodels, missingno
-# seaborn # Installed as dependency for mljar-supervised, pandas-profiling, missingno
-# send2trash # Installed as dependency for notebook
-# shap # Installed as dependency for mljar-supervised
-# six # Installed as dependency for plotly, argon2-cffi, jsonschema, catboost, bleach, mkl-service, cycler, patsy, retrying, imagehash, fastparquet, python-dateutil, thrift
-# slicer # Installed as dependency for shap
-# starlette # Installed as dependency for fastapi
-# statsmodels # Installed as dependency for category-encoders
-# tabulate # Installed as dependency for mljar-supervised
-# tangled-up-in-unicode # Installed as dependency for visions, pandas-profiling
-# terminado # Installed as dependency for notebook
-# testpath # Installed as dependency for nbconvert
-# threadpoolctl # Installed as dependency for scikit-learn
-# thrift # Installed as dependency for fastparquet
-# toml # Installed as dependency for pytest
-# tornado # Installed as dependency for terminado, jupyter-client, notebook, ipykernel
-# tqdm # Installed as dependency for shap, pandas-profiling
-# traitlets # Installed as dependency for ipywidgets, nbclient, nbformat, ipython, notebook, nbconvert, jupyter-core, qtconsole, jupyter-client, ipykernel
-# typing-extensions # Installed as dependency for uvicorn
-# unidecode # Installed as dependency for csv-detective
-# urllib3 # Installed as dependency for requests
-# visions # Installed as dependency for pandas-profiling
-# wcwidth # Installed as dependency for prompt-toolkit
-# webencodings # Installed as dependency for bleach
-# werkzeug # Installed as dependency for flask
-# widgetsnbextension # Installed as dependency for ipywidgets
-# wordcloud # Installed as dependency for mljar-supervised
-# xgboost # Installed as dependency for dtreeviz, mljar-supervised
-# zipp # Installed as dependency for importlib-metadata
+csv-detective==0.4.1
+dash-bootstrap-components==0.11.3
+fastapi==0.63.0
+imagehash==4.2.0
+jupyter==1.0.0
+markdown==3.3.4
+mkl-fft==1.2.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+mljar-supervised==0.8.9
+pandas-profiling==2.10.0
+pip-chill==1.0.1
+python-dotenv==0.15.0
+sqlitedict==1.7.0
+uvicorn==0.13.3
+# argon2-cffi==20.1.0 # Installed as dependency for notebook
+# async-generator==1.10 # Installed as dependency for nbclient
+# attrs==20.3.0 # Installed as dependency for jsonschema, visions, pandas-profiling, pytest
+# backcall==0.2.0 # Installed as dependency for ipython
+# bleach==3.2.3 # Installed as dependency for nbconvert
+# brotli==1.0.9 # Installed as dependency for flask-compress
+# catboost==0.24.1 # Installed as dependency for mljar-supervised
+# category-encoders==2.2.2 # Installed as dependency for mljar-supervised
+# cchardet==2.1.7 # Installed as dependency for csv-detective
+# certifi==2020.12.5 # Installed as dependency for requests
+# cffi==1.14.4 # Installed as dependency for argon2-cffi
+# chardet==4.0.0 # Installed as dependency for csv-detective, requests
+# click==7.1.2 # Installed as dependency for flask, uvicorn
+# cloudpickle==1.3.0 # Installed as dependency for mljar-supervised
+# colour==0.1.5 # Installed as dependency for dtreeviz
+# confuse==1.4.0 # Installed as dependency for pandas-profiling
+# cycler==0.10.0 # Installed as dependency for matplotlib
+# dash==1.19.0 # Installed as dependency for dash-bootstrap-components
+# dash-core-components==1.15.0 # Installed as dependency for dash
+# dash-html-components==1.1.2 # Installed as dependency for dash
+# dash-renderer==1.9.0 # Installed as dependency for dash
+# dash-table==4.11.2 # Installed as dependency for dash
+# decorator==4.4.2 # Installed as dependency for networkx, ipython
+# defusedxml==0.6.0 # Installed as dependency for nbconvert
+# dtreeviz==1.0 # Installed as dependency for mljar-supervised
+# entrypoints==0.3 # Installed as dependency for nbconvert
+# fastparquet==0.4.1 # Installed as dependency for mljar-supervised
+# flask==1.1.2 # Installed as dependency for flask-compress, dash
+# flask-compress==1.9.0 # Installed as dependency for dash
+# future==0.18.2 # Installed as dependency for dash
+# graphviz==0.16 # Installed as dependency for dtreeviz, catboost
+# h11==0.12.0 # Installed as dependency for uvicorn
+# htmlmin==0.1.12 # Installed as dependency for pandas-profiling
+# idna==2.10 # Installed as dependency for requests
+# importlib-metadata==2.0.0 # Installed as dependency for jsonschema, pluggy, markdown, pytest
+# iniconfig==1.1.1 # Installed as dependency for pytest
+# ipykernel==5.3.4 # Installed as dependency for jupyter, jupyter-console, ipywidgets, notebook, qtconsole
+# ipython==7.20.0 # Installed as dependency for jupyter-console, ipykernel, ipywidgets
+# ipython-genutils==0.2.0 # Installed as dependency for qtconsole, notebook, nbformat, traitlets
+# ipywidgets==7.6.3 # Installed as dependency for pandas-profiling, jupyter
+# itsdangerous==1.1.0 # Installed as dependency for flask
+# jedi==0.18.0 # Installed as dependency for ipython
+# jinja2==2.11.2 # Installed as dependency for nbconvert, notebook, flask, pandas-profiling
+# joblib==0.14.1 # Installed as dependency for pandas-profiling, scikit-learn, mljar-supervised, phik
+# jsonschema==3.2.0 # Installed as dependency for nbformat
+# jupyter-client==6.1.7 # Installed as dependency for nbclient, jupyter-console, notebook, ipykernel, qtconsole
+# jupyter-console==6.2.0 # Installed as dependency for jupyter
+# jupyter-core==4.7.0 # Installed as dependency for nbformat, notebook, jupyter-client, qtconsole, nbconvert
+# jupyterlab-pygments==0.1.2 # Installed as dependency for nbconvert
+# jupyterlab-widgets==1.0.0 # Installed as dependency for ipywidgets
+# kiwisolver==1.3.1 # Installed as dependency for matplotlib
+# lightgbm==3.0.0 # Installed as dependency for mljar-supervised
+# llvmlite==0.35.0 # Installed as dependency for numba
+# markupsafe==1.1.1 # Installed as dependency for jinja2
+# matplotlib==3.3.4 # Installed as dependency for seaborn, phik, catboost, mljar-supervised, dtreeviz, missingno, pandas-profiling, wordcloud
+# missingno==0.4.2 # Installed as dependency for pandas-profiling
+# mistune==0.8.4 # Installed as dependency for nbconvert
+# nbclient==0.5.1 # Installed as dependency for nbconvert
+# nbconvert==6.0.7 # Installed as dependency for notebook, jupyter
+# nbformat==5.1.2 # Installed as dependency for nbconvert, notebook, nbclient, ipywidgets
+# nest-asyncio==1.4.3 # Installed as dependency for nbclient
+# networkx==2.5 # Installed as dependency for visions
+# notebook==6.2.0 # Installed as dependency for jupyter, widgetsnbextension
+# numba==0.52.0 # Installed as dependency for fastparquet, shap, phik
+# numpy==1.19.2 # Installed as dependency for imagehash, xgboost, scipy, patsy, mkl-random, seaborn, pyarrow, lightgbm, dtreeviz, pandas, fastparquet, mkl-fft, numba, phik, catboost, scikit-learn, shap, statsmodels, visions, matplotlib, mljar-supervised, missingno, pywavelets, pandas-profiling, category-encoders, wordcloud
+# packaging==20.9 # Installed as dependency for fastparquet, bleach, pytest
+# pandas==1.1.2 # Installed as dependency for visions, seaborn, phik, catboost, csv-detective, mljar-supervised, dtreeviz, category-encoders, shap, fastparquet, pandas-profiling, statsmodels
+# pandocfilters==1.4.3 # Installed as dependency for nbconvert
+# parso==0.8.1 # Installed as dependency for jedi
+# patsy==0.5.1 # Installed as dependency for category-encoders, statsmodels
+# pexpect==4.8.0 # Installed as dependency for ipython
+# phik==0.11.0 # Installed as dependency for pandas-profiling
+# pickleshare==0.7.5 # Installed as dependency for ipython
+# pillow==8.1.0 # Installed as dependency for matplotlib, imagehash, wordcloud
+# plotly==4.14.3 # Installed as dependency for catboost, dash
+# pluggy==0.13.1 # Installed as dependency for pytest
+# prometheus-client==0.9.0 # Installed as dependency for notebook
+# prompt-toolkit==3.0.8 # Installed as dependency for ipython, jupyter-console
+# ptyprocess==0.7.0 # Installed as dependency for pexpect, terminado
+# py==1.10.0 # Installed as dependency for pytest
+# pyarrow==3.0.0 # Installed as dependency for mljar-supervised
+# pycparser==2.20 # Installed as dependency for cffi
+# pydantic==1.6.1 # Installed as dependency for fastapi
+# pygments==2.7.4 # Installed as dependency for jupyter-console, jupyterlab-pygments, qtconsole, nbconvert, ipython
+# pyparsing==2.4.7 # Installed as dependency for matplotlib, packaging
+# pyrsistent==0.17.3 # Installed as dependency for jsonschema
+# pytest==6.2.2 # Installed as dependency for dtreeviz
+# python-dateutil==2.8.1 # Installed as dependency for matplotlib, pandas, jupyter-client
+# pytz==2020.5 # Installed as dependency for pandas
+# pywavelets==1.1.1 # Installed as dependency for imagehash
+# pyyaml==5.4.1 # Installed as dependency for confuse
+# pyzmq==20.0.0 # Installed as dependency for qtconsole, notebook, jupyter-client
+# qtconsole==4.7.7 # Installed as dependency for jupyter
+# qtpy==1.9.0 # Installed as dependency for qtconsole
+# requests==2.25.1 # Installed as dependency for pandas-profiling
+# retrying==1.3.3 # Installed as dependency for plotly
+# scikit-learn==0.23.2 # Installed as dependency for mljar-supervised, lightgbm, dtreeviz, shap, category-encoders
+# scipy==1.4.1 # Installed as dependency for imagehash, seaborn, xgboost, phik, catboost, scikit-learn, mljar-supervised, lightgbm, category-encoders, shap, missingno, pandas-profiling, statsmodels
+# seaborn==0.11.1 # Installed as dependency for pandas-profiling, mljar-supervised, missingno
+# send2trash==1.5.0 # Installed as dependency for notebook
+# shap==0.36.0 # Installed as dependency for mljar-supervised
+# six==1.15.0 # Installed as dependency for imagehash, plotly, python-dateutil, jsonschema, catboost, thrift, cycler, argon2-cffi, fastparquet, patsy, retrying, mkl-service, bleach
+# slicer==0.0.7 # Installed as dependency for shap
+# starlette==0.13.6 # Installed as dependency for fastapi
+# statsmodels==0.12.2 # Installed as dependency for category-encoders
+# tabulate==0.8.7 # Installed as dependency for mljar-supervised
+# tangled-up-in-unicode==0.0.6 # Installed as dependency for visions, pandas-profiling
+# terminado==0.9.2 # Installed as dependency for notebook
+# testpath==0.4.4 # Installed as dependency for nbconvert
+# threadpoolctl==2.1.0 # Installed as dependency for scikit-learn
+# thrift==0.13.0 # Installed as dependency for fastparquet
+# toml==0.10.2 # Installed as dependency for pytest
+# tornado==6.1 # Installed as dependency for notebook, jupyter-client, ipykernel, terminado
+# tqdm==4.56.0 # Installed as dependency for pandas-profiling, shap
+# traitlets==5.0.5 # Installed as dependency for nbformat, nbclient, ipywidgets, notebook, jupyter-client, ipykernel, qtconsole, nbconvert, ipython, jupyter-core
+# typing-extensions==3.7.4.3 # Installed as dependency for uvicorn
+# unidecode==1.2.0 # Installed as dependency for csv-detective
+# urllib3==1.26.3 # Installed as dependency for requests
+# visions==0.6.0 # Installed as dependency for pandas-profiling
+# wcwidth==0.2.5 # Installed as dependency for prompt-toolkit
+# webencodings==0.5.1 # Installed as dependency for bleach
+# werkzeug==1.0.1 # Installed as dependency for flask
+# widgetsnbextension==3.5.1 # Installed as dependency for ipywidgets
+# wordcloud==1.7.0 # Installed as dependency for mljar-supervised
+# xgboost==1.2.0 # Installed as dependency for dtreeviz, mljar-supervised
+# zipp==3.4.0 # Installed as dependency for importlib-metadata
