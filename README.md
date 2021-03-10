@@ -1,4 +1,4 @@
-# Open_ML - Apprendre des datasets de *data.gouv.fr* grâce au Machine Learning
+# Open_ML - Catalogue de datasets de *data.gouv.fr* pour le Machine Learning
 
 Le projet OpenML vise à la construction d'un **catalogue de jeux de données de data.gouv.fr pour le Machine Learning.**
 
