@@ -17,6 +17,7 @@ from utils import add_nb_features_category, add_nb_lines_category, NB_FEATURES_C
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.BOOTSTRAP],
+    url_base_pathname="/openml/",
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
 
