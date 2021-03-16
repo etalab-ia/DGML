@@ -1,5 +1,3 @@
-from typing import Union, Optional
-
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -10,13 +8,18 @@ import pathlib
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
 
+from open_ml_app.apps.dataset_page import generate_dataset_page
+from open_ml_app.utils import generate_kpi_card, generate_badge
+
 load_dotenv(verbose=True)
 
-from utils import add_nb_features_category, add_nb_lines_category, NB_FEATURES_CATEGORIES, NB_LINES_CATEGORIES
+from utils import add_nb_features_category, add_nb_lines_category, NB_FEATURES_CATEGORIES, NB_LINES_CATEGORIES, \
+    get_dataset_info
 
 app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.BOOTSTRAP],
+    suppress_callback_exceptions=True,
     url_base_pathname="/openml/",
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
@@ -24,11 +27,11 @@ app = dash.Dash(
 app.title = "FODML"
 
 server = app.server
-app.config.suppress_callback_exceptions = True
+# app.config.suppress_callback_exceptions = True
 
 # Path
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
-DATA_PATH = BASE_PATH.joinpath("assets/data").resolve()
+DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
 # Read data
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
@@ -41,9 +44,10 @@ topic_list = df["topic"].unique()
 add_nb_features_category(df)
 add_nb_lines_category(df)
 
+
 def description_card():
     """
-
+    The section dealing with the description of the website
     :return: A Div containing dashboard title & descriptions.
     """
     return html.Div(
@@ -65,7 +69,7 @@ def description_card():
 
 def generate_control_card():
     """
-
+    The section that presents the control filtering options
     :return: A Div containing controls for graphs.
     """
     return html.Div(
@@ -109,7 +113,7 @@ def generate_control_card():
     )
 
 
-app.layout = html.Div(
+app_layout = html.Div(
     id="app-container",
     children=[
         # Banner
@@ -123,11 +127,6 @@ app.layout = html.Div(
             id="left-column",
             className="three columns",
             children=[description_card(), generate_control_card()]
-                     + [
-                         html.Div(
-                             ["initial child"], id="output-clientside", style={"display": "none"}
-                         )
-                     ],
         ),
         # Right column
         html.Div(
@@ -140,31 +139,18 @@ app.layout = html.Div(
     ],
 )
 
+url_bar_and_content_div = html.Div([
+    dcc.Location(id='url', refresh=False),
+    html.Div(id='page-content')
+])
 
-def generate_badge(title: str, url: str, color: str):
-    if pd.isna(url):
-        return []
-    badge = dbc.Badge(title, href=url,
-                      target="_blank", style={"backgroundColor": color, "color": "#333333"},
-                      pill=True, className="ml-2")
-    return badge
+app.layout = url_bar_and_content_div
 
 
-def generate_kpi_card(title: str, value: Union[int, str], color: Optional = None):
-    dataset_kpi_card = dbc.Card(
-        [
-            dbc.CardHeader(html.B(title), style={"textAlign": "center", "font-family": "Acumin"}),
-            dbc.CardBody(
-                [
-                    html.P(value, style={"textAlign": "center", "font-family": "AcuminL"}),
-                ]
-            )
-        ],
-        color="primary" if not color else color, outline=True,
-        style={"width": "10rem"},
-
-    )
-    return dataset_kpi_card
+# app.validation_layout = html.Div([
+#     url_bar_and_content_div,
+#     generate_dataset_page("test")
+# ])
 
 
 def generate_dataset_block(tasks, features, lines, topics, reset_click):
@@ -174,33 +160,8 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
     chosen_topics_df = chosen_lines_df[chosen_lines_df.topic.isin(topics)]
     cards_list = []
 
-    for index, dataset in chosen_topics_df.iterrows():
-        # get all required info
-        dataset_id = dataset.resource_id
-        dataset_title = dataset.title
-        dataset_description = dataset.description
-        dataset_task = dataset.task
-        dataset_topic = dataset.topic
-        dataset_label = dataset.has_label
-
-        # descriptive stats
-        dataset_nb_lines = dataset.nb_lines
-        dataset_nb_features = dataset.nb_features
-        dataset_missing_cells_pct = dataset.missing_cells_pct
-        dataset_profile_url = dataset.profile_url
-
-        # machine learning
-        dataset_target_variable = dataset.target_variable
-        dataset_model_metric = dataset.model_metric
-        dataset_best_value = dataset.best_value
-        dataset_best_model = dataset.best_model
-        dataset_automl_url = dataset.automl_url
-
-        # resources
-
-        dataset_dict_data = dataset.dict_url
-        dataset_dgf_dataset_url = dataset.dgf_dataset_url
-        dataset_dgf_resource_url = dataset.dgf_resource_url
+    for index, dataset_row in chosen_topics_df.iterrows():
+        dataset_dict = get_dataset_info(dataset_row)
 
         main_dataset_card = html.Div(dbc.Card(
             [
@@ -208,47 +169,50 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
                     [
                         html.H4(
                             [
-                                f"{dataset_title}",
-                                dbc.Badge(dataset_task, color="dark", pill=True,
-                                          style={"font-family": "Acumin", "font-size": "15px",
-                                                 "marginLeft": "5px"}),
-                                dbc.Badge(dataset_topic, color="info", pill=True, className="ml-1",
-                                          style={"font-family": "Acumin", "font-size": "15px"})
+                                dcc.Link(f"{dataset_dict['title']}", href=f"{app.config['url_base_pathname']}"
+                                                                          f"datasets/{dataset_dict['dgf_resource_id']}"),
+                                # dbc.Badge(dataset_dict['task'], color="dark", pill=True,
+                                #           style={"font-family": "Acumin", "font-size": "15px",
+                                #                  "marginLeft": "5px"}),
+                                # dbc.Badge(dataset_dict['topic'], color="info", pill=True, className="ml-1",
+                                #           style={"font-family": "Acumin", "font-size": "15px"})
                             ],
                             className="card-title"),
                         html.P(
-                            f"{dataset_description}",
+                            f"{dataset_dict['description']}",
                             style={"font-family": "AcuminL"},
                         ),
-                        html.H6("Descriptive Stats"),
-                        html.Hr(style={"marginBottom": "20px"}),
+                        # html.H6("Descriptive Stats"),
+                        # html.Hr(style={"marginBottom": "20px"}),
                         dbc.CardDeck([
                             # profiling
-                            generate_kpi_card("Features", dataset_nb_features),
-                            generate_kpi_card("Lines", dataset_nb_lines),
-                            generate_kpi_card("Missing Cells", f"{dataset_missing_cells_pct:.2f} %")]),
-                        html.H6("AutoML Stats", style={"marginTop": "20px"}),
-                        html.Hr(style={"marginBottom": "20px"}),
-                        dbc.CardDeck([
+                            generate_kpi_card("Task", f"{dataset_dict['task']}"),
+                            generate_kpi_card("Topic", f"{dataset_dict['topic']}"),
+                            generate_kpi_card("Features", dataset_dict['nb_features']),
+                            generate_kpi_card("Lines", dataset_dict['nb_lines']),
+                            generate_kpi_card("Missing Cells", f"{dataset_dict['missing_cells_pct']:.2f} %")]),
+                        # html.H6("AutoML Stats", style={"marginTop": "20px"}),
+                        # html.Hr(style={"marginBottom": "20px"}),
+                        # dbc.CardDeck([
 
-                            # models
-                            generate_kpi_card("Target Var", dataset_target_variable, color="info"),
-                            generate_kpi_card("Best Model", dataset_best_model, color="info"),
-                            generate_kpi_card("Metric", dataset_model_metric, color="info"),
-                            generate_kpi_card("Best Perf", f"{dataset_best_value:.2f}", color="info"),
+                        # models
+                        # generate_kpi_card("Target Var", dataset_dict['target_variable'], color="info"),
+                        # generate_kpi_card("Best Model", dataset_dict['best_model'], color="info"),
+                        # generate_kpi_card("Metric", dataset_dict['model_metric'], color="info"),
+                        # generate_kpi_card("Best Perf", f"{dataset_dict['best_value']:.2f}", color="info"),
 
-                        ], style={"marginTop": "20px"}
-                        ),
+                        # ], style={"marginTop": "20px"}
+                        # ),
                         html.Br(),
-                        dbc.CardFooter([
-                            html.H5("Resources:"),
-                            generate_badge("DGF Dataset", url=dataset_dgf_dataset_url, color="#5783B7"),
-                            generate_badge("File", url=dataset_dgf_resource_url, color="#D8D5D4"),
-                            generate_badge("Descriptive Profile", url=dataset_profile_url, color="#A4B494"),
-                            generate_badge("AutoML Profile", url=dataset_automl_url, color="#EAB464"),
-                            generate_badge("Data Dictionary", url=dataset_dict_data, color="#F49390"),
-
-                        ], style={"font-family": "Acumin", "font-size": "20px"})
+                        # dbc.CardFooter([
+                        #     html.H5("Resources:"),
+                        #     generate_badge("DGF Dataset", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7"),
+                        #     generate_badge("File", url=dataset_dict['dgf_resource_url'], background_color="#D8D5D4"),
+                        #     generate_badge("Descriptive Profile", url=dataset_dict['profile_url'], background_color="#A4B494"),
+                        #     generate_badge("AutoML Profile", url=dataset_dict['automl_url'], background_color="#EAB464"),
+                        #     generate_badge("Data Dictionary", url=dataset_dict['dict_url'], background_color="#F49390"),
+                        #
+                        # ], style={"font-family": "Acumin", "font-size": "20px"})
                     ]
                 ),
             ],
@@ -259,6 +223,16 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
         cards_list.append(main_dataset_card)
 
     return cards_list
+
+
+# Index callbacks
+@app.callback(Output('page-content', 'children'),
+              Input('url', 'pathname'))
+def display_page(pathname):
+    if pathname == app.config['url_base_pathname']:
+        return app_layout
+    else:
+        return generate_dataset_page(pathname, df)
 
 
 @app.callback(
