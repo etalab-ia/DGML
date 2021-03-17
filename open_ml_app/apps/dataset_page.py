@@ -1,17 +1,13 @@
 import pathlib
 from typing import Dict
 
-import dash
-import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
-from dash.dependencies import Input, Output
 import pandas as pd
 
 # from open_ml_app.main import DATA_PATH
 # from open_ml_app.main import DATA_PATH
-from open_ml_app.utils import get_dataset_info, generate_kpi_card, get_reuses, filter_reuses, generate_badge
-import dash_table
+from .utils import get_dataset_info, generate_kpi_card, get_reuses, filter_reuses, generate_badge
 
 # Path
 BASE_PATH = pathlib.Path(__file__).parent.parent.resolve()
