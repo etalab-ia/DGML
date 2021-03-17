@@ -43,11 +43,14 @@ def generate_reuses_cards(resuses_dict: Dict):
 
 
 def generate_table(dataset_id: str, table_type: str = "dict_data.csv"):
-    dictionary_path = DATA_PATH.joinpath(f"resources/{dataset_id}/{table_type}")
-    if not dictionary_path.exists():
-        html_table = html.H5("Data dictionary preview not available")
+    display_table_path = DATA_PATH.joinpath(f"resources/{dataset_id}/{table_type}")
+    if not display_table_path.exists():
+        if "dict_data" in table_type:
+            html_table = html.H5("Data dictionary preview not available")
+        if "mljar" in table_type:
+            html_table = html.H5("MLJAR profile preview not available")
     else:
-        table_df = pd.read_csv(dictionary_path, sep="\t")
+        table_df = pd.read_csv(display_table_path)
         if "mljar_profile" in table_type:
             # add links to mljar table
             table_df["name"] = table_df[["name", "url"]].apply(lambda row: html.A(html.P(row["name"]), href=row["url"],
@@ -98,7 +101,7 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         mljar_table,
         generate_badge("Full AutoML Profile", url=dataset_dict['automl_url'], background_color="#EAB464"),
         html.Hr(style={"marginBottom": "20px"}),
-        html.H3("ML Reuses"),
+        html.H3("Machine Learning Reuses (data.gouv.fr)"),
         html.Hr(style={"marginBottom": "20px"}),
         generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
         html.H3("Load Data"),
