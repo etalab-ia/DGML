@@ -7,13 +7,14 @@ import pandas as pd
 import pathlib
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
-
-from open_ml_app.apps.dataset_page import generate_dataset_page
-from open_ml_app.utils import generate_kpi_card, generate_badge
+import os
+print(os.getcwd())
+from apps.dataset_page import generate_dataset_page
+from apps.utils import generate_kpi_card
 
 load_dotenv(verbose=True)
 
-from utils import add_nb_features_category, add_nb_lines_category, NB_FEATURES_CATEGORIES, NB_LINES_CATEGORIES, \
+from apps.utils import add_nb_features_category, add_nb_lines_category, NB_FEATURES_CATEGORIES, NB_LINES_CATEGORIES, \
     get_dataset_info
 
 app = dash.Dash(
