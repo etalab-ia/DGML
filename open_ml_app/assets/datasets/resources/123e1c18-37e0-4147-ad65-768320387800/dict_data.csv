@@ -1,0 +1,62 @@
+Nom,Dictionary Description,Dictionary Type,Detected Type
+Identifiant,,,Real number 
+Url,,,Real number 
+Titre,,,Real number 
+PrixNuitee,,,Real number 
+Latitude,,,Real number 
+Longitude,,,Real number 
+Resume,,,Real number 
+Capacite_accueil,,,Real number 
+NombreSdB,,,Real number 
+NbChambres,,,Real number 
+NbLits,,,Real number 
+Type_logement,,,Real number 
+type_propriete,,,Real number 
+type_lit,,,Real number 
+Animal_sur_place,,,Real number 
+Cuisine,,,Real number 
+Internet,,,Real number 
+television,,,Real number 
+produits_base,,,Real number 
+Shampooing,,,Real number 
+Chauffage,,,Real number 
+Climatisation,,,Real number 
+machine_laver,,,Real number 
+seche_linge,,,Real number 
+parking_sur-place,,,Real number 
+wifi,,,Real number 
+television_cable,,,Real number 
+petit_dejeuner,,,Real number 
+animaux_acceptes,,,Categorical
+pourEnfants_famille,,,Real number 
+adapte_evenements,,,
+logement_fumeur,,,
+accessibilite,,,
+Ascenseur,,,
+cheminee_interieur,,,
+Interphone,,,
+Portier,,,
+Piscine,,,
+Jacuzzi,,,
+salle_sport,,,
+Entree_24-24,,,
+Cintres,,,
+fer_repasser,,,
+seche_cheveux,,,
+espace_travail_ordi,,,
+detecteur_fumee,,,
+monoxyde_carbone_detect,,,
+kit_secours,,,
+fiche_securite,,,
+extincteur,,,
+porte_chambre_verrou,,,
+prix_nuitee,,,
+rection_semaine,,,
+reduction_mois,,,
+surcout_voyageur_supp,,,
+frais_menage,,,
+Caution,,,
+conditions_annulation,,,
+Description,,,
+reglement_interieur,,,
+duree_minimale_sejour,,,
