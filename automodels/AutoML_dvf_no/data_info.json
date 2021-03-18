@@ -1,0 +1,101 @@
+{
+    "columns": [
+        "No disposition",
+        "Date mutation",
+        "Nature mutation",
+        "No voie",
+        "Type de voie",
+        "Code voie",
+        "Voie",
+        "Code postal",
+        "Commune",
+        "Code commune",
+        "Section",
+        "No plan",
+        "Nombre de lots",
+        "Code type local",
+        "Type local",
+        "Surface reelle bati",
+        "Nombre pieces principales",
+        "Nature culture",
+        "Surface terrain"
+    ],
+    "rows": 613032,
+    "cols": 19,
+    "target_is_numeric": true,
+    "columns_info": {
+        "No disposition": [
+            "scale"
+        ],
+        "Date mutation": [
+            "categorical",
+            "many_categories"
+        ],
+        "Nature mutation": [
+            "scale"
+        ],
+        "No voie": [
+            "missing_values",
+            "scale"
+        ],
+        "Type de voie": [
+            "missing_values",
+            "categorical",
+            "many_categories"
+        ],
+        "Code voie": [
+            "missing_values",
+            "categorical",
+            "many_categories"
+        ],
+        "Voie": [
+            "missing_values",
+            "categorical",
+            "many_categories"
+        ],
+        "Code postal": [
+            "missing_values",
+            "scale"
+        ],
+        "Commune": [
+            "categorical",
+            "many_categories"
+        ],
+        "Code commune": [
+            "scale"
+        ],
+        "Section": [
+            "missing_values",
+            "categorical",
+            "many_categories"
+        ],
+        "No plan": [
+            "scale"
+        ],
+        "Nombre de lots": [],
+        "Code type local": [],
+        "Type local": [
+            "scale"
+        ],
+        "Surface reelle bati": [
+            "missing_values",
+            "scale"
+        ],
+        "Nombre pieces principales": [
+            "missing_values",
+            "scale"
+        ],
+        "Nature culture": [
+            "scale"
+        ],
+        "Surface terrain": [
+            "missing_values",
+            "scale"
+        ]
+    },
+    "target_info": [
+        "scale"
+    ],
+    "n_features": 19,
+    "is_sample_weighted": false
+}

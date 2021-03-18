@@ -1,0 +1,224 @@
+feature,mean_importance
+Nom du Produit en Français_ou,-0.003026808161920158
+Nom du Produit en Français_poisson,-0.0015054932894645657
+Nom du Produit en Français_beurre,-0.0009774476267214282
+Nom du Produit en Français_grillée,-0.0007236255588600304
+Nom du Produit en Français_pulpe,-0.0005148164697535651
+Nom du Produit en Français_non,-0.0004495673961361302
+Nom du Produit en Français_sirop,-0.00037870340813560554
+Nom du Produit en Français_la,-0.0002354409507006494
+Nom du Produit en Français_pois,-0.00023053527401198926
+Nom du Produit en Français_biscuit,-0.0001774066642330152
+Nom du Produit en Français_nature,-7.795836502683118e-05
+Nom du Produit en Français_agneau,-2.2595537701475267e-05
+Nom du Produit en Français_tomate,-2.1325141423755854e-05
+Nom du Produit en Français_sans,-1.300127161946163e-05
+Nom du Produit en Français_pur,-6.588388044037607e-06
+Nom du Produit en Français_légumes,-5.296044566072133e-06
+Nom du Produit en Français_déshydratée,-2.6998048391901897e-06
+Nom du Produit en Français_pour,-2.5290381474030177e-06
+Nom du Produit en Français_cuite,-1.1308230488005222e-06
+Nom du Produit en Français_jus,-6.474644742571201e-07
+Code AGB_30051,0.0
+Code AGB_3000,0.0
+Code AGB_28917,0.0
+Code AGB_30005,0.0
+Code AGB_28922,0.0
+Code AGB_28911,0.0
+Code AGB_28925,0.0
+Code AGB_28927,0.0
+Code AGB_28912,0.0
+Code AGB_30011,0.0
+Code AGB_28900,0.0
+Code AGB_28905,0.0
+Code AGB_28550,0.0
+Code AGB_28700,0.0
+Code AGB_28720,0.0
+Code AGB_28800,0.0
+Code AGB_28801,0.0
+Code AGB_28802,0.0
+Code AGB_28907,0.0
+Code AGB_28803,0.0
+Code AGB_28812,0.0
+Code AGB_28844,0.0
+Code AGB_28845,0.0
+Code AGB_30104,0.0
+Code AGB_28901,0.0
+Code AGB_28902,0.0
+Nom du Produit en Français_noix,0.0
+Code AGB_30110,0.0
+Code AGB_32013,0.0
+Code AGB_31091,0.0
+Nom du Produit en Français_moyennement,0.0
+Nom du Produit en Français_minéralisée,0.0
+Nom du Produit en Français_minérale,0.0
+Nom du Produit en Français_maïs,0.0
+Nom du Produit en Français_matière,0.0
+Nom du Produit en Français_petit,0.0
+Nom du Produit en Français_gazeuse,0.0
+Nom du Produit en Français_fortement,0.0
+Nom du Produit en Français_filet,0.0
+Nom du Produit en Français_faiblement,0.0
+Nom du Produit en Français_environ,0.0
+Nom du Produit en Français_embouteillée,0.0
+Nom du Produit en Français_déjeuner,0.0
+Nom du Produit en Français_demi,0.0
+Nom du Produit en Français_poudre,0.0
+Nom du Produit en Français_chou,0.0
+Nom du Produit en Français_blé,0.0
+Code AGB_32018,0.0
+Code AGB_32017,0.0
+Code AGB_28540,0.0
+Code AGB_32011,0.0
+Code AGB_32008,0.0
+Code AGB_32000,0.0
+Code AGB_31113,0.0
+Code AGB_31102,0.0
+Code AGB_31099,0.0
+Code AGB_31098,0.0
+Code AGB_30150,0.0
+Code AGB_28504,0.0
+Code AGB_31084,0.0
+Code AGB_28478,0.0
+Code AGB_26247,0.0
+Code AGB_26245,0.0
+Code AGB_26244,0.0
+Code AGB_26243,0.0
+Code AGB_26240,0.0
+Code AGB_26239,0.0
+Code AGB_26237,0.0
+Code AGB_26236,0.0
+Code AGB_26235,0.0
+Code AGB_26233,0.0
+Code AGB_26232,0.0
+Code AGB_28480,0.0
+Code AGB_26230,0.0
+Code AGB_26229,0.0
+Code AGB_26248,0.0
+Code AGB_26214,0.0
+Code AGB_26201,0.0
+Code AGB_26194,0.0
+Code AGB_26186,0.0
+Code AGB_26177,0.0
+Code AGB_26173,0.0
+Code AGB_10001,0.0
+Nom du Produit en Français_rôti,0.0
+Nom du Produit en Français_rôtie,0.0
+Nom du Produit en Français_st,0.0
+Nom du Produit en Français_sucré,0.0
+Nom du Produit en Français_thon,0.0
+Transport par avion (1 : par avion),0.0
+Nom du Produit en Français_veau,0.0
+Nom du Produit en Français_vitamines,0.0
+Code AGB_26206,0.0
+Code AGB_26256,0.0
+Code AGB_26231,0.0
+Code AGB_28010,0.0
+Code AGB_27030,0.0
+Code AGB_28001,0.0
+Code AGB_28002,0.0
+Code AGB_28003,0.0
+Code AGB_26259,0.0
+Code AGB_28100,0.0
+Code AGB_28102,0.0
+Code AGB_28201,0.0
+Code AGB_28202,0.0
+Code AGB_28203,0.0
+Code AGB_28401,0.0
+Code AGB_28451,0.0
+Code AGB_28460,0.0
+Code AGB_28461,0.0
+Code AGB_28476,0.0
+Code AGB_27029,0.0
+Code AGB_27017,0.0
+Code AGB_28804,0.0
+Code AGB_27006,0.0
+Code AGB_26274,0.0
+Code AGB_26270,0.0
+Code AGB_27004,0.0
+Code AGB_26268,0.0
+Code AGB_27008,0.0
+Code AGB_26267,0.0
+Code AGB_26266,0.0
+Code AGB_27010,0.0
+Code AGB_27009,0.0
+Code AGB_27015,0.0
+Code AGB_27014,0.0
+Code AGB_26265,0.0
+Nom du Produit en Français_cuit,9.081099607433086e-06
+Nom du Produit en Français_avec,9.372994464618144e-06
+Nom du Produit en Français_surgelé,1.725781382591052e-05
+Nom du Produit en Français_blanc,2.091358182721992e-05
+Nom du Produit en Français_chocolat,2.1444802060577307e-05
+Nom du Produit en Français_chèvre,2.465505305582205e-05
+Nom du Produit en Français_soupe,3.999634408914376e-05
+Nom du Produit en Français_crue,4.1068842030733686e-05
+Nom du Produit en Français_eau,4.324250122456075e-05
+Nom du Produit en Français_peau,5.083317857687009e-05
+Nom du Produit en Français_sucrée,8.503078357332549e-05
+Nom du Produit en Français_céréales,8.842101982828865e-05
+Nom du Produit en Français_base,0.00010043851625213263
+Nom du Produit en Français_rayon,0.00011305166025108449
+Nom du Produit en Français_terre,0.00011834211146116713
+Nom du Produit en Français_huile,0.0001256645374359766
+Nom du Produit en Français_et,0.00015872826796282659
+Nom du Produit en Français_yaourt,0.00020146318383064133
+Nom du Produit en Français_sec,0.00020818779680266132
+Nom du Produit en Français_porc,0.0002453511907826056
+Nom du Produit en Français_dessert,0.0002582146489220283
+Nom du Produit en Français_fruits,0.0002626444839454956
+Nom du Produit en Français_sèche,0.00036354551625842333
+Nom du Produit en Français_préemballé,0.0004263482424942677
+Nom du Produit en Français_fromage,0.00043207445624650066
+Nom du Produit en Français_fourrée,0.00043469421542344786
+Nom du Produit en Français_salade,0.00044424644005899296
+Nom du Produit en Français_pâte,0.0004662214198046799
+Nom du Produit en Français_grasse,0.00046738177949223747
+Nom du Produit en Français_riz,0.00047732963335330727
+Nom du Produit en Français_au,0.0005248638550362838
+Nom du Produit en Français_poulet,0.0005249260860392014
+Nom du Produit en Français_viande,0.0005430742708187553
+Nom du Produit en Français_égoutté,0.0005542515757850364
+Nom du Produit en Français_pâtes,0.0006062609675355435
+Nom du Produit en Français_cru,0.0006350335260902562
+Nom du Produit en Français_pomme,0.0006380542978017822
+Nom du Produit en Français_pain,0.0006556568890892067
+Nom du Produit en Français_préemballée,0.0008435313450072535
+Nom du Produit en Français_type,0.0008799181840434267
+Nom du Produit en Français_surgelée,0.0010044131514711507
+Nom du Produit en Français_pizza,0.0011371708768042276
+Nom du Produit en Français_lait,0.0012014040668409498
+Acidification terrestre et eaux douces (mol H+ eq/kg de produit),0.0014112160484310078
+Nom du Produit en Français_minéraux,0.0018256875361637003
+Nom du Produit en Français_appertisé,0.0019417097886615497
+Nom du Produit en Français_frais,0.0020806792753189085
+Nom du Produit en Français_jambon,0.0021346522831560246
+Nom du Produit en Français_boisson,0.002375903008369895
+Nom du Produit en Français_en,0.002393098598983323
+Nom du Produit en Français_boeuf,0.002561587229577367
+Nom du Produit en Français_sauce,0.002665659510068341
+Nom du Produit en Français_crème,0.0028421188632017148
+Nom du Produit en Français_aux,0.003019513078962721
+Préparation,0.0032221154279618138
+Saisonnalité,0.00416357371345274
+Nom du Produit en Français_mg,0.004333168837740509
+Nom du Produit en Français_spécialité,0.004529216376253175
+Épuisement des ressources énergétiques (MJ/kg de produit),0.004857658868490322
+Sous-groupe d'aliment,0.006367232710116388
+Particules (E-06 disease inc./kg de produit),0.00853829130484508
+Score unique EF (mPt/kg de produit),0.010940742305507766
+Formation photochimique d'ozone (E-03 kg NMVOC eq/kg de produit),0.01667092529277653
+Eutrophisation eaux douces (E-03 kg P eq/kg de produit),0.02073205157658157
+Matériau d'emballage,0.027926428701640138
+Livraison,0.03276888014485807
+Écotoxicité pour écosystèmes aquatiques d'eau douce (CTUe/kg de produit),0.03441479345434394
+Épuisement des ressources minéraux (E-06 kg Sb eq/kg de produit),0.04420066562168475
+Code CIQUAL,0.051097925606953795
+Eutrophisation marine (E-03 kg N eq/kg de produit),0.051476489569070395
+Changement climatique (kg CO2 eq/kg de produit),0.07227984008872211
+Épuisement des ressources eau (m3 depriv./kg de produit),0.07330026632153146
+Eutrophisation terreste (mol N eq/kg de produit),0.07595418012044348
+Groupe d'aliment,0.07651078215195964
+Appauvrissement de la couche d'ozone (E-06 kg CVC11 eq/kg de produit),0.08171996691509735
+Rayonnements ionisants (kBq U-235 eq/kg de produit),0.2399770679379814
+Utilisation du sol (Pt/kg de produit),0.24361097028436457
