@@ -1,0 +1,147 @@
+{
+    "columns": [
+        "place",
+        "catu",
+        "sexe",
+        "trajet",
+        "secu1",
+        "secu2",
+        "secu3",
+        "locp",
+        "catv",
+        "an_nais",
+        "mois",
+        "occutc",
+        "obs",
+        "obsm",
+        "choc",
+        "manv",
+        "lum",
+        "agg",
+        "int",
+        "atm",
+        "col",
+        "catr",
+        "circ",
+        "vosp",
+        "prof",
+        "plan",
+        "surf",
+        "infra",
+        "situ",
+        "lat",
+        "long",
+        "heure",
+        "mom_acc",
+        "jour_semaine"
+    ],
+    "rows": 99732,
+    "cols": 34,
+    "target_is_numeric": true,
+    "columns_info": {
+        "place": [
+            "scale"
+        ],
+        "catu": [
+            "scale"
+        ],
+        "sexe": [
+            "scale"
+        ],
+        "trajet": [
+            "scale"
+        ],
+        "secu1": [
+            "scale"
+        ],
+        "secu2": [
+            "scale"
+        ],
+        "secu3": [
+            "scale"
+        ],
+        "locp": [],
+        "catv": [
+            "scale"
+        ],
+        "an_nais": [
+            "scale"
+        ],
+        "mois": [
+            "scale"
+        ],
+        "occutc": [
+            "missing_values",
+            "scale"
+        ],
+        "obs": [
+            "scale"
+        ],
+        "obsm": [
+            "scale"
+        ],
+        "choc": [
+            "scale"
+        ],
+        "manv": [
+            "scale"
+        ],
+        "lum": [
+            "scale"
+        ],
+        "agg": [
+            "scale"
+        ],
+        "int": [
+            "scale"
+        ],
+        "atm": [
+            "scale"
+        ],
+        "col": [
+            "scale"
+        ],
+        "catr": [
+            "scale"
+        ],
+        "circ": [
+            "scale"
+        ],
+        "vosp": [],
+        "prof": [
+            "scale"
+        ],
+        "plan": [
+            "scale"
+        ],
+        "surf": [
+            "scale"
+        ],
+        "infra": [
+            "scale"
+        ],
+        "situ": [
+            "scale"
+        ],
+        "lat": [
+            "scale"
+        ],
+        "long": [
+            "scale"
+        ],
+        "heure": [
+            "scale"
+        ],
+        "mom_acc": [
+            "datetime_transform"
+        ],
+        "jour_semaine": [
+            "scale"
+        ]
+    },
+    "target_info": [],
+    "n_features": 34,
+    "is_sample_weighted": false,
+    "n_classes": 4,
+    "num_class": 4
+}
