@@ -8,21 +8,13 @@ import markdown
 #task: classification
 #target variable: grav
 
-#import data and merge in an unique dataset
-carac = pd.read_csv('https://www.data.gouv.fr/fr/datasets/r/e22ba475-45a3-46ac-a0f7-9ca9ed1e283a',sep=';')
-lieux = pd.read_csv('https://www.data.gouv.fr/fr/datasets/r/2ad65965-36a1-4452-9c08-61a6c874e3e6',sep=';')
-veh = pd.read_csv('https://www.data.gouv.fr/fr/datasets/r/780cd335-5048-4bd6-a841-105b44eb2667',sep=';')
-usag = pd.read_csv('https://www.data.gouv.fr/fr/datasets/r/36b1b7b3-84b4-4901-9163-59ae8a9e3028',sep=';')
-
-a=pd.merge(usag,veh,on='Num_Acc')
-b=pd.merge(a,carac,on='Num_Acc')
-
-data=pd.merge(b,lieux,on='Num_Acc')
+#import data from community resources
+data = pd.read_csv('https://www.data.gouv.fr/fr/datasets/r/6af37c98-0933-4ae4-8380-5f63212fb52a',index_col=0)
 
 #Pandas profiling:
 
-profile_accidents_routiers = data.profile_report()
-profile_accidents_routiers.to_file("accidents_routiers.html")
+#profile_accidents_routiers = data.profile_report()
+#profile_accidents_routiers.to_file("accidents_routiers.html")
 
 #modify lat and long columns
 data['lat'] = data['lat'].str.replace(',', '.', regex=True)
