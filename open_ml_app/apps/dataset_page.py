@@ -67,15 +67,17 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
     mljar_table = generate_table(dataset_dict["dgf_resource_id"], table_type="mljar_profile.csv")
 
     container = dbc.Container([
-        generate_badge("Go back", url="/openml/", background_color="red"),
+        #html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
+        html.H5(generate_badge("Go back", url="/openml/", background_color="#cadae6")),
         html.Title("FODML"),
         html.H2(dataset_dict["title"]),
         html.P(dataset_dict["description"]),
-        html.P(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
+        #html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
+        html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Data Dictionary"),
         dictionary_table,
-        html.P(generate_badge("Full Data Dictionary", url=dataset_dict['dict_url'], background_color="#F49390")),
+        html.H4(generate_badge("Full Data Dictionary", url=dataset_dict['dict_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Descriptive Summary"),
 
@@ -91,11 +93,11 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
                 # generate_kpi_card("Skewed", 10),
             ]
         ),
-        generate_badge("Full Descriptive Profile", url=dataset_dict['profile_url'], background_color="#A4B494"),
+        html.H4(generate_badge("Full Descriptive Profile", url=dataset_dict['profile_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("AutoML Summary"),
         mljar_table,
-        generate_badge("Full AutoML Profile", url=dataset_dict['automl_url'], background_color="#EAB464"),
+        html.H4(generate_badge("Full AutoML Profile", url=dataset_dict['automl_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Machine Learning Reuses (data.gouv.fr)"),
         html.Hr(style={"marginBottom": "20px"}),

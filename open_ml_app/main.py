@@ -61,8 +61,8 @@ def description_card():
                 children=["Explore French Open Datasets from",
                           html.A(" data.gouv.fr (DGF)", href="https://www.data.gouv.fr",
                                  target="_blank"),
-                          " by task, number of features, number of examples, and topic."
-                          " Click on the chosen dataset to visualize its properties and its possible use cases."],
+                          "by task, number of features, number of examples, and topic."
+                          "Click on the chosen dataset to visualize its descriptive summary and the AutoMl report."],
             ),
         ],
     )
