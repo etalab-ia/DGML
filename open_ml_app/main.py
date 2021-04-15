@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import os
 print(os.getcwd())
 from apps.dataset_page import generate_dataset_page
-from apps.utils import generate_kpi_card
+from apps.utils import generate_kpi_card, DATASET_COLUMNS
 
 load_dotenv(verbose=True)
 
@@ -105,10 +105,24 @@ def generate_control_card():
                 value=topic_list,
             ),
             html.Br(),
+            html.P("Sort by:"),
+            dcc.Dropdown(
+                id="sort-by",
+                options=[{"label": i, "value": i} for i in DATASET_COLUMNS],
+                value="Task"
+            ),
+            html.Br(),
+            dcc.RadioItems(
+                id="sort-by-order",
+                options=[{"label": i, "value": i} for i in ["Ascending", "Descending"]],
+                value="Ascending",
+            ),
+            html.Br(),
             html.Div(
                 id="reset-btn-outer",
                 children=html.Button(id="reset-btn", children="Reset", n_clicks=0),
             ),
+
         ],
         style={"width": "100%"}
     )
@@ -172,48 +186,20 @@ def generate_dataset_block(tasks, features, lines, topics, reset_click):
                             [
                                 dcc.Link(f"{dataset_dict['title']}", href=f"{app.config['url_base_pathname']}"
                                                                           f"datasets/{dataset_dict['dgf_resource_id']}"),
-                                # dbc.Badge(dataset_dict['task'], color="dark", pill=True,
-                                #           style={"font-family": "Acumin", "font-size": "15px",
-                                #                  "marginLeft": "5px"}),
-                                # dbc.Badge(dataset_dict['topic'], color="info", pill=True, className="ml-1",
-                                #           style={"font-family": "Acumin", "font-size": "15px"})
                             ],
                             className="card-title"),
-                        html.P(
-                            f"{dataset_dict['description']}",
-                            style={"font-family": "AcuminL"},
-                        ),
-                        # html.H6("Descriptive Stats"),
-                        # html.Hr(style={"marginBottom": "20px"}),
+                        # html.P(
+                        #     f"{dataset_dict['description']}",
+                        #     style={"font-family": "AcuminL"},
+                        # ),
                         dbc.CardDeck([
                             # profiling
                             generate_kpi_card("Task", f"{dataset_dict['task']}"),
                             generate_kpi_card("Topic", f"{dataset_dict['topic']}"),
-                            generate_kpi_card("Features", dataset_dict['nb_features']),
+                            generate_kpi_card("Columns", dataset_dict['nb_features']),
                             generate_kpi_card("Lines", dataset_dict['nb_lines']),
-                            generate_kpi_card("Missing Cells", f"{dataset_dict['missing_cells_pct']:.2f} %")]),
-                        # html.H6("AutoML Stats", style={"marginTop": "20px"}),
-                        # html.Hr(style={"marginBottom": "20px"}),
-                        # dbc.CardDeck([
-
-                        # models
-                        # generate_kpi_card("Target Var", dataset_dict['target_variable'], color="info"),
-                        # generate_kpi_card("Best Model", dataset_dict['best_model'], color="info"),
-                        # generate_kpi_card("Metric", dataset_dict['model_metric'], color="info"),
-                        # generate_kpi_card("Best Perf", f"{dataset_dict['best_value']:.2f}", color="info"),
-
-                        # ], style={"marginTop": "20px"}
-                        # ),
-                        html.Br(),
-                        # dbc.CardFooter([
-                        #     html.H5("Resources:"),
-                        #     generate_badge("DGF Dataset", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7"),
-                        #     generate_badge("File", url=dataset_dict['dgf_resource_url'], background_color="#D8D5D4"),
-                        #     generate_badge("Descriptive Profile", url=dataset_dict['profile_url'], background_color="#A4B494"),
-                        #     generate_badge("AutoML Profile", url=dataset_dict['automl_url'], background_color="#EAB464"),
-                        #     generate_badge("Data Dictionary", url=dataset_dict['dict_url'], background_color="#F49390"),
-                        #
-                        # ], style={"font-family": "Acumin", "font-size": "20px"})
+                            # generate_kpi_card("Missing Cells", f"{dataset_dict['missing_cells_pct']:.2f} %")
+                        ]),
                     ]
                 ),
             ],
@@ -257,6 +243,9 @@ def update_dataset_block(task, feature, line, topic, reset_click):
             reset = True
     # Return to original hm(no colored annotation) by resetting
     return generate_dataset_block(task, feature, line, topic, reset_click)
+
+
+
 
 
 # Run the server

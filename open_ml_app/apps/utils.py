@@ -18,10 +18,11 @@ NB_FEATURES_CATEGORIES = {
 NB_LINES_CATEGORIES = {
     "<100": (1, 100),
     ">=100<1000": (100, 1000),
-    ">=1000<2000": (1000, 2000),
-    ">=2000": (2000, 1e100)
+    ">=1000<5000": (1000, 5000),
+    ">=5000<10000": (5000, 10000),
+    ">=10000": (10000, 1e100)
 }
-
+DATASET_COLUMNS = ["Task", "Topic", "Columns", "Lines"]
 
 def get_category(categories_dict: Dict[str, Tuple[int, int]], value: int):
     for cat, (min_val, max_val) in categories_dict.items():
@@ -48,15 +49,19 @@ def add_nb_lines_category(df: pd.DataFrame):
 def generate_kpi_card(title: str, value: Union[int, str], color: Optional = None):
     dataset_kpi_card = dbc.Card(
         [
-            dbc.CardHeader(html.B(title), style={"textAlign": "center", "font-family": "Acumin"}),
+            dbc.CardHeader(html.B(title), style={"textAlign": "center", "font-family": "Acumin",
+                                                 'font-size': '18px'}),
             dbc.CardBody(
                 [
-                    html.P(value, style={"textAlign": "center", "font-family": "AcuminL"}),
-                ]
+                    html.P(value, style={"textAlign": "center", "font-family": "AcuminL",
+                                         'font-size': '16px'}),
+
+                ],
+
             )
         ],
         color="primary" if not color else color, outline=True,
-        style={"width": "10rem"},
+        style={"width": "1cm", "height": "8.5rem"},
 
     )
     return dataset_kpi_card
