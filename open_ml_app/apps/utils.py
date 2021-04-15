@@ -48,10 +48,10 @@ def add_nb_lines_category(df: pd.DataFrame):
 def generate_kpi_card(title: str, value: Union[int, str], color: Optional = None):
     dataset_kpi_card = dbc.Card(
         [
-            dbc.CardHeader(html.B(title), style={"textAlign": "center", "font-family": "Acumin"}),
+            dbc.CardHeader(html.B(title), style={"height": "80%","textAlign": "center", "font-family": "Acumin"}),
             dbc.CardBody(
                 [
-                    html.P(value, style={"textAlign": "center", "font-family": "AcuminL"}),
+                    html.P(value, style={"height": "100%","textAlign": "center", "font-family": "AcuminL"}),
                 ]
             )
         ],
@@ -98,9 +98,9 @@ def generate_badge(title: str, url: str, background_color: str, font_color: str 
     if pd.isna(url):
         title = f"{title} not available 😞"
         badge = dbc.Badge(title, style={"backgroundColor": background_color, "color": font_color},
-                          pill=True, className="ml-2")
+                          pill=False, className="ml-2")
     else:
         badge = dbc.Badge(title, href=url,
                           target="_blank", style={"backgroundColor": background_color, "color": font_color},
-                          pill=True, className="ml-2")
+                          pill=False, className="ml-2")
     return badge
