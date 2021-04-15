@@ -17,7 +17,7 @@ DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 def generate_reuses_cards(resuses_dict: Dict):
     ml_reuses_dict = filter_reuses(resuses_dict)
     if not ml_reuses_dict:
-        return
+        return html.P("There are no data science reuses for this dataset 😞")
     list_cards = []
     for reuse in ml_reuses_dict:
         reuse_card = dbc.Card(
@@ -96,12 +96,16 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         html.H4(generate_badge("Full Descriptive Profile", url=dataset_dict['profile_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("AutoML Summary"),
+        html.P(children=[f"Dataset trained using as target variable : ", html.B(dataset_dict['target_variable'])]),
         mljar_table,
         html.H4(generate_badge("Full AutoML Profile", url=dataset_dict['automl_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Machine Learning Reuses (data.gouv.fr)"),
         html.Hr(style={"marginBottom": "20px"}),
         generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
+        html.H3("Our Experiments"),
+        html.P("Check out our experiments on this dataset."),
+        html.Hr(style={"marginBottom": "20px"}),
         html.H3("Load Data"),
         html.Hr(style={"marginBottom": "20px"}),
     ])
