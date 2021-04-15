@@ -8,6 +8,7 @@ import pathlib
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
 import os
+
 print(os.getcwd())
 from apps.dataset_page import generate_dataset_page
 from apps.utils import generate_kpi_card, DATASET_COLUMNS
@@ -103,13 +104,15 @@ def generate_control_card():
                 options=[{"label": i, "value": i} for i in topic_list],
                 multi=True,
                 value=topic_list,
+                clearable=False
             ),
             html.Br(),
             html.P("Sort by:"),
             dcc.Dropdown(
                 id="sort-by",
                 options=[{"label": i, "value": i} for i in DATASET_COLUMNS],
-                value="Task"
+                value="Task",
+                clearable=False
             ),
             html.Br(),
             dcc.RadioItems(
@@ -168,14 +171,16 @@ app.layout = url_bar_and_content_div
 # ])
 
 
-def generate_dataset_block(tasks, features, lines, topics, reset_click):
+def generate_dataset_block(tasks, features, lines, topics, sort_by, sort_order, reset_click):
     chosen_tasks_df = df[df.task.isin(tasks)]
     chosen_features_df = chosen_tasks_df[chosen_tasks_df.nb_features_cat.isin(features)]
     chosen_lines_df = chosen_features_df[chosen_features_df.nb_lines_cat.isin(lines)]
     chosen_topics_df = chosen_lines_df[chosen_lines_df.topic.isin(topics)]
+    chosen_sort_by_df = chosen_topics_df.sort_values(by=DATASET_COLUMNS[sort_by],
+                                                     ascending=True if sort_order == 'Ascending' else False)
     cards_list = []
 
-    for index, dataset_row in chosen_topics_df.iterrows():
+    for index, dataset_row in chosen_sort_by_df.iterrows():
         dataset_dict = get_dataset_info(dataset_row)
 
         main_dataset_card = html.Div(dbc.Card(
@@ -229,10 +234,12 @@ def display_page(pathname):
         Input("features-select", "value"),
         Input("lines-select", "value"),
         Input("topic-select", "value"),
+        Input("sort-by", "value"),
+        Input("sort-by-order", "value"),
         Input("reset-btn", "n_clicks"),
     ],
 )
-def update_dataset_block(task, feature, line, topic, reset_click):
+def update_dataset_block(task, feature, line, topic, sort_by, sort_order, reset_click):
     reset = False
     # Find which one has been triggered
     ctx = dash.callback_context
@@ -242,10 +249,7 @@ def update_dataset_block(task, feature, line, topic, reset_click):
         if prop_id == "reset-btn":
             reset = True
     # Return to original hm(no colored annotation) by resetting
-    return generate_dataset_block(task, feature, line, topic, reset_click)
-
-
-
+    return generate_dataset_block(task, feature, line, topic, sort_by, sort_order, reset_click)
 
 
 # Run the server

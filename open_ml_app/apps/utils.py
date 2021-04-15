@@ -22,7 +22,8 @@ NB_LINES_CATEGORIES = {
     ">=5000<10000": (5000, 10000),
     ">=10000": (10000, 1e100)
 }
-DATASET_COLUMNS = ["Task", "Topic", "Columns", "Lines"]
+DATASET_COLUMNS = {"Task":'task', "Topic":'topic', "Columns":'nb_features', "Lines":'nb_lines'}
+
 
 def get_category(categories_dict: Dict[str, Tuple[int, int]], value: int):
     for cat, (min_val, max_val) in categories_dict.items():
