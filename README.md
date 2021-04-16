@@ -9,10 +9,11 @@ Le projet OpenML vise à la construction d'un **catalogue de jeux de données de
  
  ### Ce que vous trouverez dans OpenML
  
- - Une liste de datasets réutilisables par des algorithmes de ML
+ - Une liste de datasets réutilisables par des algorithmes de ML (cliquez [ici](https://github.com/giuliasantarsieri/openml_testing/blob/main/explain_automodels/Choix%20des%20jeux%20de%20donn%C3%A9es%20pour%20le%20Machine%20Learning.md) pour avoir plus d'informations sur le choix des datasets)
  - Un profiling statistique de chaque dataset
- - Les résultats de l'entraînement et de la validation automatique d'algorithmes de ML sur ces datasets
+ - Les résultats de l'entraînement et de la validation automatique d'algorithmes de ML sur ces datasets (cliquez [ici](https://github.com/giuliasantarsieri/openml_testing/blob/main/explain_automodels/Guide%20au%20AutoML%20Leaderboard%20report.md) pour le Guide au AutoML)
  - Des exemples de code
+ 
  
  ### Libraries utilisées
  
@@ -20,5 +21,5 @@ Le projet OpenML vise à la construction d'un **catalogue de jeux de données de
  - [mljar-supervised](https://supervised.mljar.com/)
  
  ### Ressources
- - [Apprendre des datasets de data.gouv.fr grâce au Machine Learning](https://pad.incubateur.net/vUkeOagxSCWVMpaW9pz_nQ#) (liste des datasets et lien vers profiling et modèle)
+ - [Inventaire des datasets de data.gouv.fr pour le Machine Learning](https://pad.incubateur.net/vUkeOagxSCWVMpaW9pz_nQ#) (liste des datasets et lien vers profiling et modèle)
  - [Machine Learning on open datasets](https://drive.google.com/file/d/1CvEA7XWx4VJxukM9eh_c2FnHyOK7bM3U/view?usp=sharing)

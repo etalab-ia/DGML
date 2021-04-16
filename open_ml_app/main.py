@@ -59,11 +59,18 @@ def description_card():
             html.H3("Welcome to the FODML Repository"),
             html.Div(
                 id="intro",
-                children=["Explore French Open Datasets from",
-                          html.A(" data.gouv.fr (DGF)", href="https://www.data.gouv.fr",
+                children=["French Open Datasets for Machine Learning (FODML) is a collection of datasets from",
+                          html.A(" data.gouv.fr", href="https://www.data.gouv.fr",
                                  target="_blank"),
-                          "by task, number of features, number of examples, and topic."
-                          "Click on the chosen dataset to visualize its descriptive summary and the AutoMl report."],
+                          " for Machine Learning. ",
+                          html.Br(),
+                          "Click on a chosen dataset to see its Descriptive Profile, the results from the",
+                          " automatic training and testing of ML algorithms on the dataset (AutoML profile) and examples of code and reuses.",
+                          html.Br(),
+                          " Click ",
+                          html.A("here", href="https://github.com/etalab-ia/open_ML/blob/main/README.md",
+                                 target="_blank"),
+                          " to learn more about the project, about how we chose these datasets and to better understand its features."],
             ),
         ],
     )
@@ -84,7 +91,7 @@ def generate_control_card():
                 value=task_list,
             ),
             html.Br(),
-            html.P("Select Number of Features"),
+            html.P("Select Number of Columns"),
             dcc.Checklist(
                 id="features-select",
                 options=[{"label": i, "value": i} for i in nb_features_bins],
@@ -143,13 +150,13 @@ app_layout = html.Div(
         # Left column
         html.Div(
             id="left-column",
-            className="three columns",
+            className="four columns",
             children=[description_card(), generate_control_card()]
         ),
         # Right column
         html.Div(
             id="right-column",
-            className="nine columns",
+            className="seven columns",
             children=[
                 html.Div(id="dataset-card-div")
             ],

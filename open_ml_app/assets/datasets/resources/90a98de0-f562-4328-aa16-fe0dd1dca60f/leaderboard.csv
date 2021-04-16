@@ -1,4 +1,4 @@
-name,model_type,metric_type,metric_value,train_time
-1_Baseline,Baseline,rmse,4686281.570628975,1.21
-2_DecisionTree,Decision Tree,rmse,3808756.8159580138,414.27
-Ensemble,Ensemble,rmse,3808756.8159580138,0.03
+name,url,model_type,metric_type,metric_value,train_time
+1_Baseline,https://github.com/etalab-ia/open_ML/blob/main/docs/automodels/90a98de0-f562-4328-aa16-fe0dd1dca60f/1_Baseline/README.md,Baseline,rmse,4686281.57062897,1.21
+2_DecisionTree,https://github.com/etalab-ia/open_ML/blob/main/docs/automodels/90a98de0-f562-4328-aa16-fe0dd1dca60f/2_DecisionTree/README.md,Decision Tree,rmse,3808756.81595801,414.27
+Ensemble,https://github.com/etalab-ia/open_ML/blob/main/docs/automodels/90a98de0-f562-4328-aa16-fe0dd1dca60f/Ensemble/README.md,Ensemble,rmse,3808756.81595801,0.03
