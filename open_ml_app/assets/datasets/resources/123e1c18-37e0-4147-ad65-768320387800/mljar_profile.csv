@@ -1,8 +1,0 @@
-Best model,name,url,model_type,metric_type,metric_value,train_time
-,1_Baseline,https://etalab-ia.github.io/open_ML/automodels/AutoML_donn_carr/1_Baseline/README.html,Baseline,rmse,147.349,0.39
-,2_DecisionTree,https://etalab-ia.github.io/open_ML/automodels/AutoML_donn_carr/2_DecisionTree/README.html,Decision Tree,rmse,71.2099,36.51
-the best,3_Linear,https://etalab-ia.github.io/open_ML/automodels/AutoML_donn_carr/3_Linear/README.html,Linear,rmse,34.1282,16.59
-,4_Default_Xgboost,https://etalab-ia.github.io/open_ML/automodels/AutoML_donn_carr/4_Default_Xgboost/README.html,Xgboost,rmse,61.5598,12.34
-,5_Default_NeuralNetwork,https://etalab-ia.github.io/open_ML/automodels/AutoML_donn_carr/5_Default_NeuralNetwork/README.html,Neural Network,rmse,64.2611,22.97
-,6_Default_RandomForest,https://etalab-ia.github.io/open_ML/automodels/AutoML_donn_carr/6_Default_RandomForest/README.html,Random Forest,rmse,58.5626,23.29
-,Ensemble,https://etalab-ia.github.io/open_ML/automodels/AutoML_donn_carr/Ensemble/README.html,Ensemble,rmse,34.1282,0.12

@@ -43,11 +43,11 @@ def generate_table(dataset_id: str, table_type: str = "dict_data.csv"):
     if not display_table_path.exists():
         if "dict_data" in table_type:
             html_table = html.H5("Data dictionary preview not available")
-        if "mljar" in table_type:
+        if "leaderboard" in table_type:
             html_table = html.H5("MLJAR profile preview not available")
     else:
         table_df = pd.read_csv(display_table_path)
-        if "mljar_profile" in table_type:
+        if "leaderboard" in table_type:
             # add links to mljar table
             table_df["name"] = table_df[["name", "url"]].apply(lambda row: html.A(html.P(row["name"]), href=row["url"],
                                                                                   target="_blank"), axis=1)
@@ -64,7 +64,7 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         return dbc.Container(html.H2("This dataset was not found in our catalog."))
     dataset_dict = get_dataset_info(dataset_row)
     dictionary_table = generate_table(dataset_dict["dgf_resource_id"], table_type="dict_data.csv")
-    mljar_table = generate_table(dataset_dict["dgf_resource_id"], table_type="mljar_profile.csv")
+    mljar_table = generate_table(dataset_dict["dgf_resource_id"], table_type="leaderboard.csv")
 
     container = dbc.Container([
         #html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
@@ -104,7 +104,8 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         html.Hr(style={"marginBottom": "20px"}),
         generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
         html.H3("Our Experiments"),
-        html.P("Check out our experiments on this dataset."),
+        html.P("Check out our experiments on this dataset : "),
+        html.H4(generate_badge("See notebook", url=dataset_dict['etalab_xp_url'], background_color="#cadae6")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Load Data"),
         html.Hr(style={"marginBottom": "20px"}),

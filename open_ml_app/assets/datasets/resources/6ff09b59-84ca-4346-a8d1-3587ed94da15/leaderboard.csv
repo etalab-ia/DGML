@@ -1,8 +1,8 @@
-name,model_type,metric_type,metric_value,train_time
-1_Baseline,Baseline,rmse,39.93644901449782,0.29
-2_DecisionTree,Decision Tree,rmse,8.129964651878742,20.69
-3_Linear,Linear,rmse,5.866596023348161,9.68
-4_Default_Xgboost,Xgboost,rmse,1.4182049816877824,94.3
-5_Default_NeuralNetwork,Neural Network,rmse,11.137763944898554,6.79
-6_Default_RandomForest,Random Forest,rmse,6.900493055143368,23.75
-Ensemble,Ensemble,rmse,1.4182049729367308,0.11
+name,url,model_type,metric_type,metric_value,train_time
+1_Baseline,https://etalab-ia.github.io/open_ML/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/1_Baseline/README.html,Baseline,rmse,39.9364490144978,0.29
+2_DecisionTree,https://etalab-ia.github.io/open_ML/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/2_DecisionTree/README.html,Decision Tree,rmse,8.12996465187874,20.69
+3_Linear,https://etalab-ia.github.io/open_ML/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/3_Linear/README.html,Linear,rmse,5.86659602334816,9.68
+4_Default_Xgboost,https://etalab-ia.github.io/open_ML/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/4_Default_Xgboost/README.html,Xgboost,rmse,1.41820498168778,94.3
+5_Default_NeuralNetwork,https://etalab-ia.github.io/open_ML/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/5_Default_NeuralNetwork/README.html,Neural Network,rmse,11.1377639448986,6.79
+6_Default_RandomForest,https://etalab-ia.github.io/open_ML/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/6_Default_RandomForest/README.html,Random Forest,rmse,6.90049305514337,23.75
+Ensemble,https://etalab-ia.github.io/open_ML/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/Ensemble/README.html,Ensemble,rmse,1.41820497293673,0.11
