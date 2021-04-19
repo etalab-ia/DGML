@@ -27,7 +27,7 @@ def generate_reuses_cards(resuses_dict: Dict):
                     [
                         html.H4(reuse["title"], className="card-title"),
                         html.P(f"{reuse['description'][:100]}[...]", className="card-text",
-                        ),
+                               ),
                         dbc.Button("See reuse", color="primary", href=reuse["url"], target="_blank"),
                     ]
                 ),
@@ -57,6 +57,15 @@ def generate_table(dataset_id: str, table_type: str = "dict_data.csv"):
     return html_table
 
 
+def generate_stats_df(dataset_id: str, table_type: str = "statistics_summary.csv"):
+    display_stats_path = DATA_PATH.joinpath(f"resources/{dataset_id}/{table_type}")
+    if not display_stats_path.exists():
+        html_table = html.H5("Descriptive summary not available.")
+    else:
+        statistics_df = pd.read_csv(display_stats_path)
+    return statistics_df
+
+
 def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
     dataset_id = dataset_url.split("/")[-1]
     dataset_row = datasets_df[datasets_df["dgf_resource_id"] == dataset_id].iloc[0]
@@ -65,15 +74,17 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
     dataset_dict = get_dataset_info(dataset_row)
     dictionary_table = generate_table(dataset_dict["dgf_resource_id"], table_type="dict_data.csv")
     mljar_table = generate_table(dataset_dict["dgf_resource_id"], table_type="leaderboard.csv")
+    statistics_df = generate_stats_df(dataset_dict["dgf_resource_id"], table_type="statistics_summary.csv")
 
     container = dbc.Container([
-        #html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
+        # html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
         html.H5(generate_badge("Go back", url="/openml/", background_color="#cadae6")),
         html.Title("FODML"),
         html.H2(dataset_dict["title"]),
         html.P(dataset_dict["description"]),
-        #html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
-        html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#6d92ad")),
+        # html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
+        html.H4(
+            generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Data Dictionary"),
         dictionary_table,
@@ -83,17 +94,19 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
 
         dbc.CardDeck(
             [
-                generate_kpi_card("Features", dataset_dict['nb_features']),
-                generate_kpi_card("Lines", dataset_dict['nb_lines']),
-                generate_kpi_card("Missing Cells", f"{dataset_dict['missing_cells_pct']:.2f} %"),
-                generate_kpi_card("Continous", 29),
-                generate_kpi_card("Categorical", 2),
-                generate_kpi_card("High Cardinality", 10),
-                generate_kpi_card("High Correlation", 10),
+                generate_kpi_card("Number of Columns", statistics_df['Number of variables']),
+                generate_kpi_card("Number of Lines", statistics_df['Number of lines']),
+                generate_kpi_card("Missing Cells",
+                                  f"{round(float(statistics_df['Percentage of missing cells']), 2)} %"),
+                generate_kpi_card("Numeric variables", statistics_df['Numeric']),
+                generate_kpi_card("Categorical variables", statistics_df['Categorical']),
+                generate_kpi_card("High Cardinality", statistics_df['High cardinality variables']),
+                generate_kpi_card("High Correlation", statistics_df['High correlation variables']),
                 # generate_kpi_card("Skewed", 10),
             ]
         ),
-        html.H4(generate_badge("Full Descriptive Profile", url=dataset_dict['profile_url'], background_color="#6d92ad")),
+        html.H4(
+            generate_badge("Full Descriptive Profile", url=dataset_dict['profile_url'], background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("AutoML Summary"),
         html.P(children=[f"Dataset trained using as target variable : ", html.B(dataset_dict['target_variable'])]),
