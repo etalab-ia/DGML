@@ -1,0 +1,8 @@
+[
+  {
+    "id": "96f4164d-956d-4c1c-b161-68724eb0ccdc",
+    "target": "classification_diagnostic",
+    "task": "multi_classification",
+    "output_dir": "./open_ml_app/automatization/datasets/resources"
+  }
+]
