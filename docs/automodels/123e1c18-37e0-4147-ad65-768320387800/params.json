@@ -1,7 +1,7 @@
 {
     "mode": "Explain",
     "ml_task": "regression",
-    "results_path": "AutoML_13",
+    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl",
     "total_time_limit": 300,
     "model_time_limit": null,
     "algorithms": [
@@ -19,9 +19,9 @@
         "validation_type": "split",
         "train_ratio": 0.75,
         "shuffle": true,
-        "X_path": "AutoML_13/X.parquet",
-        "y_path": "AutoML_13/y.parquet",
-        "results_path": "AutoML_13"
+        "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+        "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+        "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
     },
     "verbose": 1,
     "explain_level": 2,
@@ -34,13 +34,13 @@
     "kmeans_features": false,
     "random_state": 1234,
     "saved": [
-        "AutoML_13/1_Baseline",
-        "AutoML_13/2_DecisionTree",
-        "AutoML_13/3_Linear",
-        "AutoML_13/4_Default_Xgboost",
-        "AutoML_13/5_Default_NeuralNetwork",
-        "AutoML_13/6_Default_RandomForest",
-        "AutoML_13/4_Default_Xgboost_categorical_mix",
-        "AutoML_13/Ensemble"
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/1_Baseline",
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/2_DecisionTree",
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/3_Linear",
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/4_Default_Xgboost",
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/5_Default_NeuralNetwork",
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/6_Default_RandomForest",
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/4_Default_Xgboost_categorical_mix",
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/Ensemble"
     ]
 }

@@ -16,6 +16,9 @@ data_agrib = pd.read_csv(url)
 profiling = data_agrib.profile_report()
 profiling.to_file("impacte_aliments.html")
 
+#drop id column
+data_agrib = data_agrib.drop(columns=['Code AGB','Code CIQUAL'])
+
 #fit model
 y = data_agrib["DQR - Note de qualité de la donnée (1 excellente ; 5 très faible)"].values
 X = data_agrib.drop(columns=["DQR - Note de qualité de la donnée (1 excellente ; 5 très faible)"])

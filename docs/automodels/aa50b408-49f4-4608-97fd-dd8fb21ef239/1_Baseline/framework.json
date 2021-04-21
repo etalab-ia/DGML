@@ -1,5 +1,5 @@
 {
-    "uid": "850b01f2-225c-4801-a4c8-e725a55853c5",
+    "uid": "dbf48ae3-87d0-420e-9f75-9860fb607315",
     "name": "1_Baseline",
     "preprocessing": [
         {
@@ -15,14 +15,14 @@
     ],
     "learners": [
         {
-            "library_version": "0.24.1",
+            "library_version": "0.23.2",
             "algorithm_name": "Baseline Regressor",
             "algorithm_short_name": "Baseline",
-            "uid": "3186b7ff-89cb-452b-a80b-63dec9973226",
+            "uid": "bbd5fd41-d778-4862-a62d-6f33cbe0b2af",
             "params": {
                 "model_type": "Baseline",
                 "ml_task": "regression",
-                "seed": 43,
+                "seed": 1235,
                 "explain_level": 2
             }
         }
@@ -44,14 +44,14 @@
             "validation_type": "split",
             "train_ratio": 0.75,
             "shuffle": true,
-            "X_path": "AutoML_13/X.parquet",
-            "y_path": "AutoML_13/y.parquet",
-            "results_path": "AutoML_13"
+            "X_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/X.parquet",
+            "y_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/y.parquet",
+            "results_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl"
         },
         "learner": {
             "model_type": "Baseline",
             "ml_task": "regression",
-            "seed": 43,
+            "seed": 1235,
             "explain_level": 2
         },
         "ml_task": "regression",
@@ -63,11 +63,11 @@
         "max_time_for_learner": 60
     },
     "saved": [
-        "AutoML_13/1_Baseline/learner_fold_0.baseline"
+        "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/1_Baseline/learner_fold_0.baseline"
     ],
-    "predictions_fname": "AutoML_13/1_Baseline/predictions_validation.csv",
+    "predictions_fname": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/1_Baseline/predictions_validation.csv",
     "metric_name": "rmse",
     "final_loss": 147.34949107628347,
-    "train_time": 0.16213607788085938,
+    "train_time": 0.12026381492614746,
     "is_stacked": false
 }

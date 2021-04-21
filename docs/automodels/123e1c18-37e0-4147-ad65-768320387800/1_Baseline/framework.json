@@ -1,5 +1,5 @@
 {
-    "uid": "da293d63-13b2-4542-b8b5-4e5245512d06",
+    "uid": "24b831cc-8aaf-4d3a-9583-0a743d8816fb",
     "name": "1_Baseline",
     "preprocessing": [
         {
@@ -15,10 +15,10 @@
     ],
     "learners": [
         {
-            "library_version": "0.24.1",
+            "library_version": "0.23.2",
             "algorithm_name": "Baseline Regressor",
             "algorithm_short_name": "Baseline",
-            "uid": "52250cd3-1383-481b-a448-1ee29b1a7a50",
+            "uid": "44789b55-bc49-4e26-9187-3ddf8844dbec",
             "params": {
                 "model_type": "Baseline",
                 "ml_task": "regression",
@@ -44,9 +44,9 @@
             "validation_type": "split",
             "train_ratio": 0.75,
             "shuffle": true,
-            "X_path": "AutoML_13/X.parquet",
-            "y_path": "AutoML_13/y.parquet",
-            "results_path": "AutoML_13"
+            "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+            "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+            "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
         },
         "learner": {
             "model_type": "Baseline",
@@ -63,11 +63,11 @@
         "max_time_for_learner": 60
     },
     "saved": [
-        "AutoML_13/1_Baseline/learner_fold_0.baseline"
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/1_Baseline/learner_fold_0.baseline"
     ],
-    "predictions_fname": "AutoML_13/1_Baseline/predictions_validation.csv",
+    "predictions_fname": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/1_Baseline/predictions_validation.csv",
     "metric_name": "rmse",
     "final_loss": 65.58097455953467,
-    "train_time": 0.10356760025024414,
+    "train_time": 0.06684279441833496,
     "is_stacked": false
 }

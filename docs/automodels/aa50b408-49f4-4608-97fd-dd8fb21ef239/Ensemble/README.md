@@ -6,15 +6,15 @@
 ## Ensemble structure
 | Model    |   Weight |
 |:---------|---------:|
-| 3_Linear |        6 |
+| 3_Linear |        1 |
 
 ### Metric details:
 | Metric   |       Score |
 |:---------|------------:|
-| MAE      |   12.9428   |
-| MSE      | 1164.73     |
-| RMSE     |   34.1282   |
-| R2       |    0.946354 |
+| MAE      |   12.9427   |
+| MSE      | 1165.05     |
+| RMSE     |   34.1329   |
+| R2       |    0.946339 |
 
 
 

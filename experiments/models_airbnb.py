@@ -13,7 +13,7 @@ import markdown
 url = "https://www.data.gouv.fr/fr/datasets/r/123e1c18-37e0-4147-ad65-768320387800"
 data_airbnb = pd.read_csv(url)
 data_airbnb = data_airbnb.drop(columns=['prix_nuitee']) #remove redundant column
-data_airbnb = data_airbnb.drop(columns=['Url','Resume','Shampooing']) #remove useless columns
+data_airbnb = data_airbnb.drop(columns=['Url','Resume','Shampooing','Description','Identifiant']) #remove useless columns
 
 #Pandas profiling
 profiling = data_airbnb.profile_report()

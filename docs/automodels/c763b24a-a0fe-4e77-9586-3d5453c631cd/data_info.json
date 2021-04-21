@@ -1,10 +1,9 @@
 {
     "columns": [
-        "Code AGB",
-        "Code CIQUAL",
         "Groupe d'aliment",
         "Sous-groupe d'aliment",
         "Nom du Produit en Fran\u00e7ais",
+        "LCI Name",
         "Saisonnalit\u00e9",
         "Transport par avion (1 : par avion)",
         "Livraison",
@@ -27,15 +26,9 @@
         "\u00c9puisement des ressources min\u00e9raux (E-06 kg Sb eq/kg de produit)"
     ],
     "rows": 1859,
-    "cols": 25,
+    "cols": 24,
     "target_is_numeric": true,
     "columns_info": {
-        "Code AGB": [
-            "text_transform"
-        ],
-        "Code CIQUAL": [
-            "scale"
-        ],
         "Groupe d'aliment": [
             "categorical",
             "few_categories"
@@ -45,6 +38,9 @@
             "many_categories"
         ],
         "Nom du Produit en Fran\u00e7ais": [
+            "text_transform"
+        ],
+        "LCI Name": [
             "text_transform"
         ],
         "Saisonnalit\u00e9": [
@@ -109,6 +105,6 @@
     "target_info": [
         "scale_log"
     ],
-    "n_features": 25,
+    "n_features": 24,
     "is_sample_weighted": false
 }
