@@ -18,20 +18,23 @@ rmse
 
 ## Training time
 
-11.1 seconds
+11.8 seconds
 
 ### Metric details:
 | Metric   |       Score |
 |:---------|------------:|
-| MAE      |   27.3858   |
-| MSE      | 2792.92     |
-| RMSE     |   52.8481   |
-| R2       |    0.349847 |
+| MAE      |   26.6166   |
+| MSE      | 2718.92     |
+| RMSE     |   52.1432   |
+| R2       |    0.367074 |
 
 
 
 ## Learning curves
 ![Learning curves](learning_curves.png)
+
+## Permutation-based Importance
+![Permutation-based Importance](permutation_importance.png)
 
 ## SHAP Importance
 ![SHAP Importance](shap_importance.png)

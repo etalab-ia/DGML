@@ -5,12 +5,12 @@
     "selected_models": [
         {
             "model": "3_Linear",
-            "repeat": 6.0
+            "repeat": 1.0
         }
     ],
-    "predictions_fname": "AutoML_13/Ensemble/predictions_ensemble.csv",
+    "predictions_fname": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/Ensemble/predictions_ensemble.csv",
     "metric_name": "rmse",
-    "final_loss": 34.1281963293466,
-    "train_time": 0.11545968055725098,
+    "final_loss": 34.1328975680742,
+    "train_time": 0.12163901329040527,
     "is_stacked": false
 }

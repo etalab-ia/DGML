@@ -21,49 +21,49 @@
                 "model_name": "prepare_data",
                 "model_type": "prepare_data",
                 "fit_level": "prepare_data",
-                "train_time": 9.463967323303223
+                "train_time": 6.481037378311157
             },
             {
                 "model_name": "1_Baseline",
                 "model_type": "Baseline",
                 "fit_level": "simple_algorithms",
-                "train_time": 0.3876824378967285
+                "train_time": 0.35165977478027344
             },
             {
                 "model_name": "2_DecisionTree",
                 "model_type": "Decision Tree",
                 "fit_level": "simple_algorithms",
-                "train_time": 36.51190996170044
+                "train_time": 27.622071027755737
             },
             {
                 "model_name": "3_Linear",
                 "model_type": "Linear",
                 "fit_level": "simple_algorithms",
-                "train_time": 16.592005014419556
+                "train_time": 4.3679304122924805
             },
             {
                 "model_name": "4_Default_Xgboost",
                 "model_type": "Xgboost",
                 "fit_level": "default_algorithms",
-                "train_time": 12.336830854415894
+                "train_time": 11.732016324996948
             },
             {
                 "model_name": "5_Default_NeuralNetwork",
                 "model_type": "Neural Network",
                 "fit_level": "default_algorithms",
-                "train_time": 22.9737606048584
+                "train_time": 8.18658709526062
             },
             {
                 "model_name": "6_Default_RandomForest",
                 "model_type": "Random Forest",
                 "fit_level": "default_algorithms",
-                "train_time": 23.290586948394775
+                "train_time": 15.204400539398193
             },
             {
                 "model_name": "Ensemble",
                 "model_type": "Ensemble",
                 "fit_level": "ensemble",
-                "train_time": 0.11545968055725098
+                "train_time": 0.12163901329040527
             }
         ],
         "is_hill_climbing": false,
@@ -88,14 +88,14 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/X.parquet",
+                    "y_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/y.parquet",
+                    "results_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl"
                 },
                 "learner": {
                     "model_type": "Baseline",
                     "ml_task": "regression",
-                    "seed": 43,
+                    "seed": 1235,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
@@ -103,7 +103,7 @@
                 "name": "1_Baseline",
                 "status": "trained",
                 "final_loss": 147.34949107628347,
-                "train_time": 0.3876824378967285,
+                "train_time": 0.35165977478027344,
                 "max_time_for_learner": 60
             },
             {
@@ -115,11 +115,7 @@
                     "max_cols_limit": null
                 },
                 "preprocessing": {
-                    "columns_preprocessing": {
-                        "Id_carr_n": [
-                            "text_transform"
-                        ]
-                    },
+                    "columns_preprocessing": {},
                     "target_preprocessing": [
                         "na_exclude"
                     ],
@@ -129,24 +125,24 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/X.parquet",
+                    "y_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/y.parquet",
+                    "results_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl"
                 },
                 "learner": {
                     "model_type": "Decision Tree",
                     "ml_task": "regression",
-                    "seed": 43,
-                    "criterion": "friedman_mse",
-                    "max_depth": 4,
+                    "seed": 1235,
+                    "criterion": "mse",
+                    "max_depth": 3,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
                 "name": "2_DecisionTree",
                 "status": "trained",
-                "final_loss": 71.2099105978748,
-                "train_time": 36.51190996170044,
+                "final_loss": 77.53761747905853,
+                "train_time": 27.622071027755737,
                 "max_time_for_learner": 60
             },
             {
@@ -157,9 +153,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Id_carr_n": [
-                            "text_transform"
-                        ],
                         "Ind": [
                             "scale_normal"
                         ],
@@ -205,6 +198,9 @@
                         "Log_ap90": [
                             "scale_normal"
                         ],
+                        "Log_inc": [
+                            "scale_normal"
+                        ],
                         "Ind_0_3": [
                             "scale_normal"
                         ],
@@ -235,6 +231,9 @@
                         "Ind_80p": [
                             "scale_normal"
                         ],
+                        "Ind_inc": [
+                            "scale_normal"
+                        ],
                         "t_maille": [
                             "scale_normal"
                         ]
@@ -249,22 +248,22 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/X.parquet",
+                    "y_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/y.parquet",
+                    "results_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl"
                 },
                 "learner": {
                     "model_type": "Linear",
                     "ml_task": "regression",
-                    "seed": 43,
+                    "seed": 1235,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
                 "name": "3_Linear",
                 "status": "trained",
-                "final_loss": 34.1281963293466,
-                "train_time": 16.592005014419556,
+                "final_loss": 34.1328975680742,
+                "train_time": 4.3679304122924805,
                 "max_time_for_learner": 60
             }
         ],
@@ -277,11 +276,7 @@
                     "max_cols_limit": null
                 },
                 "preprocessing": {
-                    "columns_preprocessing": {
-                        "Id_carr_n": [
-                            "text_transform"
-                        ]
-                    },
+                    "columns_preprocessing": {},
                     "target_preprocessing": [
                         "na_exclude",
                         "scale_normal"
@@ -292,9 +287,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/X.parquet",
+                    "y_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/y.parquet",
+                    "results_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl"
                 },
                 "learner": {
                     "model_type": "Xgboost",
@@ -313,8 +308,8 @@
                 "explain_level": 2,
                 "name": "4_Default_Xgboost",
                 "status": "trained",
-                "final_loss": 61.55983563046817,
-                "train_time": 12.336830854415894,
+                "final_loss": 59.93394954964643,
+                "train_time": 11.732016324996948,
                 "max_time_for_learner": 60
             },
             {
@@ -324,9 +319,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Id_carr_n": [
-                            "text_transform"
-                        ],
                         "Ind": [
                             "scale_normal"
                         ],
@@ -372,6 +364,9 @@
                         "Log_ap90": [
                             "scale_normal"
                         ],
+                        "Log_inc": [
+                            "scale_normal"
+                        ],
                         "Ind_0_3": [
                             "scale_normal"
                         ],
@@ -402,6 +397,9 @@
                         "Ind_80p": [
                             "scale_normal"
                         ],
+                        "Ind_inc": [
+                            "scale_normal"
+                        ],
                         "t_maille": [
                             "scale_normal"
                         ]
@@ -416,9 +414,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/X.parquet",
+                    "y_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/y.parquet",
+                    "results_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl"
                 },
                 "learner": {
                     "model_type": "Neural Network",
@@ -433,8 +431,8 @@
                 "explain_level": 2,
                 "name": "5_Default_NeuralNetwork",
                 "status": "trained",
-                "final_loss": 64.26108561972526,
-                "train_time": 22.9737606048584,
+                "final_loss": 59.26420492143863,
+                "train_time": 8.18658709526062,
                 "max_time_for_learner": 60
             },
             {
@@ -448,11 +446,7 @@
                     "max_cols_limit": null
                 },
                 "preprocessing": {
-                    "columns_preprocessing": {
-                        "Id_carr_n": [
-                            "text_transform"
-                        ]
-                    },
+                    "columns_preprocessing": {},
                     "target_preprocessing": [
                         "na_exclude",
                         "scale_normal"
@@ -463,9 +457,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/X.parquet",
+                    "y_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl/y.parquet",
+                    "results_path": "datasets/resources/aa50b408-49f4-4608-97fd-dd8fb21ef239/automl"
                 },
                 "learner": {
                     "model_type": "Random Forest",
@@ -481,8 +475,8 @@
                 "explain_level": 2,
                 "name": "6_Default_RandomForest",
                 "status": "trained",
-                "final_loss": 58.5626062296844,
-                "train_time": 23.290586948394775,
+                "final_loss": 58.751458577244605,
+                "train_time": 15.204400539398193,
                 "max_time_for_learner": 60
             }
         ],
@@ -492,8 +486,8 @@
                 "is_stacked": false,
                 "name": "Ensemble",
                 "status": "trained",
-                "final_loss": 34.1281963293466,
-                "train_time": 0.11545968055725098
+                "final_loss": 34.1328975680742,
+                "train_time": 0.12163901329040527
             }
         ]
     },

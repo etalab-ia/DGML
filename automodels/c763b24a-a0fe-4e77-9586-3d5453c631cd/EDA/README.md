@@ -16,30 +16,6 @@
 - **Max** :4.83
 
 ![](target.png)
-## Feature : Code AGB
-- **Feature type** : text
-- **Missing** : 0.0%
-- **Unique** : 1859
-- **Count** :1859
-- **Unique** :1859
-- **Top** :24041
-- **Freq** :1
-
-![](Code_AGB.png)
-## Feature : Code CIQUAL
-- **Feature type** : discrete
-- **Missing** : 0.0%
-- **Unique** : 1856
-- **Count** :1859.0
-- **Mean** :22548.642280796128
-- **Std** :14110.931795501925
-- **Min** :1001.0
-- **25%th Percentile** : 12762.5
-- **50%th Percentile** : 20532.0
-- **75%th Percentile** : 26108.5
-- **Max** :96778.0
-
-![](Code_CIQUAL.png)
 ## Feature : Groupe d'aliment
 - **Feature type** : categorical
 - **Missing** : 0.0%
@@ -66,10 +42,20 @@
 - **Unique** : 1859
 - **Count** :1859
 - **Unique** :1859
-- **Top** :Poêlée de légumes assaisonnés à l'asiatiques ou wok de légumes, surgelée, crue
+- **Top** :Maquereau, filet sauce moutarde, appertisé, égoutté
 - **Freq** :1
 
 ![](Nom_du_Produit_en_Franais.png)
+## Feature : LCI Name
+- **Feature type** : text
+- **Missing** : 0.0%
+- **Unique** : 1858
+- **Count** :1859
+- **Unique** :1858
+- **Top** :Wafer cookie
+- **Freq** :2
+
+![](LCI_Name.png)
 ## Feature : Saisonnalité
 - **Feature type** : categorical
 - **Missing** : 0.0%

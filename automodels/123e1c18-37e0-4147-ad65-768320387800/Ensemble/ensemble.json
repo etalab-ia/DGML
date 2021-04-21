@@ -5,16 +5,16 @@
     "selected_models": [
         {
             "model": "3_Linear",
-            "repeat": 3.0
+            "repeat": 5.0
         },
         {
-            "model": "4_Default_Xgboost_categorical_mix",
+            "model": "4_Default_Xgboost",
             "repeat": 2.0
         }
     ],
-    "predictions_fname": "AutoML_13/Ensemble/predictions_ensemble.csv",
+    "predictions_fname": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/Ensemble/predictions_ensemble.csv",
     "metric_name": "rmse",
-    "final_loss": 38.39258868160813,
-    "train_time": 0.1443638801574707,
+    "final_loss": 38.97400723025983,
+    "train_time": 0.13670563697814941,
     "is_stacked": false
 }

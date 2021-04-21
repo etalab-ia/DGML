@@ -1,6 +1,5 @@
 {
     "columns": [
-        "Identifiant",
         "Titre",
         "Latitude",
         "Longitude",
@@ -11,7 +10,6 @@
         "Type_logement",
         "type_propriete",
         "type_lit",
-        "Animal_sur_place",
         "Cuisine",
         "Internet",
         "television",
@@ -53,17 +51,12 @@
         "frais_menage",
         "Caution",
         "conditions_annulation",
-        "Description",
-        "reglement_interieur",
         "duree_minimale_sejour"
     ],
     "rows": 3927,
-    "cols": 56,
+    "cols": 52,
     "target_is_numeric": true,
     "columns_info": {
-        "Identifiant": [
-            "scale"
-        ],
         "Titre": [
             "text_transform"
         ],
@@ -94,11 +87,6 @@
             "few_categories"
         ],
         "type_lit": [
-            "missing_values",
-            "categorical",
-            "few_categories"
-        ],
-        "Animal_sur_place": [
             "missing_values",
             "categorical",
             "few_categories"
@@ -178,12 +166,6 @@
             "categorical",
             "few_categories"
         ],
-        "Description": [
-            "text_transform"
-        ],
-        "reglement_interieur": [
-            "text_transform"
-        ],
         "duree_minimale_sejour": [
             "scale"
         ]
@@ -191,6 +173,6 @@
     "target_info": [
         "scale_log"
     ],
-    "n_features": 56,
+    "n_features": 52,
     "is_sample_weighted": false
 }

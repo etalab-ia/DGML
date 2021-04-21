@@ -22,49 +22,55 @@
                 "model_name": "prepare_data",
                 "model_type": "prepare_data",
                 "fit_level": "prepare_data",
-                "train_time": 6.540955543518066
+                "train_time": 6.099306583404541
             },
             {
                 "model_name": "1_Baseline",
                 "model_type": "Baseline",
                 "fit_level": "simple_algorithms",
-                "train_time": 0.21192479133605957
+                "train_time": 0.19650530815124512
             },
             {
                 "model_name": "2_DecisionTree",
                 "model_type": "Decision Tree",
                 "fit_level": "simple_algorithms",
-                "train_time": 12.16199254989624
+                "train_time": 10.112196683883667
             },
             {
-                "model_name": "3_Default_Xgboost",
+                "model_name": "3_Linear",
+                "model_type": "Linear",
+                "fit_level": "simple_algorithms",
+                "train_time": 7.831279277801514
+            },
+            {
+                "model_name": "4_Default_Xgboost",
                 "model_type": "Xgboost",
                 "fit_level": "default_algorithms",
-                "train_time": 6.037923097610474
+                "train_time": 8.495061159133911
             },
             {
-                "model_name": "4_Default_NeuralNetwork",
+                "model_name": "5_Default_NeuralNetwork",
                 "model_type": "Neural Network",
                 "fit_level": "default_algorithms",
-                "train_time": 2.239851713180542
+                "train_time": 3.2792391777038574
             },
             {
-                "model_name": "5_Default_RandomForest",
+                "model_name": "6_Default_RandomForest",
                 "model_type": "Random Forest",
                 "fit_level": "default_algorithms",
-                "train_time": 7.982290506362915
+                "train_time": 22.628756761550903
             },
             {
-                "model_name": "3_Default_Xgboost_categorical_mix",
+                "model_name": "4_Default_Xgboost_categorical_mix",
                 "model_type": "Xgboost",
                 "fit_level": "mix_encoding",
-                "train_time": 8.497218132019043
+                "train_time": 9.90535306930542
             },
             {
                 "model_name": "Ensemble",
                 "model_type": "Ensemble",
                 "fit_level": "ensemble",
-                "train_time": 0.09960269927978516
+                "train_time": 0.1634840965270996
             }
         ],
         "is_hill_climbing": false,
@@ -89,14 +95,14 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/X.parquet",
+                    "y_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/y.parquet",
+                    "results_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl"
                 },
                 "learner": {
                     "model_type": "Baseline",
                     "ml_task": "regression",
-                    "seed": 43,
+                    "seed": 1235,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
@@ -104,7 +110,7 @@
                 "name": "1_Baseline",
                 "status": "trained",
                 "final_loss": 0.5199782412902427,
-                "train_time": 0.21192479133605957,
+                "train_time": 0.19650530815124512,
                 "max_time_for_learner": 60
             },
             {
@@ -117,9 +123,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Code AGB": [
-                            "text_transform"
-                        ],
                         "Groupe d'aliment": [
                             "categorical_to_int"
                         ],
@@ -127,6 +130,9 @@
                             "categorical_to_int"
                         ],
                         "Nom du Produit en Fran\u00e7ais": [
+                            "text_transform"
+                        ],
+                        "LCI Name": [
                             "text_transform"
                         ],
                         "Saisonnalit\u00e9": [
@@ -151,24 +157,24 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/X.parquet",
+                    "y_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/y.parquet",
+                    "results_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl"
                 },
                 "learner": {
                     "model_type": "Decision Tree",
                     "ml_task": "regression",
-                    "seed": 43,
-                    "criterion": "friedman_mse",
-                    "max_depth": 4,
+                    "seed": 1235,
+                    "criterion": "mse",
+                    "max_depth": 3,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
                 "name": "2_DecisionTree",
                 "status": "trained",
-                "final_loss": 0.4406680437872413,
-                "train_time": 12.16199254989624,
+                "final_loss": 0.45481162013894316,
+                "train_time": 10.112196683883667,
                 "max_time_for_learner": 60
             },
             {
@@ -179,12 +185,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Code AGB": [
-                            "text_transform"
-                        ],
-                        "Code CIQUAL": [
-                            "scale_normal"
-                        ],
                         "Groupe d'aliment": [
                             "categorical_to_int",
                             "scale_normal"
@@ -194,6 +194,9 @@
                             "scale_normal"
                         ],
                         "Nom du Produit en Fran\u00e7ais": [
+                            "text_transform"
+                        ],
+                        "LCI Name": [
                             "text_transform"
                         ],
                         "Saisonnalit\u00e9": [
@@ -262,22 +265,22 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/X.parquet",
+                    "y_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/y.parquet",
+                    "results_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl"
                 },
                 "learner": {
                     "model_type": "Linear",
                     "ml_task": "regression",
-                    "seed": 43,
+                    "seed": 1235,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
                 "name": "3_Linear",
-                "status": "error",
-                "final_loss": null,
-                "train_time": null,
+                "status": "trained",
+                "final_loss": 0.4240761877016086,
+                "train_time": 7.831279277801514,
                 "max_time_for_learner": 60
             }
         ],
@@ -291,9 +294,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Code AGB": [
-                            "text_transform"
-                        ],
                         "Groupe d'aliment": [
                             "categorical_to_int"
                         ],
@@ -301,6 +301,9 @@
                             "categorical_to_int"
                         ],
                         "Nom du Produit en Fran\u00e7ais": [
+                            "text_transform"
+                        ],
+                        "LCI Name": [
                             "text_transform"
                         ],
                         "Saisonnalit\u00e9": [
@@ -326,9 +329,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/X.parquet",
+                    "y_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/y.parquet",
+                    "results_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl"
                 },
                 "learner": {
                     "model_type": "Xgboost",
@@ -340,15 +343,15 @@
                     "min_child_weight": 1,
                     "subsample": 1.0,
                     "colsample_bytree": 1.0,
-                    "seed": 3,
+                    "seed": 4,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
-                "name": "3_Default_Xgboost",
+                "name": "4_Default_Xgboost",
                 "status": "trained",
-                "final_loss": 0.285951216823448,
-                "train_time": 6.037923097610474,
+                "final_loss": 0.28695044647535695,
+                "train_time": 8.495061159133911,
                 "max_time_for_learner": 60
             },
             {
@@ -358,12 +361,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Code AGB": [
-                            "text_transform"
-                        ],
-                        "Code CIQUAL": [
-                            "scale_normal"
-                        ],
                         "Groupe d'aliment": [
                             "categorical_to_int",
                             "scale_normal"
@@ -373,6 +370,9 @@
                             "scale_normal"
                         ],
                         "Nom du Produit en Fran\u00e7ais": [
+                            "text_transform"
+                        ],
+                        "LCI Name": [
                             "text_transform"
                         ],
                         "Saisonnalit\u00e9": [
@@ -441,9 +441,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/X.parquet",
+                    "y_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/y.parquet",
+                    "results_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl"
                 },
                 "learner": {
                     "model_type": "Neural Network",
@@ -451,15 +451,15 @@
                     "dense_1_size": 32,
                     "dense_2_size": 16,
                     "learning_rate": 0.05,
-                    "seed": 4,
+                    "seed": 5,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
-                "name": "4_Default_NeuralNetwork",
+                "name": "5_Default_NeuralNetwork",
                 "status": "trained",
-                "final_loss": 0.40334783995696666,
-                "train_time": 2.239851713180542,
+                "final_loss": 0.38351315220294757,
+                "train_time": 3.2792391777038574,
                 "max_time_for_learner": 60
             },
             {
@@ -474,9 +474,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Code AGB": [
-                            "text_transform"
-                        ],
                         "Groupe d'aliment": [
                             "categorical_to_int"
                         ],
@@ -484,6 +481,9 @@
                             "categorical_to_int"
                         ],
                         "Nom du Produit en Fran\u00e7ais": [
+                            "text_transform"
+                        ],
+                        "LCI Name": [
                             "text_transform"
                         ],
                         "Saisonnalit\u00e9": [
@@ -509,9 +509,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/X.parquet",
+                    "y_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/y.parquet",
+                    "results_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl"
                 },
                 "learner": {
                     "model_type": "Random Forest",
@@ -520,15 +520,15 @@
                     "max_features": 0.9,
                     "min_samples_split": 30,
                     "max_depth": 4,
-                    "seed": 5,
+                    "seed": 6,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
-                "name": "5_Default_RandomForest",
+                "name": "6_Default_RandomForest",
                 "status": "trained",
-                "final_loss": 0.3881334125787203,
-                "train_time": 7.982290506362915,
+                "final_loss": 0.4004687238720798,
+                "train_time": 22.628756761550903,
                 "max_time_for_learner": 60
             }
         ],
@@ -542,9 +542,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Code AGB": [
-                            "text_transform"
-                        ],
                         "Groupe d'aliment": [
                             "categorical_to_onehot"
                         ],
@@ -552,6 +549,9 @@
                             "categorical_to_int"
                         ],
                         "Nom du Produit en Fran\u00e7ais": [
+                            "text_transform"
+                        ],
+                        "LCI Name": [
                             "text_transform"
                         ],
                         "Saisonnalit\u00e9": [
@@ -577,9 +577,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/X.parquet",
+                    "y_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl/y.parquet",
+                    "results_path": "datasets/resources/2d4c66ea-c8a1-4a20-b903-54120d9f6008/automl"
                 },
                 "learner": {
                     "model_type": "Xgboost",
@@ -591,15 +591,15 @@
                     "min_child_weight": 1,
                     "subsample": 1.0,
                     "colsample_bytree": 1.0,
-                    "seed": 3,
+                    "seed": 4,
                     "explain_level": 2
                 },
                 "ml_task": "regression",
                 "explain_level": 2,
-                "name": "3_Default_Xgboost_categorical_mix",
+                "name": "4_Default_Xgboost_categorical_mix",
                 "status": "trained",
-                "final_loss": 0.28174902525659273,
-                "train_time": 8.497218132019043,
+                "final_loss": 0.2813268622249305,
+                "train_time": 9.90535306930542,
                 "max_time_for_learner": 60
             }
         ],
@@ -609,8 +609,8 @@
                 "is_stacked": false,
                 "name": "Ensemble",
                 "status": "trained",
-                "final_loss": 0.2797666465288615,
-                "train_time": 0.09960269927978516
+                "final_loss": 0.28016109590955685,
+                "train_time": 0.1634840965270996
             }
         ]
     },

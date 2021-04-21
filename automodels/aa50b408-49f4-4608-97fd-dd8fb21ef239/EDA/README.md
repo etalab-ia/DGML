@@ -16,16 +16,6 @@
 - **Max** :14951.8
 
 ![](target.png)
-## Feature : Id_carr_n
-- **Feature type** : text
-- **Missing** : 0.0%
-- **Unique** : 107190
-- **Count** :107190
-- **Unique** :107190
-- **Top** :CRS3035RES2000mN2950000E3870000
-- **Freq** :1
-
-![](Id_carr_n.png)
 ## Feature : Ind
 - **Feature type** : continous
 - **Missing** : 0.0%
@@ -236,6 +226,20 @@
 - **Max** :25544.7
 
 ![](Log_ap90.png)
+## Feature : Log_inc
+- **Feature type** : continous
+- **Missing** : 0.0%
+- **Unique** : 261
+- **Count** :107190.0
+- **Mean** :0.4938221849053082
+- **Std** :2.864756677741919
+- **Min** :0.0
+- **25%th Percentile** : 0.0
+- **50%th Percentile** : 0.0
+- **75%th Percentile** : 0.0
+- **Max** :268.0
+
+![](Log_inc.png)
 ## Feature : Ind_0_3
 - **Feature type** : continous
 - **Missing** : 0.0%
@@ -376,6 +380,20 @@
 - **Max** :13562.5
 
 ![](Ind_80p.png)
+## Feature : Ind_inc
+- **Feature type** : continous
+- **Missing** : 0.0%
+- **Unique** : 1412
+- **Count** :107190.0
+- **Mean** :9.804430450601734
+- **Std** :31.863044482448334
+- **Min** :0.0
+- **25%th Percentile** : 1.0
+- **50%th Percentile** : 3.1
+- **75%th Percentile** : 8.9
+- **Max** :4806.5
+
+![](Ind_inc.png)
 ## Feature : I_pauv
 - **Feature type** : discrete
 - **Missing** : 0.0%
