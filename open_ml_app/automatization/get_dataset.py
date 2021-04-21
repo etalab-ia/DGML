@@ -14,7 +14,7 @@ def latest_catalog():
 
 def fixed_catalog():
     """This function returns the pandas dataframe containg a 'catalog' of our datasets"""
-    dgf_catalog_df = pd.read_csv('./open_ml_app/automatization/catalog.csv')
+    dgf_catalog_df = pd.read_csv('./catalog.csv')
     pd.set_option('display.max_colwidth', None)  # to stop pandas from "cutting" long urls
     return dgf_catalog_df
 

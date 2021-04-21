@@ -95,7 +95,7 @@ def generate_mljar(data, target_variable, output_dir):
 
 def plot_mljar_table(id):
     """Returns a plot from the mljar leaderboard with train_time of the x-axis and metric_value on the y axis"""
-    leaderboard = pd.read_csv(f"./open_ml_app/automatization/datasets/resources/{id}/leaderboard.csv")
+    leaderboard = pd.read_csv(f"./datasets/resources/{id}/leaderboard.csv")
     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
     leaderboard['train_time'] = leaderboard['train_time'].astype(float)
     leaderboard['metric_value'] = leaderboard['metric_value'].astype(float)
@@ -110,5 +110,5 @@ def plot_mljar_table(id):
         ax.set(xlabel='train_time (seconds)', ylabel='metric_value (logloss)')
     else:
         ax.set(xlabel='train_time(seconds)', ylabel='metric_value (rmse)')
-    figure = plt.savefig(f"./open_ml_app/automatization/datasets/resources/{id}/mljar_plot.png")
+    figure = plt.savefig(f"./datasets/resources/{id}/mljar_plot.png")
     return figure
