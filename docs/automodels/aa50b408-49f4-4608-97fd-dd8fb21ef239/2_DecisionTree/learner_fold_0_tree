@@ -8,310 +8,150 @@ digraph G {
     node [margin="0.03" penwidth="0.5" width=.1, height=.1];
     edge [arrowsize=.4 penwidth="0.3"]
 
-    node3 [margin="0" shape=none label=<<table border="0">
+    node2 [margin="0" shape=none label=<<table border="0">
             
             <tr>
-                    <td><img src="/tmp/node3_21627.svg"/></td>
+                    <td><img src="/tmp/node2_34277.svg"/></td>
             </tr>
             </table>>]
-	node6 [margin="0" shape=none label=<<table border="0">
+	node5 [margin="0" shape=none label=<<table border="0">
             
             <tr>
-                    <td><img src="/tmp/node6_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node2 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node2_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node10 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node10_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node13 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node13_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node9 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node9_21627.svg"/></td>
+                    <td><img src="/tmp/node5_34277.svg"/></td>
             </tr>
             </table>>]
 	node1 [margin="0" shape=none label=<<table border="0">
             
             <tr>
-                    <td><img src="/tmp/node1_21627.svg"/></td>
+                    <td><img src="/tmp/node1_34277.svg"/></td>
             </tr>
             </table>>]
-	node18 [margin="0" shape=none label=<<table border="0">
+	node9 [margin="0" shape=none label=<<table border="0">
             
             <tr>
-                    <td><img src="/tmp/node18_21627.svg"/></td>
+                    <td><img src="/tmp/node9_34277.svg"/></td>
             </tr>
             </table>>]
-	node21 [margin="0" shape=none label=<<table border="0">
+	node12 [margin="0" shape=none label=<<table border="0">
             
             <tr>
-                    <td><img src="/tmp/node21_21627.svg"/></td>
+                    <td><img src="/tmp/node12_34277.svg"/></td>
             </tr>
             </table>>]
-	node17 [margin="0" shape=none label=<<table border="0">
+	node8 [margin="0" shape=none label=<<table border="0">
             
             <tr>
-                    <td><img src="/tmp/node17_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node25 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node25_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node28 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node28_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node24 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node24_21627.svg"/></td>
-            </tr>
-            </table>>]
-	node16 [margin="0" shape=none label=<<table border="0">
-            
-            <tr>
-                    <td><img src="/tmp/node16_21627.svg"/></td>
+                    <td><img src="/tmp/node8_34277.svg"/></td>
             </tr>
             </table>>]
 	node0 [margin="0" shape=none label=<<table border="0">
             
             <tr>
-                    <td><img src="/tmp/node0_21627.svg"/></td>
+                    <td><img src="/tmp/node0_34277.svg"/></td>
             </tr>
             </table>>]
-    node3 -> leaf4 [penwidth=0.3 color="#444443" label=<>]
-	node3 -> leaf5 [penwidth=0.3 color="#444443" label=<>]
+    node2 -> leaf3 [penwidth=0.3 color="#444443" label=<>]
+	node2 -> leaf4 [penwidth=0.3 color="#444443" label=<>]
 	
             {
                 rank=same;
-                leaf4 -> leaf5 [style=invis]
+                leaf3 -> leaf4 [style=invis]
             }
             
-	node6 -> leaf7 [penwidth=0.3 color="#444443" label=<>]
-	node6 -> leaf8 [penwidth=0.3 color="#444443" label=<>]
+	node5 -> leaf6 [penwidth=0.3 color="#444443" label=<>]
+	node5 -> leaf7 [penwidth=0.3 color="#444443" label=<>]
 	
             {
                 rank=same;
-                leaf7 -> leaf8 [style=invis]
-            }
-            
-	node2 -> node3 [penwidth=0.3 color="#444443" label=<>]
-	node2 -> node6 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                node3 -> node6 [style=invis]
-            }
-            
-	node10 -> leaf11 [penwidth=0.3 color="#444443" label=<>]
-	node10 -> leaf12 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                leaf11 -> leaf12 [style=invis]
-            }
-            
-	node13 -> leaf14 [penwidth=0.3 color="#444443" label=<>]
-	node13 -> leaf15 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                leaf14 -> leaf15 [style=invis]
-            }
-            
-	node9 -> node10 [penwidth=0.3 color="#444443" label=<>]
-	node9 -> node13 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                node10 -> node13 [style=invis]
+                leaf6 -> leaf7 [style=invis]
             }
             
 	node1 -> node2 [penwidth=0.3 color="#444443" label=<>]
-	node1 -> node9 [penwidth=0.3 color="#444443" label=<>]
+	node1 -> node5 [penwidth=0.3 color="#444443" label=<>]
 	
             {
                 rank=same;
-                node2 -> node9 [style=invis]
+                node2 -> node5 [style=invis]
             }
             
-	node18 -> leaf19 [penwidth=0.3 color="#444443" label=<>]
-	node18 -> leaf20 [penwidth=0.3 color="#444443" label=<>]
+	node9 -> leaf10 [penwidth=0.3 color="#444443" label=<>]
+	node9 -> leaf11 [penwidth=0.3 color="#444443" label=<>]
 	
             {
                 rank=same;
-                leaf19 -> leaf20 [style=invis]
+                leaf10 -> leaf11 [style=invis]
             }
             
-	node21 -> leaf22 [penwidth=0.3 color="#444443" label=<>]
-	node21 -> leaf23 [penwidth=0.3 color="#444443" label=<>]
+	node12 -> leaf13 [penwidth=0.3 color="#444443" label=<>]
+	node12 -> leaf14 [penwidth=0.3 color="#444443" label=<>]
 	
             {
                 rank=same;
-                leaf22 -> leaf23 [style=invis]
+                leaf13 -> leaf14 [style=invis]
             }
             
-	node17 -> node18 [penwidth=0.3 color="#444443" label=<>]
-	node17 -> node21 [penwidth=0.3 color="#444443" label=<>]
+	node8 -> node9 [penwidth=0.3 color="#444443" label=<>]
+	node8 -> node12 [penwidth=0.3 color="#444443" label=<>]
 	
             {
                 rank=same;
-                node18 -> node21 [style=invis]
-            }
-            
-	node25 -> leaf26 [penwidth=0.3 color="#444443" label=<>]
-	node25 -> leaf27 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                leaf26 -> leaf27 [style=invis]
-            }
-            
-	node28 -> leaf29 [penwidth=0.3 color="#444443" label=<>]
-	node28 -> leaf30 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                leaf29 -> leaf30 [style=invis]
-            }
-            
-	node24 -> node25 [penwidth=0.3 color="#444443" label=<>]
-	node24 -> node28 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                node25 -> node28 [style=invis]
-            }
-            
-	node16 -> node17 [penwidth=0.3 color="#444443" label=<>]
-	node16 -> node24 [penwidth=0.3 color="#444443" label=<>]
-	
-            {
-                rank=same;
-                node17 -> node24 [style=invis]
+                node9 -> node12 [style=invis]
             }
             
 	node0 -> node1 [penwidth=0.3 color="#444443" label=<&lt;>]
-	node0 -> node16 [penwidth=0.3 color="#444443" label=<&ge;>]
+	node0 -> node8 [penwidth=0.3 color="#444443" label=<&ge;>]
 	
             {
                 rank=same;
-                node1 -> node16 [style=invis]
+                node1 -> node8 [style=invis]
             }
             
-    leaf4 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
+    leaf3 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
         
         <tr>
-                <td><img src="/tmp/leaf4_21627.svg"/></td>
+                <td><img src="/tmp/leaf3_34277.svg"/></td>
         </tr>
         </table>>]
-	leaf5 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
+	leaf4 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
         
         <tr>
-                <td><img src="/tmp/leaf5_21627.svg"/></td>
+                <td><img src="/tmp/leaf4_34277.svg"/></td>
+        </tr>
+        </table>>]
+	leaf6 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
+        
+        <tr>
+                <td><img src="/tmp/leaf6_34277.svg"/></td>
         </tr>
         </table>>]
 	leaf7 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
         
         <tr>
-                <td><img src="/tmp/leaf7_21627.svg"/></td>
+                <td><img src="/tmp/leaf7_34277.svg"/></td>
         </tr>
         </table>>]
-	leaf8 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
+	leaf10 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
         
         <tr>
-                <td><img src="/tmp/leaf8_21627.svg"/></td>
+                <td><img src="/tmp/leaf10_34277.svg"/></td>
         </tr>
         </table>>]
 	leaf11 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
         
         <tr>
-                <td><img src="/tmp/leaf11_21627.svg"/></td>
+                <td><img src="/tmp/leaf11_34277.svg"/></td>
         </tr>
         </table>>]
-	leaf12 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
+	leaf13 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
         
         <tr>
-                <td><img src="/tmp/leaf12_21627.svg"/></td>
+                <td><img src="/tmp/leaf13_34277.svg"/></td>
         </tr>
         </table>>]
 	leaf14 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
         
         <tr>
-                <td><img src="/tmp/leaf14_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf15 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf15_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf19 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf19_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf20 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf20_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf22 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf22_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf23 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf23_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf26 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf26_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf27 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf27_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf29 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf29_21627.svg"/></td>
-        </tr>
-        </table>>]
-	leaf30 [margin="0" shape=box penwidth="0" color="#444443" label=<<table border="0">
-        
-        <tr>
-                <td><img src="/tmp/leaf30_21627.svg"/></td>
+                <td><img src="/tmp/leaf14_34277.svg"/></td>
         </tr>
         </table>>]
 

@@ -18,7 +18,7 @@ profiling.to_file("donnes_carroyees.html")
 
 
 carreaux_metr = carreaux_metr.drop(columns=['Ind_inc','Log_inc'])  #drop columns contaning the 'missing values' of the dataset
-
+carreaux_metr = carreaux_metr.drop(columns='Id_carr_n')
 
 y = carreaux_metr['Log_soc'].values
 X = carreaux_metr.drop(columns=['Log_soc'])

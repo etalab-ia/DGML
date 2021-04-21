@@ -4,18 +4,18 @@
 
 
 ## Ensemble structure
-| Model                             |   Weight |
-|:----------------------------------|---------:|
-| 3_Linear                          |        3 |
-| 4_Default_Xgboost_categorical_mix |        2 |
+| Model             |   Weight |
+|:------------------|---------:|
+| 3_Linear          |        5 |
+| 4_Default_Xgboost |        2 |
 
 ### Metric details:
 | Metric   |       Score |
 |:---------|------------:|
-| MAE      |   20.6186   |
-| MSE      | 1473.99     |
-| RMSE     |   38.3926   |
-| R2       |    0.656875 |
+| MAE      |   21.0753   |
+| MSE      | 1518.97     |
+| RMSE     |   38.974    |
+| R2       |    0.646404 |
 
 
 

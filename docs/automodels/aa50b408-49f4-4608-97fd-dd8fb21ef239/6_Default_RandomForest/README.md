@@ -20,15 +20,15 @@ rmse
 
 ## Training time
 
-22.2 seconds
+14.4 seconds
 
 ### Metric details:
 | Metric   |       Score |
 |:---------|------------:|
-| MAE      |   16.7885   |
-| MSE      | 3429.58     |
-| RMSE     |   58.5626   |
-| R2       |    0.842038 |
+| MAE      |   16.8422   |
+| MSE      | 3451.73     |
+| RMSE     |   58.7515   |
+| R2       |    0.841017 |
 
 
 

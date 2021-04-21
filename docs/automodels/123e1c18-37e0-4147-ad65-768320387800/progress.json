@@ -22,55 +22,55 @@
                 "model_name": "prepare_data",
                 "model_type": "prepare_data",
                 "fit_level": "prepare_data",
-                "train_time": 10.924951314926147
+                "train_time": 11.289257049560547
             },
             {
                 "model_name": "1_Baseline",
                 "model_type": "Baseline",
                 "fit_level": "simple_algorithms",
-                "train_time": 0.28261590003967285
+                "train_time": 0.21054553985595703
             },
             {
                 "model_name": "2_DecisionTree",
                 "model_type": "Decision Tree",
                 "fit_level": "simple_algorithms",
-                "train_time": 11.491045713424683
+                "train_time": 12.509875774383545
             },
             {
                 "model_name": "3_Linear",
                 "model_type": "Linear",
                 "fit_level": "simple_algorithms",
-                "train_time": 10.601067304611206
+                "train_time": 6.327587366104126
             },
             {
                 "model_name": "4_Default_Xgboost",
                 "model_type": "Xgboost",
                 "fit_level": "default_algorithms",
-                "train_time": 18.14085555076599
+                "train_time": 8.916982650756836
             },
             {
                 "model_name": "5_Default_NeuralNetwork",
                 "model_type": "Neural Network",
                 "fit_level": "default_algorithms",
-                "train_time": 2.636122465133667
+                "train_time": 2.7146310806274414
             },
             {
                 "model_name": "6_Default_RandomForest",
                 "model_type": "Random Forest",
                 "fit_level": "default_algorithms",
-                "train_time": 14.692793130874634
+                "train_time": 18.226748943328857
             },
             {
                 "model_name": "4_Default_Xgboost_categorical_mix",
                 "model_type": "Xgboost",
                 "fit_level": "mix_encoding",
-                "train_time": 17.6206476688385
+                "train_time": 8.646071672439575
             },
             {
                 "model_name": "Ensemble",
                 "model_type": "Ensemble",
                 "fit_level": "ensemble",
-                "train_time": 0.1443638801574707
+                "train_time": 0.13670563697814941
             }
         ],
         "is_hill_climbing": false,
@@ -95,9 +95,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
                 },
                 "learner": {
                     "model_type": "Baseline",
@@ -110,7 +110,7 @@
                 "name": "1_Baseline",
                 "status": "trained",
                 "final_loss": 65.58097455953467,
-                "train_time": 0.28261590003967285,
+                "train_time": 0.21054553985595703,
                 "max_time_for_learner": 60
             },
             {
@@ -136,19 +136,9 @@
                             "na_fill_median",
                             "categorical_to_int"
                         ],
-                        "Animal_sur_place": [
-                            "na_fill_median",
-                            "categorical_to_int"
-                        ],
                         "conditions_annulation": [
                             "na_fill_median",
                             "categorical_to_int"
-                        ],
-                        "Description": [
-                            "text_transform"
-                        ],
-                        "reglement_interieur": [
-                            "text_transform"
                         ]
                     },
                     "target_preprocessing": [
@@ -160,9 +150,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
                 },
                 "learner": {
                     "model_type": "Decision Tree",
@@ -176,8 +166,8 @@
                 "explain_level": 2,
                 "name": "2_DecisionTree",
                 "status": "trained",
-                "final_loss": 52.84809366667022,
-                "train_time": 11.491045713424683,
+                "final_loss": 52.14324021545183,
+                "train_time": 12.509875774383545,
                 "max_time_for_learner": 60
             },
             {
@@ -188,9 +178,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Identifiant": [
-                            "scale_normal"
-                        ],
                         "Titre": [
                             "text_transform"
                         ],
@@ -221,11 +208,6 @@
                             "scale_normal"
                         ],
                         "type_lit": [
-                            "na_fill_median",
-                            "categorical_to_int",
-                            "scale_normal"
-                        ],
-                        "Animal_sur_place": [
                             "na_fill_median",
                             "categorical_to_int",
                             "scale_normal"
@@ -280,12 +262,6 @@
                             "categorical_to_int",
                             "scale_normal"
                         ],
-                        "Description": [
-                            "text_transform"
-                        ],
-                        "reglement_interieur": [
-                            "text_transform"
-                        ],
                         "duree_minimale_sejour": [
                             "scale_normal"
                         ]
@@ -300,9 +276,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
                 },
                 "learner": {
                     "model_type": "Linear",
@@ -314,8 +290,8 @@
                 "explain_level": 2,
                 "name": "3_Linear",
                 "status": "trained",
-                "final_loss": 40.27661010374779,
-                "train_time": 10.601067304611206,
+                "final_loss": 39.638416698229555,
+                "train_time": 6.327587366104126,
                 "max_time_for_learner": 60
             }
         ],
@@ -342,19 +318,9 @@
                             "na_fill_median",
                             "categorical_to_int"
                         ],
-                        "Animal_sur_place": [
-                            "na_fill_median",
-                            "categorical_to_int"
-                        ],
                         "conditions_annulation": [
                             "na_fill_median",
                             "categorical_to_int"
-                        ],
-                        "Description": [
-                            "text_transform"
-                        ],
-                        "reglement_interieur": [
-                            "text_transform"
                         ]
                     },
                     "target_preprocessing": [
@@ -367,9 +333,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
                 },
                 "learner": {
                     "model_type": "Xgboost",
@@ -388,8 +354,8 @@
                 "explain_level": 2,
                 "name": "4_Default_Xgboost",
                 "status": "trained",
-                "final_loss": 43.24871269977866,
-                "train_time": 18.14085555076599,
+                "final_loss": 42.74492262591713,
+                "train_time": 8.916982650756836,
                 "max_time_for_learner": 60
             },
             {
@@ -399,9 +365,6 @@
                 },
                 "preprocessing": {
                     "columns_preprocessing": {
-                        "Identifiant": [
-                            "scale_normal"
-                        ],
                         "Titre": [
                             "text_transform"
                         ],
@@ -432,11 +395,6 @@
                             "scale_normal"
                         ],
                         "type_lit": [
-                            "na_fill_median",
-                            "categorical_to_int",
-                            "scale_normal"
-                        ],
-                        "Animal_sur_place": [
                             "na_fill_median",
                             "categorical_to_int",
                             "scale_normal"
@@ -491,12 +449,6 @@
                             "categorical_to_int",
                             "scale_normal"
                         ],
-                        "Description": [
-                            "text_transform"
-                        ],
-                        "reglement_interieur": [
-                            "text_transform"
-                        ],
                         "duree_minimale_sejour": [
                             "scale_normal"
                         ]
@@ -511,9 +463,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
                 },
                 "learner": {
                     "model_type": "Neural Network",
@@ -528,8 +480,8 @@
                 "explain_level": 2,
                 "name": "5_Default_NeuralNetwork",
                 "status": "trained",
-                "final_loss": 51.737600914918914,
-                "train_time": 2.636122465133667,
+                "final_loss": 43.92059319795449,
+                "train_time": 2.7146310806274414,
                 "max_time_for_learner": 60
             },
             {
@@ -557,19 +509,9 @@
                             "na_fill_median",
                             "categorical_to_int"
                         ],
-                        "Animal_sur_place": [
-                            "na_fill_median",
-                            "categorical_to_int"
-                        ],
                         "conditions_annulation": [
                             "na_fill_median",
                             "categorical_to_int"
-                        ],
-                        "Description": [
-                            "text_transform"
-                        ],
-                        "reglement_interieur": [
-                            "text_transform"
                         ]
                     },
                     "target_preprocessing": [
@@ -582,9 +524,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
                 },
                 "learner": {
                     "model_type": "Random Forest",
@@ -600,8 +542,8 @@
                 "explain_level": 2,
                 "name": "6_Default_RandomForest",
                 "status": "trained",
-                "final_loss": 46.46401433927811,
-                "train_time": 14.692793130874634,
+                "final_loss": 45.7597209281715,
+                "train_time": 18.226748943328857,
                 "max_time_for_learner": 60
             }
         ],
@@ -628,19 +570,9 @@
                             "na_fill_median",
                             "categorical_to_onehot"
                         ],
-                        "Animal_sur_place": [
-                            "na_fill_median",
-                            "categorical_to_onehot"
-                        ],
                         "conditions_annulation": [
                             "na_fill_median",
                             "categorical_to_onehot"
-                        ],
-                        "Description": [
-                            "text_transform"
-                        ],
-                        "reglement_interieur": [
-                            "text_transform"
                         ]
                     },
                     "target_preprocessing": [
@@ -653,9 +585,9 @@
                     "validation_type": "split",
                     "train_ratio": 0.75,
                     "shuffle": true,
-                    "X_path": "AutoML_13/X.parquet",
-                    "y_path": "AutoML_13/y.parquet",
-                    "results_path": "AutoML_13"
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
                 },
                 "learner": {
                     "model_type": "Xgboost",
@@ -674,8 +606,8 @@
                 "explain_level": 2,
                 "name": "4_Default_Xgboost_categorical_mix",
                 "status": "trained",
-                "final_loss": 43.0562958572554,
-                "train_time": 17.6206476688385,
+                "final_loss": 43.219933681145456,
+                "train_time": 8.646071672439575,
                 "max_time_for_learner": 60
             }
         ],
@@ -685,8 +617,8 @@
                 "is_stacked": false,
                 "name": "Ensemble",
                 "status": "trained",
-                "final_loss": 38.39258868160813,
-                "train_time": 0.1443638801574707
+                "final_loss": 38.97400723025983,
+                "train_time": 0.13670563697814941
             }
         ]
     },

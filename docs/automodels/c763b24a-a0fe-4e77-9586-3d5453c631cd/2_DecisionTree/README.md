@@ -4,8 +4,8 @@
 
 
 ## Decision Tree
-- **criterion**: friedman_mse
-- **max_depth**: 4
+- **criterion**: mse
+- **max_depth**: 3
 - **explain_level**: 2
 
 ## Validation
@@ -18,15 +18,15 @@ rmse
 
 ## Training time
 
-11.4 seconds
+9.0 seconds
 
 ### Metric details:
 | Metric   |    Score |
 |:---------|---------:|
-| MAE      | 0.336788 |
-| MSE      | 0.194188 |
-| RMSE     | 0.440668 |
-| R2       | 0.281375 |
+| MAE      | 0.343416 |
+| MSE      | 0.206854 |
+| RMSE     | 0.454812 |
+| R2       | 0.234505 |
 
 
 
