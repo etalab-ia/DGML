@@ -61,7 +61,7 @@ def main():
     for param in PARAMETERS:
         id = param["id"]
         output_dir = Path(param["output_dir"]).joinpath(id)
-        catalog = fixed_catalog()  # or latest_catalog for using the last catalog
+        catalog = latest_catalog()  # or latest_catalog for using the last catalog
 
         catalog_info = info_from_catalog(id, catalog)
         output_dir = create_output_folder(output_dir)
@@ -80,6 +80,7 @@ def main():
         print("Successfully generated AutoML report.")
         fill_main_csv(id=id, catalog=catalog, statistics_summary=statistics_summary)
         print("Added info to main csv.")
+
 
 
 if __name__ == "__main__":

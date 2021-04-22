@@ -4,9 +4,6 @@ fastapi==0.63.0
 imagehash==4.2.0
 jupyter==1.0.0
 markdown==3.3.4
-mkl-fft==1.2.0
-mkl-random==1.1.1
-mkl-service==2.3.0
 mljar-supervised==0.8.9
 pandas-profiling==2.10.0
 pip-chill==1.0.1
