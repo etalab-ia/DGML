@@ -92,7 +92,7 @@ def load_dataset(id, catalog_info, output_dir):
         request = requests.get(url)
         delimiter = detect_csv(request)['separator']
         encoding = detect_csv(request)['encoding']
-        if file_format == 'csv' or format_is_nan == True:  # if the format is not available on dgf, we assume it is a csv by default
+        if file_format == 'csv' or format_is_nan:  # if the format is not available on dgf, we assume it is a csv by default
             if url.rsplit('.', 1)[-1] == 'zip':
                 dataframe = pd.read_csv(url, sep=None, engine='python', encoding=encoding, compression='zip',
                                         error_bad_lines=False)
