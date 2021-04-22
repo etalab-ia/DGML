@@ -7,7 +7,7 @@ from get_mljar import *
 import json
 import glob
 
-PARAMETER_FILE = Path("./config/auto_ml_parameters.json")
+PARAMETER_FILE = Path("config/auto_ml_parameters.json")
 if PARAMETER_FILE.exists():
     with open(PARAMETER_FILE) as fout:
         PARAMETERS = json.load(fout)
