@@ -6,8 +6,9 @@ import os
 def latest_catalog():
     """This function returns the pandas dataframe of the latest version of dgf resource catalog
     (https://www.data.gouv.fr/en/datasets/catalogue-des-donnees-de-data-gouv-fr/#_)"""
-    dgf_catalog = 'https://www.data.gouv.fr/fr/datasets/r/4babf5f2-6a9c-45b5-9144-ca5eae6a7a6d'  # latest url of the catalog
-    dgf_catalog_df = pd.read_csv(dgf_catalog, delimiter=";", encoding='utf-8')
+    #dgf_catalog = 'https://www.data.gouv.fr/fr/datasets/r/4babf5f2-6a9c-45b5-9144-ca5eae6a7a6d'  # latest url of the catalog
+    dgf_catalog = './latest_dgf_catalog.zip' # latest downloaded csv
+    dgf_catalog_df = pd.read_csv(dgf_catalog, delimiter=";", compression='zip',error_bad_lines=False)
     pd.set_option('display.max_colwidth', None)  # to stop pandas from "cutting" long urls
     return dgf_catalog_df
 
