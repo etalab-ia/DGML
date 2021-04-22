@@ -1,6 +1,9 @@
+from pathlib import Path
+
 import requests
 import pandas as pd
 import os
+
 
 
 def latest_catalog():
@@ -37,7 +40,6 @@ def info_from_catalog(id: str, catalog: pd.DataFrame):
     catalog_dict = {'url_resource': url, 'format': file_format, 'url_dgf': dgf_page, 'format_is_nan': format_is_nan}
     return catalog_dict
 
-
 def is_referenced(url, id, catalog_info):
     """Given the url of  a resource from the catalog, this function returns True if the resource is referenced by data.gouv.fr
     False otherwise
@@ -47,8 +49,9 @@ def is_referenced(url, id, catalog_info):
     headers = requests.head(url).headers
     downloadable = 'attachment' in headers.get('Content-Disposition', '')
     # download_zip = 'application/zip' in headers.get('Content-Type','')
-    if downloadable == False:
-        if os.path.isfile(f'./datasets/resources/{id}/{id}.csv') == False:
+    if not downloadable:
+        #if not os.path.isfile(f'./datasets/resources/{id}/{id}.csv') :
+        if not Path().home().joinpath(f'open_ML/datasets/resources/{id}/{id}.csv'):
             raise Exception(f'This id is associated to a dataset not referenced by data.gouv.fr. \n '
                             f'Please download the dataset from here: {dgf_page}\n'
                             f'Then manually upload it in the corresponding folder and name it: {id}.csv')
@@ -131,7 +134,7 @@ def load_dataset(id, catalog_info, output_dir):
         dataframe.to_csv(output_dir.joinpath(f"{id}.csv"))
         return dataframe
     else:
-        dataframe = pd.read_csv(f"./datasets/resources/{id}/{id}.csv", sep=None, engine='python')
+        dataframe = pd.read_csv(Path().home().joinpath(f'open_ML/datasets/resources/{id}/{id}.csv'), sep=None, engine='python')
         return dataframe
 
 # Remark on separators detection : the 'python engine' in pd.read_csv/read_table  works pretty well most of the time. However, it does not handle well some
