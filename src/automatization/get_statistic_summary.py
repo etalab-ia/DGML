@@ -15,7 +15,7 @@ def generate_pandas_profiling(id, data, output_dir, config_path=None):
     return profiling
 
 
-def get_statistics_summary(id, profiling, output_dir):
+def get_statistics_summary(profiling, output_dir):
     """Returns a csv file containing all the relevant dataset statistics from pandas profiling.
     This summary is the info pandas profiling info we display in the web page
     -----------------------------------------------
@@ -61,7 +61,8 @@ def get_dict_data(id, profiling, output_dir):
     :param:       profiling: Pandas Profiling
     :type:        profiling: pandas profiling
     :param:       output_dir: output directory for the csv
-    :type:        output_dir: str"""
+    :type:        output_dir: str
+    """
     data_dict = {}
     get_description = profiling.get_description()
     variables_description = get_description['variables']

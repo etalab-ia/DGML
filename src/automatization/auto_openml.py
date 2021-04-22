@@ -69,7 +69,7 @@ def main():
         data = load_dataset(id, catalog_info, output_dir=output_dir)
         print("Successfully loaded dataset.")
         profiling = generate_pandas_profiling(id, data, output_dir=output_dir, config_path=None)
-        statistics_summary = get_statistics_summary(id, profiling, output_dir=output_dir)
+        statistics_summary = get_statistics_summary(profiling, output_dir=output_dir)
         get_dict_data(id, profiling, output_dir=output_dir)
         print("Successfully generated Pandas Profiling.")
         prep_data = prepare_to_mljar(data=data, target_variable=param["target"],
