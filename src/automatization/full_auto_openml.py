@@ -1,17 +1,23 @@
-import shutil
-from pathlib import Path
-
-from get_dataset import *
-from get_statistic_summary import *
-from get_mljar import *
-import json
+# from get_mljar import *
 import glob
+from pathlib import Path
+from typing import Union
+from csv_detective.explore_csv import routine
+import pandas as pd
+from tqdm import tqdm
+
+from src.automatization.get_dataset import latest_catalog, info_from_catalog, load_dataset
+from src.automatization.get_mljar import prepare_to_mljar, generate_mljar
+from src.automatization.get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_dict_data, \
+    is_a_warning_col
+
+SAMPLE_DATASETS = Path('../../data/data.gouv/csv_top')
+OUTPUT_DIR = Path('../../datasets/resources')
 
 
 def create_output_folder(output_dir):
     if not output_dir.exists():
         output_dir.mkdir()
-    return output_dir
 
 
 def get_mljar_info(output_dir, automl_report):
@@ -27,9 +33,9 @@ def get_mljar_info(output_dir, automl_report):
         model_path.unlink()
 
 
-def fill_main_csv(id, catalog, statistics_summary, target_variable = '', task= ''):
+def fill_main_csv(id, catalog, statistics_summary, target_variable='', task=''):
     """This function adds a new row in open_ml_datasets.csv containing info of a chosen dataset."""
-    main_csv_path = Path().home().joinpath('open_ML/open_ml_app/assets/datasets/open_data_ml_datasets.csv')
+    main_csv_path = Path('../../open_ml_app/assets/datasets/open_data_ml_datasets.csv')
     main_df = pd.read_csv(main_csv_path)
     new_row = {}
     for col in main_df.columns:
@@ -75,43 +81,59 @@ def check_constraints(data):
 
 
 # TO DO: add these parameters to a config file
+def load_dataset_wrapper(dataset_name: Union[Path, str]):
+    if isinstance(dataset_name, Path):
+        csv_metadata = routine(dataset_name.as_posix(), user_input_tests=None)
+        encoding = csv_metadata.get("encoding", "latin-1")
+        separator = csv_metadata.get("separator", ",")
+        dataset_df = pd.read_csv(dataset_name, sep=separator, encoding=encoding)
+        id_data = dataset_name.stem
+    else:
+        catalog = latest_catalog()  # or fixed_catalog to use our catalog
+        catalog_info = info_from_catalog(dataset_name, catalog)
+        dataset_df = load_dataset(id=dataset_name, catalog_info=catalog_info)
+        id_data = dataset_name
+    return dataset_df, id_data
 
 
 def main():
-    sample_datasets = Path().home().joinpath('open_ML/data/data.gouv/csv_top')
-    ids = [Path(p).stem for p in glob.glob(sample_datasets.as_posix() + f"/*.csv", recursive=True)]
+    global OUTPUT_DIR
+    ids = [Path(p) for p in glob.glob(SAMPLE_DATASETS.as_posix() + f"/*.csv", recursive=True)]
+
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
-    for id in ids:
-        output_dir = Path().home().joinpath('open_ML/datasets/resources').joinpath(id)
-        output_dir = create_output_folder(output_dir)
-        catalog_info = info_from_catalog(id, catalog)
-        data = load_dataset(id, catalog_info, output_dir=output_dir)
+    for id_ in tqdm(ids, desc="CSVs", unit="csv-file"):
+        data, id_data = load_dataset_wrapper(id_)
+        print(f"Treating file with id {id_}")
+        current_output_dir = OUTPUT_DIR.joinpath(id_data)
+        create_output_folder(current_output_dir)
         print("Successfully loaded dataset.")
         if check_constraints(data):
-            profiling = generate_pandas_profiling(id, data, output_dir=output_dir, config_path=None)
-            statistics_summary = get_statistics_summary(profiling, output_dir=output_dir)
-            get_dict_data(id, profiling, output_dir=output_dir)
+            profiling = generate_pandas_profiling(id_data, data, output_dir=current_output_dir, config_path=None)
+            statistics_summary = get_statistics_summary(profiling, output_dir=current_output_dir)
+            get_dict_data(id_data, profiling, output_dir=current_output_dir)
             print("Successfully generated Pandas Profiling.")
-            for column in data.columns:
-                if is_a_warning_col(column,profiling = profiling):
+            for column in tqdm(data.columns):
+                if is_a_warning_col(column, profiling=profiling):
                     data = data.drop(columns=column)
             if len(data.columns) >= 3:
                 for target_variable in data.columns:
                     prep_data = prepare_to_mljar(data=data, target_variable=target_variable,
                                                  profiling=profiling)
-                    automl = generate_mljar(data=prep_data, target_variable=target_variable, output_dir=output_dir)
-                    get_mljar_info(output_dir=output_dir, automl_report=automl)
+                    automl = generate_mljar(data=prep_data, target_variable=target_variable,
+                                            output_dir=current_output_dir)
+                    get_mljar_info(output_dir=current_output_dir, automl_report=automl)
                     # plot_mljar_table(id)
                     print("Successfully generated AutoML report.")
                     task = automl._get_ml_task()
-                    fill_main_csv(id=id, catalog=catalog, statistics_summary=statistics_summary,
+                    fill_main_csv(id=id_data, catalog=catalog, statistics_summary=statistics_summary,
                                   target_variable=target_variable, task=task)
                     print("Added info to main csv.")
             else:
-                print(f'The dataset with id {id} cannot be used to obtain meaningful results with AutoML.')
-                fill_main_csv(id=id, catalog=catalog, statistics_summary=statistics_summary)
+                print(f'The dataset with id {id_data} cannot be used to obtain meaningful results with AutoML.')
+                fill_main_csv(id=id_data, catalog=catalog, statistics_summary=statistics_summary)
         else:
-            print(f'The dataset with id: {id} is not adequate for Machine Learning')
+            print(f'The dataset with id: {id_data} is not adequate for Machine Learning')
+
 
 
 if __name__ == "__main__":

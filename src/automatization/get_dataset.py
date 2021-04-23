@@ -5,7 +5,6 @@ import pandas as pd
 import os
 
 
-
 def latest_catalog():
     """This function returns the pandas dataframe of the latest version of dgf resource catalog
     (https://www.data.gouv.fr/en/datasets/catalogue-des-donnees-de-data-gouv-fr/#_)"""
@@ -78,9 +77,10 @@ def detect_csv(request):
     url_dict = {'encoding': encoding, 'separator': sep}
     return url_dict
 
-def load_dataset_without_url(id,)
+def load_dataset_without_url(id,):
+    pass
 
-def load_dataset(id, catalog_info, output_dir):
+def load_dataset(id, catalog_info, output_dir = None):
     """This function loads a csv in the datasets folder/creates a pandas dataframe given its id if the dataset is referenced by data.gouv.fr.
     Otherwise, you get an error and you should manually upload it.
     Remark: on data.gouv.fr, datasets are available in various "formats": json, shp, csv, zip, document, xls, pdf, html, xlsx,geojson etc.
@@ -131,12 +131,14 @@ def load_dataset(id, catalog_info, output_dir):
             raise TypeError(
                 'Please choose a dataset that has one of the following extensions: .csv, .txt, .xls or choose '
                 'a compressed file having one of these extensions.')
-
-        dataframe.to_csv(output_dir.joinpath(f"{id}.csv"))
         return dataframe
     else:
         dataframe = pd.read_csv(Path().home().joinpath(f'open_ML/datasets/resources/{id}/{id}.csv'), sep=None, engine='python')
         return dataframe
+
+
+def save_dataset(dataframe, id, output_dir):
+    dataframe.to_csv(output_dir.joinpath(f"{id}.csv"))
 
 # Remark on separators detection : the 'python engine' in pd.read_csv/read_table  works pretty well most of the time. However, it does not handle well some
 # exceptions (see for instance the dataset: 90a98de0-f562-4328-aa16-fe0dd1dca60f).
