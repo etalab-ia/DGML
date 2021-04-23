@@ -7,6 +7,7 @@ from get_mljar import *
 import json
 import glob
 
+
 def create_output_folder(output_dir):
     if not output_dir.exists():
         output_dir.mkdir()
@@ -26,7 +27,7 @@ def get_mljar_info(output_dir, automl_report):
         model_path.unlink()
 
 
-def fill_main_csv(id, catalog, statistics_summary, target_variable, task):
+def fill_main_csv(id, catalog, statistics_summary, target_variable = '', task= ''):
     """This function adds a new row in open_ml_datasets.csv containing info of a chosen dataset."""
     main_csv_path = Path().home().joinpath('open_ML/open_ml_app/assets/datasets/open_data_ml_datasets.csv')
     main_df = pd.read_csv(main_csv_path)
@@ -41,10 +42,13 @@ def fill_main_csv(id, catalog, statistics_summary, target_variable, task):
     new_row['nb_lines'] = statistics_summary['Number of lines'][0]
     new_row['nb_features'] = statistics_summary['Number of variables'][0]
     new_row['profile_url'] = f"https://etalab-ia.github.io/open_ML/profilings/{id}.html"
-    new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id}/README.html"
+    if not target_variable and not task:
+        new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id}/README.html"
+    else:
+        new_row['automl_url'] = ''
     new_row['dgf_resource_id'] = id
     main_df = main_df.append(new_row, ignore_index=True)
-    # main_df.to_csv(main_csv_path, index=False)
+    main_df.to_csv(main_csv_path, index=False)
     return main_df
 
 
@@ -52,7 +56,7 @@ def check_constraints(data):
     """This function checks that the given dataset respects the following constraints:
     * 200 <= number of lines <= 2*10⁶
     * 3 <= number of columns <= 500
-    * lines_cols_ratio >=10
+    * nb_lines / nb_columns >=10
     * has both numerical and categorical variables
     * < 30% missing values overall
     :param:     :data: dataset we want to check
@@ -76,12 +80,11 @@ def check_constraints(data):
 def main():
     sample_datasets = Path().home().joinpath('open_ML/data/data.gouv/csv_top')
     ids = [Path(p).stem for p in glob.glob(sample_datasets.as_posix() + f"/*.csv", recursive=True)]
-    catalog = latest_catalog()  # or latest_catalog for using the last catalog
+    catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for id in ids:
         output_dir = Path().home().joinpath('open_ML/datasets/resources').joinpath(id)
-        catalog_info = info_from_catalog(id, catalog)
         output_dir = create_output_folder(output_dir)
-
+        catalog_info = info_from_catalog(id, catalog)
         data = load_dataset(id, catalog_info, output_dir=output_dir)
         print("Successfully loaded dataset.")
         if check_constraints(data):
@@ -89,19 +92,26 @@ def main():
             statistics_summary = get_statistics_summary(profiling, output_dir=output_dir)
             get_dict_data(id, profiling, output_dir=output_dir)
             print("Successfully generated Pandas Profiling.")
-            for target_variable in data.columns:
-                prep_data = prepare_to_mljar(data=data, target_variable=target_variable,
-                                             profiling=profiling)
-                automl = generate_mljar(data=prep_data, target_variable=target_variable, output_dir=output_dir)
-                get_mljar_info(output_dir=output_dir, automl_report=automl)
-                #plot_mljar_table(id)
-                print("Successfully generated AutoML report.")
-                task = automl.ml_task
-                fill_main_csv(id=id, catalog=catalog, statistics_summary=statistics_summary,
-                              target_variable=target_variable, task=task)
-                print("Added info to main csv.")
+            for column in data.columns:
+                if is_a_warning_col(column,profiling = profiling):
+                    data = data.drop(columns=column)
+            if len(data.columns) >= 3:
+                for target_variable in data.columns:
+                    prep_data = prepare_to_mljar(data=data, target_variable=target_variable,
+                                                 profiling=profiling)
+                    automl = generate_mljar(data=prep_data, target_variable=target_variable, output_dir=output_dir)
+                    get_mljar_info(output_dir=output_dir, automl_report=automl)
+                    # plot_mljar_table(id)
+                    print("Successfully generated AutoML report.")
+                    task = automl._get_ml_task()
+                    fill_main_csv(id=id, catalog=catalog, statistics_summary=statistics_summary,
+                                  target_variable=target_variable, task=task)
+                    print("Added info to main csv.")
+            else:
+                print(f'The dataset with id {id} cannot be used to obtain meaningful results with AutoML.')
+                fill_main_csv(id=id, catalog=catalog, statistics_summary=statistics_summary)
         else:
-            raise Exception('This dataset is not adequate for Machine Learning')
+            print(f'The dataset with id: {id} is not adequate for Machine Learning')
 
 
 if __name__ == "__main__":

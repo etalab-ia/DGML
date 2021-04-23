@@ -78,6 +78,7 @@ def detect_csv(request):
     url_dict = {'encoding': encoding, 'separator': sep}
     return url_dict
 
+def load_dataset_without_url(id,)
 
 def load_dataset(id, catalog_info, output_dir):
     """This function loads a csv in the datasets folder/creates a pandas dataframe given its id if the dataset is referenced by data.gouv.fr.
