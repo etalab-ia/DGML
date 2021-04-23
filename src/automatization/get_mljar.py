@@ -1,3 +1,6 @@
+import re
+import unicodedata
+
 import pandas as pd
 
 from get_dataset import *
@@ -83,13 +86,29 @@ def generate_mljar(data, target_variable, output_dir):
     y = data[target_variable].values
     X = data.drop(columns=[target_variable])
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-    results_path = output_dir.joinpath(f"automl_{target_variable}")
+    results_path = output_dir.joinpath(f"automl_{slugify(target_variable)}")
     automl = AutoML(results_path=results_path.as_posix(), total_time_limit=5 * 60, mode='Explain')
     automl.fit(X_train, y_train)
     predictions = automl.predict(X_test)
     automl.report()
     return automl
 
+
+def slugify(value, allow_unicode=False):
+    """
+    Taken from https://github.com/django/django/blob/master/django/utils/text.py
+    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
+    dashes to single dashes. Remove characters that aren't alphanumerics,
+    underscores, or hyphens. Convert to lowercase. Also strip leading and
+    trailing whitespace, dashes, and underscores.
+    """
+    value = str(value)
+    if allow_unicode:
+        value = unicodedata.normalize('NFKC', value)
+    else:
+        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
+    value = re.sub(r'[^\w\s-]', '', value.lower())
+    return re.sub(r'[-\s]+', '-', value).strip('-_')
 
 # def plot_mljar_table(id):
 #     """Returns a plot from the mljar leaderboard with train_time of the x-axis and metric_value on the y axis"""

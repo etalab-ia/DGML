@@ -1,7 +1,8 @@
 import pandas_profiling
 from pandas_profiling import ProfileReport
 from get_dataset import *
-
+import matplotlib
+matplotlib.use('Agg')
 
 def generate_pandas_profiling(id, data, output_dir, config_path=None):
     """Returns the Pandas Profiling of this dataset. The name of the output html file is id.html
