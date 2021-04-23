@@ -91,21 +91,21 @@ def generate_mljar(data, target_variable, output_dir):
     return automl
 
 
-def plot_mljar_table(id):
-    """Returns a plot from the mljar leaderboard with train_time of the x-axis and metric_value on the y axis"""
-    leaderboard = pd.read_csv(Path().home().joinpath(f'open_ML/datasets/resources/{id}/leaderboard.csv'))
-    fig, ax = plt.subplots(1, 1, figsize=(15, 10))
-    leaderboard['train_time'] = leaderboard['train_time'].astype(float)
-    leaderboard['metric_value'] = leaderboard['metric_value'].astype(float)
-    ax.plot(leaderboard['train_time'], leaderboard['metric_value'], 'o')
-    leaderboard['name'] = leaderboard['name'].astype('category')
-    groups = leaderboard.groupby("name")
-    for name, group in groups:
-        plt.plot(group["train_time"], group["metric_value"], marker="o", linestyle="", label=name)
-    for i, txt in enumerate(leaderboard['name']):
-        ax.annotate(txt, (leaderboard['train_time'][i], leaderboard['metric_value'][i]), va='bottom')
-    if leaderboard['metric_type'][1] == 'logloss':
-        ax.set(xlabel='train_time (seconds)', ylabel='metric_value (logloss)')
-    else:
-        ax.set(xlabel='train_time(seconds)', ylabel='metric_value (rmse)')
-    return figure
+# def plot_mljar_table(id):
+#     """Returns a plot from the mljar leaderboard with train_time of the x-axis and metric_value on the y axis"""
+#     leaderboard = pd.read_csv(Path().home().joinpath(f'open_ML/datasets/resources/{id}/leaderboard.csv'))
+#     fig, ax = plt.subplots(1, 1, figsize=(15, 10))
+#     leaderboard['train_time'] = leaderboard['train_time'].astype(float)
+#     leaderboard['metric_value'] = leaderboard['metric_value'].astype(float)
+#     ax.plot(leaderboard['train_time'], leaderboard['metric_value'], 'o')
+#     leaderboard['name'] = leaderboard['name'].astype('category')
+#     groups = leaderboard.groupby("name")
+#     for name, group in groups:
+#         plt.plot(group["train_time"], group["metric_value"], marker="o", linestyle="", label=name)
+#     for i, txt in enumerate(leaderboard['name']):
+#         ax.annotate(txt, (leaderboard['train_time'][i], leaderboard['metric_value'][i]), va='bottom')
+#     if leaderboard['metric_type'][1] == 'logloss':
+#         ax.set(xlabel='train_time (seconds)', ylabel='metric_value (logloss)')
+#     else:
+#         ax.set(xlabel='train_time(seconds)', ylabel='metric_value (rmse)')
+#     return figure

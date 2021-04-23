@@ -79,21 +79,31 @@ def get_dict_data(id, profiling, output_dir):
     return data_dict_df
 
 
+def is_a_warning_col(col_name, profiling):
+    """This function tells whether a given column in the dataset is an high cardinality or high correlation column.
+    :param:     :col_name: name of a column in a pandas df
+    :type:      :col_name: str
+    :param:     :profiling: pandas profiling of tha dataset cotainining col_name
+    :type:      :profiling: pandas profile report"""
+    get_description = profiling.get_description()
+    messages = get_description["messages"]
+    warnings = ["HIGH_CARDINALITY", "HIGH_CORRELATION"]
+    warning_columns = []
+    is_warning = False
+    for message in range(len(messages)):
+        for warning in warnings:
+            if (warning in str(messages[message]).split("column ", 1)[0]):
+                warning_columns.append(str(messages[message]).split("column ", 1)[1])
+    if col_name in warning_columns:
+        is_warning = True
+    return is_warning
+
+
 def rejected_var(profiling):
     """This function returns a list of the variables detected as unsupported by Pandas Profiling.
     -----------------------------------
     :param:       id: id of the dataset
     :type:        id: string
     """
-    get_description = profiling.get_description()
-    messages = get_description["messages"]
-    pos_rej = -1
-    list_rej = []
-    for message in messages:
-        pos_rej += 1
-        message_type = message.message_type.name
-        if message_type == 'REJECTED':
-            rejected_mess = str(messages[pos_rej])
-            rej_name = rejected_mess.split("warning on column ", 1)[1]
-            list_rej.append(rej_name)
-    return list_rej
+    rejected = list(profiling.get_rejected_variables())
+    return rejected

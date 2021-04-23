@@ -35,7 +35,15 @@ def get_mljar_info(output_dir, automl_report):
 
 
 def fill_main_csv(id, catalog, statistics_summary):
-    """This function adds a new row in open_ml_datasets.csv containing info of a chosen dataset."""
+    """This function adds a new row in open_ml_datasets.csv containing all the main info about each dataset. This csv file is then used as
+    database in the app.
+    :param:     :id: data.gouv.fr id of the dataset
+    :type:      :id: str
+    :param:     :catalog: data.gouv.fr catalog
+    :type:      :catalog: pandas dataframe
+    :param:     :statistics_summary: table containing info extracted from pandas profiling
+    :type:      :statistics_summary: pandas dataframe
+    """
     main_csv_path = Path().home().joinpath('open_ML/open_ml_app/assets/datasets/open_data_ml_datasets.csv')
     main_df = pd.read_csv(main_csv_path)
     new_row = {}
@@ -53,32 +61,13 @@ def fill_main_csv(id, catalog, statistics_summary):
     new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id}/README.html"
     new_row['dgf_resource_id'] = id
     main_df = main_df.append(new_row, ignore_index=True)
-    # main_df.to_csv(main_csv_path, index=False)
+    main_df.to_csv(main_csv_path, index=False)
     return main_df
 
 
-def check_constraints(data):
-    """This function checks that the given dataset respects the following constraints:
-    * 200 <= number of lines <= 2*10⁶
-    * 3 <= number of columns <= 500
-    * lines_cols_ratio >=10
-    * has both numerical and categorical variables
-    * < 30% missing values overall
-    :param:     :data: dataset we want to check
-    :type:      :data: pandas dataframe
-    """
-    passed_constraints = False
-    nb_lines = len(data)
-    nb_columns = len(data.columns)
-    check_categorical = data.select_dtypes(include='object').empty
-    check_numerical = data.select_dtypes(include=['float64', 'int64']).empty
-    total_nan = data.isna().sum().sum()/(nb_lines*nb_columns)
-    if (200 <= nb_lines <= 2 * (10 ** 6)) and (3 <= nb_columns <= 500) and ((nb_lines / nb_columns) >= 10) and (
-            check_categorical is False) and (check_numerical is False) and (total_nan <= 30):
-        passed_constraints = True
-    return passed_constraints
 
-# TO DO: add these parameters to a config file
+
+
 
 
 def main():
@@ -98,10 +87,10 @@ def main():
             get_dict_data(id, profiling, output_dir=output_dir)
             print("Successfully generated Pandas Profiling.")
             prep_data = prepare_to_mljar(data=data, target_variable=param["target"],
-                                         task=param["task"], profiling=profiling)
+                                         profiling=profiling)
             automl = generate_mljar(data=prep_data, target_variable=param["target"], output_dir=output_dir)
             get_mljar_info(output_dir=output_dir, automl_report=automl)
-            plot_mljar_table(id)
+            # plot_mljar_table(id)
             print("Successfully generated AutoML report.")
             fill_main_csv(id=id, catalog=catalog, statistics_summary=statistics_summary)
             print("Added info to main csv.")
