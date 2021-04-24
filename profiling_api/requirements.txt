@@ -1,8 +1,0 @@
-csv-detective==0.4.1
-fastapi==0.63.0
-imagehash==4.2.0
-jupyter==1.0.0
-pandas-profiling==2.10.0
-pip-chill==1.0.1
-sqlitedict==1.7.0
-uvicorn==0.13.3
