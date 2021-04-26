@@ -154,7 +154,7 @@ def get_csv_paths(datasets_path: str):
     return csv_paths
 
 
-def generate_score(statistics_summary, columns_to_drop, current_output_dir):
+def generate_score(statistics_summary, columns_to_drop, automl):
     """Returns a score of the evaluating the 'goodness' of a given dataset. Datasets with an higher score will be selected for the app.
     The score takes into account:
     * the overall percentage of missing values, extracted from the pandas df of statistics_summary.csv (30%)
@@ -162,9 +162,7 @@ def generate_score(statistics_summary, columns_to_drop, current_output_dir):
     * the logloss (for classification) or rmse (for regression) value for the best model (30%), extracted leaderboard.csv """
     prop_missing = statistics_summary['Percentage of missing cells'] / 100
     prop_not_retained = len(columns_to_drop) / statistics_summary['Number of variables']
-    path_leaderboard = current_output_dir.joinpath('leaderboard.csv')
-    leaderboard_df = pd.read_csv(path_leaderboard)
-    best_metric = leaderboard_df['metric_value'].min()
+    best_metric = automl.get_leaderboard()['metric_value'].min()
     score = 1 / (0.3 * (prop_missing) + 0.4 * (prop_not_retained) + 0.3 * (best_metric))
     return score
 
@@ -215,7 +213,7 @@ def main():
                     logger.info(f"Dataset {id_data}: Successfully generated AutoML report.")
                     task = automl._get_ml_task()
                     score = generate_score(statistics_summary=statistics_summary, columns_to_drop=columns_to_drop,
-                                           current_output_dir=mljar_output_dir)
+                                           automl=automl)
                     logger.info(f"the score is: {score[0]}")
                     fill_main_csv(id_=id_data, catalog=catalog, statistics_summary=statistics_summary,
                                   output_dir=OUTPUT_DIR,
