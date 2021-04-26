@@ -27,6 +27,7 @@ logging.basicConfig(
 logger = logging.getLogger("root")
 logger.setLevel(logging.INFO)
 DATASETS_PATH = '../../data/data.gouv/csv_top'
+
 OUTPUT_DIR = Path('../../datasets/resources')
 
 
@@ -175,19 +176,23 @@ def main():
                 fill_main_csv(id=id_data, catalog=catalog, statistics_summary=statistics_summary)
                 continue
             for target_variable in prep_data.columns:
-                logger.info(f"Dataset {id_data}: Testing AutoML models with target var {target_variable}")
-                # drop nan lines
-                notna_data = prep_data[prep_data[target_variable].notna()]
-                mljar_output_dir = current_output_dir.joinpath(f"automl_{slugify(target_variable)}")
-                automl = generate_mljar(data=notna_data, target_variable=target_variable,
-                                        output_dir=mljar_output_dir)
-                get_mljar_info(output_dir=mljar_output_dir, automl_report=automl)
-                # plot_mljar_table(id)
-                logger.info(f"Dataset {id_data}: Successfully generated AutoML report.")
-                task = automl._get_ml_task()
-                fill_main_csv(id=id_data, catalog=catalog, statistics_summary=statistics_summary,
-                              target_variable=target_variable, task=task)
-                logger.info(f"Dataset {id_data}: Added info to main datasets csv.")
+                try:
+                    logger.info(f"Dataset {id_data}: Testing AutoML models with target var {target_variable}")
+                    # drop nan lines
+                    notna_data = prep_data[prep_data[target_variable].notna()]
+                    mljar_output_dir = current_output_dir.joinpath(f"automl_{slugify(target_variable)}")
+                    automl = generate_mljar(data=notna_data, target_variable=target_variable,
+                                            output_dir=mljar_output_dir)
+                    get_mljar_info(output_dir=mljar_output_dir, automl_report=automl)
+                    # plot_mljar_table(id)
+                    logger.info(f"Dataset {id_data}: Successfully generated AutoML report.")
+                    task = automl._get_ml_task()
+                    fill_main_csv(id=id_data, catalog=catalog, statistics_summary=statistics_summary,
+                                  target_variable=target_variable, task=task)
+                    logger.info(f"Dataset {id_data}: Added info to main datasets csv.")
+                except Exception:
+                    logger.exception(f"Dataset {id_data}: Fatal error while testing var {target_variable}")
+                    continue
         except Exception:
             logger.exception(f"Dataset {dataset_path}: Fatal error while treating file")
 
