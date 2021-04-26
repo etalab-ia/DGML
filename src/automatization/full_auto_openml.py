@@ -70,13 +70,14 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_
     new_row['dgf_resource_id'] = id_
     if main_csv_path.exists():
         main_df = pd.read_csv(main_csv_path)
-        for col in main_df.columns:
-            new_row.update({col: ''})
+        # for col in main_df.columns:
+        #     new_row.update({col: ''})
         main_df = main_df.append(new_row, ignore_index=True)
     else:
         main_df = pd.DataFrame([new_row])
     # add score to main csv file:
-    main_df.loc[(main_df['dgf_resource_id'] == id_) & (main_df['target_variable'] == target_variable), ['score']] = score
+    main_df.loc[
+        (main_df['dgf_resource_id'] == id_) & (main_df['target_variable'] == target_variable), ['score']] = score
     main_df.to_csv(main_csv_path, index=False)
     return main_df
 
@@ -153,7 +154,7 @@ def get_csv_paths(datasets_path: str):
     return csv_paths
 
 
-def generate_score(statistics_summary, columns_to_drop, target_variable, current_output_dir):
+def generate_score(statistics_summary, columns_to_drop, current_output_dir):
     """Returns a score of the evaluating the 'goodness' of a given dataset. Datasets with an higher score will be selected for the app.
     The score takes into account:
     * the overall percentage of missing values, extracted from the pandas df of statistics_summary.csv (30%)
@@ -161,7 +162,7 @@ def generate_score(statistics_summary, columns_to_drop, target_variable, current
     * the logloss (for classification) or rmse (for regression) value for the best model (30%), extracted leaderboard.csv """
     prop_missing = statistics_summary['Percentage of missing cells'] / 100
     prop_not_retained = len(columns_to_drop) / statistics_summary['Number of variables']
-    path_leaderboard = current_output_dir.joinpath(f'automl_{target_variable}/leaderboard.csv')
+    path_leaderboard = current_output_dir.joinpath('leaderboard.csv')
     leaderboard_df = pd.read_csv(path_leaderboard)
     best_metric = leaderboard_df['metric_value'].min()
     score = 1 / (0.3 * (prop_missing) + 0.4 * (prop_not_retained) + 0.3 * (best_metric))
@@ -198,14 +199,15 @@ def main():
                 logger.warning(f"Dataset {id_data}: We have less than 3 columns. "
                                f"We will only generate the pandas profiling")
                 fill_main_csv(id_=id_data, catalog=catalog, output_dir=OUTPUT_DIR,
-                              statistics_summary=statistics_summary,score='')
+                              statistics_summary=statistics_summary, score='')
                 continue
             for target_variable in prep_data.columns:
+                slugified_target_variable = slugify(target_variable)
                 try:
                     logger.info(f"Dataset {id_data}: Testing AutoML models with target var {target_variable}")
                     # drop nan lines
                     notna_data = prep_data[prep_data[target_variable].notna()]
-                    mljar_output_dir = current_output_dir.joinpath(f"automl_{slugify(target_variable)}")
+                    mljar_output_dir = current_output_dir.joinpath(f"automl_{slugified_target_variable}")
                     automl = generate_mljar(data=notna_data, target_variable=target_variable,
                                             output_dir=mljar_output_dir)
                     get_mljar_info(output_dir=mljar_output_dir, automl_report=automl)
@@ -213,12 +215,11 @@ def main():
                     logger.info(f"Dataset {id_data}: Successfully generated AutoML report.")
                     task = automl._get_ml_task()
                     score = generate_score(statistics_summary=statistics_summary, columns_to_drop=columns_to_drop,
-                                           current_output_dir=current_output_dir,
-                                           target_variable=target_variable)
+                                           current_output_dir=mljar_output_dir)
                     logger.info(f"the score is: {score[0]}")
                     fill_main_csv(id_=id_data, catalog=catalog, statistics_summary=statistics_summary,
                                   output_dir=OUTPUT_DIR,
-                                  target_variable=target_variable, task=task,score=score[0])
+                                  target_variable=target_variable, task=task, score=score[0])
                     logger.info(f"Dataset {id_data}: Added info to main datasets csv.")
                 except Exception:
                     logger.exception(f"Dataset {id_data}: Fatal error while testing var {target_variable}")
