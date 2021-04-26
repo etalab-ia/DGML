@@ -1,0 +1,223 @@
+feature,shap_importance
+Rayonnements ionisants (kBq U-235 eq/kg de produit),0.16214458644390106
+Utilisation du sol (Pt/kg de produit),0.15310809016227722
+Groupe d'aliment,0.09323269873857498
+Épuisement des ressources minéraux (E-06 kg Sb eq/kg de produit),0.08674945682287216
+Eutrophisation marine (E-03 kg N eq/kg de produit),0.08283668756484985
+Changement climatique (kg CO2 eq/kg de produit),0.0739041417837143
+Épuisement des ressources eau (m3 depriv./kg de produit),0.07366012036800385
+Appauvrissement de la couche d'ozone (E-06 kg CVC11 eq/kg de produit),0.07139098644256592
+LCI Name_cheese,0.06795676052570343
+Eutrophisation terreste (mol N eq/kg de produit),0.05789560824632645
+Matériau d'emballage,0.056567203253507614
+Formation photochimique d'ozone (E-03 kg NMVOC eq/kg de produit),0.056463032960891724
+Livraison,0.051364198327064514
+Écotoxicité pour écosystèmes aquatiques d'eau douce (CTUe/kg de produit),0.04110148549079895
+Score unique EF (mPt/kg de produit),0.03465254604816437
+Eutrophisation eaux douces (E-03 kg P eq/kg de produit),0.033118195831775665
+Épuisement des ressources énergétiques (MJ/kg de produit),0.020783696323633194
+Particules (E-06 disease inc./kg de produit),0.02075974829494953
+Sous-groupe d'aliment,0.015673521906137466
+LCI Name_cooked,0.01201637089252472
+Nom du Produit en Français_aux,0.011717480607330799
+Acidification terrestre et eaux douces (mol H+ eq/kg de produit),0.011681078933179379
+LCI Name_breakfast,0.009781628847122192
+LCI Name_beef,0.00955951027572155
+LCI Name_raw,0.009417916648089886
+LCI Name_sugar,0.008620046079158783
+Nom du Produit en Français_crème,0.007852892391383648
+Préparation,0.0075224461033940315
+Nom du Produit en Français_boisson,0.007067715749144554
+LCI Name_fortified,0.006952198687940836
+Nom du Produit en Français_lait,0.006583712995052338
+LCI Name_cookie,0.005764835514128208
+Nom du Produit en Français_ou,0.005545974243432283
+Nom du Produit en Français_minéraux,0.005522679537534714
+Nom du Produit en Français_préemballée,0.005213947035372257
+Nom du Produit en Français_salade,0.004977204371243715
+LCI Name_bread,0.00451593566685915
+LCI Name_prepacked,0.004485968500375748
+LCI Name_milk,0.004326908849179745
+Nom du Produit en Français_pâte,0.004266122821718454
+Nom du Produit en Français_rayon,0.004198916256427765
+Nom du Produit en Français_et,0.004065139684826136
+Nom du Produit en Français_frais,0.004049420356750488
+LCI Name_dried,0.004026929382234812
+LCI Name_fish,0.003838241333141923
+LCI Name_pure,0.003784048603847623
+Nom du Produit en Français_jambon,0.0037088850513100624
+Nom du Produit en Français_pomme,0.0035956362262368202
+Nom du Produit en Français_cru,0.003501870669424534
+Nom du Produit en Français_sirop,0.0034387651830911636
+Nom du Produit en Français_au,0.003417154075577855
+Nom du Produit en Français_légumes,0.0031665386632084846
+Nom du Produit en Français_soupe,0.0030183664057403803
+Saisonnalité,0.003010635497048497
+Nom du Produit en Français_crue,0.002965756691992283
+LCI Name_grilled,0.0029216804541647434
+Nom du Produit en Français_fruits,0.002898847684264183
+Nom du Produit en Français_surgelée,0.002825342118740082
+LCI Name_cake,0.002805940341204405
+Nom du Produit en Français_fourrée,0.0026157102547585964
+Nom du Produit en Français_blanc,0.0025173344183713198
+LCI Name_chocolate,0.0024526265915483236
+Nom du Produit en Français_viande,0.002420328091830015
+Nom du Produit en Français_terre,0.0023938296362757683
+Nom du Produit en Français_la,0.002317549893632531
+LCI Name_fat,0.002282720757648349
+Nom du Produit en Français_pulpe,0.0021967620123177767
+Nom du Produit en Français_mg,0.0021931366063654423
+Nom du Produit en Français_appertisé,0.0021452009677886963
+LCI Name_chicken,0.002122910926118493
+LCI Name_pizza,0.0020468849688768387
+Nom du Produit en Français_pois,0.001941858441568911
+LCI Name_butter,0.0018783583072945476
+LCI Name_biscuit,0.0018656570464372635
+Nom du Produit en Français_poudre,0.0017890221206471324
+LCI Name_fruits,0.0017671240493655205
+Nom du Produit en Français_fromage,0.0017334545264020562
+Nom du Produit en Français_dessert,0.001729641342535615
+LCI Name_crepe,0.0017029163427650928
+LCI Name_bar,0.0016705782618373632
+Nom du Produit en Français_spécialité,0.0016590201994404197
+LCI Name_fresh,0.0016501377103850245
+LCI Name_frozen,0.0016466685337945819
+LCI Name_filled,0.001612538006156683
+Nom du Produit en Français_sauce,0.0015818991232663393
+Nom du Produit en Français_biscuit,0.0015483878087252378
+Nom du Produit en Français_non,0.0015406579477712512
+LCI Name_sandwich,0.0015182667411863804
+LCI Name_sauce,0.0014479004312306643
+Nom du Produit en Français_pâtes,0.001419743406586349
+Nom du Produit en Français_sec,0.0013864492066204548
+Nom du Produit en Français_base,0.0013647974701598287
+Nom du Produit en Français_riz,0.0013437960296869278
+LCI Name_unsalted,0.0013350893277674913
+LCI Name_egg,0.0013219497632235289
+LCI Name_ice,0.001256441930308938
+LCI Name_refrigerated,0.0012450908543542027
+LCI Name_light,0.0012187985703349113
+Nom du Produit en Français_en,0.0012117252917960286
+LCI Name_syrup,0.0011869899462908506
+Nom du Produit en Français_beurre,0.001166570233181119
+Nom du Produit en Français_pizza,0.0011581582948565483
+Nom du Produit en Français_céréales,0.0011031748726963997
+Nom du Produit en Français_porc,0.0011027915170416236
+Nom du Produit en Français_boeuf,0.0010851299157366157
+Nom du Produit en Français_grillée,0.0010627848096191883
+LCI Name_baked,0.001049117068760097
+LCI Name_powder,0.0010267707984894514
+LCI Name_fruit,0.0010168323060497642
+Nom du Produit en Français_huile,0.0009909855434671044
+Nom du Produit en Français_chou,0.0009716946515254676
+LCI Name_white,0.0009313529590144753
+Nom du Produit en Français_égoutté,0.0009144897921942174
+Nom du Produit en Français_sans,0.0009098562295548618
+Nom du Produit en Français_peau,0.000867862778250128
+LCI Name_salmon,0.00082363624824211
+LCI Name_plain,0.0008128080517053604
+Nom du Produit en Français_eau,0.000810278404969722
+LCI Name_yogurt,0.0007376198773272336
+LCI Name_drained,0.0007211081683635712
+LCI Name_potato,0.0006880025030113757
+LCI Name_type,0.000680557161103934
+LCI Name_style,0.0006783947465009987
+LCI Name_oil,0.0006545584183186293
+Nom du Produit en Français_pour,0.0006333670462481678
+Nom du Produit en Français_chèvre,0.0006136939628049731
+LCI Name_boiled,0.0005980057176202536
+Nom du Produit en Français_préemballé,0.0005815105978399515
+LCI Name_tomato,0.0005655750865116715
+Nom du Produit en Français_grasse,0.0005583518068306148
+LCI Name_dairy,0.0005560574936680496
+LCI Name_cream,0.000534595747012645
+Nom du Produit en Français_type,0.0005260941106826067
+LCI Name_pastry,0.0004677299875766039
+LCI Name_canned,0.0004632031195797026
+LCI Name_soft,0.00044367791269905865
+LCI Name_meat,0.00043802589061670005
+Nom du Produit en Français_cuite,0.00042175830458290875
+LCI Name_pan,0.0003936103021260351
+Nom du Produit en Français_avec,0.00036520216963253915
+Nom du Produit en Français_environ,0.0003643428208306432
+LCI Name_vegetables,0.00033093360252678394
+Nom du Produit en Français_poulet,0.00031653803307563066
+Nom du Produit en Français_cuit,0.0003156309248879552
+Nom du Produit en Français_chocolat,0.0003116885491181165
+Nom du Produit en Français_sucrée,0.00030910808709450066
+LCI Name_bean,0.0003080291789956391
+LCI Name_ham,0.00030072213849052787
+Nom du Produit en Français_poisson,0.00029126432491466403
+Nom du Produit en Français_pain,0.00029060631641186774
+Nom du Produit en Français_demi,0.0002795671462081373
+Nom du Produit en Français_blé,0.00025170293520204723
+LCI Name_dessert,0.00024371748440898955
+Nom du Produit en Français_yaourt,0.00022155779879540205
+LCI Name_juice,0.0002180841693188995
+LCI Name_cow,0.00021700341312680393
+LCI Name_soup,0.00020756133017130196
+LCI Name_cereals,0.00019661335682030767
+LCI Name_wheat,0.00018275126058142632
+LCI Name_roasted,0.00018234032904729247
+LCI Name_veal,0.00017438018403481692
+Nom du Produit en Français_tomate,0.00017198629211634398
+Nom du Produit en Français_petit,0.0001369708334095776
+LCI Name_green,9.442747250432149e-05
+LCI Name_baby,8.70733056217432e-05
+Nom du Produit en Français_sucré,8.384050306631252e-05
+Nom du Produit en Français_nature,8.372015872737393e-05
+LCI Name_fried,7.519069185946137e-05
+Nom du Produit en Français_veau,6.955705612199381e-05
+LCI Name_flavoured,6.527308869408444e-05
+LCI Name_sausage,6.509682134492323e-05
+Nom du Produit en Français_sèche,5.362275260267779e-05
+LCI Name_french,3.954324347432703e-05
+Nom du Produit en Français_filet,3.616974572651088e-05
+LCI Name_dehydrated,2.5721627025632188e-05
+Nom du Produit en Français_déshydratée,2.5576022380846553e-05
+LCI Name_vegetable,2.0884061086690053e-05
+Nom du Produit en Français_jus,1.9048522517550737e-05
+Nom du Produit en Français_surgelé,1.8283777535543777e-05
+Nom du Produit en Français_rôti,1.3677561582881026e-05
+LCI Name_sparkling,0.0
+Nom du Produit en Français_maïs,0.0
+Nom du Produit en Français_matière,0.0
+LCI Name_skin,0.0
+LCI Name_dry,0.0
+LCI Name_strongly,0.0
+LCI Name_steak,0.0
+LCI Name_vitamins,0.0
+LCI Name_bottled,0.0
+LCI Name_wine,0.0
+Transport par avion (1 : par avion),0.0
+Nom du Produit en Français_thon,0.0
+LCI Name_rice,0.0
+LCI Name_water,0.0
+Nom du Produit en Français_fortement,0.0
+Nom du Produit en Français_minéralisée,0.0
+Nom du Produit en Français_minérale,0.0
+LCI Name_reduced,0.0
+Nom du Produit en Français_pur,0.0
+Nom du Produit en Français_déjeuner,0.0
+LCI Name_goat,0.0
+LCI Name_corn,0.0
+LCI Name_elements,0.0
+LCI Name_lamb,0.0
+Nom du Produit en Français_rôtie,0.0
+LCI Name_lightly,0.0
+Nom du Produit en Français_gazeuse,0.0
+Nom du Produit en Français_noix,0.0
+LCI Name_mineral,0.0
+LCI Name_mineralized,0.0
+Nom du Produit en Français_st,0.0
+LCI Name_pasta,0.0
+LCI Name_chemical,0.0
+Nom du Produit en Français_moyennement,0.0
+LCI Name_pork,0.0
+LCI Name_drink,0.0
+Nom du Produit en Français_faiblement,0.0
+LCI Name_pulp,0.0
+Nom du Produit en Français_embouteillée,0.0
+Nom du Produit en Français_agneau,0.0
+LCI Name_red,0.0
+Nom du Produit en Français_vitamines,0.0

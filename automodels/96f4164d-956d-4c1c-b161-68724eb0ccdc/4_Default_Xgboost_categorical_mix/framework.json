@@ -1,0 +1,803 @@
+{
+    "uid": "118bc283-6d78-4f91-bd71-3a11c1004e81",
+    "name": "4_Default_Xgboost_categorical_mix",
+    "preprocessing": [
+        {
+            "remove_columns": [
+                "insecte_houppier"
+            ],
+            "missing_values": [
+                {
+                    "fill_method": "na_fill_median",
+                    "fill_params": {
+                        "espece_arbre": " Europaea -  - Pallida",
+                        "situation": "Alignement",
+                        "plaie_collet": "RCPPL",
+                        "rejet_tronc": "Non",
+                        "plaie_tronc": "TPLS",
+                        "champignon_houppier": "Non",
+                        "fissure_houppier": "HPF ",
+                        "bois_mort_houppier": "HPBM ",
+                        "plaie_houppier": "HPLS",
+                        "esperance_maintien": 1.0,
+                        "contrainte": "Non",
+                        "date_diagnostic": "2020/11/23"
+                    },
+                    "datetime_columns": []
+                }
+            ],
+            "categorical": [
+                {
+                    "convert_method": "categorical_to_int",
+                    "convert_params": {
+                        "site": {
+                            "Avenue Carnot": 0,
+                            "Avenue Gambetta": 1,
+                            "Avenue Saint-Fiacre": 2,
+                            "Avenue du Mar\u00e9chal Foch": 3,
+                            "Bois Schnapper": 4,
+                            "Carrefour RN13": 5,
+                            "Jardin du CA": 6,
+                            "Lyc\u00e9e Internationnal": 7,
+                            "Nouveau cimeti\u00e8re": 8,
+                            "Place Christiane Frahier": 9,
+                            "Place Jean Monnet": 10,
+                            "Place de la victoire": 11,
+                            "Place des Combattants": 12,
+                            "RN13": 13,
+                            "Rue Bastiat": 14,
+                            "Rue L\u00e9on D\u00e9soyer": 15,
+                            "Rue Pereire": 16,
+                            "Rue Pr\u00e9sident Roosevelt": 17,
+                            "Rue Saint-Leger": 18,
+                            "Rue Thiers": 19,
+                            "Rue Turgot": 20,
+                            "Rue de Boufflers": 21,
+                            "Rue de Gramont": 22,
+                            "Rue de l'Aurore": 23,
+                            "Rue des Gaudines": 24,
+                            "Rue du Docteur Jean Paul Lamare": 25,
+                            "Square Louis XIV": 26
+                        },
+                        "genre_arbre": {
+                            "Acer": 0,
+                            "Aesculus": 1,
+                            "Alnus": 2,
+                            "Betula": 3,
+                            "Carpinus": 4,
+                            "Catalpa": 5,
+                            "Cedrus": 6,
+                            "Cercis": 7,
+                            "Corylus": 8,
+                            "Fagus": 9,
+                            "Fraxinus": 10,
+                            "Juglans": 11,
+                            "Liriodendron": 12,
+                            "Magnolia": 13,
+                            "Ostrya": 14,
+                            "Paulownia": 15,
+                            "PhotiniaxFraseri'RedRobin'": 16,
+                            "Prunus": 17,
+                            "Sequoiadendron": 18,
+                            "Tilia": 19,
+                            "Zelkova": 20
+                        },
+                        "espece_arbre": {
+                            " Alba": 0,
+                            " Americana -  - Autumn Applause": 1,
+                            " Angustifolia -  - Oxycarpa 'Raywood'": 2,
+                            " Angustifolia - L. - Raywood": 3,
+                            " Atlantica - Manetti. -  ": 4,
+                            " Betulus - L. -  ": 5,
+                            " Betulus - L. - Fastigiata": 6,
+                            " Bignonioides - Walter -  ": 7,
+                            " Carpinifolia - K. Koch -  ": 8,
+                            " Carpinifolia - Scop. -  ": 9,
+                            " Cerasifera - Ehrh. - Nigra": 10,
+                            " Cerasifera - Ehrh. - Pissardi": 11,
+                            " Colurna - L. -  ": 12,
+                            " Cordata - Mill. - Mill.": 13,
+                            " Europaea -  - Pallida": 14,
+                            " Excelsior - L. -  ": 15,
+                            " Giganteum - Lindl. - ": 16,
+                            " Glabrata -  - ": 17,
+                            " Glutinosa -": 18,
+                            " Hippocastanum -  - Baumannii": 19,
+                            " Nigra - L. - ": 20,
+                            " Platanoides -   - Columnare": 21,
+                            " Platyphyllos -  - Flamme du Vercor": 22,
+                            " Pseudoplatanus - L. -  ": 23,
+                            " Siliquastrum - L. -  ": 24,
+                            " Sylvatica - L. -  ": 25,
+                            " Tulipifera - L. -  ": 26,
+                            " campestris -  - Royal Ruby": 27,
+                            " sp. -   -  ": 28,
+                            " sp. -  - ": 29,
+                            " x Soulangena - Soul. Bod - Heaven Scent": 30
+                        },
+                        "date_diagnostic": {
+                            "2020/06/10": 0,
+                            "2020/07/27": 1,
+                            "2020/10/07": 2,
+                            "2020/10/12": 3,
+                            "2020/10/16": 4,
+                            "2020/10/19": 5,
+                            "2020/10/20": 6,
+                            "2020/10/21": 7,
+                            "2020/10/22": 8,
+                            "2020/10/23": 9,
+                            "2020/11/12": 10,
+                            "2020/11/13": 11,
+                            "2020/11/16": 12,
+                            "2020/11/18": 13,
+                            "2020/11/19": 14,
+                            "2020/11/23": 15,
+                            "2020/11/24": 16,
+                            "2020/11/25": 17,
+                            "2020/11/27": 18,
+                            "2020/12/15": 19,
+                            "2020/12/16": 20,
+                            "2020/12/18": 21
+                        }
+                    },
+                    "columns": [
+                        "site",
+                        "genre_arbre",
+                        "espece_arbre",
+                        "date_diagnostic"
+                    ]
+                },
+                {
+                    "convert_method": "categorical_to_onehot",
+                    "convert_params": {
+                        "quartier": {
+                            "new_columns": [
+                                "quartier_Quartier 1 - C\u0153ur de Ville et Quatier forestier",
+                                "quartier_Quartier 2 - Alsace - Pereire",
+                                "quartier_Quartier 3 - Lyc\u00e9e International",
+                                "quartier_Quartier 4 - Rotondes - St L\u00e9ger",
+                                "quartier_Quartier 6 - H\u00f4pital",
+                                "quartier_Quartier 7 - Debussy - Schnapper"
+                            ],
+                            "unique_values": [
+                                "Quartier 1 - C\u0153ur de Ville et Quatier forestier",
+                                "Quartier 2 - Alsace - Pereire",
+                                "Quartier 3 - Lyc\u00e9e International",
+                                "Quartier 4 - Rotondes - St L\u00e9ger",
+                                "Quartier 6 - H\u00f4pital",
+                                "Quartier 7 - Debussy - Schnapper"
+                            ],
+                            "old_column": "quartier"
+                        },
+                        "cote_voirie": {
+                            "new_columns": [
+                                "cote_voirie_Pair"
+                            ],
+                            "unique_values": [
+                                "Impair",
+                                "Pair"
+                            ],
+                            "old_column": "cote_voirie"
+                        },
+                        "situation": {
+                            "new_columns": [
+                                "situation_Alignement",
+                                "situation_Bosquet",
+                                "situation_Groupe",
+                                "situation_Isol\u00e9"
+                            ],
+                            "unique_values": [
+                                "Alignement",
+                                "Bosquet",
+                                "Groupe",
+                                "Isol\u00e9"
+                            ],
+                            "old_column": "situation"
+                        },
+                        "type_sol": {
+                            "new_columns": [
+                                "type_sol_CS",
+                                "type_sol_G",
+                                "type_sol_GR",
+                                "type_sol_Gr",
+                                "type_sol_MA",
+                                "type_sol_P",
+                                "type_sol_S",
+                                "type_sol_TV"
+                            ],
+                            "unique_values": [
+                                "CS",
+                                "G",
+                                "GR",
+                                "Gr",
+                                "MA",
+                                "P",
+                                "S",
+                                "TV"
+                            ],
+                            "old_column": "type_sol"
+                        },
+                        "classe_age": {
+                            "new_columns": [
+                                "classe_age_A",
+                                "classe_age_AM",
+                                "classe_age_J",
+                                "classe_age_JA"
+                            ],
+                            "unique_values": [
+                                "A",
+                                "AM",
+                                "J",
+                                "JA"
+                            ],
+                            "old_column": "classe_age"
+                        },
+                        "classe_hauteur": {
+                            "new_columns": [
+                                "classe_hauteur_H1",
+                                "classe_hauteur_H2",
+                                "classe_hauteur_H3",
+                                "classe_hauteur_H4",
+                                "classe_hauteur_H5"
+                            ],
+                            "unique_values": [
+                                "H1",
+                                "H2",
+                                "H3",
+                                "H4",
+                                "H5"
+                            ],
+                            "old_column": "classe_hauteur"
+                        },
+                        "classe_circonference": {
+                            "new_columns": [
+                                "classe_circonference_C1",
+                                "classe_circonference_C2",
+                                "classe_circonference_C3",
+                                "classe_circonference_C4",
+                                "classe_circonference_C5",
+                                "classe_circonference_C6",
+                                "classe_circonference_C7"
+                            ],
+                            "unique_values": [
+                                "C1",
+                                "C2",
+                                "C3",
+                                "C4",
+                                "C5",
+                                "C6",
+                                "C7"
+                            ],
+                            "old_column": "classe_circonference"
+                        },
+                        "port_arbre": {
+                            "new_columns": [
+                                "port_arbre_A",
+                                "port_arbre_L",
+                                "port_arbre_R5",
+                                "port_arbre_SL"
+                            ],
+                            "unique_values": [
+                                "A",
+                                "L",
+                                "R5",
+                                "SL"
+                            ],
+                            "old_column": "port_arbre"
+                        },
+                        "vigueur_pousse": {
+                            "new_columns": [
+                                "vigueur_pousse_D",
+                                "vigueur_pousse_MP",
+                                "vigueur_pousse_P",
+                                "vigueur_pousse_PP"
+                            ],
+                            "unique_values": [
+                                "D",
+                                "MP",
+                                "P",
+                                "PP"
+                            ],
+                            "old_column": "vigueur_pousse"
+                        },
+                        "plaie_collet": {
+                            "new_columns": [
+                                "plaie_collet_AU",
+                                "plaie_collet_RCPLC",
+                                "plaie_collet_RCPLCF",
+                                "plaie_collet_RCPLNC",
+                                "plaie_collet_RCPLNS",
+                                "plaie_collet_RCPLS",
+                                "plaie_collet_RCPPL"
+                            ],
+                            "unique_values": [
+                                "AU",
+                                "RCPLC",
+                                "RCPLCF",
+                                "RCPLNC",
+                                "RCPLNS",
+                                "RCPLS",
+                                "RCPPL"
+                            ],
+                            "old_column": "plaie_collet"
+                        },
+                        "rejet_tronc": {
+                            "new_columns": [
+                                "rejet_tronc_Oui"
+                            ],
+                            "unique_values": [
+                                "Non",
+                                "Oui"
+                            ],
+                            "old_column": "rejet_tronc"
+                        },
+                        "tuteurage_arbre": {
+                            "new_columns": [
+                                "tuteurage_arbre_Non",
+                                "tuteurage_arbre_T2:Bipode",
+                                "tuteurage_arbre_T3Tripode"
+                            ],
+                            "unique_values": [
+                                "Non",
+                                "T2:Bipode",
+                                "T3Tripode"
+                            ],
+                            "old_column": "tuteurage_arbre"
+                        },
+                        "canisse_arbre": {
+                            "new_columns": [
+                                "canisse_arbre_Oui"
+                            ],
+                            "unique_values": [
+                                "Non",
+                                "Oui"
+                            ],
+                            "old_column": "canisse_arbre"
+                        },
+                        "plaie_tronc": {
+                            "new_columns": [
+                                "plaie_tronc_TPLC",
+                                "plaie_tronc_TPLCF",
+                                "plaie_tronc_TPLNC",
+                                "plaie_tronc_TPLS",
+                                "plaie_tronc_TPPL",
+                                "plaie_tronc_ZZ"
+                            ],
+                            "unique_values": [
+                                "TPLC",
+                                "TPLCF",
+                                "TPLNC",
+                                "TPLS",
+                                "TPPL",
+                                "ZZ"
+                            ],
+                            "old_column": "plaie_tronc"
+                        },
+                        "champignon_houppier": {
+                            "new_columns": [
+                                "champignon_houppier_Oui"
+                            ],
+                            "unique_values": [
+                                "Non",
+                                "Oui"
+                            ],
+                            "old_column": "champignon_houppier"
+                        },
+                        "fissure_houppier": {
+                            "new_columns": [
+                                "fissure_houppier_HFF ",
+                                "fissure_houppier_HFO ",
+                                "fissure_houppier_HPF "
+                            ],
+                            "unique_values": [
+                                "HFF ",
+                                "HFO ",
+                                "HPF "
+                            ],
+                            "old_column": "fissure_houppier"
+                        },
+                        "bois_mort_houppier": {
+                            "new_columns": [
+                                "bois_mort_houppier_HBMI ",
+                                "bois_mort_houppier_HBMU ",
+                                "bois_mort_houppier_HPBM "
+                            ],
+                            "unique_values": [
+                                "HBMI ",
+                                "HBMU ",
+                                "HPBM "
+                            ],
+                            "old_column": "bois_mort_houppier"
+                        },
+                        "plaie_houppier": {
+                            "new_columns": [
+                                "plaie_houppier_HPLC",
+                                "plaie_houppier_HPLNC",
+                                "plaie_houppier_HPLS",
+                                "plaie_houppier_HPPL",
+                                "plaie_houppier_ZZ"
+                            ],
+                            "unique_values": [
+                                "HPLC",
+                                "HPLNC",
+                                "HPLS",
+                                "HPPL",
+                                "ZZ"
+                            ],
+                            "old_column": "plaie_houppier"
+                        },
+                        "contrainte": {
+                            "new_columns": [
+                                "contrainte_Oui"
+                            ],
+                            "unique_values": [
+                                "Non",
+                                "Oui"
+                            ],
+                            "old_column": "contrainte"
+                        },
+                        "prescription_1": {
+                            "new_columns": [
+                                "prescription_1_RC",
+                                "prescription_1_RT",
+                                "prescription_1_Tpa",
+                                "prescription_1_ab",
+                                "prescription_1_au",
+                                "prescription_1_rg",
+                                "prescription_1_sl",
+                                "prescription_1_tac",
+                                "prescription_1_tdg",
+                                "prescription_1_tfo",
+                                "prescription_1_tr",
+                                "prescription_1_trd",
+                                "prescription_1_trg",
+                                "prescription_1_tsbm"
+                            ],
+                            "unique_values": [
+                                "RC",
+                                "RT",
+                                "Tpa",
+                                "ab",
+                                "au",
+                                "rg",
+                                "sl",
+                                "tac",
+                                "tdg",
+                                "tfo",
+                                "tr",
+                                "trd",
+                                "trg",
+                                "tsbm"
+                            ],
+                            "old_column": "prescription_1"
+                        },
+                        "prescription_2": {
+                            "new_columns": [
+                                "prescription_2_RC",
+                                "prescription_2_RT",
+                                "prescription_2_Tpa",
+                                "prescription_2_au",
+                                "prescription_2_sl",
+                                "prescription_2_trg",
+                                "prescription_2_tsbm"
+                            ],
+                            "unique_values": [
+                                "RC",
+                                "RT",
+                                "Tpa",
+                                "au",
+                                "sl",
+                                "trg",
+                                "tsbm"
+                            ],
+                            "old_column": "prescription_2"
+                        }
+                    },
+                    "columns": [
+                        "quartier",
+                        "cote_voirie",
+                        "situation",
+                        "type_sol",
+                        "classe_age",
+                        "classe_hauteur",
+                        "classe_circonference",
+                        "port_arbre",
+                        "vigueur_pousse",
+                        "plaie_collet",
+                        "rejet_tronc",
+                        "tuteurage_arbre",
+                        "canisse_arbre",
+                        "plaie_tronc",
+                        "champignon_houppier",
+                        "fissure_houppier",
+                        "bois_mort_houppier",
+                        "plaie_houppier",
+                        "contrainte",
+                        "prescription_1",
+                        "prescription_2"
+                    ]
+                }
+            ],
+            "categorical_y": {
+                "C1": 0,
+                "C2": 1,
+                "C3": 2,
+                "C4": 3,
+                "C5": 4,
+                "nan": 5
+            },
+            "ml_task": "multiclass_classification",
+            "params": {
+                "columns_preprocessing": {
+                    "quartier": [
+                        "categorical_to_onehot"
+                    ],
+                    "site": [
+                        "categorical_to_int"
+                    ],
+                    "cote_voirie": [
+                        "categorical_to_onehot"
+                    ],
+                    "genre_arbre": [
+                        "categorical_to_int"
+                    ],
+                    "espece_arbre": [
+                        "na_fill_median",
+                        "categorical_to_int"
+                    ],
+                    "situation": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "type_sol": [
+                        "categorical_to_onehot"
+                    ],
+                    "classe_age": [
+                        "categorical_to_onehot"
+                    ],
+                    "classe_hauteur": [
+                        "categorical_to_onehot"
+                    ],
+                    "classe_circonference": [
+                        "categorical_to_onehot"
+                    ],
+                    "port_arbre": [
+                        "categorical_to_onehot"
+                    ],
+                    "vigueur_pousse": [
+                        "categorical_to_onehot"
+                    ],
+                    "plaie_collet": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "rejet_tronc": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "tuteurage_arbre": [
+                        "categorical_to_onehot"
+                    ],
+                    "canisse_arbre": [
+                        "categorical_to_onehot"
+                    ],
+                    "plaie_tronc": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "champignon_houppier": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "insecte_houppier": [
+                        "remove_column"
+                    ],
+                    "fissure_houppier": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "bois_mort_houppier": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "plaie_houppier": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "esperance_maintien": [
+                        "na_fill_median"
+                    ],
+                    "contrainte": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "date_diagnostic": [
+                        "na_fill_median",
+                        "categorical_to_int"
+                    ],
+                    "prescription_1": [
+                        "categorical_to_onehot"
+                    ],
+                    "prescription_2": [
+                        "categorical_to_onehot"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "categorical_to_int"
+                ],
+                "ml_task": "multiclass_classification"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "1.2.0",
+            "algorithm_name": "Extreme Gradient Boosting",
+            "algorithm_short_name": "Xgboost",
+            "uid": "b069f267-c433-46c4-a785-a79cb4cb8057",
+            "params": {
+                "model_type": "Xgboost",
+                "ml_task": "multiclass_classification",
+                "objective": "multi:softprob",
+                "eval_metric": "mlogloss",
+                "eta": 0.075,
+                "max_depth": 6,
+                "min_child_weight": 1,
+                "subsample": 1.0,
+                "colsample_bytree": 1.0,
+                "seed": 4,
+                "num_class": 6,
+                "explain_level": 2
+            },
+            "best_ntree_limit": 71
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_rounds": 10000,
+            "early_stopping_rounds": 50,
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "quartier": [
+                    "categorical_to_onehot"
+                ],
+                "site": [
+                    "categorical_to_int"
+                ],
+                "cote_voirie": [
+                    "categorical_to_onehot"
+                ],
+                "genre_arbre": [
+                    "categorical_to_int"
+                ],
+                "espece_arbre": [
+                    "na_fill_median",
+                    "categorical_to_int"
+                ],
+                "situation": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "type_sol": [
+                    "categorical_to_onehot"
+                ],
+                "classe_age": [
+                    "categorical_to_onehot"
+                ],
+                "classe_hauteur": [
+                    "categorical_to_onehot"
+                ],
+                "classe_circonference": [
+                    "categorical_to_onehot"
+                ],
+                "port_arbre": [
+                    "categorical_to_onehot"
+                ],
+                "vigueur_pousse": [
+                    "categorical_to_onehot"
+                ],
+                "plaie_collet": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "rejet_tronc": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "tuteurage_arbre": [
+                    "categorical_to_onehot"
+                ],
+                "canisse_arbre": [
+                    "categorical_to_onehot"
+                ],
+                "plaie_tronc": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "champignon_houppier": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "insecte_houppier": [
+                    "remove_column"
+                ],
+                "fissure_houppier": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "bois_mort_houppier": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "plaie_houppier": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "esperance_maintien": [
+                    "na_fill_median"
+                ],
+                "contrainte": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "date_diagnostic": [
+                    "na_fill_median",
+                    "categorical_to_int"
+                ],
+                "prescription_1": [
+                    "categorical_to_onehot"
+                ],
+                "prescription_2": [
+                    "categorical_to_onehot"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "categorical_to_int"
+            ],
+            "ml_task": "multiclass_classification"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "stratify": true,
+            "X_path": "AutoML_13/X.parquet",
+            "y_path": "AutoML_13/y.parquet",
+            "results_path": "AutoML_13"
+        },
+        "learner": {
+            "model_type": "Xgboost",
+            "ml_task": "multiclass_classification",
+            "objective": "multi:softprob",
+            "eval_metric": "mlogloss",
+            "eta": 0.075,
+            "max_depth": 6,
+            "min_child_weight": 1,
+            "subsample": 1.0,
+            "colsample_bytree": 1.0,
+            "seed": 4,
+            "num_class": 6,
+            "explain_level": 2
+        },
+        "ml_task": "multiclass_classification",
+        "explain_level": 2,
+        "name": "4_Default_Xgboost_categorical_mix",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "max_time_for_learner": 60
+    },
+    "saved": [
+        "AutoML_13/4_Default_Xgboost_categorical_mix/learner_fold_0.xgboost"
+    ],
+    "predictions_fname": "AutoML_13/4_Default_Xgboost_categorical_mix/predictions_validation.csv",
+    "metric_name": "logloss",
+    "final_loss": 0.3203131722378164,
+    "train_time": 28.647127151489258,
+    "is_stacked": false
+}

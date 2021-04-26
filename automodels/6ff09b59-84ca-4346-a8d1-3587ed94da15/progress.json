@@ -1,0 +1,675 @@
+{
+    "fit_level": "finished",
+    "time_controller": {
+        "total_time_limit": 300,
+        "model_time_limit": null,
+        "steps": [
+            "simple_algorithms",
+            "default_algorithms",
+            "mix_encoding",
+            "ensemble"
+        ],
+        "algorithms": [
+            "Baseline",
+            "Linear",
+            "Decision Tree",
+            "Random Forest",
+            "Xgboost",
+            "Neural Network"
+        ],
+        "spend": [
+            {
+                "model_name": "prepare_data",
+                "model_type": "prepare_data",
+                "fit_level": "prepare_data",
+                "train_time": 7.827507734298706
+            },
+            {
+                "model_name": "1_Baseline",
+                "model_type": "Baseline",
+                "fit_level": "simple_algorithms",
+                "train_time": 0.2865266799926758
+            },
+            {
+                "model_name": "2_DecisionTree",
+                "model_type": "Decision Tree",
+                "fit_level": "simple_algorithms",
+                "train_time": 20.68748188018799
+            },
+            {
+                "model_name": "3_Linear",
+                "model_type": "Linear",
+                "fit_level": "simple_algorithms",
+                "train_time": 9.680174827575684
+            },
+            {
+                "model_name": "4_Default_Xgboost",
+                "model_type": "Xgboost",
+                "fit_level": "default_algorithms",
+                "train_time": 94.30428695678711
+            },
+            {
+                "model_name": "5_Default_NeuralNetwork",
+                "model_type": "Neural Network",
+                "fit_level": "default_algorithms",
+                "train_time": 6.78532338142395
+            },
+            {
+                "model_name": "6_Default_RandomForest",
+                "model_type": "Random Forest",
+                "fit_level": "default_algorithms",
+                "train_time": 23.75070309638977
+            },
+            {
+                "model_name": "Ensemble",
+                "model_type": "Ensemble",
+                "fit_level": "ensemble",
+                "train_time": 0.11325860023498535
+            }
+        ],
+        "is_hill_climbing": false,
+        "is_stacking": false
+    },
+    "all_params": {
+        "simple_algorithms": [
+            {
+                "additional": {
+                    "max_steps": 1,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {},
+                    "target_preprocessing": [
+                        "na_exclude"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "AutoML_13/X.parquet",
+                    "y_path": "AutoML_13/y.parquet",
+                    "results_path": "AutoML_13"
+                },
+                "learner": {
+                    "model_type": "Baseline",
+                    "ml_task": "regression",
+                    "seed": 43,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "1_Baseline",
+                "status": "trained",
+                "final_loss": 39.93644901449782,
+                "train_time": 0.2865266799926758,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "trees_in_step": 1,
+                    "train_cant_improve_limit": 0,
+                    "max_steps": 1,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Marque": [
+                            "categorical_to_int"
+                        ],
+                        "Mod\u00e8le dossier": [
+                            "categorical_to_int"
+                        ],
+                        "Mod\u00e8le UTAC": [
+                            "categorical_to_int"
+                        ],
+                        "D\u00e9signation commerciale": [
+                            "categorical_to_int"
+                        ],
+                        "CNIT": [
+                            "text_transform"
+                        ],
+                        "Type Variante Version (TVV)": [
+                            "text_transform"
+                        ],
+                        "Carburant": [
+                            "categorical_to_int"
+                        ],
+                        "Hybride": [
+                            "categorical_to_int"
+                        ],
+                        "Bo\u00eete de vitesse": [
+                            "categorical_to_int"
+                        ],
+                        "Consommation urbaine (l/100km)": [
+                            "na_fill_median"
+                        ],
+                        "Consommation extra-urbaine (l/100km)": [
+                            "na_fill_median"
+                        ],
+                        "CO type I (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC+NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Particules (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Champ V9": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ],
+                        "Carrosserie": [
+                            "categorical_to_int"
+                        ],
+                        "gamme": [
+                            "categorical_to_int"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "AutoML_13/X.parquet",
+                    "y_path": "AutoML_13/y.parquet",
+                    "results_path": "AutoML_13"
+                },
+                "learner": {
+                    "model_type": "Decision Tree",
+                    "ml_task": "regression",
+                    "seed": 43,
+                    "criterion": "friedman_mse",
+                    "max_depth": 4,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "2_DecisionTree",
+                "status": "trained",
+                "final_loss": 8.129964651878742,
+                "train_time": 20.68748188018799,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "max_steps": 1,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Marque": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Mod\u00e8le dossier": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Mod\u00e8le UTAC": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "D\u00e9signation commerciale": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "CNIT": [
+                            "text_transform"
+                        ],
+                        "Type Variante Version (TVV)": [
+                            "text_transform"
+                        ],
+                        "Carburant": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Hybride": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Puissance administrative": [
+                            "scale_normal"
+                        ],
+                        "Puissance maximale (kW)": [
+                            "scale_normal"
+                        ],
+                        "Bo\u00eete de vitesse": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Consommation urbaine (l/100km)": [
+                            "na_fill_median",
+                            "scale_normal"
+                        ],
+                        "Consommation extra-urbaine (l/100km)": [
+                            "na_fill_median",
+                            "scale_normal"
+                        ],
+                        "Consommation mixte (l/100km)": [
+                            "scale_normal"
+                        ],
+                        "CO type I (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC+NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Particules (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "masse vide euro min (kg)": [
+                            "scale_normal"
+                        ],
+                        "masse vide euro max (kg)": [
+                            "scale_normal"
+                        ],
+                        "Champ V9": [
+                            "na_fill_median",
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Carrosserie": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "gamme": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "AutoML_13/X.parquet",
+                    "y_path": "AutoML_13/y.parquet",
+                    "results_path": "AutoML_13"
+                },
+                "learner": {
+                    "model_type": "Linear",
+                    "ml_task": "regression",
+                    "seed": 43,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "3_Linear",
+                "status": "trained",
+                "final_loss": 5.866596023348161,
+                "train_time": 9.680174827575684,
+                "max_time_for_learner": 60
+            }
+        ],
+        "default_algorithms": [
+            {
+                "additional": {
+                    "max_rounds": 10000,
+                    "early_stopping_rounds": 50,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Marque": [
+                            "categorical_to_int"
+                        ],
+                        "Mod\u00e8le dossier": [
+                            "categorical_to_int"
+                        ],
+                        "Mod\u00e8le UTAC": [
+                            "categorical_to_int"
+                        ],
+                        "D\u00e9signation commerciale": [
+                            "categorical_to_int"
+                        ],
+                        "CNIT": [
+                            "text_transform"
+                        ],
+                        "Type Variante Version (TVV)": [
+                            "text_transform"
+                        ],
+                        "Carburant": [
+                            "categorical_to_int"
+                        ],
+                        "Hybride": [
+                            "categorical_to_int"
+                        ],
+                        "Bo\u00eete de vitesse": [
+                            "categorical_to_int"
+                        ],
+                        "Consommation urbaine (l/100km)": [
+                            "na_fill_median"
+                        ],
+                        "Consommation extra-urbaine (l/100km)": [
+                            "na_fill_median"
+                        ],
+                        "CO type I (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC+NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Particules (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Champ V9": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ],
+                        "Carrosserie": [
+                            "categorical_to_int"
+                        ],
+                        "gamme": [
+                            "categorical_to_int"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "AutoML_13/X.parquet",
+                    "y_path": "AutoML_13/y.parquet",
+                    "results_path": "AutoML_13"
+                },
+                "learner": {
+                    "model_type": "Xgboost",
+                    "ml_task": "regression",
+                    "objective": "reg:squarederror",
+                    "eval_metric": "rmse",
+                    "eta": 0.075,
+                    "max_depth": 6,
+                    "min_child_weight": 1,
+                    "subsample": 1.0,
+                    "colsample_bytree": 1.0,
+                    "seed": 4,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "4_Default_Xgboost",
+                "status": "trained",
+                "final_loss": 1.4182049816877824,
+                "train_time": 94.30428695678711,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Marque": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Mod\u00e8le dossier": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Mod\u00e8le UTAC": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "D\u00e9signation commerciale": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "CNIT": [
+                            "text_transform"
+                        ],
+                        "Type Variante Version (TVV)": [
+                            "text_transform"
+                        ],
+                        "Carburant": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Hybride": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Puissance administrative": [
+                            "scale_normal"
+                        ],
+                        "Puissance maximale (kW)": [
+                            "scale_normal"
+                        ],
+                        "Bo\u00eete de vitesse": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Consommation urbaine (l/100km)": [
+                            "na_fill_median",
+                            "scale_normal"
+                        ],
+                        "Consommation extra-urbaine (l/100km)": [
+                            "na_fill_median",
+                            "scale_normal"
+                        ],
+                        "Consommation mixte (l/100km)": [
+                            "scale_normal"
+                        ],
+                        "CO type I (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC+NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Particules (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "masse vide euro min (kg)": [
+                            "scale_normal"
+                        ],
+                        "masse vide euro max (kg)": [
+                            "scale_normal"
+                        ],
+                        "Champ V9": [
+                            "na_fill_median",
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Carrosserie": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "gamme": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "AutoML_13/X.parquet",
+                    "y_path": "AutoML_13/y.parquet",
+                    "results_path": "AutoML_13"
+                },
+                "learner": {
+                    "model_type": "Neural Network",
+                    "ml_task": "regression",
+                    "dense_1_size": 32,
+                    "dense_2_size": 16,
+                    "learning_rate": 0.05,
+                    "seed": 5,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "5_Default_NeuralNetwork",
+                "status": "trained",
+                "final_loss": 11.137763944898554,
+                "train_time": 6.78532338142395,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "trees_in_step": 100,
+                    "train_cant_improve_limit": 1,
+                    "min_steps": 1,
+                    "max_steps": 50,
+                    "early_stopping_rounds": 50,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Marque": [
+                            "categorical_to_int"
+                        ],
+                        "Mod\u00e8le dossier": [
+                            "categorical_to_int"
+                        ],
+                        "Mod\u00e8le UTAC": [
+                            "categorical_to_int"
+                        ],
+                        "D\u00e9signation commerciale": [
+                            "categorical_to_int"
+                        ],
+                        "CNIT": [
+                            "text_transform"
+                        ],
+                        "Type Variante Version (TVV)": [
+                            "text_transform"
+                        ],
+                        "Carburant": [
+                            "categorical_to_int"
+                        ],
+                        "Hybride": [
+                            "categorical_to_int"
+                        ],
+                        "Bo\u00eete de vitesse": [
+                            "categorical_to_int"
+                        ],
+                        "Consommation urbaine (l/100km)": [
+                            "na_fill_median"
+                        ],
+                        "Consommation extra-urbaine (l/100km)": [
+                            "na_fill_median"
+                        ],
+                        "CO type I (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "HC+NOX (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Particules (g/km)": [
+                            "na_fill_median"
+                        ],
+                        "Champ V9": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ],
+                        "Carrosserie": [
+                            "categorical_to_int"
+                        ],
+                        "gamme": [
+                            "categorical_to_int"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "AutoML_13/X.parquet",
+                    "y_path": "AutoML_13/y.parquet",
+                    "results_path": "AutoML_13"
+                },
+                "learner": {
+                    "model_type": "Random Forest",
+                    "ml_task": "regression",
+                    "criterion": "mse",
+                    "max_features": 0.9,
+                    "min_samples_split": 30,
+                    "max_depth": 4,
+                    "seed": 6,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "6_Default_RandomForest",
+                "status": "trained",
+                "final_loss": 6.900493055143368,
+                "train_time": 23.75070309638977,
+                "max_time_for_learner": 60
+            }
+        ],
+        "ensemble": [
+            {
+                "model_type": "ensemble",
+                "is_stacked": false,
+                "name": "Ensemble",
+                "status": "trained",
+                "final_loss": 1.4182049729367308,
+                "train_time": 0.11325860023498535
+            }
+        ]
+    },
+    "adjust_validation": false
+}

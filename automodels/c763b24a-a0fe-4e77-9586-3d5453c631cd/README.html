@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="style.css">
+
+<img src="https://raw.githubusercontent.com/mljar/visual-identity/main/media/mljar_AutomatedML.png" style="height:128px; margin-left: auto;
+margin-right: auto;display: block;"/>
+
+<a href="EDA/README.html">Automatic Exploratory Data Analysis Report</a><h1>AutoML Leaderboard</h1>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left">Best model</th>
+<th align="left">name</th>
+<th align="left">model_type</th>
+<th align="left">metric_type</th>
+<th align="right">metric_value</th>
+<th align="right">train_time</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="1_Baseline/README.html">1_Baseline</a></td>
+<td align="left">Baseline</td>
+<td align="left">rmse</td>
+<td align="right">0.519978</td>
+<td align="right">0.2</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="2_DecisionTree/README.html">2_DecisionTree</a></td>
+<td align="left">Decision Tree</td>
+<td align="left">rmse</td>
+<td align="right">0.454812</td>
+<td align="right">10.11</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="3_Linear/README.html">3_Linear</a></td>
+<td align="left">Linear</td>
+<td align="left">rmse</td>
+<td align="right">0.424076</td>
+<td align="right">7.83</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="4_Default_Xgboost/README.html">4_Default_Xgboost</a></td>
+<td align="left">Xgboost</td>
+<td align="left">rmse</td>
+<td align="right">0.28695</td>
+<td align="right">8.5</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="5_Default_NeuralNetwork/README.html">5_Default_NeuralNetwork</a></td>
+<td align="left">Neural Network</td>
+<td align="left">rmse</td>
+<td align="right">0.383513</td>
+<td align="right">3.28</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="6_Default_RandomForest/README.html">6_Default_RandomForest</a></td>
+<td align="left">Random Forest</td>
+<td align="left">rmse</td>
+<td align="right">0.400469</td>
+<td align="right">22.63</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"></td>
+<td align="left"><a href="4_Default_Xgboost_categorical_mix/README.html">4_Default_Xgboost_categorical_mix</a></td>
+<td align="left">Xgboost</td>
+<td align="left">rmse</td>
+<td align="right">0.281327</td>
+<td align="right">9.91</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left"><strong>the best</strong></td>
+<td align="left"><a href="Ensemble/README.html">Ensemble</a></td>
+<td align="left">Ensemble</td>
+<td align="left">rmse</td>
+<td align="right">0.280161</td>
+<td align="right">0.16</td>
+</tr>
+</tbody>
+</table>
+<h3>AutoML Performance</h3>
+<p><img style="width:80%" alt="AutoML Performance" src="ldb_performance.png" /></p>
+<h3>AutoML Performance Boxplot</h3>
+<p><img style="width:80%" alt="AutoML Performance Boxplot" src="ldb_performance_boxplot.png" /></p>

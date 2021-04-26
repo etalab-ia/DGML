@@ -1,0 +1,178 @@
+{
+    "columns": [
+        "Titre",
+        "Latitude",
+        "Longitude",
+        "Capacite_accueil",
+        "NombreSdB",
+        "NbChambres",
+        "NbLits",
+        "Type_logement",
+        "type_propriete",
+        "type_lit",
+        "Cuisine",
+        "Internet",
+        "television",
+        "produits_base",
+        "Chauffage",
+        "Climatisation",
+        "machine_laver",
+        "seche_linge",
+        "parking_sur-place",
+        "wifi",
+        "television_cable",
+        "petit_dejeuner",
+        "animaux_acceptes",
+        "pourEnfants_famille",
+        "adapte_evenements",
+        "logement_fumeur",
+        "accessibilite",
+        "Ascenseur",
+        "cheminee_interieur",
+        "Interphone",
+        "Portier",
+        "Piscine",
+        "Jacuzzi",
+        "salle_sport",
+        "Entree_24-24",
+        "Cintres",
+        "fer_repasser",
+        "seche_cheveux",
+        "espace_travail_ordi",
+        "detecteur_fumee",
+        "monoxyde_carbone_detect",
+        "kit_secours",
+        "fiche_securite",
+        "extincteur",
+        "porte_chambre_verrou",
+        "rection_semaine",
+        "reduction_mois",
+        "surcout_voyageur_supp",
+        "frais_menage",
+        "Caution",
+        "conditions_annulation",
+        "duree_minimale_sejour"
+    ],
+    "rows": 3927,
+    "cols": 52,
+    "target_is_numeric": true,
+    "columns_info": {
+        "Titre": [
+            "text_transform"
+        ],
+        "Latitude": [
+            "scale"
+        ],
+        "Longitude": [
+            "scale"
+        ],
+        "Capacite_accueil": [
+            "scale"
+        ],
+        "NombreSdB": [
+            "scale"
+        ],
+        "NbChambres": [
+            "scale"
+        ],
+        "NbLits": [
+            "scale"
+        ],
+        "Type_logement": [
+            "categorical",
+            "few_categories"
+        ],
+        "type_propriete": [
+            "categorical",
+            "few_categories"
+        ],
+        "type_lit": [
+            "missing_values",
+            "categorical",
+            "few_categories"
+        ],
+        "Cuisine": [
+            "scale"
+        ],
+        "Internet": [
+            "scale"
+        ],
+        "television": [
+            "scale"
+        ],
+        "produits_base": [
+            "scale"
+        ],
+        "Chauffage": [
+            "scale"
+        ],
+        "Climatisation": [],
+        "machine_laver": [
+            "scale"
+        ],
+        "seche_linge": [],
+        "parking_sur-place": [],
+        "wifi": [
+            "scale"
+        ],
+        "television_cable": [],
+        "petit_dejeuner": [],
+        "animaux_acceptes": [],
+        "pourEnfants_famille": [
+            "scale"
+        ],
+        "adapte_evenements": [],
+        "logement_fumeur": [],
+        "accessibilite": [],
+        "Ascenseur": [],
+        "cheminee_interieur": [],
+        "Interphone": [],
+        "Portier": [],
+        "Piscine": [],
+        "Jacuzzi": [],
+        "salle_sport": [],
+        "Entree_24-24": [],
+        "Cintres": [
+            "scale"
+        ],
+        "fer_repasser": [],
+        "seche_cheveux": [],
+        "espace_travail_ordi": [],
+        "detecteur_fumee": [
+            "scale"
+        ],
+        "monoxyde_carbone_detect": [],
+        "kit_secours": [],
+        "fiche_securite": [],
+        "extincteur": [],
+        "porte_chambre_verrou": [],
+        "rection_semaine": [
+            "scale"
+        ],
+        "reduction_mois": [
+            "scale"
+        ],
+        "surcout_voyageur_supp": [
+            "scale"
+        ],
+        "frais_menage": [
+            "scale"
+        ],
+        "Caution": [
+            "scale"
+        ],
+        "conditions_annulation": [
+            "missing_values",
+            "categorical",
+            "few_categories"
+        ],
+        "duree_minimale_sejour": [
+            "scale"
+        ]
+    },
+    "target_info": [
+        "scale_log"
+    ],
+    "n_features": 52,
+    "is_sample_weighted": false
+}

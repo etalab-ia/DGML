@@ -1,0 +1,123 @@
+{
+    "columns": [
+        "Marque",
+        "Mod\u00e8le dossier",
+        "Mod\u00e8le UTAC",
+        "D\u00e9signation commerciale",
+        "CNIT",
+        "Type Variante Version (TVV)",
+        "Carburant",
+        "Hybride",
+        "Puissance administrative",
+        "Puissance maximale (kW)",
+        "Bo\u00eete de vitesse",
+        "Consommation urbaine (l/100km)",
+        "Consommation extra-urbaine (l/100km)",
+        "Consommation mixte (l/100km)",
+        "CO type I (g/km)",
+        "HC (g/km)",
+        "NOX (g/km)",
+        "HC+NOX (g/km)",
+        "Particules (g/km)",
+        "masse vide euro min (kg)",
+        "masse vide euro max (kg)",
+        "Champ V9",
+        "Carrosserie",
+        "gamme"
+    ],
+    "rows": 33608,
+    "cols": 24,
+    "target_is_numeric": true,
+    "columns_info": {
+        "Marque": [
+            "categorical",
+            "many_categories"
+        ],
+        "Mod\u00e8le dossier": [
+            "categorical",
+            "many_categories"
+        ],
+        "Mod\u00e8le UTAC": [
+            "categorical",
+            "many_categories"
+        ],
+        "D\u00e9signation commerciale": [
+            "categorical",
+            "many_categories"
+        ],
+        "CNIT": [
+            "text_transform"
+        ],
+        "Type Variante Version (TVV)": [
+            "text_transform"
+        ],
+        "Carburant": [
+            "categorical",
+            "few_categories"
+        ],
+        "Hybride": [
+            "categorical",
+            "few_categories"
+        ],
+        "Puissance administrative": [
+            "scale"
+        ],
+        "Puissance maximale (kW)": [
+            "scale"
+        ],
+        "Bo\u00eete de vitesse": [
+            "categorical",
+            "few_categories"
+        ],
+        "Consommation urbaine (l/100km)": [
+            "missing_values",
+            "scale"
+        ],
+        "Consommation extra-urbaine (l/100km)": [
+            "missing_values",
+            "scale"
+        ],
+        "Consommation mixte (l/100km)": [
+            "scale"
+        ],
+        "CO type I (g/km)": [
+            "missing_values"
+        ],
+        "HC (g/km)": [
+            "missing_values"
+        ],
+        "NOX (g/km)": [
+            "missing_values"
+        ],
+        "HC+NOX (g/km)": [
+            "missing_values"
+        ],
+        "Particules (g/km)": [
+            "missing_values"
+        ],
+        "masse vide euro min (kg)": [
+            "scale"
+        ],
+        "masse vide euro max (kg)": [
+            "scale"
+        ],
+        "Champ V9": [
+            "missing_values",
+            "categorical",
+            "few_categories"
+        ],
+        "Carrosserie": [
+            "categorical",
+            "few_categories"
+        ],
+        "gamme": [
+            "categorical",
+            "few_categories"
+        ]
+    },
+    "target_info": [
+        "scale"
+    ],
+    "n_features": 24,
+    "is_sample_weighted": false
+}

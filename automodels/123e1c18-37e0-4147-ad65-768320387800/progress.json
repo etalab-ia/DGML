@@ -1,0 +1,626 @@
+{
+    "fit_level": "finished",
+    "time_controller": {
+        "total_time_limit": 300,
+        "model_time_limit": null,
+        "steps": [
+            "simple_algorithms",
+            "default_algorithms",
+            "mix_encoding",
+            "ensemble"
+        ],
+        "algorithms": [
+            "Baseline",
+            "Linear",
+            "Decision Tree",
+            "Random Forest",
+            "Xgboost",
+            "Neural Network"
+        ],
+        "spend": [
+            {
+                "model_name": "prepare_data",
+                "model_type": "prepare_data",
+                "fit_level": "prepare_data",
+                "train_time": 11.289257049560547
+            },
+            {
+                "model_name": "1_Baseline",
+                "model_type": "Baseline",
+                "fit_level": "simple_algorithms",
+                "train_time": 0.21054553985595703
+            },
+            {
+                "model_name": "2_DecisionTree",
+                "model_type": "Decision Tree",
+                "fit_level": "simple_algorithms",
+                "train_time": 12.509875774383545
+            },
+            {
+                "model_name": "3_Linear",
+                "model_type": "Linear",
+                "fit_level": "simple_algorithms",
+                "train_time": 6.327587366104126
+            },
+            {
+                "model_name": "4_Default_Xgboost",
+                "model_type": "Xgboost",
+                "fit_level": "default_algorithms",
+                "train_time": 8.916982650756836
+            },
+            {
+                "model_name": "5_Default_NeuralNetwork",
+                "model_type": "Neural Network",
+                "fit_level": "default_algorithms",
+                "train_time": 2.7146310806274414
+            },
+            {
+                "model_name": "6_Default_RandomForest",
+                "model_type": "Random Forest",
+                "fit_level": "default_algorithms",
+                "train_time": 18.226748943328857
+            },
+            {
+                "model_name": "4_Default_Xgboost_categorical_mix",
+                "model_type": "Xgboost",
+                "fit_level": "mix_encoding",
+                "train_time": 8.646071672439575
+            },
+            {
+                "model_name": "Ensemble",
+                "model_type": "Ensemble",
+                "fit_level": "ensemble",
+                "train_time": 0.13670563697814941
+            }
+        ],
+        "is_hill_climbing": false,
+        "is_stacking": false
+    },
+    "all_params": {
+        "simple_algorithms": [
+            {
+                "additional": {
+                    "max_steps": 1,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {},
+                    "target_preprocessing": [
+                        "na_exclude"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+                },
+                "learner": {
+                    "model_type": "Baseline",
+                    "ml_task": "regression",
+                    "seed": 1235,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "1_Baseline",
+                "status": "trained",
+                "final_loss": 65.58097455953467,
+                "train_time": 0.21054553985595703,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "trees_in_step": 1,
+                    "train_cant_improve_limit": 0,
+                    "max_steps": 1,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Titre": [
+                            "text_transform"
+                        ],
+                        "Type_logement": [
+                            "categorical_to_int"
+                        ],
+                        "type_propriete": [
+                            "categorical_to_int"
+                        ],
+                        "type_lit": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ],
+                        "conditions_annulation": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+                },
+                "learner": {
+                    "model_type": "Decision Tree",
+                    "ml_task": "regression",
+                    "seed": 1235,
+                    "criterion": "mse",
+                    "max_depth": 3,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "2_DecisionTree",
+                "status": "trained",
+                "final_loss": 52.14324021545183,
+                "train_time": 12.509875774383545,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "max_steps": 1,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Titre": [
+                            "text_transform"
+                        ],
+                        "Latitude": [
+                            "scale_normal"
+                        ],
+                        "Longitude": [
+                            "scale_normal"
+                        ],
+                        "Capacite_accueil": [
+                            "scale_normal"
+                        ],
+                        "NombreSdB": [
+                            "scale_normal"
+                        ],
+                        "NbChambres": [
+                            "scale_normal"
+                        ],
+                        "NbLits": [
+                            "scale_normal"
+                        ],
+                        "Type_logement": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "type_propriete": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "type_lit": [
+                            "na_fill_median",
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Cuisine": [
+                            "scale_normal"
+                        ],
+                        "Internet": [
+                            "scale_normal"
+                        ],
+                        "television": [
+                            "scale_normal"
+                        ],
+                        "produits_base": [
+                            "scale_normal"
+                        ],
+                        "Chauffage": [
+                            "scale_normal"
+                        ],
+                        "machine_laver": [
+                            "scale_normal"
+                        ],
+                        "wifi": [
+                            "scale_normal"
+                        ],
+                        "pourEnfants_famille": [
+                            "scale_normal"
+                        ],
+                        "Cintres": [
+                            "scale_normal"
+                        ],
+                        "detecteur_fumee": [
+                            "scale_normal"
+                        ],
+                        "rection_semaine": [
+                            "scale_normal"
+                        ],
+                        "reduction_mois": [
+                            "scale_normal"
+                        ],
+                        "surcout_voyageur_supp": [
+                            "scale_normal"
+                        ],
+                        "frais_menage": [
+                            "scale_normal"
+                        ],
+                        "Caution": [
+                            "scale_normal"
+                        ],
+                        "conditions_annulation": [
+                            "na_fill_median",
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "duree_minimale_sejour": [
+                            "scale_normal"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_log_and_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+                },
+                "learner": {
+                    "model_type": "Linear",
+                    "ml_task": "regression",
+                    "seed": 1235,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "3_Linear",
+                "status": "trained",
+                "final_loss": 39.638416698229555,
+                "train_time": 6.327587366104126,
+                "max_time_for_learner": 60
+            }
+        ],
+        "default_algorithms": [
+            {
+                "additional": {
+                    "max_rounds": 10000,
+                    "early_stopping_rounds": 50,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Titre": [
+                            "text_transform"
+                        ],
+                        "Type_logement": [
+                            "categorical_to_int"
+                        ],
+                        "type_propriete": [
+                            "categorical_to_int"
+                        ],
+                        "type_lit": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ],
+                        "conditions_annulation": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_log_and_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+                },
+                "learner": {
+                    "model_type": "Xgboost",
+                    "ml_task": "regression",
+                    "objective": "reg:squarederror",
+                    "eval_metric": "rmse",
+                    "eta": 0.075,
+                    "max_depth": 6,
+                    "min_child_weight": 1,
+                    "subsample": 1.0,
+                    "colsample_bytree": 1.0,
+                    "seed": 4,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "4_Default_Xgboost",
+                "status": "trained",
+                "final_loss": 42.74492262591713,
+                "train_time": 8.916982650756836,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Titre": [
+                            "text_transform"
+                        ],
+                        "Latitude": [
+                            "scale_normal"
+                        ],
+                        "Longitude": [
+                            "scale_normal"
+                        ],
+                        "Capacite_accueil": [
+                            "scale_normal"
+                        ],
+                        "NombreSdB": [
+                            "scale_normal"
+                        ],
+                        "NbChambres": [
+                            "scale_normal"
+                        ],
+                        "NbLits": [
+                            "scale_normal"
+                        ],
+                        "Type_logement": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "type_propriete": [
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "type_lit": [
+                            "na_fill_median",
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "Cuisine": [
+                            "scale_normal"
+                        ],
+                        "Internet": [
+                            "scale_normal"
+                        ],
+                        "television": [
+                            "scale_normal"
+                        ],
+                        "produits_base": [
+                            "scale_normal"
+                        ],
+                        "Chauffage": [
+                            "scale_normal"
+                        ],
+                        "machine_laver": [
+                            "scale_normal"
+                        ],
+                        "wifi": [
+                            "scale_normal"
+                        ],
+                        "pourEnfants_famille": [
+                            "scale_normal"
+                        ],
+                        "Cintres": [
+                            "scale_normal"
+                        ],
+                        "detecteur_fumee": [
+                            "scale_normal"
+                        ],
+                        "rection_semaine": [
+                            "scale_normal"
+                        ],
+                        "reduction_mois": [
+                            "scale_normal"
+                        ],
+                        "surcout_voyageur_supp": [
+                            "scale_normal"
+                        ],
+                        "frais_menage": [
+                            "scale_normal"
+                        ],
+                        "Caution": [
+                            "scale_normal"
+                        ],
+                        "conditions_annulation": [
+                            "na_fill_median",
+                            "categorical_to_int",
+                            "scale_normal"
+                        ],
+                        "duree_minimale_sejour": [
+                            "scale_normal"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_log_and_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+                },
+                "learner": {
+                    "model_type": "Neural Network",
+                    "ml_task": "regression",
+                    "dense_1_size": 32,
+                    "dense_2_size": 16,
+                    "learning_rate": 0.05,
+                    "seed": 5,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "5_Default_NeuralNetwork",
+                "status": "trained",
+                "final_loss": 43.92059319795449,
+                "train_time": 2.7146310806274414,
+                "max_time_for_learner": 60
+            },
+            {
+                "additional": {
+                    "trees_in_step": 100,
+                    "train_cant_improve_limit": 1,
+                    "min_steps": 1,
+                    "max_steps": 50,
+                    "early_stopping_rounds": 50,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Titre": [
+                            "text_transform"
+                        ],
+                        "Type_logement": [
+                            "categorical_to_int"
+                        ],
+                        "type_propriete": [
+                            "categorical_to_int"
+                        ],
+                        "type_lit": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ],
+                        "conditions_annulation": [
+                            "na_fill_median",
+                            "categorical_to_int"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_log_and_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+                },
+                "learner": {
+                    "model_type": "Random Forest",
+                    "ml_task": "regression",
+                    "criterion": "mse",
+                    "max_features": 0.9,
+                    "min_samples_split": 30,
+                    "max_depth": 4,
+                    "seed": 6,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "6_Default_RandomForest",
+                "status": "trained",
+                "final_loss": 45.7597209281715,
+                "train_time": 18.226748943328857,
+                "max_time_for_learner": 60
+            }
+        ],
+        "mix_encoding": [
+            {
+                "additional": {
+                    "max_rounds": 10000,
+                    "early_stopping_rounds": 50,
+                    "max_rows_limit": null,
+                    "max_cols_limit": null
+                },
+                "preprocessing": {
+                    "columns_preprocessing": {
+                        "Titre": [
+                            "text_transform"
+                        ],
+                        "Type_logement": [
+                            "categorical_to_onehot"
+                        ],
+                        "type_propriete": [
+                            "categorical_to_onehot"
+                        ],
+                        "type_lit": [
+                            "na_fill_median",
+                            "categorical_to_onehot"
+                        ],
+                        "conditions_annulation": [
+                            "na_fill_median",
+                            "categorical_to_onehot"
+                        ]
+                    },
+                    "target_preprocessing": [
+                        "na_exclude",
+                        "scale_log_and_normal"
+                    ],
+                    "ml_task": "regression"
+                },
+                "validation_strategy": {
+                    "validation_type": "split",
+                    "train_ratio": 0.75,
+                    "shuffle": true,
+                    "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+                    "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+                    "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+                },
+                "learner": {
+                    "model_type": "Xgboost",
+                    "ml_task": "regression",
+                    "objective": "reg:squarederror",
+                    "eval_metric": "rmse",
+                    "eta": 0.075,
+                    "max_depth": 6,
+                    "min_child_weight": 1,
+                    "subsample": 1.0,
+                    "colsample_bytree": 1.0,
+                    "seed": 4,
+                    "explain_level": 2
+                },
+                "ml_task": "regression",
+                "explain_level": 2,
+                "name": "4_Default_Xgboost_categorical_mix",
+                "status": "trained",
+                "final_loss": 43.219933681145456,
+                "train_time": 8.646071672439575,
+                "max_time_for_learner": 60
+            }
+        ],
+        "ensemble": [
+            {
+                "model_type": "ensemble",
+                "is_stacked": false,
+                "name": "Ensemble",
+                "status": "trained",
+                "final_loss": 38.97400723025983,
+                "train_time": 0.13670563697814941
+            }
+        ]
+    },
+    "adjust_validation": false
+}

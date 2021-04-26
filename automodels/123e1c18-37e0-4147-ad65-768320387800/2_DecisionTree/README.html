@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="../style.css">
+
+<h1>Summary of 2_DecisionTree</h1>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
+<h2>Decision Tree</h2>
+<ul>
+<li><strong>criterion</strong>: mse</li>
+<li><strong>max_depth</strong>: 3</li>
+<li><strong>explain_level</strong>: 2</li>
+</ul>
+<h2>Validation</h2>
+<ul>
+<li><strong>validation_type</strong>: split</li>
+<li><strong>train_ratio</strong>: 0.75</li>
+<li><strong>shuffle</strong>: True</li>
+</ul>
+<h2>Optimized metric</h2>
+<p>rmse</p>
+<h2>Training time</h2>
+<p>11.8 seconds</p>
+<h3>Metric details:</h3>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left">Metric</th>
+<th align="right">Score</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">MAE</td>
+<td align="right">26.6166</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">MSE</td>
+<td align="right">2718.92</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">RMSE</td>
+<td align="right">52.1432</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">R2</td>
+<td align="right">0.367074</td>
+</tr>
+</tbody>
+</table>
+<h2>Learning curves</h2>
+<p><img style="width:80%" alt="Learning curves" src="learning_curves.png" /></p>
+<h2>Permutation-based Importance</h2>
+<p><img style="width:80%" alt="Permutation-based Importance" src="permutation_importance.png" /></p>
+<h2>SHAP Importance</h2>
+<p><img style="width:80%" alt="SHAP Importance" src="shap_importance.png" /></p>
+<h2>SHAP Dependence plots</h2>
+<h3>Dependence (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from Fold 1" src="learner_fold_0_shap_dependence.png" /></p>
+<h2>SHAP Decision plots</h2>
+<h3>Top-10 Worst decisions (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from fold 1" src="learner_fold_0_shap_worst_decisions.png" /></p>
+<h3>Top-10 Best decisions (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from fold 1" src="learner_fold_0_shap_best_decisions.png" /></p>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>

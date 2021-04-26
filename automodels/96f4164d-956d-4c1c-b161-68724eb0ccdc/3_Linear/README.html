@@ -1,0 +1,531 @@
+<link rel="stylesheet" href="../style.css">
+
+<h1>Summary of 3_Linear</h1>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
+<h2>Logistic Regression (Linear)</h2>
+<ul>
+<li><strong>num_class</strong>: 6</li>
+<li><strong>explain_level</strong>: 2</li>
+</ul>
+<h2>Validation</h2>
+<ul>
+<li><strong>validation_type</strong>: split</li>
+<li><strong>train_ratio</strong>: 0.75</li>
+<li><strong>shuffle</strong>: True</li>
+<li><strong>stratify</strong>: True</li>
+</ul>
+<h2>Optimized metric</h2>
+<p>logloss</p>
+<h2>Training time</h2>
+<p>14.0 seconds</p>
+<h3>Metric details</h3>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">C1</th>
+<th align="right">C2</th>
+<th align="right">C3</th>
+<th align="right">C4</th>
+<th align="right">C5</th>
+<th align="right">nan</th>
+<th align="right">accuracy</th>
+<th align="right">macro avg</th>
+<th align="right">weighted avg</th>
+<th align="right">logloss</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">precision</td>
+<td align="right">0.825</td>
+<td align="right">0.848101</td>
+<td align="right">0.666667</td>
+<td align="right">0.833333</td>
+<td align="right">1</td>
+<td align="right">0.833333</td>
+<td align="right">0.838028</td>
+<td align="right">0.834406</td>
+<td align="right">0.83647</td>
+<td align="right">0.515071</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">recall</td>
+<td align="right">0.767442</td>
+<td align="right">0.87013</td>
+<td align="right">0.571429</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.838028</td>
+<td align="right">0.868167</td>
+<td align="right">0.838028</td>
+<td align="right">0.515071</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">f1-score</td>
+<td align="right">0.795181</td>
+<td align="right">0.858974</td>
+<td align="right">0.615385</td>
+<td align="right">0.909091</td>
+<td align="right">1</td>
+<td align="right">0.909091</td>
+<td align="right">0.838028</td>
+<td align="right">0.847954</td>
+<td align="right">0.836144</td>
+<td align="right">0.515071</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">support</td>
+<td align="right">43</td>
+<td align="right">77</td>
+<td align="right">7</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">0.838028</td>
+<td align="right">142</td>
+<td align="right">142</td>
+<td align="right">0.515071</td>
+</tr>
+</tbody>
+</table>
+<h2>Confusion matrix</h2>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">Predicted as C1</th>
+<th align="right">Predicted as C2</th>
+<th align="right">Predicted as C3</th>
+<th align="right">Predicted as C4</th>
+<th align="right">Predicted as C5</th>
+<th align="right">Predicted as nan</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">Labeled as C1</td>
+<td align="right">33</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C2</td>
+<td align="right">7</td>
+<td align="right">67</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C3</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as nan</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5</td>
+</tr>
+</tbody>
+</table>
+<h2>Learning curves</h2>
+<p><img style="width:80%" alt="Learning curves" src="learning_curves.png" /></p>
+<h2>Coefficients</h2>
+<h3>Coefficients learner #1</h3>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">C1</th>
+<th align="right">C2</th>
+<th align="right">C3</th>
+<th align="right">C4</th>
+<th align="right">C5</th>
+<th align="right">nan</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">intercept</td>
+<td align="right">1.89661</td>
+<td align="right">4.73311</td>
+<td align="right">0.313168</td>
+<td align="right">-1.85347</td>
+<td align="right">-2.43957</td>
+<td align="right">-2.64985</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">quartier</td>
+<td align="right">-0.0690232</td>
+<td align="right">-0.520492</td>
+<td align="right">0.280769</td>
+<td align="right">-0.197011</td>
+<td align="right">0.175582</td>
+<td align="right">0.330176</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">site</td>
+<td align="right">-0.582602</td>
+<td align="right">0.359342</td>
+<td align="right">0.494725</td>
+<td align="right">0.297185</td>
+<td align="right">-0.293456</td>
+<td align="right">-0.275193</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">cote_voirie</td>
+<td align="right">-0.057919</td>
+<td align="right">-0.00634577</td>
+<td align="right">-0.265585</td>
+<td align="right">0.170897</td>
+<td align="right">-0.0815646</td>
+<td align="right">0.240517</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">matricule_arbre</td>
+<td align="right">0.232195</td>
+<td align="right">-0.152501</td>
+<td align="right">-0.5127</td>
+<td align="right">0.115912</td>
+<td align="right">0.167134</td>
+<td align="right">0.14996</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">genre_arbre</td>
+<td align="right">0.224655</td>
+<td align="right">-0.155951</td>
+<td align="right">0.354036</td>
+<td align="right">-0.218611</td>
+<td align="right">-0.185036</td>
+<td align="right">-0.0190935</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">espece_arbre</td>
+<td align="right">-0.127532</td>
+<td align="right">-0.106983</td>
+<td align="right">-0.275406</td>
+<td align="right">0.595506</td>
+<td align="right">0.330809</td>
+<td align="right">-0.416395</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">situation</td>
+<td align="right">0.347032</td>
+<td align="right">-0.308958</td>
+<td align="right">0.339237</td>
+<td align="right">0.22492</td>
+<td align="right">-0.31169</td>
+<td align="right">-0.290541</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">type_sol</td>
+<td align="right">0.334279</td>
+<td align="right">-0.610421</td>
+<td align="right">-1.08511</td>
+<td align="right">0.532669</td>
+<td align="right">-0.163595</td>
+<td align="right">0.992174</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">surf_permeable</td>
+<td align="right">0.749115</td>
+<td align="right">-0.129183</td>
+<td align="right">-0.689116</td>
+<td align="right">0.578937</td>
+<td align="right">-0.118665</td>
+<td align="right">-0.391089</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">date_plantation</td>
+<td align="right">0.770019</td>
+<td align="right">-0.242307</td>
+<td align="right">-0.438837</td>
+<td align="right">0.182992</td>
+<td align="right">0.118448</td>
+<td align="right">-0.390315</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">classe_age</td>
+<td align="right">0.269413</td>
+<td align="right">-0.131004</td>
+<td align="right">0.346802</td>
+<td align="right">-0.231565</td>
+<td align="right">0.0344866</td>
+<td align="right">-0.288132</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">hauteur</td>
+<td align="right">-0.422751</td>
+<td align="right">0.30564</td>
+<td align="right">-0.130745</td>
+<td align="right">0.0744087</td>
+<td align="right">-0.41052</td>
+<td align="right">0.583967</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">classe_hauteur</td>
+<td align="right">0.197638</td>
+<td align="right">0.333466</td>
+<td align="right">-0.0657908</td>
+<td align="right">-0.335988</td>
+<td align="right">-0.415089</td>
+<td align="right">0.285764</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">diametre</td>
+<td align="right">-0.00137278</td>
+<td align="right">-0.249939</td>
+<td align="right">-0.0491795</td>
+<td align="right">-0.338085</td>
+<td align="right">0.277887</td>
+<td align="right">0.360689</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">circonference (en cm)</td>
+<td align="right">-0.00137278</td>
+<td align="right">-0.249939</td>
+<td align="right">-0.0491795</td>
+<td align="right">-0.338085</td>
+<td align="right">0.277887</td>
+<td align="right">0.360689</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">classe_circonference</td>
+<td align="right">-0.600672</td>
+<td align="right">0.0687286</td>
+<td align="right">0.274753</td>
+<td align="right">-0.363808</td>
+<td align="right">0.246348</td>
+<td align="right">0.37465</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">port_arbre</td>
+<td align="right">0.14454</td>
+<td align="right">-0.00263849</td>
+<td align="right">0.568355</td>
+<td align="right">-0.197853</td>
+<td align="right">-0.125059</td>
+<td align="right">-0.387345</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">vigueur_pousse</td>
+<td align="right">0.778623</td>
+<td align="right">-0.25484</td>
+<td align="right">0.201818</td>
+<td align="right">0.101664</td>
+<td align="right">-0.493926</td>
+<td align="right">-0.333338</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">plaie_collet</td>
+<td align="right">0.602204</td>
+<td align="right">-0.50791</td>
+<td align="right">-0.195289</td>
+<td align="right">0.0165047</td>
+<td align="right">-0.141935</td>
+<td align="right">0.226425</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">rejet_tronc</td>
+<td align="right">0.305942</td>
+<td align="right">-0.0402351</td>
+<td align="right">0.575186</td>
+<td align="right">-0.0749786</td>
+<td align="right">-0.33891</td>
+<td align="right">-0.427004</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">tuteurage_arbre</td>
+<td align="right">-0.211183</td>
+<td align="right">1.05375</td>
+<td align="right">-0.328805</td>
+<td align="right">-0.393688</td>
+<td align="right">-0.109677</td>
+<td align="right">-0.0103937</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">canisse_arbre</td>
+<td align="right">0.872519</td>
+<td align="right">-0.590594</td>
+<td align="right">-0.876563</td>
+<td align="right">0.68941</td>
+<td align="right">-0.0736011</td>
+<td align="right">-0.0211699</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">plaie_tronc</td>
+<td align="right">0.309558</td>
+<td align="right">0.402056</td>
+<td align="right">-0.382171</td>
+<td align="right">-0.409827</td>
+<td align="right">0.0126527</td>
+<td align="right">0.0677316</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">champignon_houppier</td>
+<td align="right">-0.0317644</td>
+<td align="right">-0.329102</td>
+<td align="right">-0.0882225</td>
+<td align="right">0.511329</td>
+<td align="right">0.044008</td>
+<td align="right">-0.106249</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">fissure_houppier</td>
+<td align="right">0.00144877</td>
+<td align="right">0.282041</td>
+<td align="right">0.262076</td>
+<td align="right">-0.303087</td>
+<td align="right">-0.243152</td>
+<td align="right">0.000673708</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">bois_mort_houppier</td>
+<td align="right">0.78076</td>
+<td align="right">-0.0663505</td>
+<td align="right">-0.449878</td>
+<td align="right">-0.424198</td>
+<td align="right">-0.00514947</td>
+<td align="right">0.164816</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">plaie_houppier</td>
+<td align="right">0.509451</td>
+<td align="right">0.388228</td>
+<td align="right">-0.352651</td>
+<td align="right">-0.455034</td>
+<td align="right">-0.185651</td>
+<td align="right">0.0956575</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">esperance_maintien</td>
+<td align="right">-1.80137</td>
+<td align="right">-0.419574</td>
+<td align="right">0.886968</td>
+<td align="right">1.21003</td>
+<td align="right">0.810899</td>
+<td align="right">-0.686958</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">contrainte</td>
+<td align="right">-0.0987119</td>
+<td align="right">-0.16551</td>
+<td align="right">-0.0705857</td>
+<td align="right">-0.0418059</td>
+<td align="right">0.769036</td>
+<td align="right">-0.392422</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">date_diagnostic</td>
+<td align="right">-0.73924</td>
+<td align="right">-0.592679</td>
+<td align="right">0.805366</td>
+<td align="right">-0.023401</td>
+<td align="right">0.372522</td>
+<td align="right">0.177432</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">prescription_1</td>
+<td align="right">-0.0438974</td>
+<td align="right">0.347947</td>
+<td align="right">0.427542</td>
+<td align="right">-0.152804</td>
+<td align="right">-0.836765</td>
+<td align="right">0.257978</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">prescription_2</td>
+<td align="right">0.356812</td>
+<td align="right">0.198394</td>
+<td align="right">-0.635027</td>
+<td align="right">0.0896253</td>
+<td align="right">0.0341129</td>
+<td align="right">-0.0439177</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Long</td>
+<td align="right">-0.624515</td>
+<td align="right">0.89516</td>
+<td align="right">-0.374953</td>
+<td align="right">0.206672</td>
+<td align="right">0.118174</td>
+<td align="right">-0.220537</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Lat</td>
+<td align="right">0.246282</td>
+<td align="right">-0.176627</td>
+<td align="right">0.681353</td>
+<td align="right">-0.326147</td>
+<td align="right">-0.0619319</td>
+<td align="right">-0.362929</td>
+</tr>
+</tbody>
+</table>
+<h2>Permutation-based Importance</h2>
+<p><img style="width:80%" alt="Permutation-based Importance" src="permutation_importance.png" /></p>
+<h2>SHAP Importance</h2>
+<p><img style="width:80%" alt="SHAP Importance" src="shap_importance.png" /></p>
+<h2>SHAP Dependence plots</h2>
+<h3>Dependence C1 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C1.png" /></p>
+<h3>Dependence C2 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C2.png" /></p>
+<h3>Dependence C3 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C3.png" /></p>
+<h3>Dependence C4 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C4.png" /></p>
+<h3>Dependence C5 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C5.png" /></p>
+<h3>Dependence nan (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_nan.png" /></p>
+<h2>SHAP Decision plots</h2>
+<h3>Worst decisions for selected sample 1 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_0_worst_decisions.png" /></p>
+<h3>Worst decisions for selected sample 2 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_1_worst_decisions.png" /></p>
+<h3>Worst decisions for selected sample 3 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_2_worst_decisions.png" /></p>
+<h3>Worst decisions for selected sample 4 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_3_worst_decisions.png" /></p>
+<h3>Best decisions for selected sample 1 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_0_best_decisions.png" /></p>
+<h3>Best decisions for selected sample 2 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_1_best_decisions.png" /></p>
+<h3>Best decisions for selected sample 3 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_2_best_decisions.png" /></p>
+<h3>Best decisions for selected sample 4 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_3_best_decisions.png" /></p>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>

@@ -1,0 +1,128 @@
+{
+    "columns": [
+        "Ind",
+        "Men",
+        "Men_pauv",
+        "Men_1ind",
+        "Men_5ind",
+        "Men_prop",
+        "Men_fmp",
+        "Ind_snv",
+        "Men_surf",
+        "Men_coll",
+        "Men_mais",
+        "Log_av45",
+        "Log_45_70",
+        "Log_70_90",
+        "Log_ap90",
+        "Log_inc",
+        "Ind_0_3",
+        "Ind_4_5",
+        "Ind_6_10",
+        "Ind_11_17",
+        "Ind_18_24",
+        "Ind_25_39",
+        "Ind_40_54",
+        "Ind_55_64",
+        "Ind_65_79",
+        "Ind_80p",
+        "Ind_inc",
+        "I_pauv",
+        "t_maille"
+    ],
+    "rows": 107190,
+    "cols": 29,
+    "target_is_numeric": true,
+    "columns_info": {
+        "Ind": [
+            "scale"
+        ],
+        "Men": [
+            "scale"
+        ],
+        "Men_pauv": [
+            "scale"
+        ],
+        "Men_1ind": [
+            "scale"
+        ],
+        "Men_5ind": [
+            "scale"
+        ],
+        "Men_prop": [
+            "scale"
+        ],
+        "Men_fmp": [
+            "scale"
+        ],
+        "Ind_snv": [
+            "scale"
+        ],
+        "Men_surf": [
+            "scale"
+        ],
+        "Men_coll": [
+            "scale"
+        ],
+        "Men_mais": [
+            "scale"
+        ],
+        "Log_av45": [
+            "scale"
+        ],
+        "Log_45_70": [
+            "scale"
+        ],
+        "Log_70_90": [
+            "scale"
+        ],
+        "Log_ap90": [
+            "scale"
+        ],
+        "Log_inc": [
+            "scale"
+        ],
+        "Ind_0_3": [
+            "scale"
+        ],
+        "Ind_4_5": [
+            "scale"
+        ],
+        "Ind_6_10": [
+            "scale"
+        ],
+        "Ind_11_17": [
+            "scale"
+        ],
+        "Ind_18_24": [
+            "scale"
+        ],
+        "Ind_25_39": [
+            "scale"
+        ],
+        "Ind_40_54": [
+            "scale"
+        ],
+        "Ind_55_64": [
+            "scale"
+        ],
+        "Ind_65_79": [
+            "scale"
+        ],
+        "Ind_80p": [
+            "scale"
+        ],
+        "Ind_inc": [
+            "scale"
+        ],
+        "I_pauv": [],
+        "t_maille": [
+            "scale"
+        ]
+    },
+    "target_info": [
+        "scale"
+    ],
+    "n_features": 29,
+    "is_sample_weighted": false
+}

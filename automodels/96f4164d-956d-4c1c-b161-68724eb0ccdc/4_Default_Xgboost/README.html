@@ -1,0 +1,206 @@
+<link rel="stylesheet" href="../style.css">
+
+<h1>Summary of 4_Default_Xgboost</h1>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
+<h2>Extreme Gradient Boosting (Xgboost)</h2>
+<ul>
+<li><strong>objective</strong>: multi:softprob</li>
+<li><strong>eval_metric</strong>: mlogloss</li>
+<li><strong>eta</strong>: 0.075</li>
+<li><strong>max_depth</strong>: 6</li>
+<li><strong>min_child_weight</strong>: 1</li>
+<li><strong>subsample</strong>: 1.0</li>
+<li><strong>colsample_bytree</strong>: 1.0</li>
+<li><strong>num_class</strong>: 6</li>
+<li><strong>explain_level</strong>: 2</li>
+</ul>
+<h2>Validation</h2>
+<ul>
+<li><strong>validation_type</strong>: split</li>
+<li><strong>train_ratio</strong>: 0.75</li>
+<li><strong>shuffle</strong>: True</li>
+<li><strong>stratify</strong>: True</li>
+</ul>
+<h2>Optimized metric</h2>
+<p>logloss</p>
+<h2>Training time</h2>
+<p>17.3 seconds</p>
+<h3>Metric details</h3>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">C1</th>
+<th align="right">C2</th>
+<th align="right">C3</th>
+<th align="right">C4</th>
+<th align="right">C5</th>
+<th align="right">nan</th>
+<th align="right">accuracy</th>
+<th align="right">macro avg</th>
+<th align="right">weighted avg</th>
+<th align="right">logloss</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">precision</td>
+<td align="right">0.906977</td>
+<td align="right">0.935897</td>
+<td align="right">1</td>
+<td align="right">0.833333</td>
+<td align="right">1</td>
+<td align="right">0.833333</td>
+<td align="right">0.922535</td>
+<td align="right">0.918257</td>
+<td align="right">0.925334</td>
+<td align="right">0.269899</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">recall</td>
+<td align="right">0.906977</td>
+<td align="right">0.948052</td>
+<td align="right">0.571429</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.922535</td>
+<td align="right">0.90441</td>
+<td align="right">0.922535</td>
+<td align="right">0.269899</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">f1-score</td>
+<td align="right">0.906977</td>
+<td align="right">0.941935</td>
+<td align="right">0.727273</td>
+<td align="right">0.909091</td>
+<td align="right">1</td>
+<td align="right">0.909091</td>
+<td align="right">0.922535</td>
+<td align="right">0.899061</td>
+<td align="right">0.920499</td>
+<td align="right">0.269899</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">support</td>
+<td align="right">43</td>
+<td align="right">77</td>
+<td align="right">7</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">0.922535</td>
+<td align="right">142</td>
+<td align="right">142</td>
+<td align="right">0.269899</td>
+</tr>
+</tbody>
+</table>
+<h2>Confusion matrix</h2>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">Predicted as C1</th>
+<th align="right">Predicted as C2</th>
+<th align="right">Predicted as C3</th>
+<th align="right">Predicted as C4</th>
+<th align="right">Predicted as C5</th>
+<th align="right">Predicted as nan</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">Labeled as C1</td>
+<td align="right">39</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C2</td>
+<td align="right">4</td>
+<td align="right">73</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as C5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as nan</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">5</td>
+</tr>
+</tbody>
+</table>
+<h2>Learning curves</h2>
+<p><img style="width:80%" alt="Learning curves" src="learning_curves.png" /></p>
+<h2>Permutation-based Importance</h2>
+<p><img style="width:80%" alt="Permutation-based Importance" src="permutation_importance.png" /></p>
+<h2>SHAP Importance</h2>
+<p><img style="width:80%" alt="SHAP Importance" src="shap_importance.png" /></p>
+<h2>SHAP Dependence plots</h2>
+<h3>Dependence C1 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C1.png" /></p>
+<h3>Dependence C2 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C2.png" /></p>
+<h3>Dependence C3 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C3.png" /></p>
+<h3>Dependence C4 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C4.png" /></p>
+<h3>Dependence C5 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_C5.png" /></p>
+<h3>Dependence nan (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP Dependence from fold 1" src="learner_fold_0_shap_dependence_class_nan.png" /></p>
+<h2>SHAP Decision plots</h2>
+<h3>Worst decisions for selected sample 1 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_0_worst_decisions.png" /></p>
+<h3>Worst decisions for selected sample 2 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_1_worst_decisions.png" /></p>
+<h3>Worst decisions for selected sample 3 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_2_worst_decisions.png" /></p>
+<h3>Worst decisions for selected sample 4 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP worst decisions from Fold 1" src="learner_fold_0_sample_3_worst_decisions.png" /></p>
+<h3>Best decisions for selected sample 1 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_0_best_decisions.png" /></p>
+<h3>Best decisions for selected sample 2 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_1_best_decisions.png" /></p>
+<h3>Best decisions for selected sample 3 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_2_best_decisions.png" /></p>
+<h3>Best decisions for selected sample 4 (Fold 1)</h3>
+<p><img style="width:80%" alt="SHAP best decisions from Fold 1" src="learner_fold_0_sample_3_best_decisions.png" /></p>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>

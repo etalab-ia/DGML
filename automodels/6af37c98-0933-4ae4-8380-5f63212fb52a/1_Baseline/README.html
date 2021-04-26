@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="../style.css">
+
+<h1>Summary of 1_Baseline</h1>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
+<h2>Baseline Classifier (Baseline)</h2>
+<ul>
+<li><strong>n_jobs</strong>: -1</li>
+<li><strong>num_class</strong>: 4</li>
+<li><strong>explain_level</strong>: 0</li>
+</ul>
+<h2>Validation</h2>
+<ul>
+<li><strong>validation_type</strong>: split</li>
+<li><strong>train_ratio</strong>: 0.75</li>
+<li><strong>shuffle</strong>: True</li>
+<li><strong>stratify</strong>: True</li>
+</ul>
+<h2>Optimized metric</h2>
+<p>logloss</p>
+<h2>Training time</h2>
+<p>0.8 seconds</p>
+<h3>Metric details</h3>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">1</th>
+<th align="right">2</th>
+<th align="right">3</th>
+<th align="right">4</th>
+<th align="right">accuracy</th>
+<th align="right">macro avg</th>
+<th align="right">weighted avg</th>
+<th align="right">logloss</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">precision</td>
+<td align="right">0.416757</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.416757</td>
+<td align="right">0.104189</td>
+<td align="right">0.173686</td>
+<td align="right">1.11752</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">recall</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.416757</td>
+<td align="right">0.25</td>
+<td align="right">0.416757</td>
+<td align="right">1.11752</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">f1-score</td>
+<td align="right">0.588325</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.416757</td>
+<td align="right">0.147081</td>
+<td align="right">0.245189</td>
+<td align="right">1.11752</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">support</td>
+<td align="right">10391</td>
+<td align="right">655</td>
+<td align="right">3913</td>
+<td align="right">9974</td>
+<td align="right">0.416757</td>
+<td align="right">24933</td>
+<td align="right">24933</td>
+<td align="right">1.11752</td>
+</tr>
+</tbody>
+</table>
+<h2>Confusion matrix</h2>
+<table class="styled-table">
+<thead>
+<tr style="text-align: right;">
+<th align="left"></th>
+<th align="right">Predicted as 1</th>
+<th align="right">Predicted as 2</th>
+<th align="right">Predicted as 3</th>
+<th align="right">Predicted as 4</th>
+</tr>
+</thead>
+<tbody>
+<tr style="text-align: right;">
+<td align="left">Labeled as 1</td>
+<td align="right">10391</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 2</td>
+<td align="right">655</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 3</td>
+<td align="right">3913</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr style="text-align: right;">
+<td align="left">Labeled as 4</td>
+<td align="right">9974</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<h2>Learning curves</h2>
+<p><img style="width:80%" alt="Learning curves" src="learning_curves.png" /></p>
+<p><a href="../README.html">&lt;&lt; Go back</a></p>
