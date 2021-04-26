@@ -1,16 +1,11 @@
-import re
-import unicodedata
+import logging
 
-import pandas as pd
+logger = logging.getLogger()
 
-from get_dataset import *
 from get_statistic_summary import *
 import numpy as np
 from sklearn.model_selection import train_test_split
 from supervised.automl import AutoML
-import IPython
-import markdown
-import matplotlib.pyplot as plt
 
 
 # Minimal rules to be followed to get mljar working
@@ -21,8 +16,9 @@ import matplotlib.pyplot as plt
 # d. drop columns with 100% of distinct values
 
 
-def prepare_to_mljar(data, target_variable, profiling):
+def prepare_to_mljar(data, profiling, csv_data=None):
     """This function returns a dataset properly prepared to be used by mljar
+    :param csv_data:
     :param:     id: id of the dgf resource (must be a txt, csv or xls file)
     :type:      id: string
     :param:     target_variable: name of the target variable of the chosen ML task
@@ -30,50 +26,67 @@ def prepare_to_mljar(data, target_variable, profiling):
     :param:     task: chosen ML task (regression, binary_classification, multi_classification
     :type:      task: string
     """
-    data = data[data[target_variable].isna() == False]  # handle NaN in target variable
-    if data.isna().sum().sum() / (len(data) * len(data.columns)) < 30:  # check total number of NaN in dataset
-        list_rej = rejected_var(profiling)
-        if len(list_rej) != 0:
-            data = data.drop(columns=list_rej)  # drop unsupported variables
-        data = data.drop(columns=[col for col in data.columns if
-                                  data[col].isna().sum() / len(data) > 0.7])  # drop columns with more than 70% of NaN
-        data = data.loc[:, ~data.columns.duplicated()]  # drop redundant columns if there are any
-        description = profiling.get_description()
-        type_target = str(description['variables'][target_variable]['type'])
-        pandas_cat_col = [key for key, value in description['variables'].items() if
-                          str(value['type']) == 'Categorical']
-        pandas_cat_col = [col for col in pandas_cat_col if col in data.columns]
-        long_text_cols = [(data[col].str.split().str.len().mean(), col) for col in pandas_cat_col if
-                          np.any([isinstance(val, str) for val in data[col]])]
-        url_columns = [col for col in pandas_cat_col if (str(data[col][1]).startswith('https'))]  # drop urls
-        columns_to_drop = [long_text_cols[i][1] for i in range(len(long_text_cols)) if
-                           long_text_cols[i][0] > 15]  # drop columns with long text
-        columns_to_drop = columns_to_drop + url_columns
-        data = data.drop(columns=columns_to_drop)
-        # check if the type of the target variable is right
-        # if task == 'regression':
-        #     if type_target == 'Categorical':
-        #         data[target_variable] = data[target_variable].str.replace(',', '.', regex=True)
-        #         try:
-        #             data[target_variable] = data[target_variable].astype(float)
-        #         except ValueError:
-        #             raise TypeError('Please modify the target variable: values must be numeric.')
-        #     elif type_target == 'Unsupported':
-        #         raise TypeError('Please choose another target variable. This target variable is unsupported.')
-        #     else:
-        #         print('The type of your target variable is ok.')
-        # elif (task == 'binary_classification') or (task == 'multi_classification'):
-        #     if type_target == 'Unsupported':
-        #         raise TypeError('Please choose another target variable. This target variable is unsupported.')
-        #     else:
-        #         print(
-        #             'The type of your target variable is ok. AutoML will tranform it into a categorical variable if needed.')
-        # else:
-        #     raise ValueError(
-        #         'Please enter one of the following words as task: regression, binary_classification, multi_classification')
-    else:
-        raise Exception('This dataset contains too many missing values. No ML task will be performed')
-    return data
+    columns_to_drop = []
+    # 1. Check total number of NaN in dataset
+    if data.isna().sum().sum() / (len(data) * len(data.columns)) >= 30:
+        logger.warning('This dataset contains too many missing values. No ML task will be performed')
+        return
+
+    # 2. Remove pandas profiling rejected variables
+    columns_to_drop.extend(rejected_var(profiling))
+
+    # 3. Remove pandas profinling warning variables
+    columns_to_drop.extend([col for col in data.columns
+                            if is_a_warning_col(col, profiling=profiling)])
+
+    # 4. Remove variables with more than 70% of NaNs
+    columns_to_drop.extend([col for col in data.columns if
+                            data[col].isna().sum() / len(data) > 0.7])
+
+    # 5. Remove redundant variables
+    data = data.loc[:, ~data.columns.duplicated()]
+    description = profiling.get_description()
+    pandas_cat_col = [key for key, value in description['variables'].items() if
+                      str(value['type']) == 'Categorical']
+    pandas_cat_col = [col for col in pandas_cat_col if col in data.columns]
+    text_cols = [(data[col].str.split().str.len().mean(), col) for col in pandas_cat_col if
+                 np.any([isinstance(val, str) for val in data[col]])]
+    # 6. Remove long text columns
+    columns_to_drop.extend([text_cols[i][1] for i in range(len(text_cols)) if
+                            text_cols[i][0] > 15])
+
+    # 7. Remove url columns
+    columns_to_drop.extend([col for col in pandas_cat_col if (str(data[col][1]).startswith('https'))])
+
+    # 8. Remmove csv-detective detected columns
+    if csv_data and "columns" in csv_data:
+        columns_to_drop.extend([col_name for col_name, col_type in csv_data["columns"].items()
+                                if col_type in ["booleen"]])
+
+    # Actually remove columns
+    data = data.drop(columns=set(columns_to_drop))
+    # check if the type of the target variable is right
+    # if task == 'regression':
+    #     if type_target == 'Categorical':
+    #         data[target_variable] = data[target_variable].str.replace(',', '.', regex=True)
+    #         try:
+    #             data[target_variable] = data[target_variable].astype(float)
+    #         except ValueError:
+    #             raise TypeError('Please modify the target variable: values must be numeric.')
+    #     elif type_target == 'Unsupported':
+    #         raise TypeError('Please choose another target variable. This target variable is unsupported.')
+    #     else:
+    #         print('The type of your target variable is ok.')
+    # elif (task == 'binary_classification') or (task == 'multi_classification'):
+    #     if type_target == 'Unsupported':
+    #         raise TypeError('Please choose another target variable. This target variable is unsupported.')
+    #     else:
+    #         print(
+    #             'The type of your target variable is ok. AutoML will tranform it into a categorical variable if needed.')
+    # else:
+    #     raise ValueError(
+    #         'Please enter one of the following words as task: regression, binary_classification, multi_classification')
+    return data, columns_to_drop
 
 
 def generate_mljar(data, target_variable, output_dir):
@@ -86,29 +99,11 @@ def generate_mljar(data, target_variable, output_dir):
     y = data[target_variable].values
     X = data.drop(columns=[target_variable])
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-    results_path = output_dir.joinpath(f"automl_{slugify(target_variable)}")
-    automl = AutoML(results_path=results_path.as_posix(), total_time_limit=5 * 60, mode='Explain')
+
+    automl = AutoML(results_path=output_dir.as_posix(), total_time_limit=5 * 60, mode='Explain')
     automl.fit(X_train, y_train)
-    predictions = automl.predict(X_test)
     automl.report()
     return automl
-
-
-def slugify(value, allow_unicode=False):
-    """
-    Taken from https://github.com/django/django/blob/master/django/utils/text.py
-    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
-    dashes to single dashes. Remove characters that aren't alphanumerics,
-    underscores, or hyphens. Convert to lowercase. Also strip leading and
-    trailing whitespace, dashes, and underscores.
-    """
-    value = str(value)
-    if allow_unicode:
-        value = unicodedata.normalize('NFKC', value)
-    else:
-        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
-    value = re.sub(r'[^\w\s-]', '', value.lower())
-    return re.sub(r'[-\s]+', '-', value).strip('-_')
 
 # def plot_mljar_table(id):
 #     """Returns a plot from the mljar leaderboard with train_time of the x-axis and metric_value on the y axis"""
