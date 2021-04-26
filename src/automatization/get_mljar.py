@@ -61,7 +61,7 @@ def prepare_to_mljar(data, profiling, csv_data=None):
     # 8. Remmove csv-detective detected columns
     if csv_data and "columns" in csv_data:
         columns_to_drop.extend([col_name for col_name, col_type in csv_data["columns"].items()
-                                if col_type in ["booleen"]])
+                                if col_type not in ["booleen"]])
 
     # Actually remove columns
     data = data.drop(columns=set(columns_to_drop))

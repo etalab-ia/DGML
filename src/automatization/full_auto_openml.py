@@ -20,7 +20,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler("debug.log"),
+        logging.FileHandler("debug.log", mode="w"),
         logging.StreamHandler()
     ]
 )
@@ -48,27 +48,33 @@ def get_mljar_info(output_dir, automl_report):
         model_path.unlink()
 
 
-def fill_main_csv(id, catalog, statistics_summary, target_variable='', task=''):
+def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_ml_app/assets/datasets/"),
+                  target_variable='', task=''):
     """This function adds a new row in open_ml_datasets.csv containing info of a chosen dataset."""
-    main_csv_path = Path('../../open_ml_app/assets/datasets/open_data_ml_datasets.csv')
-    main_df = pd.read_csv(main_csv_path)
+    main_csv_path = output_dir.joinpath('open_data_ml_datasets.csv')
     new_row = {}
-    for col in main_df.columns:
-        new_row.update({col: ''})
+
     dict_main_df = {'title': 'dataset.title', 'dgf_dataset_url': 'dataset.url', 'dgf_resource_url': 'url'}
     for key, item in dict_main_df.items():
-        new_row[key] = catalog[catalog['id'] == id][item].values.item()
+        new_row[key] = catalog[catalog['id'] == id_][item].values.item()
     new_row['target_variable'] = target_variable
     new_row['task'] = task
     new_row['nb_lines'] = statistics_summary['Number of lines'][0]
     new_row['nb_features'] = statistics_summary['Number of variables'][0]
-    new_row['profile_url'] = f"https://etalab-ia.github.io/open_ML/profilings/{id}.html"
+    new_row['profile_url'] = f"https://etalab-ia.github.io/open_ML/profilings/{id_}.html"
     if not target_variable and not task:
-        new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id}/README.html"
+        new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/README.html"
     else:
         new_row['automl_url'] = ''
-    new_row['dgf_resource_id'] = id
-    main_df = main_df.append(new_row, ignore_index=True)
+    new_row['dgf_resource_id'] = id_
+    if main_csv_path.exists():
+        main_df = pd.read_csv(main_csv_path)
+        for col in main_df.columns:
+            new_row.update({col: ''})
+        main_df = main_df.append(new_row, ignore_index=True)
+    else:
+        main_df = pd.DataFrame([new_row])
+
     main_df.to_csv(main_csv_path, index=False)
     return main_df
 
@@ -173,7 +179,8 @@ def main():
             if prep_data is not None and len(prep_data.columns) < 3:
                 logger.warning(f"Dataset {id_data}: We have less than 3 columns. "
                                f"We will only generate the pandas profiling")
-                fill_main_csv(id=id_data, catalog=catalog, statistics_summary=statistics_summary)
+                fill_main_csv(id_=id_data, catalog=catalog, output_dir=OUTPUT_DIR,
+                              statistics_summary=statistics_summary)
                 continue
             for target_variable in prep_data.columns:
                 try:
@@ -187,7 +194,8 @@ def main():
                     # plot_mljar_table(id)
                     logger.info(f"Dataset {id_data}: Successfully generated AutoML report.")
                     task = automl._get_ml_task()
-                    fill_main_csv(id=id_data, catalog=catalog, statistics_summary=statistics_summary,
+                    fill_main_csv(id_=id_data, catalog=catalog, statistics_summary=statistics_summary,
+                                  output_dir=OUTPUT_DIR,
                                   target_variable=target_variable, task=task)
                     logger.info(f"Dataset {id_data}: Added info to main datasets csv.")
                 except Exception:
