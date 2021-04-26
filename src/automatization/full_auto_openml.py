@@ -1,6 +1,7 @@
 import glob
 import logging
 import re
+import shutil
 import unicodedata
 from pathlib import Path
 from typing import Union
@@ -157,6 +158,7 @@ def main():
     dataset_paths = get_csv_paths(DATASETS_PATH)
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for ix, dataset_path in enumerate(dataset_paths):
+        current_output_dir = None
         try:
             data, id_data, csv_data = load_dataset_wrapper(dataset_path)
             logger.info(f"Treating Dataset {id_data} ({ix})")
@@ -201,8 +203,12 @@ def main():
                 except Exception:
                     logger.exception(f"Dataset {id_data}: Fatal error while testing var {target_variable}")
                     continue
+
         except Exception:
             logger.exception(f"Dataset {dataset_path}: Fatal error while treating file")
+        finally:
+            if current_output_dir is not None and not len(list(current_output_dir.iterdir())):
+                shutil.rmtree(current_output_dir.as_posix())
 
 
 def slugify(value, allow_unicode=False):
