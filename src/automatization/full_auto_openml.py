@@ -11,6 +11,7 @@ import fs
 import pandas as pd
 from csv_detective.explore_csv import routine
 from fs.glob import GlobMatch
+from supervised.model_framework import ModelFramework
 
 from get_dataset import latest_catalog, info_from_catalog, load_dataset
 from get_mljar import prepare_to_mljar, generate_mljar
@@ -27,7 +28,6 @@ logging.basicConfig(
     ]
 )
 DATASETS_PATH = '../../data/data.gouv/csv_top'
-
 OUTPUT_DIR = Path('../../datasets/resources')
 
 
@@ -74,9 +74,14 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_
         new_row['metric_type'] = ''
         new_row['metric_value'] = ''
     else:
-        new_row['best_model'] = automl._best_model.algorithm_short_name
-        new_row['metric_type'] = automl._get_eval_metric()
-        new_row['metric_value'] = automl._best_model.best_loss
+        if isinstance(automl._best_model, ModelFramework):
+            new_row['best_model'] = automl._best_model.get_name()
+            new_row['metric_type'] = automl._best_model.metric_name
+            new_row['metric_value'] = automl._best_model.get_final_loss()
+        else:
+            new_row['best_model'] = automl._best_model.algorithm_short_name
+            new_row['metric_type'] = automl._get_eval_metric()
+            new_row['metric_value'] = automl._best_model.best_loss
     if main_csv_path.exists():
         main_df = pd.read_csv(main_csv_path)
         main_df = main_df.append(new_row, ignore_index=True)
@@ -227,10 +232,10 @@ def main():
                     task = automl._get_ml_task()
                     score = generate_score(statistics_summary=statistics_summary, columns_to_drop=columns_to_drop,
                                            automl=automl)
-                    logging.info(f"the score is: {score[0]}")
+                    logging.info(f"Dataset {id_data}: The score is: {score[0]}")
                     fill_main_csv(id_=id_data, catalog=catalog, statistics_summary=statistics_summary,
-                                  output_dir=OUTPUT_DIR,
-                                  target_variable=target_variable, task=task, score=score[0], automl=automl)
+                                  output_dir=OUTPUT_DIR, target_variable=target_variable,
+                                  task=task, score=score[0], automl=automl)
                     logging.info(f"Dataset {id_data}: Added info to main datasets csv.")
                 except Exception:
                     logging.exception(f"Dataset {id_data}: Fatal error while testing var {target_variable}")

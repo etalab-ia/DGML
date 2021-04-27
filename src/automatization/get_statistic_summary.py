@@ -2,7 +2,9 @@ import pandas_profiling
 from pandas_profiling import ProfileReport
 from get_dataset import *
 import matplotlib
+
 matplotlib.use('Agg')
+
 
 def generate_pandas_profiling(id, data, output_dir, config_path=None):
     """Returns the Pandas Profiling of this dataset. The name of the output html file is id.html
@@ -10,7 +12,7 @@ def generate_pandas_profiling(id, data, output_dir, config_path=None):
     :param:       id: id of the dataset
     :type:        id: string
     """
-    if (len(data)<10000) and (len(data.columns))<30:
+    if (len(data) < 10000) and (len(data.columns)) < 30:
         profiling = ProfileReport(data)
     else:
         profiling = ProfileReport(data, minimal=True, config_file=config_path)
