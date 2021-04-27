@@ -10,8 +10,10 @@ def generate_pandas_profiling(id, data, output_dir, config_path=None):
     :param:       id: id of the dataset
     :type:        id: string
     """
-
-    profiling = ProfileReport(data, minimal=True, config_file=config_path)
+    if (len(data)<10000) and (len(data.columns))<30:
+        profiling = ProfileReport(data)
+    else:
+        profiling = ProfileReport(data, minimal=True, config_file=config_path)
     profiling.to_file(output_dir.joinpath(f"{id}_pandas_profile.html"))
     return profiling
 

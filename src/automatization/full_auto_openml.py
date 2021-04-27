@@ -49,28 +49,36 @@ def get_mljar_info(output_dir, automl_report):
 
 
 def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_ml_app/assets/datasets/"),
-                  target_variable='', task='', score=''):
+                  target_variable=None, task=None, score='', automl=None):
     """This function adds a new row in open_ml_datasets.csv containing info of a chosen dataset."""
     main_csv_path = output_dir.joinpath('open_data_ml_datasets.csv')
     new_row = {}
-
     dict_main_df = {'title': 'dataset.title', 'dgf_dataset_url': 'dataset.url', 'dgf_resource_url': 'url'}
     for key, item in dict_main_df.items():
         new_row[key] = catalog[catalog['id'] == id_][item].values.item()
-    new_row['target_variable'] = target_variable
-    new_row['task'] = task
     new_row['nb_lines'] = statistics_summary['Number of lines'][0]
     new_row['nb_features'] = statistics_summary['Number of variables'][0]
-    new_row['profile_url'] = f"https://etalab-ia.github.io/open_ML/profilings/{id_}.html"
-    if not target_variable and not task:
-        new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/README.html"
-    else:
+    new_row['profile_url'] = f"https://etalab-ia.github.io/open_ML/profilings/{id_}_pandas_profile.html"
+    if target_variable is None and task is None:
         new_row['automl_url'] = ''
+        new_row['target_variable'] = ''
+        new_row['task'] = ''
+    else:
+        new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/automl_{slugify(target_variable)}/README.html"
+        new_row['target_variable'] = target_variable
+        new_row['task'] = task
     new_row['dgf_resource_id'] = id_
+    # add info about best model:
+    if automl is None:
+        new_row['best_model'] = ''
+        new_row['metric_type'] = ''
+        new_row['metric_value'] = ''
+    else:
+        new_row['best_model'] = automl._best_model.algorithm_short_name
+        new_row['metric_type'] = automl._get_eval_metric()
+        new_row['metric_value'] = automl._best_model.best_loss
     if main_csv_path.exists():
         main_df = pd.read_csv(main_csv_path)
-        # for col in main_df.columns:
-        #     new_row.update({col: ''})
         main_df = main_df.append(new_row, ignore_index=True)
     else:
         main_df = pd.DataFrame([new_row])
@@ -179,7 +187,7 @@ def main():
             if df_hash in seen_dataframes:
                 logging.info(f"Dataset {id_data}: Same hash dataset already treated. Skipping dataset.")
                 continue
-            seen_dataframes.update(df_hash)
+            seen_dataframes.add(df_hash)
             logging.info(f"Treating Dataset {id_data} ({ix})")
             current_output_dir = OUTPUT_DIR.joinpath(id_data)
             create_output_folder(current_output_dir)
@@ -194,12 +202,13 @@ def main():
             statistics_summary = get_statistics_summary(profiling, output_dir=current_output_dir)
             get_dict_data(id_data, profiling, output_dir=current_output_dir)
             logging.info(f"Dataset {id_data}: Successfully generated Pandas Profiling.")
-            prep_data, columns_to_drop = prepare_to_mljar(data=data_df, profiling=profiling, csv_data=csv_detective_data)
+            prep_data, columns_to_drop = prepare_to_mljar(data=data_df, profiling=profiling,
+                                                          csv_data=csv_detective_data)
             logging.info(f"Dataset {id_data}: removed the following columns: {columns_to_drop}")
             logging.info(f"Dataset {id_data}: the following columns are left: {list(prep_data.columns)}")
             if prep_data is not None and len(prep_data.columns) < 3:
                 logging.warning(f"Dataset {id_data}: We have less than 3 columns. "
-                               f"We will only generate the pandas profiling")
+                                f"We will only generate the pandas profiling")
                 fill_main_csv(id_=id_data, catalog=catalog, output_dir=OUTPUT_DIR,
                               statistics_summary=statistics_summary, score='')
                 continue
@@ -221,7 +230,7 @@ def main():
                     logging.info(f"the score is: {score[0]}")
                     fill_main_csv(id_=id_data, catalog=catalog, statistics_summary=statistics_summary,
                                   output_dir=OUTPUT_DIR,
-                                  target_variable=target_variable, task=task, score=score[0])
+                                  target_variable=target_variable, task=task, score=score[0], automl=automl)
                     logging.info(f"Dataset {id_data}: Added info to main datasets csv.")
                 except Exception:
                     logging.exception(f"Dataset {id_data}: Fatal error while testing var {target_variable}")
