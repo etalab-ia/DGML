@@ -5,6 +5,7 @@ import shutil
 import unicodedata
 from pathlib import Path
 from typing import Union
+from pandas.util import hash_pandas_object
 
 import fs
 import pandas as pd
@@ -25,8 +26,6 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-logger = logging.getLogger("root")
-logger.setLevel(logging.INFO)
 DATASETS_PATH = '../../data/data.gouv/csv_top'
 
 OUTPUT_DIR = Path('../../datasets/resources')
@@ -111,7 +110,7 @@ def load_dataset_wrapper(dataset_name: Union[Path, str]):
         try:
             csv_data = routine(dataset_name.as_posix(), num_rows=200)
         except Exception as e:
-            logger.exception(f"Dataset {dataset_name}: csv-detective analysis failed")
+            logging.exception(f"Dataset {dataset_name}: csv-detective analysis failed")
             raise e
 
         encoding = csv_data.get("encoding", "latin-1")
@@ -149,7 +148,7 @@ def get_csv_paths(datasets_path: str):
             my_fs = fs.open_fs(datasets_path)
             csv_paths = (create_files_iterator(path) for path in my_fs.glob("**/*.csv").__iter__())
         except Exception as e:
-            logger.exception(f"Connecting to {datasets_path} did not work")
+            logging.exception(f"Connecting to {datasets_path} did not work")
             raise e
     return csv_paths
 
@@ -169,32 +168,37 @@ def generate_score(statistics_summary, columns_to_drop, automl):
 
 def main():
     global OUTPUT_DIR
-
+    seen_dataframes = set()
     dataset_paths = get_csv_paths(DATASETS_PATH)
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for ix, dataset_path in enumerate(dataset_paths):
         current_output_dir = None
         try:
-            data, id_data, csv_data = load_dataset_wrapper(dataset_path)
-            logger.info(f"Treating Dataset {id_data} ({ix})")
+            data_df, id_data, csv_detective_data = load_dataset_wrapper(dataset_path)
+            df_hash = hash_pandas_object(data_df).sum()
+            if df_hash in seen_dataframes:
+                logging.info(f"Dataset {id_data}: Same hash dataset already treated. Skipping dataset.")
+                continue
+            seen_dataframes.update(df_hash)
+            logging.info(f"Treating Dataset {id_data} ({ix})")
             current_output_dir = OUTPUT_DIR.joinpath(id_data)
             create_output_folder(current_output_dir)
-            logger.debug(f"Dataset {id_data}: Successfully loaded dataset.")
-            if not check_constraints(data):
-                logger.warning(
+            logging.info(f"Dataset {id_data}: Successfully loaded dataset.")
+            if not check_constraints(data_df):
+                logging.warning(
                     f"The Dataset {id_data} did not pass the first-level constraints. It seems not adequate for Machine "
                     f"Learning")
                 continue
-            logger.info(f"Dataset {id_data}: passed the first-level constraints")
-            profiling = generate_pandas_profiling(id_data, data, output_dir=current_output_dir, config_path=None)
+            logging.info(f"Dataset {id_data}: passed the first-level constraints")
+            profiling = generate_pandas_profiling(id_data, data_df, output_dir=current_output_dir, config_path=None)
             statistics_summary = get_statistics_summary(profiling, output_dir=current_output_dir)
             get_dict_data(id_data, profiling, output_dir=current_output_dir)
-            logger.info(f"Dataset {id_data}: Successfully generated Pandas Profiling.")
-            prep_data, columns_to_drop = prepare_to_mljar(data=data, profiling=profiling, csv_data=csv_data)
-            logger.info(f"Dataset {id_data}: removed the following columns: {columns_to_drop}")
-            logger.info(f"Dataset {id_data}: the following columns are left: {list(prep_data.columns)}")
+            logging.info(f"Dataset {id_data}: Successfully generated Pandas Profiling.")
+            prep_data, columns_to_drop = prepare_to_mljar(data=data_df, profiling=profiling, csv_data=csv_detective_data)
+            logging.info(f"Dataset {id_data}: removed the following columns: {columns_to_drop}")
+            logging.info(f"Dataset {id_data}: the following columns are left: {list(prep_data.columns)}")
             if prep_data is not None and len(prep_data.columns) < 3:
-                logger.warning(f"Dataset {id_data}: We have less than 3 columns. "
+                logging.warning(f"Dataset {id_data}: We have less than 3 columns. "
                                f"We will only generate the pandas profiling")
                 fill_main_csv(id_=id_data, catalog=catalog, output_dir=OUTPUT_DIR,
                               statistics_summary=statistics_summary, score='')
@@ -202,7 +206,7 @@ def main():
             for target_variable in prep_data.columns:
                 slugified_target_variable = slugify(target_variable)
                 try:
-                    logger.info(f"Dataset {id_data}: Testing AutoML models with target var {target_variable}")
+                    logging.info(f"Dataset {id_data}: Testing AutoML models with target var {target_variable}")
                     # drop nan lines
                     notna_data = prep_data[prep_data[target_variable].notna()]
                     mljar_output_dir = current_output_dir.joinpath(f"automl_{slugified_target_variable}")
@@ -210,21 +214,21 @@ def main():
                                             output_dir=mljar_output_dir)
                     get_mljar_info(output_dir=mljar_output_dir, automl_report=automl)
                     # plot_mljar_table(id)
-                    logger.info(f"Dataset {id_data}: Successfully generated AutoML report.")
+                    logging.info(f"Dataset {id_data}: Successfully generated AutoML report.")
                     task = automl._get_ml_task()
                     score = generate_score(statistics_summary=statistics_summary, columns_to_drop=columns_to_drop,
                                            automl=automl)
-                    logger.info(f"the score is: {score[0]}")
+                    logging.info(f"the score is: {score[0]}")
                     fill_main_csv(id_=id_data, catalog=catalog, statistics_summary=statistics_summary,
                                   output_dir=OUTPUT_DIR,
                                   target_variable=target_variable, task=task, score=score[0])
-                    logger.info(f"Dataset {id_data}: Added info to main datasets csv.")
+                    logging.info(f"Dataset {id_data}: Added info to main datasets csv.")
                 except Exception:
-                    logger.exception(f"Dataset {id_data}: Fatal error while testing var {target_variable}")
+                    logging.exception(f"Dataset {id_data}: Fatal error while testing var {target_variable}")
                     continue
 
         except Exception:
-            logger.exception(f"Dataset {dataset_path}: Fatal error while treating file")
+            logging.exception(f"Dataset {dataset_path}: Fatal error while treating file")
         finally:
             if current_output_dir is not None and not len(list(current_output_dir.iterdir())):
                 shutil.rmtree(current_output_dir.as_posix())
