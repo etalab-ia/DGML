@@ -53,7 +53,8 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_
     """This function adds a new row in open_ml_datasets.csv containing info of a chosen dataset."""
     main_csv_path = output_dir.joinpath('open_data_ml_datasets.csv')
     new_row = {}
-    dict_main_df = {'title': 'dataset.title', 'dgf_dataset_url': 'dataset.url', 'dgf_resource_url': 'url'}
+    dict_main_df = {'title': 'dataset.title', 'dgf_dataset_url': 'dataset.url',
+                    'dgf_dataset_id': 'dataset.id', 'dgf_resource_url': 'url'}
     for key, item in dict_main_df.items():
         new_row[key] = catalog[catalog['id'] == id_][item].values.item()
     new_row['nb_lines'] = statistics_summary['Number of lines'][0]
@@ -71,17 +72,17 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_
     # add info about best model:
     if automl is None:
         new_row['best_model'] = ''
-        new_row['metric_type'] = ''
-        new_row['metric_value'] = ''
+        new_row['model_metric'] = ''
+        new_row['best_value'] = ''
     else:
         if isinstance(automl._best_model, ModelFramework):
             new_row['best_model'] = automl._best_model.get_name()
-            new_row['metric_type'] = automl._best_model.metric_name
-            new_row['metric_value'] = automl._best_model.get_final_loss()
+            new_row['model_metric'] = automl._best_model.metric_name
+            new_row['best_value'] = automl._best_model.get_final_loss()
         else:
             new_row['best_model'] = automl._best_model.algorithm_short_name
-            new_row['metric_type'] = automl._get_eval_metric()
-            new_row['metric_value'] = automl._best_model.best_loss
+            new_row['model_metric'] = automl._get_eval_metric()
+            new_row['best_value'] = automl._best_model.best_loss
     if main_csv_path.exists():
         main_df = pd.read_csv(main_csv_path)
         main_df = main_df.append(new_row, ignore_index=True)
@@ -174,7 +175,7 @@ def generate_score(statistics_summary, columns_to_drop, automl):
     * the logloss (for classification) or rmse (for regression) value for the best model (30%), extracted leaderboard.csv """
     prop_missing = statistics_summary['Percentage of missing cells'] / 100
     prop_not_retained = len(columns_to_drop) / statistics_summary['Number of variables']
-    best_metric = automl.get_leaderboard()['metric_value'].min()
+    best_metric = automl.get_leaderboard()['best_value'].min()
     score = 1 / (0.3 * (prop_missing) + 0.4 * (prop_not_retained) + 0.3 * (best_metric))
     return score
 
