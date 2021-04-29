@@ -210,7 +210,6 @@ def generate_dataset_block(tasks, features, lines, topics, sort_by, sort_order, 
                             generate_kpi_card("Topic", f"{dataset_dict['topic']}"),
                             generate_kpi_card("Columns", dataset_dict['nb_features']),
                             generate_kpi_card("Lines", dataset_dict['nb_lines']),
-                            # generate_kpi_card("Missing Cells", f"{dataset_dict['missing_cells_pct']:.2f} %")
                         ]),
                     ]
                 ),
