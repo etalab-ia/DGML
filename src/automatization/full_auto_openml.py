@@ -1,12 +1,13 @@
 import glob
 import logging
+import os
 import re
 import shutil
 import unicodedata
 from pathlib import Path
 from typing import Union, Optional
 from pandas.util import hash_pandas_object
-
+from dotenv import load_dotenv
 import fs
 import pandas as pd
 from csv_detective.explore_csv import routine
@@ -16,7 +17,7 @@ from supervised.model_framework import ModelFramework
 from get_dataset import latest_catalog, info_from_catalog, load_dataset
 from get_mljar import prepare_to_mljar, generate_mljar
 from get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_dict_data
-
+load_dotenv("./.env")
 logging.root.handlers = []
 # noinspection PyArgumentList
 logging.basicConfig(
@@ -27,8 +28,10 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-DATASETS_PATH = '../../data/data.gouv/csv_top'
+DATASETS_PATH = os.getenv("DATASETS_PATH", '../../data/data.gouv/csv_top')
+
 OUTPUT_DIR = Path('../../datasets/resources')
+
 
 SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
 
