@@ -28,6 +28,8 @@ logging.basicConfig(
     ]
 )
 DATASETS_PATH = '../../data/data.gouv/csv_top'
+# DATASETS_PATH = "sftp://pavel@datascience-01.infra.data.gouv.fr:/data/datagouv/csv"
+
 OUTPUT_DIR = Path('../../datasets/resources')
 
 SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
@@ -35,11 +37,12 @@ SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
 
 def get_specific_ids(specific_ids_path: Optional[Path] = None):
     if not SPECIFIC_IDS_PATH or not specific_ids_path.exists():
-        return
+        return set()
     with open(specific_ids_path) as filo:
-        specific_ids = [l.strip() for l in filo.readlines()]
+        specific_ids = set([l.strip() for l in filo.readlines()])
     logging.info(f"We found specific ids. They are: {specific_ids}")
     return specific_ids
+
 
 def create_output_folder(output_dir):
     if not output_dir.exists():
@@ -75,7 +78,8 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_
         new_row['target_variable'] = ''
         new_row['task'] = ''
     else:
-        new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/automl_{slugify(target_variable)}/README.html"
+        new_row[
+            'automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/automl_{slugify(target_variable)}/README.html"
         new_row['target_variable'] = target_variable
         new_row['task'] = task
     new_row['dgf_resource_id'] = id_
@@ -199,11 +203,19 @@ def main():
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for ix, dataset_path in enumerate(dataset_paths):
         current_output_dir = None
-        if specific_ids and dataset_path.stem not in specific_ids:
-            logging.warning(f"We are only analysing specific ids. Id {dataset_path.stem} is not a specified id. Trying "
-                            f"next...")
+        if specific_ids is not None and len(specific_ids) > 0:
+            if dataset_path.stem not in specific_ids:
+                logging.warning(
+                    f"Dataset {dataset_path.stem}: We are only analysing specific ids. Id {dataset_path.stem} is not a specified id. Trying "
+                    f"next...")
+
             continue
         try:
+
+            if not specific_ids:
+                logging.warning(
+                    f"Dataset {dataset_path.stem}: We found all the specific ids.")
+                break
             data_df, id_data, csv_detective_data = load_dataset_wrapper(dataset_path)
             df_hash = hash_pandas_object(data_df).sum()
             if df_hash in seen_dataframes:
@@ -263,6 +275,8 @@ def main():
         finally:
             if current_output_dir is not None and not len(list(current_output_dir.iterdir())):
                 shutil.rmtree(current_output_dir.as_posix())
+            if specific_ids:
+                specific_ids.remove(dataset_path.stem)
 
 
 def slugify(value, allow_unicode=False):
