@@ -37,6 +37,7 @@ def get_specific_ids(specific_ids_path: Optional[Path] = None):
         return
     with open(specific_ids_path) as filo:
         specific_ids = [l.strip() for l in filo.readlines()]
+    logging.info(f"We found specific ids. They are: {specific_ids}")
     return specific_ids
 
 def create_output_folder(output_dir):
