@@ -4,7 +4,7 @@ import re
 import shutil
 import unicodedata
 from pathlib import Path
-from typing import Union
+from typing import Union, Optional
 from pandas.util import hash_pandas_object
 
 import fs
@@ -29,7 +29,15 @@ logging.basicConfig(
 )
 DATASETS_PATH = '../../data/data.gouv/csv_top'
 OUTPUT_DIR = Path('../../datasets/resources')
+SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
 
+
+def get_specific_ids(specific_ids_path: Optional[Path] = None):
+    if not SPECIFIC_IDS_PATH or not specific_ids_path.exists():
+        return
+    with open(specific_ids_path) as filo:
+        specific_ids = [l.strip() for l in filo.readlines()]
+    return specific_ids
 
 def create_output_folder(output_dir):
     if not output_dir.exists():
@@ -184,9 +192,15 @@ def main():
     global OUTPUT_DIR
     seen_dataframes = set()
     dataset_paths = get_csv_paths(DATASETS_PATH)
+    specific_ids = get_specific_ids(SPECIFIC_IDS_PATH)
+
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for ix, dataset_path in enumerate(dataset_paths):
         current_output_dir = None
+        if specific_ids and dataset_path.stem not in specific_ids:
+            logging.warning(f"We are only analysing specific ids. Id {dataset_path.stem} is not a specified id. Trying "
+                            f"next...")
+            continue
         try:
             data_df, id_data, csv_detective_data = load_dataset_wrapper(dataset_path)
             df_hash = hash_pandas_object(data_df).sum()
