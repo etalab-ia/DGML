@@ -1,0 +1,554 @@
+{
+    "uid": "58a71532-f9a0-456c-9b6d-f205f13fbe59",
+    "name": "4_Default_Xgboost_categorical_mix",
+    "preprocessing": [
+        {
+            "missing_values": [
+                {
+                    "fill_method": "na_fill_median",
+                    "fill_params": {
+                        "type_lit": "Vrai lit",
+                        "conditions_annulation": "Flexibles"
+                    },
+                    "datetime_columns": []
+                }
+            ],
+            "categorical": [
+                {
+                    "convert_method": "categorical_to_onehot",
+                    "convert_params": {
+                        "Type_logement": {
+                            "new_columns": [
+                                "Type_logement_Chambre partag\u00e9e",
+                                "Type_logement_Chambre priv\u00e9e",
+                                "Type_logement_Logement entier"
+                            ],
+                            "unique_values": [
+                                "Chambre partag\u00e9e",
+                                "Chambre priv\u00e9e",
+                                "Logement entier"
+                            ],
+                            "old_column": "Type_logement"
+                        },
+                        "type_propriete": {
+                            "new_columns": [
+                                "type_propriete_Appartement",
+                                "type_propriete_Appartement en r\u00e9sidence",
+                                "type_propriete_Autre",
+                                "type_propriete_Bed & Breakfast",
+                                "type_propriete_Bungalow",
+                                "type_propriete_Cabane",
+                                "type_propriete_Dortoir",
+                                "type_propriete_Inconnue",
+                                "type_propriete_Loft",
+                                "type_propriete_Maison",
+                                "type_propriete_Maison de ville",
+                                "type_propriete_Maison \u00e9cologique",
+                                "type_propriete_Villa"
+                            ],
+                            "unique_values": [
+                                "Appartement",
+                                "Appartement en r\u00e9sidence",
+                                "Autre",
+                                "Bed & Breakfast",
+                                "Bungalow",
+                                "Cabane",
+                                "Dortoir",
+                                "Inconnue",
+                                "Loft",
+                                "Maison",
+                                "Maison de ville",
+                                "Maison \u00e9cologique",
+                                "Villa"
+                            ],
+                            "old_column": "type_propriete"
+                        },
+                        "type_lit": {
+                            "new_columns": [
+                                "type_lit_Canap\u00e9",
+                                "type_lit_Canap\u00e9 convertible",
+                                "type_lit_Vrai lit"
+                            ],
+                            "unique_values": [
+                                "Canap\u00e9",
+                                "Canap\u00e9 convertible",
+                                "Vrai lit"
+                            ],
+                            "old_column": "type_lit"
+                        },
+                        "conditions_annulation": {
+                            "new_columns": [
+                                "conditions_annulation_Flexibles",
+                                "conditions_annulation_Mod\u00e9r\u00e9es",
+                                "conditions_annulation_Strictes"
+                            ],
+                            "unique_values": [
+                                "Flexibles",
+                                "Mod\u00e9r\u00e9es",
+                                "Strictes"
+                            ],
+                            "old_column": "conditions_annulation"
+                        }
+                    },
+                    "columns": [
+                        "Type_logement",
+                        "type_propriete",
+                        "type_lit",
+                        "conditions_annulation"
+                    ]
+                }
+            ],
+            "text_transforms": [
+                {
+                    "new_columns": [
+                        "Titre_2016",
+                        "Titre_agr\u00e9able",
+                        "Titre_ancien",
+                        "Titre_appart",
+                        "Titre_appartement",
+                        "Titre_appt",
+                        "Titre_apt",
+                        "Titre_au",
+                        "Titre_aux",
+                        "Titre_avec",
+                        "Titre_balcon",
+                        "Titre_bdx",
+                        "Titre_beau",
+                        "Titre_bel",
+                        "Titre_belle",
+                        "Titre_bis",
+                        "Titre_bordeaux",
+                        "Titre_bordelais",
+                        "Titre_bordelaise",
+                        "Titre_calme",
+                        "Titre_center",
+                        "Titre_centre",
+                        "Titre_chambre",
+                        "Titre_chambres",
+                        "Titre_charmant",
+                        "Titre_charme",
+                        "Titre_chartrons",
+                        "Titre_coeur",
+                        "Titre_confort",
+                        "Titre_confortable",
+                        "Titre_cosy",
+                        "Titre_c\u0153ur",
+                        "Titre_dans",
+                        "Titre_des",
+                        "Titre_double",
+                        "Titre_du",
+                        "Titre_duplex",
+                        "Titre_echoppe",
+                        "Titre_en",
+                        "Titre_et",
+                        "Titre_euro",
+                        "Titre_flat",
+                        "Titre_gambetta",
+                        "Titre_gare",
+                        "Titre_grand",
+                        "Titre_grande",
+                        "Titre_historique",
+                        "Titre_hyper",
+                        "Titre_hypercentre",
+                        "Titre_jardin",
+                        "Titre_jean",
+                        "Titre_joli",
+                        "Titre_jolie",
+                        "Titre_la",
+                        "Titre_le",
+                        "Titre_les",
+                        "Titre_loft",
+                        "Titre_lumineux",
+                        "Titre_m2",
+                        "Titre_maison",
+                        "Titre_michel",
+                        "Titre_neuf",
+                        "Titre_parking",
+                        "Titre_personnes",
+                        "Titre_petit",
+                        "Titre_pierre",
+                        "Titre_piscine",
+                        "Titre_pi\u00e8ces",
+                        "Titre_place",
+                        "Titre_plein",
+                        "Titre_pour",
+                        "Titre_priv\u00e9e",
+                        "Titre_proche",
+                        "Titre_public",
+                        "Titre_quais",
+                        "Titre_quartier",
+                        "Titre_rue",
+                        "Titre_r\u00e9nov\u00e9",
+                        "Titre_saint",
+                        "Titre_salle",
+                        "Titre_sdb",
+                        "Titre_spacieux",
+                        "Titre_st",
+                        "Titre_studio",
+                        "Titre_superbe",
+                        "Titre_sur",
+                        "Titre_t1",
+                        "Titre_t2",
+                        "Titre_t3",
+                        "Titre_t4",
+                        "Titre_terrasse",
+                        "Titre_tout",
+                        "Titre_tram",
+                        "Titre_triangle",
+                        "Titre_tr\u00e8s",
+                        "Titre_une",
+                        "Titre_victoire",
+                        "Titre_ville",
+                        "Titre_vue",
+                        "Titre_\u00e9choppe"
+                    ],
+                    "old_column": "Titre",
+                    "vocabulary": {
+                        "au": 7,
+                        "coeur": 27,
+                        "du": 35,
+                        "triangle": 93,
+                        "bordeaux": 16,
+                        "appartement": 4,
+                        "des": 33,
+                        "chambre": 22,
+                        "dans": 32,
+                        "maison": 59,
+                        "double": 34,
+                        "hyper": 47,
+                        "centre": 21,
+                        "avec": 9,
+                        "charme": 25,
+                        "terrasse": 90,
+                        "historique": 46,
+                        "joli": 51,
+                        "studio": 83,
+                        "calme": 19,
+                        "grand": 44,
+                        "t2": 87,
+                        "proche": 72,
+                        "la": 53,
+                        "victoire": 96,
+                        "duplex": 36,
+                        "belle": 14,
+                        "quartier": 75,
+                        "echoppe": 37,
+                        "jardin": 49,
+                        "petit": 64,
+                        "charmant": 24,
+                        "\u00e9choppe": 99,
+                        "t3": 88,
+                        "r\u00e9nov\u00e9": 77,
+                        "ville": 97,
+                        "chartrons": 26,
+                        "beau": 12,
+                        "cosy": 30,
+                        "piscine": 66,
+                        "grande": 45,
+                        "une": 95,
+                        "balcon": 10,
+                        "m2": 58,
+                        "en": 38,
+                        "plein": 69,
+                        "appt": 5,
+                        "euro": 40,
+                        "saint": 78,
+                        "c\u0153ur": 31,
+                        "loft": 56,
+                        "jolie": 52,
+                        "st": 82,
+                        "bordelais": 17,
+                        "le": 54,
+                        "lumineux": 57,
+                        "vue": 98,
+                        "sur": 85,
+                        "tram": 92,
+                        "aux": 8,
+                        "gare": 43,
+                        "sdb": 80,
+                        "t1": 86,
+                        "bis": 15,
+                        "pierre": 65,
+                        "jean": 50,
+                        "t4": 89,
+                        "spacieux": 81,
+                        "hypercentre": 48,
+                        "center": 20,
+                        "bel": 13,
+                        "appart": 3,
+                        "salle": 79,
+                        "et": 39,
+                        "parking": 62,
+                        "flat": 41,
+                        "agr\u00e9able": 1,
+                        "pi\u00e8ces": 67,
+                        "chambres": 23,
+                        "les": 55,
+                        "quais": 74,
+                        "place": 68,
+                        "gambetta": 42,
+                        "confortable": 29,
+                        "priv\u00e9e": 71,
+                        "bordelaise": 18,
+                        "tr\u00e8s": 94,
+                        "tout": 91,
+                        "confort": 28,
+                        "pour": 70,
+                        "public": 73,
+                        "rue": 76,
+                        "bdx": 11,
+                        "superbe": 84,
+                        "michel": 60,
+                        "ancien": 2,
+                        "personnes": 63,
+                        "2016": 0,
+                        "apt": 6,
+                        "neuf": 61
+                    },
+                    "fixed_vocabulary": false,
+                    "idf": [
+                        5.769327772154375,
+                        5.35061743729619,
+                        5.852709381093426,
+                        4.200711854240529,
+                        2.4471735978326725,
+                        5.274631530318268,
+                        5.81014976667463,
+                        3.3897816380242007,
+                        4.980870411790105,
+                        3.3183226740420557,
+                        5.3246419508929295,
+                        5.769327772154375,
+                        4.783510977631609,
+                        4.35347460879294,
+                        4.877329732849264,
+                        5.81014976667463,
+                        2.3060949995727666,
+                        5.6559990868473715,
+                        5.227003481329013,
+                        4.090363797071664,
+                        5.5542163925374295,
+                        2.3601622208430424,
+                        2.926746678094559,
+                        5.299324142908639,
+                        4.018390297446575,
+                        4.373083080181316,
+                        3.767847771944251,
+                        3.715204038458829,
+                        5.692366731018247,
+                        5.769327772154375,
+                        4.075548711286523,
+                        4.739708354973217,
+                        3.636345463546509,
+                        4.813816327126938,
+                        5.6559990868473715,
+                        4.053729663891884,
+                        4.35347460879294,
+                        5.404684658566466,
+                        3.746456581962933,
+                        3.9319577916742676,
+                        5.6559990868473715,
+                        5.6559990868473715,
+                        5.81014976667463,
+                        4.980870411790105,
+                        4.373083080181316,
+                        5.274631530318268,
+                        4.522295478367992,
+                        4.167922031417539,
+                        4.522295478367992,
+                        3.8291482978080467,
+                        5.6559990868473715,
+                        4.71153747800652,
+                        5.432855535533162,
+                        4.670715483486266,
+                        4.754097092425316,
+                        5.204013963104314,
+                        4.754097092425316,
+                        4.444908814752571,
+                        4.927760586476156,
+                        3.5588579680681347,
+                        4.999219550458301,
+                        5.852709381093426,
+                        4.413492618519193,
+                        5.692366731018247,
+                        5.35061743729619,
+                        5.159562200533481,
+                        5.6559990868473715,
+                        5.35061743729619,
+                        5.017911683470453,
+                        3.9067992320381126,
+                        5.377285684378351,
+                        4.8938590348004745,
+                        4.105401674436205,
+                        5.096383298911949,
+                        5.491696035556095,
+                        4.606176962348695,
+                        5.852709381093426,
+                        5.692366731018247,
+                        4.980870411790105,
+                        5.81014976667463,
+                        5.89716114366426,
+                        5.522467694222849,
+                        4.697744155874185,
+                        3.4548141082950554,
+                        5.274631530318268,
+                        4.618755744555554,
+                        5.138055995312517,
+                        3.0883062434400843,
+                        3.95776567563014,
+                        5.769327772154375,
+                        4.176019241650158,
+                        5.58700621536042,
+                        5.852709381093426,
+                        5.58700621536042,
+                        5.138055995312517,
+                        5.6559990868473715,
+                        5.05637796429825,
+                        3.443026152543013,
+                        4.861069211977484,
+                        5.181541107252256
+                    ]
+                }
+            ],
+            "scale_y": {
+                "scale": [
+                    0.5870281266370149
+                ],
+                "mean": [
+                    4.141758663095779
+                ],
+                "var": [
+                    0.3446020214629632
+                ],
+                "n_samples_seen": 2945,
+                "n_features_in": 1,
+                "columns": [
+                    "target"
+                ],
+                "scale_method": "scale_log_and_normal",
+                "X_min_values": [
+                    0.0
+                ]
+            },
+            "ml_task": "regression",
+            "params": {
+                "columns_preprocessing": {
+                    "Titre": [
+                        "text_transform"
+                    ],
+                    "Type_logement": [
+                        "categorical_to_onehot"
+                    ],
+                    "type_propriete": [
+                        "categorical_to_onehot"
+                    ],
+                    "type_lit": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ],
+                    "conditions_annulation": [
+                        "na_fill_median",
+                        "categorical_to_onehot"
+                    ]
+                },
+                "target_preprocessing": [
+                    "na_exclude",
+                    "scale_log_and_normal"
+                ],
+                "ml_task": "regression"
+            }
+        }
+    ],
+    "learners": [
+        {
+            "library_version": "1.2.0",
+            "algorithm_name": "Extreme Gradient Boosting",
+            "algorithm_short_name": "Xgboost",
+            "uid": "888fac76-29f2-4e99-aba0-090cef75a10c",
+            "params": {
+                "model_type": "Xgboost",
+                "ml_task": "regression",
+                "objective": "reg:squarederror",
+                "eval_metric": "rmse",
+                "eta": 0.075,
+                "max_depth": 6,
+                "min_child_weight": 1,
+                "subsample": 1.0,
+                "colsample_bytree": 1.0,
+                "seed": 4,
+                "explain_level": 2
+            },
+            "best_ntree_limit": 86
+        }
+    ],
+    "params": {
+        "additional": {
+            "max_rounds": 10000,
+            "early_stopping_rounds": 50,
+            "max_rows_limit": null,
+            "max_cols_limit": null
+        },
+        "preprocessing": {
+            "columns_preprocessing": {
+                "Titre": [
+                    "text_transform"
+                ],
+                "Type_logement": [
+                    "categorical_to_onehot"
+                ],
+                "type_propriete": [
+                    "categorical_to_onehot"
+                ],
+                "type_lit": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ],
+                "conditions_annulation": [
+                    "na_fill_median",
+                    "categorical_to_onehot"
+                ]
+            },
+            "target_preprocessing": [
+                "na_exclude",
+                "scale_log_and_normal"
+            ],
+            "ml_task": "regression"
+        },
+        "validation_strategy": {
+            "validation_type": "split",
+            "train_ratio": 0.75,
+            "shuffle": true,
+            "X_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/X.parquet",
+            "y_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/y.parquet",
+            "results_path": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl"
+        },
+        "learner": {
+            "model_type": "Xgboost",
+            "ml_task": "regression",
+            "objective": "reg:squarederror",
+            "eval_metric": "rmse",
+            "eta": 0.075,
+            "max_depth": 6,
+            "min_child_weight": 1,
+            "subsample": 1.0,
+            "colsample_bytree": 1.0,
+            "seed": 4,
+            "explain_level": 2
+        },
+        "ml_task": "regression",
+        "explain_level": 2,
+        "name": "4_Default_Xgboost_categorical_mix",
+        "status": "initialized",
+        "final_loss": null,
+        "train_time": null,
+        "max_time_for_learner": 60
+    },
+    "saved": [
+        "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/4_Default_Xgboost_categorical_mix/learner_fold_0.xgboost"
+    ],
+    "predictions_fname": "datasets/resources/123e1c18-37e0-4147-ad65-768320387800/automl/4_Default_Xgboost_categorical_mix/predictions_validation.csv",
+    "metric_name": "rmse",
+    "final_loss": 43.219933681145456,
+    "train_time": 7.943051099777222,
+    "is_stacked": false
+}

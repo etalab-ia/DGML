@@ -1,0 +1,17 @@
+feature,mean_importance
+dept,-1.656816127817429e-05
+year,0.0
+weekday,0.0
+count_controls_filtre,0.0
+count_controls_wday,0.0
+score_controls_wday,0.0
+count_controls_activite,0.0004341873276707542
+latitude,0.000503752064707097
+month,0.0005909400031477441
+filtre,0.0019125730763634996
+longitude,0.002204315370326837
+count_controls_dept,0.005036154868375298
+has_agrement,0.010249397617211286
+score_controls_activite,0.01104689495127662
+score_controls_filtre,0.04461516992229506
+score_controls_dept,0.07378841610224393
