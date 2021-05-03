@@ -110,7 +110,7 @@ def generate_control_card():
             dcc.Checklist(
                 id="valid-select",
                 options=[{'label': l, "value": l} for l in ["Curated", "Automatic"]],
-                value=["Curated"],
+                value=["Curated", "Automatic"],
             ),
             html.Br(),
             html.P("Topic"),
@@ -126,7 +126,7 @@ def generate_control_card():
             dcc.Dropdown(
                 id="sort-by",
                 options=[{"label": i, "value": i} for i in DATASET_COLUMNS],
-                value="Task",
+                value="Validated",
                 clearable=False
             ),
             html.Br(),
@@ -192,12 +192,13 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
     chosen_features_df = chosen_tasks_df[chosen_tasks_df.nb_features_cat.isin(features)]
     chosen_lines_df = chosen_features_df[chosen_features_df.nb_lines_cat.isin(lines)]
     chosen_topics_df = chosen_lines_df[chosen_lines_df.topic.isin(topics)]
-    chosen_sort_by_df = chosen_topics_df.sort_values(by=DATASET_COLUMNS[sort_by],
-                                                     ascending=True if sort_order == 'Ascending' else False)
-    chosen_validation = chosen_sort_by_df[chosen_sort_by_df["is_validated"].isin([curated_dict[v] for v in valid])]
+    chosen_validation = chosen_topics_df[chosen_topics_df["is_validated"].isin([curated_dict[v] for v in valid])]
+    chosen_sort_by_df = chosen_validation.sort_values(by=DATASET_COLUMNS[sort_by],
+                                                      ascending=True if sort_order == 'Ascending' and sort_by != "Validated"
+                                                                        else False)
     cards_list = []
 
-    for index, dataset_row in chosen_validation.iterrows():
+    for index, dataset_row in chosen_sort_by_df.iterrows():
         dataset_dict = get_dataset_info(dataset_row)
 
         main_dataset_card = html.Div(dbc.Card(
