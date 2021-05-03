@@ -36,7 +36,7 @@ BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
 # Read data
-encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("validated.png"), 'rb').read()).decode()
+encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
 
 task_list = df["task"].unique()
