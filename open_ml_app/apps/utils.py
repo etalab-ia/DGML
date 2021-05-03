@@ -22,9 +22,11 @@ NB_LINES_CATEGORIES = {
     ">=5000<10000": (5000, 10000),
     ">=10000": (10000, 1e100)
 }
-DATASET_COLUMNS = {"Task": 'task', "Topic": 'topic', "Columns": 'nb_features', "Lines": 'nb_lines'}
+DATASET_COLUMNS = {"Task": 'task', "Topic": 'topic', "Columns": 'nb_features', "Lines": 'nb_lines',
+                   "Validated": "is_validated"}
 
-DATASET_NAME = {'Name':'title'}
+DATASET_NAME = {'Name': 'title'}
+
 
 def get_category(categories_dict: Dict[str, Tuple[int, int]], value: int):
     for cat, (min_val, max_val) in categories_dict.items():
@@ -124,5 +126,5 @@ def generate_badge(title: str, url: str, background_color: str, font_color: str 
     else:
         badge = dbc.Badge(title, href=url,
                           target="_blank", style={"backgroundColor": background_color, "color": font_color},
-                          pill=True, className="ml-2")
+                          pill=True, className="ml-2", external_link=True)
     return badge

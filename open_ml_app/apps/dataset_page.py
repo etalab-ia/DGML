@@ -69,13 +69,13 @@ def generate_mljar_table(dataset_id: str, target_variable: str, base_url: str):
         table_df["name"] = algorithm_urls
         html_table = html.Div(dbc.Table.from_dataframe(table_df, striped=True, size="sm", borderless=True),
                               style={"height": "300px", "overflow": 'auto'})
-    return html_table
+    return html_table, display_table_path.parent.joinpath("README.html")
 
 
 def generate_stats_df(dataset_id: str, table_type: str = "statistics_summary.csv"):
     display_stats_path = DATA_PATH.joinpath(f"resources/{dataset_id}/{table_type}")
     if not display_stats_path.exists():
-        html_table = html.H5("Descriptive summary not available.")
+        statistics_df = html.H5("Descriptive summary not available.")
     else:
         statistics_df = pd.read_csv(display_stats_path)
     return statistics_df
@@ -89,10 +89,10 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
     dataset_dict = get_dataset_info(dataset_row)
     target_variable = dataset_row["target_variable"]
     dictionary_table = generate_table(dataset_dict["dgf_resource_id"], table_type="dict_data.csv")
-    mljar_table = generate_mljar_table(dataset_dict["dgf_resource_id"],
+    mljar_table, mljar_profile_url = generate_mljar_table(dataset_dict["dgf_resource_id"],
                                        target_variable=target_variable, base_url=app.config["url_base_pathname"])
     statistics_df = generate_stats_df(dataset_dict["dgf_resource_id"], table_type="statistics_summary.csv")
-
+    pandas_profile_url = DATA_PATH.joinpath(f"resources/{dataset_id}/{dataset_id}_pandas_profile.html")
     container = dbc.Container([
         # html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
         html.H5(generate_badge("Go back", url="/openml/", background_color="#cadae6")),
@@ -123,12 +123,12 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
             ]
         ),
         html.H4(
-            generate_badge("Full Pandas Profile", url=dataset_dict['profile_url'], background_color="#6d92ad")),
+            generate_badge("Full Pandas Profile", url=pandas_profile_url.as_posix(), background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("AutoML Summary"),
         html.P(children=[f"Models trained with this dataset using the following target variable : ", html.B(dataset_dict['target_variable'])]),
         mljar_table,
-        html.H4(generate_badge("Full Mljar Profile", url=dataset_dict['automl_url'], background_color="#6d92ad")),
+        html.H4(generate_badge("Full Mljar Profile", url=mljar_profile_url.as_posix(), background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Machine Learning Reuses (data.gouv.fr)"),
         generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
