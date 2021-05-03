@@ -1,3 +1,5 @@
+import base64
+
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -7,9 +9,7 @@ import pandas as pd
 import pathlib
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
-import os
 
-print(os.getcwd())
 from apps.dataset_page import generate_dataset_page
 from apps.utils import generate_kpi_card, DATASET_COLUMNS
 
@@ -36,6 +36,7 @@ BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
 # Read data
+encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("validated.png"), 'rb').read()).decode()
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
 
 task_list = df["task"].unique()
@@ -84,28 +85,35 @@ def generate_control_card():
     return html.Div(
         id="control-card",
         children=[
-            html.P("Select Task"),
+            html.P("Task"),
             dcc.Checklist(
                 id="task-select",
                 options=[{"label": i, "value": i} for i in task_list],
                 value=task_list,
             ),
             html.Br(),
-            html.P("Select Number of Columns"),
+            html.P("Number of Columns"),
             dcc.Checklist(
                 id="features-select",
                 options=[{"label": i, "value": i} for i in nb_features_bins],
                 value=nb_features_bins,
             ),
             html.Br(),
-            html.P("Select Number of Lines"),
+            html.P("Number of Lines"),
             dcc.Checklist(
                 id="lines-select",
                 options=[{"label": i, "value": i} for i in nb_lines_bins],
                 value=nb_lines_bins,
             ),
             html.Br(),
-            html.P("Select Topic"),
+            html.P("Validation Status"),
+            dcc.Checklist(
+                id="valid-select",
+                options=[{'label': l, "value": l} for l in ["Curated", "Automatic"]],
+                value=["Curated"],
+            ),
+            html.Br(),
+            html.P("Topic"),
             dcc.Dropdown(
                 id="topic-select",
                 options=[{"label": i, "value": i} for i in topic_list],
@@ -178,16 +186,18 @@ app.layout = url_bar_and_content_div
 # ])
 
 
-def generate_dataset_block(tasks, features, lines, topics, sort_by, sort_order, reset_click):
+def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_order, reset_click):
+    curated_dict = {"Curated": True, "Automatic": False}
     chosen_tasks_df = df[df.task.isin(tasks)]
     chosen_features_df = chosen_tasks_df[chosen_tasks_df.nb_features_cat.isin(features)]
     chosen_lines_df = chosen_features_df[chosen_features_df.nb_lines_cat.isin(lines)]
     chosen_topics_df = chosen_lines_df[chosen_lines_df.topic.isin(topics)]
     chosen_sort_by_df = chosen_topics_df.sort_values(by=DATASET_COLUMNS[sort_by],
                                                      ascending=True if sort_order == 'Ascending' else False)
+    chosen_validation = chosen_sort_by_df[chosen_sort_by_df["is_validated"].isin([curated_dict[v] for v in valid])]
     cards_list = []
 
-    for index, dataset_row in chosen_sort_by_df.iterrows():
+    for index, dataset_row in chosen_validation.iterrows():
         dataset_dict = get_dataset_info(dataset_row)
 
         main_dataset_card = html.Div(dbc.Card(
@@ -197,16 +207,20 @@ def generate_dataset_block(tasks, features, lines, topics, sort_by, sort_order, 
                         html.H4(
                             [
                                 dcc.Link(f"{dataset_dict['title']}", href=f"{app.config['url_base_pathname']}"
-                                                                          f"datasets/{dataset_dict['dgf_resource_id']}"),
+                                                                          f"{dataset_dict['dgf_resource_id']}"),
+                                None if not dataset_dict["is_validated"] else
+                                html.Img(id="validated-img",
+                                         src="data:image/png;base64,{}".format(encoded_image_validated),
+                                         style={'height': '3%', 'width': '3%', "float": "right"}),
+                                dbc.Tooltip("This dataset has been selected and analysed manually.",
+                                            target="validated-img",
+                                            style={'font-size': 13}
+                                            )
                             ],
                             className="card-title"),
-                        # html.P(
-                        #     f"{dataset_dict['description']}",
-                        #     style={"font-family": "AcuminL"},
-                        # ),
                         dbc.CardDeck([
                             # profiling
-                            generate_kpi_card("Task", f"{dataset_dict['task']}"),
+                            generate_kpi_card("Proposed Task", f"{dataset_dict['task']}"),
                             generate_kpi_card("Topic", f"{dataset_dict['topic']}"),
                             generate_kpi_card("Columns", dataset_dict['nb_features']),
                             generate_kpi_card("Lines", dataset_dict['nb_lines']),
@@ -230,7 +244,7 @@ def display_page(pathname):
     if pathname == app.config['url_base_pathname']:
         return app_layout
     else:
-        return generate_dataset_page(pathname, df)
+        return generate_dataset_page(pathname, df, app)
 
 
 @app.callback(
@@ -239,13 +253,14 @@ def display_page(pathname):
         Input("task-select", "value"),
         Input("features-select", "value"),
         Input("lines-select", "value"),
+        Input("valid-select", "value"),
         Input("topic-select", "value"),
         Input("sort-by", "value"),
         Input("sort-by-order", "value"),
         Input("reset-btn", "n_clicks"),
     ],
 )
-def update_dataset_block(task, feature, line, topic, sort_by, sort_order, reset_click):
+def update_dataset_block(task, feature, line, valid, topic, sort_by, sort_order, reset_click):
     reset = False
     # Find which one has been triggered
     ctx = dash.callback_context
@@ -255,7 +270,7 @@ def update_dataset_block(task, feature, line, topic, sort_by, sort_order, reset_
         if prop_id == "reset-btn":
             reset = True
     # Return to original hm(no colored annotation) by resetting
-    return generate_dataset_block(task, feature, line, topic, sort_by, sort_order, reset_click)
+    return generate_dataset_block(task, feature, line, valid, topic, sort_by, sort_order, reset_click)
 
 
 # Run the server

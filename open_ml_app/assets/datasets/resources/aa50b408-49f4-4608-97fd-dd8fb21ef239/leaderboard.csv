@@ -1,8 +1,0 @@
-Best model,name,url,model_type,metric_type,metric_value,train_time
-,1_Baseline,https://etalab-ia.github.io/open_ML/automodels/aa50b408-49f4-4608-97fd-dd8fb21ef239/1_Baseline/README.html,Baseline,rmse,147.349,0.35
-,2_DecisionTree,https://etalab-ia.github.io/open_ML/automodels/aa50b408-49f4-4608-97fd-dd8fb21ef239/2_DecisionTree/README.html,Decision Tree,rmse,77.5376,27.62
-the best,3_Linear,https://etalab-ia.github.io/open_ML/automodels/aa50b408-49f4-4608-97fd-dd8fb21ef239/3_Linear/README.html,Linear,rmse,34.1329,4.37
-,4_Default_Xgboost,https://etalab-ia.github.io/open_ML/automodels/aa50b408-49f4-4608-97fd-dd8fb21ef239/4_Default_Xgboost/README.html,Xgboost,rmse,59.9339,11.73
-,5_Default_NeuralNetwork,https://etalab-ia.github.io/open_ML/automodels/aa50b408-49f4-4608-97fd-dd8fb21ef239/5_Default_NeuralNetwork/README.html,Neural Network,rmse,59.2642,8.19
-,6_Default_RandomForest,https://etalab-ia.github.io/open_ML/automodels/aa50b408-49f4-4608-97fd-dd8fb21ef239/6_Default_RandomForest/README.html,Random Forest,rmse,58.7515,15.2
-,Ensemble,https://etalab-ia.github.io/open_ML/automodels/aa50b408-49f4-4608-97fd-dd8fb21ef239/Ensemble/README.html,Ensemble,rmse,34.1329,0.12

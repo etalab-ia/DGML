@@ -1,8 +1,0 @@
-name,url,model_type,metric_type,metric_value,train_time
-1_Baseline,https://etalab-ia.github.io/open_ML/automodels/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/1_Baseline/README.html,Baseline,logloss,0.881415145293064,0.37
-2_DecisionTree,https://etalab-ia.github.io/open_ML/automodels/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/2_DecisionTree/README.html,Decision Tree,logloss,0.807468036228321,16.94
-3_Linear,https://etalab-ia.github.io/open_ML/automodels/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/3_Linear/README.html,Linear,logloss,0.801042084124994,8.56
-4_Default_Xgboost,https://etalab-ia.github.io/open_ML/automodels/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/4_Default_Xgboost/README.html,Xgboost,logloss,0.76041777038644,21.46
-5_Default_NeuralNetwork,https://etalab-ia.github.io/open_ML/automodels/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/5_Default_NeuralNetwork/README.html,Neural Network,logloss,0.802565236003174,3.79
-6_Default_RandomForest,https://etalab-ia.github.io/open_ML/automodels/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/6_Default_RandomForest/README.html,Random Forest,logloss,0.799779988984285,10.55
-Ensemble,https://etalab-ia.github.io/open_ML/automodels/fff0cc27-977b-40d5-9c11-f7e4e79a0b72/Ensemble/README.html,Ensemble,logloss,0.758822164930322,0.25

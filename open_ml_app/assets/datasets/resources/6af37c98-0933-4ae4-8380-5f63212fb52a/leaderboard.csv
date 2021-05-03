@@ -1,6 +1,0 @@
-name,url,model_type,metric_type,metric_value,train_time
-1_Baseline,https://etalab-ia.github.io/open_ML/automodels/6af37c98-0933-4ae4-8380-5f63212fb52a/1_Baseline/README.html,Baseline,logloss,1.1175236061087,1.24
-2_DecisionTree,https://etalab-ia.github.io/open_ML/automodels/6af37c98-0933-4ae4-8380-5f63212fb52a/2_DecisionTree/README.html,Decision Tree,logloss,0.909709397544331,1.5
-3_Default_Xgboost,https://etalab-ia.github.io/open_ML/automodels/6af37c98-0933-4ae4-8380-5f63212fb52a/3_Default_Xgboost/README.html,Xgboost,logloss,0.736726460561389,17.62
-4_Default_RandomForest,https://etalab-ia.github.io/open_ML/automodels/6af37c98-0933-4ae4-8380-5f63212fb52a/4_Default_RandomForest/README.html,Random Forest,logloss,0.899587540490633,15.67
-Ensemble,https://etalab-ia.github.io/open_ML/automodels/6af37c98-0933-4ae4-8380-5f63212fb52a/Ensemble/README.html,Ensemble,logloss,0.736726460537801,0.72
