@@ -9,10 +9,11 @@ Le projet OpenML vise à la construction d'un **catalogue de jeux de données de
  
  ### Ce que vous trouverez dans OpenML
  
- - Une liste de datasets réutilisables par des algorithmes de ML (cliquez [ici](https://github.com/giuliasantarsieri/openml_testing/blob/main/explain_automodels/Choix%20des%20jeux%20de%20donn%C3%A9es%20pour%20le%20Machine%20Learning.md) pour avoir plus d'informations sur le choix des datasets)
+ - Une liste de datasets réutilisables par des algorithmes de ML (cliquez [ici](https://github.com/etalab-ia/open_ML/blob/main/docs/explain_automodels/Choix%20des%20jeux%20de%20donn%C3%A9es%20pour%20le%20Machine%20Learning.md) pour avoir plus d'informations sur le choix des datasets)
  - Un profiling statistique de chaque dataset
- - Les résultats de l'entraînement et de la validation automatique d'algorithmes de ML sur ces datasets (cliquez [ici](https://github.com/giuliasantarsieri/openml_testing/blob/main/explain_automodels/Guide%20au%20AutoML%20Leaderboard%20report.md) pour le Guide au AutoML)
+ - Les résultats de l'entraînement et de la validation automatique d'algorithmes de ML sur ces datasets (cliquez [ici](https://github.com/etalab-ia/open_ML/blob/main/docs/explain_automodels/Guide%20au%20AutoML%20Leaderboard%20report.md) pour le Guide au AutoML)
  - Des exemples de code
+ 
  
  
  ### Libraries utilisées
