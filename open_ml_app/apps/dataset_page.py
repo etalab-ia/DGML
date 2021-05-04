@@ -1,3 +1,5 @@
+import base64
+import glob
 from typing import Dict
 
 import dash_bootstrap_components as dbc
@@ -8,6 +10,34 @@ from .utils import get_dataset_info, generate_kpi_card, get_reuses, filter_reuse
 
 # Path
 DATA_PATH = Path("./assets/datasets")
+jupyter_logo = base64.b64encode(open(DATA_PATH.parent.joinpath("jupyter_logo.png"), 'rb').read()).decode()
+
+
+def generate_etalab_cards(experiment_path: Path):
+    notebook_html = [Path(p) for p in glob.glob(experiment_path.as_posix() + "/*.html")]
+
+    if not notebook_html:
+        return html.P("There are no experiments with this dataset 😞")
+    list_cards = []
+    for notebook in notebook_html:
+        reuse_card = dbc.Card(
+            [
+                dbc.CardImg(src="./assets/jupyter_logo.png", top=True),
+                dbc.CardBody(
+                    [
+                        html.H4(notebook.stem, className="card-title"),
+                        html.P("A complete ML pipeline"
+                               ),
+                        dbc.Button("See experiments", color="primary", href=notebook.as_posix(), target="_blank",
+                                   external_link=True),
+                    ]
+                ),
+            ],
+
+        )
+        list_cards.append(reuse_card)
+    return dbc.CardDeck(list_cards, className="w-25")
+
 
 def generate_reuses_cards(resuses_dict: Dict):
     ml_reuses_dict = filter_reuses(resuses_dict)
@@ -63,9 +93,6 @@ def generate_mljar_table(dataset_id: str, target_variable: str, base_url: str):
         algorithm_urls = [html.A(html.P(n), href=experiment_path.joinpath(f"{n}/README.html").as_posix(),
                                  target="_blank")
                           for n in table_df.name]
-        # table_df["name"] = table_df[["name", "url"]].apply(lambda row: html.A(html.P(row["name"]), href=row["url"],
-        #                                                                       target="_blank"), axis=1)
-        # table_df = table_df.drop(["url"], axis=1)
         table_df["name"] = algorithm_urls
         html_table = html.Div(dbc.Table.from_dataframe(table_df, striped=True, size="sm", borderless=True),
                               style={"height": "300px", "overflow": 'auto'})
@@ -90,12 +117,14 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
     target_variable = dataset_row["target_variable"]
     dictionary_table = generate_table(dataset_dict["dgf_resource_id"], table_type="dict_data.csv")
     mljar_table, mljar_profile_url = generate_mljar_table(dataset_dict["dgf_resource_id"],
-                                       target_variable=target_variable, base_url=app.config["url_base_pathname"])
+                                                          target_variable=target_variable,
+                                                          base_url=app.config["url_base_pathname"])
     statistics_df = generate_stats_df(dataset_dict["dgf_resource_id"], table_type="statistics_summary.csv")
     pandas_profile_url = DATA_PATH.joinpath(f"resources/{dataset_id}/{dataset_id}_pandas_profile.html")
+    experiments_url = DATA_PATH.joinpath(f"resources/{dataset_id}/our_experiments/")
     container = dbc.Container([
         # html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
-        html.H5(generate_badge("Go back", url="/openml/", background_color="#cadae6")),
+        html.H5(generate_badge("Go back", url="/openml/", background_color="#cadae6", new_tab=False)),
         html.Title("FODML: French Open Data for Machine Learning"),
         html.H2([dataset_dict["title"]]),
         html.P(dataset_dict["description"]),
@@ -126,7 +155,8 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
             generate_badge("Full Pandas Profile", url=pandas_profile_url.as_posix(), background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("AutoML Summary"),
-        html.P(children=[f"Models trained with this dataset using the following target variable : ", html.B(dataset_dict['target_variable'])]),
+        html.P(children=[f"Models trained with this dataset using the following target variable : ",
+                         html.B(dataset_dict['target_variable'])]),
         mljar_table,
         html.H4(generate_badge("Full Mljar Profile", url=mljar_profile_url.as_posix(), background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
@@ -134,8 +164,9 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
         generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Our Experiments"),
-        html.P("Check out our experiments on this dataset : "),
-        html.H4(generate_badge("See notebook", url=dataset_dict['etalab_xp_url'], background_color="#cadae6")),
+        # html.P("Check out our experiments on this dataset : "),
+        generate_etalab_cards(experiments_url),
+        # html.H4(generate_badge("See notebook", url=dataset_dict['etalab_xp_url'], background_color="#cadae6")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Load Data"),
         html.Hr(style={"marginBottom": "20px"}),

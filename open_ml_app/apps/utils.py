@@ -118,13 +118,14 @@ def filter_reuses(reuses_dict: Dict):
     return ml_reuses
 
 
-def generate_badge(title: str, url: str, background_color: str, font_color: str = "#333333"):
+def generate_badge(title: str, url: str, background_color: str, font_color: str = "#333333",
+                   new_tab:bool=False):
     if pd.isna(url):
         title = f"{title} not available 😞"
         badge = dbc.Badge(title, style={"backgroundColor": background_color, "color": font_color},
                           pill=True, className="ml-2")
     else:
         badge = dbc.Badge(title, href=url,
-                          target="_blank", style={"backgroundColor": background_color, "color": font_color},
+                          target="_blank" if new_tab else False, style={"backgroundColor": background_color, "color": font_color},
                           pill=True, className="ml-2", external_link=True)
     return badge
