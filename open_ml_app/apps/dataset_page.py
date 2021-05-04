@@ -9,8 +9,10 @@ from pathlib import Path
 from .utils import get_dataset_info, generate_kpi_card, get_reuses, filter_reuses, generate_badge, slugify
 
 # Path
+from ..main import encoded_image_validated
+
 DATA_PATH = Path("./assets/datasets")
-jupyter_logo = base64.b64encode(open(DATA_PATH.parent.joinpath("jupyter_logo.png"), 'rb').read()).decode()
+#jupyter_logo = base64.b64encode(open(DATA_PATH.parent.joinpath("jupyter_logo.png"), 'rb').read()).decode()
 
 
 def generate_etalab_cards(experiment_path: Path):
@@ -126,7 +128,15 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
         # html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
         html.H5(generate_badge("Go back", url="/openml/", background_color="#cadae6", new_tab=False)),
         html.Title("FODML: French Open Data for Machine Learning"),
-        html.H2([dataset_dict["title"]]),
+        html.H2([dataset_dict["title"]],
+                                None if not dataset_dict["is_validated"] else
+                                html.Img(id="validated-img",
+                                         src="data:image/png;base64,{}".format(encoded_image_validated),
+                                         style={'height': '3%', 'width': '3%', "float": "right"}),
+                                dbc.Tooltip("This dataset has been selected and analysed manually.",
+                                            target="validated-img",
+                                            style={'font-size': 13}
+                                            )),
         html.P(dataset_dict["description"]),
         # html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
         html.H4(
