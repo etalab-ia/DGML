@@ -150,11 +150,11 @@ app_layout = html.Div(
     id="app-container",
     children=[
         # Banner
-        html.Div(
-            id="banner",
-            className="banner",
-            children=[html.Img(src=app.get_asset_url("plotly_logo.png"))],
-        ),
+        # html.Div(
+        #     id="banner",
+        #     className="banner",
+        #     children=[html.Img(src=app.get_asset_url("plotly_logo.png"))],
+        # ),
         # Left column
         html.Div(
             id="left-column",
