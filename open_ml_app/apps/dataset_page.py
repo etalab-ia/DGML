@@ -179,8 +179,8 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
         generate_etalab_cards(experiments_url),
         # html.H4(generate_badge("See notebook", url=dataset_dict['etalab_xp_url'], background_color="#cadae6")),
         html.Hr(style={"marginBottom": "20px"}),
-        html.H3("Load Data"),
-        html.Hr(style={"marginBottom": "20px"}),
+        # html.H3("Load Data"),
+        # html.Hr(style={"marginBottom": "20px"}),
     ])
 
     return container
