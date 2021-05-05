@@ -1,6 +1,6 @@
 # Choix des jeux de données pour le Machine Learning
 
-Dans OpenML, deux catégories de jeux de données sont proposés: des jeux de données qui ont été séléctionnés à la main (curated datasets) et pour lesquels il y a eu une intervention humaine pour vérifier que les jeux de données sont adaptés aux tâches de Machine Learning et des jeux de données qui ont été extraits automatiquement à partir de data.gouv.fr (automatic datasets) et qui ont été séléctionnés automatiquement en fonction d'un certain nombre de critères statistiques.
+Dans DGML, deux catégories de jeux de données sont proposés: des jeux de données qui ont été séléctionnés à la main (curated datasets) et pour lesquels il y a eu une intervention humaine pour vérifier que les jeux de données sont adaptés aux tâches de Machine Learning et des jeux de données qui ont été extraits automatiquement à partir de data.gouv.fr (automatic datasets) et qui ont été séléctionnés automatiquement en fonction d'un certain nombre de critères statistiques.
 
 Parmi le grand nombre de jeux de données disponibles sur data.gouv.fr, nous avons séléctionné les jeux de données ayant les caractéristiques suivantes:
 
