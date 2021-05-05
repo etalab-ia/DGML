@@ -1,13 +1,13 @@
-# Open_ML - Catalogue de datasets de *data.gouv.fr* pour le Machine Learning
+# DGML - Catalogue de datasets de *data.gouv.fr* pour le Machine Learning
 
-Le projet OpenML vise à la construction d'un **catalogue de jeux de données de data.gouv.fr pour le Machine Learning.**
+Le projet DGML vise à la construction d'un **catalogue de jeux de données de data.gouv.fr pour le Machine Learning.**
 
 ### Objectifs
 
  Les données ouvertes (open data), telles que les données de data.gouv.fr ne sont pas toujours exploitées par le Machine Learning car il est difficile de déterminer si elles seraient adaptées à cette tâche. Des jeux de données assez classiques sont alors plutôt privilégiés dans ce domaine par rapport à l'open data. La construction de ce catalogue permettrait une plus grande réutilisation de la donnée ouverte par le ML, en particulier de celle de data.gouv.fr.
  
  
- ### Ce que vous trouverez dans OpenML
+ ### Ce que vous trouverez dans DGML
  
  - Une liste de datasets réutilisables par des algorithmes de ML (cliquez [ici](https://github.com/etalab-ia/open_ML/blob/main/docs/explain_automodels/Choix%20des%20jeux%20de%20donn%C3%A9es%20pour%20le%20Machine%20Learning.md) pour avoir plus d'informations sur le choix des datasets)
  - Un profiling statistique de chaque dataset
