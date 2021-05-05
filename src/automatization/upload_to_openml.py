@@ -10,8 +10,12 @@ Arguments:
     <output_snippet_folder>               A folder with dgf resources ids and csv files wtihin
     <main_csv_file>                       The path of the main csv file used in the website
 '''
+from dotenv import load_dotenv
+load_dotenv(verbose=True)
+
 import logging
 import os
+openml_apikey = os.getenv("openml_apikey")
 from pathlib import Path
 
 import pandas as pd
@@ -23,7 +27,8 @@ from openml.datasets.functions import create_dataset
 
 from open_ml_app.apps.utils import slugify
 
-openml.config.start_using_configuration_for_example()
+# openml.config.start_using_configuration_for_example()
+openml.config.apikey = openml_apikey
 def run(doc_path):
     return 1
 
@@ -67,6 +72,7 @@ def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path
             data=df_dataset,
             version_label="example",
         )
+        weather_dataset.publish()
         pass
 
 
