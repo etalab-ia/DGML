@@ -209,10 +209,10 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
                             [
                                 dcc.Link(f"{dataset_dict['title']}", href=f"{app.config['url_base_pathname']}"
                                                                           f"{dataset_dict['dgf_resource_id']}"),
-                                None if not dataset_dict["is_validated"] else
                                 html.Img(id="validated-img",
                                          src="data:image/png;base64,{}".format(encoded_image_validated),
-                                         style={'height': '3%', 'width': '3%', "float": "right"}),
+                                         style={'height': '3%', 'width': '3%', "float": "right"},
+                                         hidden=not dataset_dict["is_validated"]),
                                 dbc.Tooltip("This dataset has been selected and analysed manually.",
                                             target="validated-img",
                                             style={'font-size': 13}
