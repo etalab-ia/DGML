@@ -22,11 +22,11 @@ app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.BOOTSTRAP],
     suppress_callback_exceptions=True,
-    url_base_pathname="/openml/",
+    url_base_pathname="/dgml/",
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
 
-app.title = "FODML"
+app.title = "DGML"
 
 server = app.server
 # app.config.suppress_callback_exceptions = True
@@ -56,11 +56,11 @@ def description_card():
     return html.Div(
         id="description-card",
         children=[
-            html.H5("French Open Datasets for ML (FODML)"),
-            html.H3("Welcome to the FODML Repository"),
+            html.H5("Data Gouv for Machine Learning (DGML)"),
+            html.H3("Welcome to the DGML Repository"),
             html.Div(
                 id="intro",
-                children=["French Open Datasets for Machine Learning (FODML) is a collection of datasets from",
+                children=["Data Gouv for Machine Learning (DGML) is a collection of datasets from",
                           html.A(" data.gouv.fr", href="https://www.data.gouv.fr",
                                  target="_blank"),
                           " for Machine Learning. ",

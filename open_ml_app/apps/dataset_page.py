@@ -123,9 +123,8 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
     pandas_profile_url = DATA_PATH.joinpath(f"resources/{dataset_id}/{dataset_id}_pandas_profile.html")
     experiments_url = DATA_PATH.joinpath(f"resources/{dataset_id}/our_experiments/")
     container = dbc.Container([
-        # html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
-        html.H5(generate_badge("Go back", url="/openml/", background_color="#cadae6", new_tab=False)),
-        html.Title("FODML: French Open Data for Machine Learning"),
+        html.H5(generate_badge("Go back", url="/dgml/", background_color="#cadae6", new_tab=False)),
+        html.Title("DGML: Data Gouv for Machine Learning"),
         html.H2([dataset_dict["title"]]),
         html.P(dataset_dict["description"]),
         # html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
@@ -168,8 +167,8 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
         generate_etalab_cards(experiments_url),
         # html.H4(generate_badge("See notebook", url=dataset_dict['etalab_xp_url'], background_color="#cadae6")),
         html.Hr(style={"marginBottom": "20px"}),
-        html.H3("Load Data"),
-        html.Hr(style={"marginBottom": "20px"}),
+        # html.H3("Load Data"),
+        # html.Hr(style={"marginBottom": "20px"}),
     ])
 
     return container
