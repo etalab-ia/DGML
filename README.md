@@ -1,9 +1,9 @@
 # DGML (Data Gouv pour le Machine Learning)
-[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/etalab-ia/DGML/README.en.md)
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/etalab-ia/DGML/blob/main/README.en.md)
 
 Le projet DGML vise à la construction d'un **catalogue de jeux de données de data.gouv.fr pour le Machine Learning.**
 
-![](https://storage.gra.cloud.ovh.net/v1/AUTH_0f20d409cb2a4c9786c769e2edec0e06/imagespadincubateurnet/uploads/upload_a2a6cac87d197051d9e09107e78460d1.png =12x12) [datascience.etalab.studio/dgml/](https://datascience.etalab.studio/dgml/)
+:link: [datascience.etalab.studio/dgml/](https://datascience.etalab.studio/dgml/)
 
 ### Objectifs
 
@@ -14,8 +14,6 @@ Dans DGML, vous pouvez rapidement **séléctionner un jeu de données de data.go
  ### Ce que vous trouvez dans DGML
  
  - 60 *jeux de données* réutilisables par des algorithmes de ML (cliquez [ici](https://github.com/etalab-ia/open_ML/blob/main/docs/explain_automodels/Choix%20des%20jeux%20de%20donn%C3%A9es%20pour%20le%20Machine%20Learning.md) pour avoir plus d'informations sur le choix des datasets), que vous pouvez trier par tâche (régression ou classification), par taille etc.
-
-![](https://storage.gra.cloud.ovh.net/v1/AUTH_0f20d409cb2a4c9786c769e2edec0e06/imagespadincubateurnet/uploads/upload_c6347dbee1bcb73aa66aa35718169f36.png =500x)
 
 
 Pour chaque jeux de données vous trouvez:

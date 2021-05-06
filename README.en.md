@@ -3,7 +3,7 @@
 DGML is a **data repository for Machine Learning** using open data from **data.gouv.fr**.
 
 
-![](https://storage.gra.cloud.ovh.net/v1/AUTH_0f20d409cb2a4c9786c769e2edec0e06/imagespadincubateurnet/uploads/upload_a2a6cac87d197051d9e09107e78460d1.png =12x12) [datascience.etalab.studio/dgml/](https://datascience.etalab.studio/dgml/)
+:link: [datascience.etalab.studio/dgml/](https://datascience.etalab.studio/dgml/)
 
 Open Data, such as the data on data.gouv.fr, is sometimes neglected in Machine Learning applications, since it can be hard to identify, among thousands of datasets, those that would be adequate for Machine Learning.
 In DGML, you can **quickly choose a dataset from data.gouv.fr for Machine Learning** and **check all the informations you might need to do a Machine Learning application**.
@@ -12,7 +12,6 @@ In DGML, you can **quickly choose a dataset from data.gouv.fr for Machine Learni
  
  - 60 datasets for Machine Learning (click [here]() for more info about the choice of datasets), that you can filter according to a ML task, size of the dataset etc.
 
-![](https://storage.gra.cloud.ovh.net/v1/AUTH_0f20d409cb2a4c9786c769e2edec0e06/imagespadincubateurnet/uploads/upload_c6347dbee1bcb73aa66aa35718169f36.png =500x)
  
  For each of these datasets you find:
  - A statistical profile, quickly showing you some statistics about the dataset, the distribution of its variables, of its missing values and correlations
