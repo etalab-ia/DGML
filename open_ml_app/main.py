@@ -35,6 +35,8 @@ server = app.server
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
+
+
 # Read data
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
@@ -46,6 +48,14 @@ topic_list = df["topic"].unique()
 
 add_nb_features_category(df)
 add_nb_lines_category(df)
+
+
+def check_if_resource(df):
+    folders = [pathlib.Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
+    filtered_df = df[df['dgf_resource_id'].isin(folders)]
+    return filtered_df
+
+df = check_if_resource(df)
 
 
 def description_card():
