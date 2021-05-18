@@ -66,22 +66,23 @@ def description_card():
     return html.Div(
         id="description-card",
         children=[
-            html.H5("Data Gouv for Machine Learning (DGML)"),
-            html.H3("Welcome to the DGML Repository"),
+            html.H5("Data Gouv pour le Machine Learning (DGML)"),
+            html.H3("Bienvenue sur DGML!"),
             html.Div(
                 id="intro",
-                children=["Data Gouv for Machine Learning (DGML) is a collection of datasets from",
+                children=["Data Gouv pour le Machine Learning (DGML) est le catalogue des jeux de données de",
                           html.A(" data.gouv.fr", href="https://www.data.gouv.fr",
                                  target="_blank"),
-                          " for Machine Learning. ",
+                          " pour le Machine Learning.",
                           html.Br(),
-                          "Click on a chosen dataset to see its Descriptive Profile, the results from the",
-                          " automatic training and testing of ML algorithms on the dataset (AutoML profile) and examples of code and reuses.",
+                          "Cliquez sur un jeu de données pour voir ses statistiques et les résultats ",
+                          "de l'entraînement et test automatique d'algorithmes de Machine Learning sur les données, ainsi que des ",
+                          "exemples de code et des réutilisations",
                           html.Br(),
-                          " Click ",
-                          html.A("here", href="https://github.com/etalab-ia/open_ML/blob/main/README.md",
+                          " Cliquez ",
+                          html.A("ici", href="https://github.com/etalab-ia/open_ML/blob/main/README.md",
                                  target="_blank"),
-                          " to learn more about the project, about how we chose these datasets and to better understand its features."],
+                          " pour en savoir plus sur le projet, sur le choix des jeux de données et pour mieux comprendre les résultats."],
             ),
         ],
     )
@@ -95,35 +96,35 @@ def generate_control_card():
     return html.Div(
         id="control-card",
         children=[
-            html.P("Task"),
+            html.P("Tâche"),
             dcc.Checklist(
                 id="task-select",
                 options=[{"label": i, "value": i} for i in task_list],
                 value=task_list,
             ),
             html.Br(),
-            html.P("Number of Columns"),
+            html.P("Nombre de colonnes"),
             dcc.Checklist(
                 id="features-select",
                 options=[{"label": i, "value": i} for i in nb_features_bins],
                 value=nb_features_bins,
             ),
             html.Br(),
-            html.P("Number of Lines"),
+            html.P("Nombre de lignes"),
             dcc.Checklist(
                 id="lines-select",
                 options=[{"label": i, "value": i} for i in nb_lines_bins],
                 value=nb_lines_bins,
             ),
             html.Br(),
-            html.P("Validation Status"),
+            html.P("Validation"),
             dcc.Checklist(
                 id="valid-select",
-                options=[{'label': l, "value": l} for l in ["Curated", "Automatic"]],
-                value=["Curated", "Automatic"],
+                options=[{'label': l, "value": l} for l in ["Sélectionné", "Automatique"]],
+                value=["Sélectionné", "Automatique"],
             ),
             html.Br(),
-            html.P("Topic"),
+            html.P("Thème"),
             dcc.Dropdown(
                 id="topic-select",
                 options=[{"label": i, "value": i} for i in topic_list],
@@ -132,18 +133,18 @@ def generate_control_card():
                 clearable=False
             ),
             html.Br(),
-            html.P("Sort by:"),
+            html.P("Filtrer par:"),
             dcc.Dropdown(
                 id="sort-by",
                 options=[{"label": i, "value": i} for i in DATASET_COLUMNS],
-                value="Validated",
+                value="Validé",
                 clearable=False
             ),
             html.Br(),
             dcc.RadioItems(
                 id="sort-by-order",
-                options=[{"label": i, "value": i} for i in ["Ascending", "Descending"]],
-                value="Ascending",
+                options=[{"label": i, "value": i} for i in ["Ascendant", "Descendant"]],
+                value="Ascendant",
             ),
             html.Br(),
             html.Div(
@@ -197,14 +198,14 @@ app.layout = url_bar_and_content_div
 
 
 def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_order, reset_click):
-    curated_dict = {"Curated": True, "Automatic": False}
+    curated_dict = {"Sélectionné": True, "Automatique": False}
     chosen_tasks_df = df[df.task.isin(tasks)]
     chosen_features_df = chosen_tasks_df[chosen_tasks_df.nb_features_cat.isin(features)]
     chosen_lines_df = chosen_features_df[chosen_features_df.nb_lines_cat.isin(lines)]
     chosen_topics_df = chosen_lines_df[chosen_lines_df.topic.isin(topics)]
     chosen_validation = chosen_topics_df[chosen_topics_df["is_validated"].isin([curated_dict[v] for v in valid])]
     chosen_sort_by_df = chosen_validation.sort_values(by=DATASET_COLUMNS[sort_by],
-                                                      ascending=True if sort_order == 'Ascending' and sort_by != "Validated"
+                                                      ascending=True if sort_order == 'Ascendant' and sort_by != "Validé"
                                                                         else False)
     cards_list = []
 
@@ -223,7 +224,7 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
                                          src="data:image/png;base64,{}".format(encoded_image_validated),
                                          style={'height': '3%', 'width': '3%', "float": "right"},
                                          hidden=not dataset_dict["is_validated"]),
-                                dbc.Tooltip("This dataset has been selected and analysed manually.",
+                                dbc.Tooltip("Ce jeu de données a été sélectionné et analysé manuellement.",
                                             target="validated-img",
                                             style={'font-size': 13}
                                             )
@@ -231,10 +232,10 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
                             className="card-title"),
                         dbc.CardDeck([
                             # profiling
-                            generate_kpi_card("Proposed Task", f"{dataset_dict['task']}"),
-                            generate_kpi_card("Topic", f"{dataset_dict['topic']}"),
-                            generate_kpi_card("Columns", dataset_dict['nb_features']),
-                            generate_kpi_card("Lines", dataset_dict['nb_lines']),
+                            generate_kpi_card("Tâche proposée", f"{dataset_dict['task']}"),
+                            generate_kpi_card("Thème", f"{dataset_dict['topic']}"),
+                            generate_kpi_card("Colonnes", dataset_dict['nb_features']),
+                            generate_kpi_card("Lignes", dataset_dict['nb_lines']),
                         ]),
                     ]
                 ),
