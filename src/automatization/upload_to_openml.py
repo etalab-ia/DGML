@@ -27,10 +27,8 @@ from openml.datasets.functions import create_dataset
 
 from open_ml_app.apps.utils import slugify
 
-# openml.config.start_using_configuration_for_example()
-openml.config.apikey = openml_apikey
-def run(doc_path):
-    return 1
+openml.config.start_using_configuration_for_example()
+# openml.config.apikey = openml_apikey
 
 
 def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path):
@@ -73,20 +71,8 @@ def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path
             version_label="example",
         )
         weather_dataset.publish()
-        pass
+        weather_dataset.openml_url()
 
-
-
-
-
-
-    for doc_path in tqdm(doc_paths):
-        tqdm.write(f"Converting file {doc_path}")
-        job_output.append(run(doc_path))
-
-    logging.info(
-        f"{sum(job_output)} DOC files were converted to TXT. {len(job_output) - sum(job_output)} files "
-        f"had some error.")
 
     return doc_paths
 
