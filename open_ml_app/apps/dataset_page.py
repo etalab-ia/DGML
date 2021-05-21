@@ -126,7 +126,7 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame, app):
     experiments_url = DATA_PATH.joinpath(f"resources/{dataset_id}/our_experiments/")
     container = dbc.Container([
         # html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
-        html.H5(generate_badge("Home", url="/dgml/", background_color="#cadae6", new_tab=False)),
+        html.H5(generate_badge("Accueil", url="/dgml/", background_color="#cadae6", new_tab=False)),
         html.Title("DGML: Data Gouv pour le Machine Learning"),
         html.H2([dataset_dict["title"],
                                 html.Img(id="validated-img2",

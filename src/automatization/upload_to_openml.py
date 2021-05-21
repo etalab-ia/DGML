@@ -6,13 +6,13 @@ Usage:
     my_script.py <datasets_folder> <output_snippet_folder> <main_csv_file> [options]
 
 Arguments:
-    <datasets_folder>                     A folder with dgf resources ids and csv files wtihin
-    <output_snippet_folder>               A folder with dgf resources ids and csv files wtihin
+    <datasets_folder>                     A folder with dgf resources ids and csv files within
+    <output_snippet_folder>               A folder with dgf resources ids and csv files within
     <main_csv_file>                       The path of the main csv file used in the website
 '''
 from dotenv import load_dotenv
-load_dotenv(verbose=True)
 
+load_dotenv(verbose=True)
 import logging
 import os
 openml_apikey = os.getenv("openml_apikey")
@@ -29,9 +29,11 @@ from open_ml_app.apps.utils import slugify
 
 # openml.config.start_using_configuration_for_example()
 openml.config.apikey = openml_apikey
+
 def run(doc_path):
     return 1
 
+# TO DO: This code retrieves the info from the main_csv, we need to include it directly into full_auto_openml.py
 
 def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path):
     doc_paths = []
@@ -44,7 +46,7 @@ def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path
         raise FileNotFoundError(main_csv_file.as_posix())
 
 
-
+    main_csv = pd.read_csv(main_csv_file)
     list_subfolders_with_paths = [Path(f.path) for f in os.scandir(datasets_folder.as_posix()) if f.is_dir()]
     for path in list_subfolders_with_paths:
         id_dataset = path.name
@@ -56,25 +58,35 @@ def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path
                                  encoding=dataset_metadata["encoding"])
         renamed_cols = {k: slugify(k) for k in df_dataset.columns}
         df_dataset.rename(columns=slugify, inplace=True)
-        weather_dataset = create_dataset(
-            name="dgf_test",
-            description="dgf_test",
-            creator="dgf_test",
-            contributor="dgf_test",
-            collection_date="01-01-2011",
-            language="French",
-            licence="Undefined",
-            default_target_attribute="type-de-ligne",
-            row_id_attribute=None,
-            ignore_attribute=None,
-            citation="dgf test",
-            attributes="auto",
-            data=df_dataset,
-            version_label="example",
-        )
-        weather_dataset.publish()
-        pass
-
+        # enforce the categorical column to have a categorical dtype
+        for cat_var in df_dataset.select_dtypes(include='object').columns.to_list():
+            df_dataset[cat_var] = df_dataset[cat_var].astype('category')
+        name = f"dgf_{id_dataset}"
+        dataset_info=main_csv[main_csv['dgf_resource_id']==id_dataset]
+        description=dataset_info['title'][dataset_info.index.to_list()[0]]
+        target_var = slugify(dataset_info['target_variable'][dataset_info.index.to_list()[0]])
+        try:
+            new_dataset = create_dataset(
+                name=name,
+                description=description,
+                creator="dgml_test",
+                contributor="dgml_test",
+                collection_date="20-05-2021",
+                language="French",
+                licence="Undefined",
+                default_target_attribute=target_var,
+                row_id_attribute=None,
+                ignore_attribute=None,
+                citation="dgf test",
+                attributes='auto',
+                data=df_dataset,
+                version_label="example",
+            )
+            data_id = new_dataset.publish()
+            main_csv.loc[main_csv['dgf_resource_id'] == id_dataset, 'openml_id'] = data_id.id
+            main_csv.to_csv(main_csv_file,index=False)
+        except Exception:
+            pass
 
 
 
