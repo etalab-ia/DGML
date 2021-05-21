@@ -20,6 +20,19 @@ In DGML, you can **quickly choose a dataset from data.gouv.fr for Machine Learni
 
 ![](https://storage.gra.cloud.ovh.net/v1/AUTH_0f20d409cb2a4c9786c769e2edec0e06/imagespadincubateurnet/uploads/upload_3f6f170c0eab8a384f823d997235e6e8.png)
 
+### How to use this repo locally
+ 
+ 1. Clone/Fork the repo (more information [here](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository))
+ 2. Install requirements from `requirements.txt`:
+     - Using pip: `pip install -r requirements.txt`
+     - Using conda:`conda env create --name envname --file=environment.yml`
+
+To launch the app from your command line, from root:
+
+`cd openml_app`
+
+`python main.py`
+
 ### Libraries 
  
  - [pandas profiling](https://pandas-profiling.github.io/pandas-profiling/docs/master/rtd/) for the statistical profiling

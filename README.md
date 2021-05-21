@@ -24,6 +24,21 @@ Pour chaque jeux de données vous trouvez:
 
 ![](https://storage.gra.cloud.ovh.net/v1/AUTH_0f20d409cb2a4c9786c769e2edec0e06/imagespadincubateurnet/uploads/upload_3f6f170c0eab8a384f823d997235e6e8.png)
 
+ ### Comment utiliser ce repo en local
+ 
+ 1. Cloner/Forker le repo (plus d'info [ici](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository))
+ 2. Une fois dans le repo, installer les requirements à partir du fichier `requirements.txt`:
+     - Avec pip: `pip install -r requirements.txt`
+     - Avec conda:`conda env create --name envname --file=environment.yml`
+3. Activer l'environnement
+
+Pour lancer l'application, depuis votre ligne de commande, à la racine:
+
+`cd openml_app`
+
+`python main.py`
+ 
+ 
  
  ### Libraries utilisées
  
