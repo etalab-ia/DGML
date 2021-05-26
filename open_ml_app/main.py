@@ -100,22 +100,22 @@ def description_card():
     return html.Div(
         id="description-card",
         children=[
-            # html.H5("Data Gouv for Machine Learning (DGML)"),
-            html.H3("Welcome to the DGML Repository"),
+            html.H5("Data Gouv pour le Machine Learning (DGML)"),
+            html.H3("Bienvenue sur DGML!"),
             html.Div(
                 id="intro",
-                children=["Data Gouv for Machine Learning (DGML) is a collection of datasets from",
+                children=["Data Gouv pour le Machine Learning (DGML) est le catalogue des jeux de données de",
                           html.A(" data.gouv.fr", href="https://www.data.gouv.fr",
                                  target="_blank"),
-                          " for Machine Learning. ",
+                          " pour le Machine Learning. ",
                           html.Br(),
-                          "Click on a chosen dataset to see its Descriptive Profile, the results from the",
-                          " automatic training and testing of ML algorithms on the dataset (AutoML profile) and examples of code and reuses.",
-                          html.Br(),
-                          " Click ",
-                          html.A("here", href="https://github.com/etalab-ia/open_ML/blob/main/README.md",
-                                 target="_blank"),
-                          " to learn more about the project, about how we chose these datasets and to better understand its features."],
+
+                          "Cliquez sur un jeu de données pour voir: ses statistiques, les résultats ",
+                          "de l'entraînement et test automatique d'algorithmes de Machine Learning sur les données, ainsi que des ",
+                          "exemples de code et des réutilisations qui vont vous guider dans la mise en oeuvre de votre modèle de Machine Learning avec ces données.",
+                          html.Br(),"DGML a été développé par le ",
+                          html.A("Lab IA d'Etalab: ", href="https://www.etalab.gouv.fr/datasciences-et-intelligence-artificielle",
+                                 target="_blank"), "visitez notre Github pour en savoir plus sur le projet, sur le choix des jeux de données, pour mieux comprendre les résultats ou nous contacter."],
             ),
         ],
     )
@@ -129,28 +129,28 @@ def generate_control_card():
     return html.Div(
         id="control-card",
         children=[
-            html.P("Task"),
+            html.P("Tâche"),
             dcc.Checklist(
                 id="task-select",
                 options=[{"label": f" {i}", "value": i} for i in task_list],
                 value=task_list,
             ),
             html.Br(),
-            html.P("Number of Columns"),
+            html.P("Nombre de colonnes"),
             dcc.Checklist(
                 id="features-select",
                 options=[{"label": f" {i}", "value": i} for i in nb_features_bins],
                 value=nb_features_bins,
             ),
             html.Br(),
-            html.P("Number of Lines"),
+            html.P("Nombre de lignes"),
             dcc.Checklist(
                 id="lines-select",
                 options=[{"label": f" {i}", "value": i} for i in nb_lines_bins],
                 value=nb_lines_bins,
             ),
             html.Br(),
-            html.P("Validation Status"),
+            html.P("Validation"),
             dcc.Checklist(
                 id="valid-select",
                 options=[{'label': f" {l}", "value": l} for l in ["Sélectionné", "Automatique"]],
@@ -176,7 +176,7 @@ def generate_control_card():
             html.Br(),
             dcc.RadioItems(
                 id="sort-by-order",
-                options=[{"label": i, "value": i} for i in ["Ascending", "Descending"]],
+                options=[{"label": i, "value": i} for i in ["Ascendant", "Descendant"]],
                 value="Ascendant",
             ),
             html.Br(),
