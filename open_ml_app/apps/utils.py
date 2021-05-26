@@ -22,8 +22,8 @@ NB_LINES_CATEGORIES = {
     ">=5000<10000": (5000, 10000),
     ">=10000": (10000, 1e100)
 }
-DATASET_COLUMNS = {"Task": 'task', "Topic": 'topic', "Columns": 'nb_features', "Lines": 'nb_lines',
-                   "Validated": "is_validated"}
+DATASET_COLUMNS = {"Tâche": 'task', "Thème": 'topic', "Colonnes": 'nb_features', "Lignes": 'nb_lines',
+                   "Validé": "is_validated"}
 
 DATASET_NAME = {'Name': 'title'}
 
@@ -121,7 +121,7 @@ def filter_reuses(reuses_dict: Dict):
 def generate_badge(title: str, url: str, background_color: str, font_color: str = "#333333",
                    new_tab: bool = False):
     if pd.isna(url):
-        title = f"{title} not available 😞"
+        title = f"{title} non disponible 😞"
         badge = dbc.Badge(title, style={"backgroundColor": background_color, "color": font_color},
                           pill=True, className="ml-2")
     else:

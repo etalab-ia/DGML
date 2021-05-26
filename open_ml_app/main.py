@@ -36,6 +36,8 @@ server = app.server
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
+
+
 # Read data
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
@@ -151,11 +153,11 @@ def generate_control_card():
             html.P("Validation Status"),
             dcc.Checklist(
                 id="valid-select",
-                options=[{'label': f" {l}", "value": l} for l in ["Curated", "Automatic"]],
-                value=["Curated", "Automatic"],
+                options=[{'label': f" {l}", "value": l} for l in ["Sélectionné", "Automatique"]],
+                value=["Sélectionné", "Automatique"],
             ),
             html.Br(),
-            html.P("Topic"),
+            html.P("Thème"),
             dcc.Dropdown(
                 id="topic-select",
                 options=[{"label": f" {i}", "value": i} for i in topic_list],
@@ -164,18 +166,18 @@ def generate_control_card():
                 clearable=False
             ),
             html.Br(),
-            html.P("Sort by:"),
+            html.P("Filtrer par:"),
             dcc.Dropdown(
                 id="sort-by",
                 options=[{"label": f" {i}", "value": i} for i in DATASET_COLUMNS],
-                value="Validated",
+                value="Validé",
                 clearable=False
             ),
             html.Br(),
             dcc.RadioItems(
                 id="sort-by-order",
-                options=[{"label": f" {i}", "value": i} for i in ["Ascending", "Descending"]],
-                value="Ascending",
+                options=[{"label": i, "value": i} for i in ["Ascending", "Descending"]],
+                value="Ascendant",
             ),
             html.Br(),
             html.Div(
@@ -228,15 +230,15 @@ app.layout = url_bar_and_content_div
 
 
 def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_order, reset_click):
-    curated_dict = {"Curated": True, "Automatic": False}
+    curated_dict = {"Sélectionné": True, "Automatique": False}
     chosen_tasks_df = df[df.task.isin(tasks)]
     chosen_features_df = chosen_tasks_df[chosen_tasks_df.nb_features_cat.isin(features)]
     chosen_lines_df = chosen_features_df[chosen_features_df.nb_lines_cat.isin(lines)]
     chosen_topics_df = chosen_lines_df[chosen_lines_df.topic.isin(topics)]
     chosen_validation = chosen_topics_df[chosen_topics_df["is_validated"].isin([curated_dict[v] for v in valid])]
     chosen_sort_by_df = chosen_validation.sort_values(by=DATASET_COLUMNS[sort_by],
-                                                      ascending=True if sort_order == 'Ascending' and sort_by != "Validated"
-                                                      else False)
+                                                      ascending=True if sort_order == 'Ascendant' and sort_by != "Validé"
+                                                                        else False)
     cards_list = []
 
     for index, dataset_row in chosen_sort_by_df.iterrows():
@@ -254,7 +256,7 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
                                          src="data:image/png;base64,{}".format(encoded_image_validated),
                                          style={'height': '3%', 'width': '3%', "float": "right"},
                                          hidden=not dataset_dict["is_validated"]),
-                                dbc.Tooltip("This dataset has been selected and analysed manually.",
+                                dbc.Tooltip("Ce jeu de données a été sélectionné et analysé manuellement.",
                                             target="validated-img",
                                             style={'font-size': 13}
                                             )
@@ -262,10 +264,10 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
                             className="card-title"),
                         dbc.CardDeck([
                             # profiling
-                            generate_kpi_card("Proposed Task", f"{dataset_dict['task']}"),
-                            generate_kpi_card("Topic", f"{dataset_dict['topic']}"),
-                            generate_kpi_card("Columns", dataset_dict['nb_features']),
-                            generate_kpi_card("Lines", dataset_dict['nb_lines']),
+                            generate_kpi_card("Tâche proposée", f"{dataset_dict['task']}"),
+                            generate_kpi_card("Thème", f"{dataset_dict['topic']}"),
+                            generate_kpi_card("Colonnes", dataset_dict['nb_features']),
+                            generate_kpi_card("Lignes", dataset_dict['nb_lines']),
                         ]),
                     ]
                 ),
