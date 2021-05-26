@@ -125,7 +125,7 @@ def check_constraints(data):
     check_numerical = data.select_dtypes(include=['float64', 'int64']).empty
     total_nan = data.isna().sum().sum() / (nb_lines * nb_columns)
     if (200 <= nb_lines <= 2 * (10 ** 6)) and (3 <= nb_columns <= 500) and ((nb_lines / nb_columns) >= 10) and (
-            check_categorical is False) and (check_numerical is False) and (total_nan <= 30):
+            check_categorical is False) and (check_numerical is False) and (total_nan <= 0.30):
         passed_constraints = True
     return passed_constraints
 
