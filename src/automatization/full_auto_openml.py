@@ -17,6 +17,7 @@ from supervised.model_framework import ModelFramework
 from get_dataset import latest_catalog, info_from_catalog, load_dataset
 from get_mljar import prepare_to_mljar, generate_mljar
 from get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_dict_data
+
 load_dotenv("./.env")
 logging.root.handlers = []
 # noinspection PyArgumentList
@@ -32,8 +33,9 @@ DATASETS_PATH = os.getenv("DATASETS_PATH", '../../data/data.gouv/csv_top')
 
 OUTPUT_DIR = Path('../../datasets/resources')
 
-
 SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
+
+AUTOML_MODE = 'Perform'
 
 
 def get_specific_ids(specific_ids_path: Optional[Path] = None):
@@ -43,6 +45,7 @@ def get_specific_ids(specific_ids_path: Optional[Path] = None):
         specific_ids = [l.strip() for l in filo.readlines()]
     logging.info(f"We found specific ids. They are: {specific_ids}")
     return specific_ids
+
 
 def create_output_folder(output_dir):
     if not output_dir.exists():
@@ -78,7 +81,8 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_
         new_row['target_variable'] = ''
         new_row['task'] = ''
     else:
-        new_row['automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/automl_{slugify(target_variable)}/README.html"
+        new_row[
+            'automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/automl_{slugify(target_variable)}/README.html"
         new_row['target_variable'] = target_variable
         new_row['task'] = task
     new_row['dgf_resource_id'] = id_
@@ -198,7 +202,7 @@ def main():
     seen_dataframes = set()
     dataset_paths = get_csv_paths(DATASETS_PATH)
     specific_ids = get_specific_ids(SPECIFIC_IDS_PATH)
-
+    automl_mode = AUTOML_MODE
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for ix, dataset_path in enumerate(dataset_paths):
         current_output_dir = None
@@ -245,7 +249,7 @@ def main():
                     notna_data = prep_data[prep_data[target_variable].notna()]
                     mljar_output_dir = current_output_dir.joinpath(f"automl_{slugified_target_variable}")
                     automl = generate_mljar(data=notna_data, target_variable=target_variable,
-                                            output_dir=mljar_output_dir)
+                                            output_dir=mljar_output_dir, automl_mode=automl_mode)
                     get_mljar_info(output_dir=mljar_output_dir, automl_report=automl)
                     # plot_mljar_table(id)
                     logging.info(f"Dataset {id_data}: Successfully generated AutoML report.")

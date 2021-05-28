@@ -13,7 +13,7 @@ from supervised.automl import AutoML
 # 2. Drop columns with > 70%? of  missing values because useless
 # 3. Drop columns labeled as unsupported by Pandas Profiling and redundant columns
 # c. url and long texts are unsupported
-# d. drop columns with 100% of distinct values
+# d. drop columns with 100% of distinct values (such as IDs)
 
 
 def prepare_to_mljar(data, profiling, csv_data=None):
@@ -58,51 +58,38 @@ def prepare_to_mljar(data, profiling, csv_data=None):
     # 7. Remove url columns
     columns_to_drop.extend([col for col in pandas_cat_col if (str(data[col][1]).startswith('https'))])
 
-    # 8. Remmove csv-detective detected columns
+    # 8. Remove csv-detective detected columns
     if csv_data and "columns" in csv_data:
         columns_to_drop.extend([col_name for col_name, col_type in csv_data["columns"].items()
                                 if col_type not in ["booleen"]])
 
     # Actually remove columns
     data = data.drop(columns=set(columns_to_drop))
-    # check if the type of the target variable is right
-    # if task == 'regression':
-    #     if type_target == 'Categorical':
-    #         data[target_variable] = data[target_variable].str.replace(',', '.', regex=True)
-    #         try:
-    #             data[target_variable] = data[target_variable].astype(float)
-    #         except ValueError:
-    #             raise TypeError('Please modify the target variable: values must be numeric.')
-    #     elif type_target == 'Unsupported':
-    #         raise TypeError('Please choose another target variable. This target variable is unsupported.')
-    #     else:
-    #         print('The type of your target variable is ok.')
-    # elif (task == 'binary_classification') or (task == 'multi_classification'):
-    #     if type_target == 'Unsupported':
-    #         raise TypeError('Please choose another target variable. This target variable is unsupported.')
-    #     else:
-    #         print(
-    #             'The type of your target variable is ok. AutoML will tranform it into a categorical variable if needed.')
-    # else:
-    #     raise ValueError(
-    #         'Please enter one of the following words as task: regression, binary_classification, multi_classification')
     return data, columns_to_drop
 
 
-def generate_mljar(data, target_variable, output_dir):
+def generate_mljar(data, target_variable, output_dir, automl_mode):
     """This function takes a properly prepared dataframe and performs AutoML on it. The generated output is the html report.
     ------------------------------------------------
     :param:     :data: dataframe on which we want to perform a given ML task
     :type:      :data: pandas dataframe
     :param:     :target_variable: chosen target_variable for the ML task
-    :type:      :target_variable: string"""
+    :type:      :target_variable: string
+    :param:     :output_dir: directory path for the mljar report
+    :type:      :output_dir: Path
+    :param:     :automl_mode: mode for AutoMl computing: choose 'Perform' to have more visualisations and features (but slower and not
+     always better performing; choose 'Explain' otherwise"""
     y = data[target_variable].values
     X = data.drop(columns=[target_variable])
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-
-    automl = AutoML(results_path=output_dir.as_posix(), total_time_limit=5 * 60, mode='Explain')
-    automl.fit(X_train, y_train)
-    automl.report()
+    if automl_mode == 'Explain':
+        automl = AutoML(results_path=output_dir.as_posix(), total_time_limit=5 * 60, mode='Explain')
+        automl.fit(X_train, y_train)
+        automl.report()
+    else:
+        automl = AutoML(results_path=output_dir.as_posix(), total_time_limit=7 * 60, mode='Perform')
+        automl.fit(X_train, y_train)
+        automl.report()
     return automl
 
 # def plot_mljar_table(id):
