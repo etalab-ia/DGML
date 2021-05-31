@@ -1,0 +1,46 @@
+{
+    "mode": "Perform",
+    "ml_task": "regression",
+    "results_path": "AutoML_2",
+    "total_time_limit": 300,
+    "model_time_limit": null,
+    "algorithms": [
+        "Linear",
+        "Random Forest",
+        "LightGBM",
+        "Xgboost",
+        "CatBoost",
+        "Neural Network"
+    ],
+    "train_ensemble": true,
+    "stack_models": false,
+    "eval_metric": "rmse",
+    "validation_strategy": {
+        "validation_type": "kfold",
+        "k_folds": 5,
+        "shuffle": true,
+        "X_path": "AutoML_2/X.parquet",
+        "y_path": "AutoML_2/y.parquet",
+        "results_path": "AutoML_2"
+    },
+    "verbose": 1,
+    "explain_level": 1,
+    "golden_features": true,
+    "features_selection": true,
+    "start_random_models": 5,
+    "hill_climbing_steps": 2,
+    "top_models_to_improve": 2,
+    "boost_on_errors": false,
+    "kmeans_features": false,
+    "random_state": 1234,
+    "saved": [
+        "AutoML_2/1_Linear",
+        "AutoML_2/2_Default_LightGBM",
+        "AutoML_2/3_Default_Xgboost",
+        "AutoML_2/4_Default_CatBoost",
+        "AutoML_2/9_LightGBM",
+        "AutoML_2/5_Xgboost",
+        "AutoML_2/1_Linear_GoldenFeatures",
+        "AutoML_2/Ensemble"
+    ]
+}
