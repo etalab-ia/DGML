@@ -1,5 +1,7 @@
 import logging
 
+from open_ml_app.apps.utils import slugify
+
 logger = logging.getLogger()
 
 from get_statistic_summary import *
@@ -35,7 +37,7 @@ def prepare_to_mljar(data, profiling, csv_data=None):
     # 2. Remove pandas profiling rejected variables
     columns_to_drop.extend(rejected_var(profiling))
 
-    # 3. Remove pandas profinling warning variables
+    # 3. Remove pandas profiling warning variables
     columns_to_drop.extend([col for col in data.columns
                             if is_a_warning_col(col, profiling=profiling)])
 
@@ -60,7 +62,7 @@ def prepare_to_mljar(data, profiling, csv_data=None):
 
     # 8. Remove csv-detective detected columns
     if csv_data and "columns" in csv_data:
-        columns_to_drop.extend([col_name for col_name, col_type in csv_data["columns"].items()
+        columns_to_drop.extend([slugify(col_name) for col_name, col_type in csv_data["columns"].items()
                                 if col_type not in ["booleen"]])
 
     # Actually remove columns

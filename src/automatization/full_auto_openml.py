@@ -17,6 +17,7 @@ from supervised.model_framework import ModelFramework
 from get_dataset import latest_catalog, info_from_catalog, load_dataset
 from get_mljar import prepare_to_mljar, generate_mljar
 from get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_dict_data
+from open_ml_app.apps.utils import slugify
 
 load_dotenv("./.env")
 logging.root.handlers = []
@@ -29,9 +30,9 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-DATASETS_PATH = os.getenv("DATASETS_PATH", '../../data/data.gouv/csv_top')
+DATASETS_PATH = os.getenv("DATASETS_PATH", '../../open_ml_app/assets/datasets_50_best/csvs')
 
-OUTPUT_DIR = Path('../../datasets/resources')
+OUTPUT_DIR = Path('../../open_ml_app/assets/datasets/test')
 
 SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
 
@@ -82,7 +83,7 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../../open_
         new_row['task'] = ''
     else:
         new_row[
-            'automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/automl_{slugify(target_variable)}/README.html"
+            'automl_url'] = f"https://etalab-ia.github.io/open_ML/automodels/{id_}/automl_{target_variable}/README.html"
         new_row['target_variable'] = target_variable
         new_row['task'] = task
     new_row['dgf_resource_id'] = id_
@@ -147,6 +148,7 @@ def load_dataset_wrapper(dataset_name: Union[Path, str]):
         encoding = csv_data.get("encoding", "latin-1")
         separator = csv_data.get("separator", ",")
         dataset_df = pd.read_csv(dataset_name, sep=separator, encoding=encoding)
+        dataset_df.rename(columns=slugify, inplace=True)
         id_data = dataset_name.stem
         # Delete file if it is a temp file (in /tmp)
         if "/tmp" in dataset_name.as_posix():
@@ -242,12 +244,11 @@ def main():
                               statistics_summary=statistics_summary, score='')
                 continue
             for target_variable in prep_data.columns:
-                slugified_target_variable = slugify(target_variable)
                 try:
                     logging.info(f"Dataset {id_data}: Testing AutoML models with target var {target_variable}")
                     # drop nan lines
                     notna_data = prep_data[prep_data[target_variable].notna()]
-                    mljar_output_dir = current_output_dir.joinpath(f"automl_{slugified_target_variable}")
+                    mljar_output_dir = current_output_dir.joinpath(f"automl_{target_variable}")
                     automl = generate_mljar(data=notna_data, target_variable=target_variable,
                                             output_dir=mljar_output_dir, automl_mode=automl_mode)
                     get_mljar_info(output_dir=mljar_output_dir, automl_report=automl)
@@ -272,21 +273,7 @@ def main():
                 shutil.rmtree(current_output_dir.as_posix())
 
 
-def slugify(value, allow_unicode=False):
-    """
-    Taken from https://github.com/django/django/blob/master/django/utils/text.py
-    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
-    dashes to single dashes. Remove characters that aren't alphanumerics,
-    underscores, or hyphens. Convert to lowercase. Also strip leading and
-    trailing whitespace, dashes, and underscores.
-    """
-    value = str(value)
-    if allow_unicode:
-        value = unicodedata.normalize('NFKC', value)
-    else:
-        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
-    value = re.sub(r'[^\w\s-]', '', value.lower())
-    return re.sub(r'[-\s]+', '-', value).strip('-_')
+
 
 
 if __name__ == "__main__":
