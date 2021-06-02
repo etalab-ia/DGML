@@ -36,8 +36,6 @@ server = app.server
 BASE_PATH = pathlib.Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
-
-
 # Read data
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
@@ -84,7 +82,8 @@ def get_mljar_info():
     dataset_folders = [pathlib.Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
     for dataset_id in dataset_folders:
         available_target_variables = {var_path.stem.split("_")[1]: var_path for var_path in
-                                      DATA_PATH.joinpath(f"resources/{dataset_id}/").glob("automl*")}
+                                      DATA_PATH.joinpath(f"resources/{dataset_id}/").glob("automl*")
+                                      if var_path.joinpath("leaderboard.csv").exists()}
         dict_dataset_mljar[dataset_id] = generate_mljar_model_tables(available_target_variables.values())
     return dict_dataset_mljar
 
@@ -113,9 +112,11 @@ def description_card():
                           "Cliquez sur un jeu de données pour voir: ses statistiques, les résultats ",
                           "de l'entraînement et test automatique d'algorithmes de Machine Learning sur les données, ainsi que des ",
                           "exemples de code et des réutilisations qui vont vous guider dans la mise en oeuvre de votre modèle de Machine Learning avec ces données.",
-                          html.Br(),"DGML a été développé par le ",
-                          html.A("Lab IA d'Etalab: ", href="https://www.etalab.gouv.fr/datasciences-et-intelligence-artificielle",
-                                 target="_blank"), "visitez notre Github pour en savoir plus sur le projet, sur le choix des jeux de données, pour mieux comprendre les résultats ou nous contacter."],
+                          html.Br(), "DGML a été développé par le ",
+                          html.A("Lab IA d'Etalab: ",
+                                 href="https://www.etalab.gouv.fr/datasciences-et-intelligence-artificielle",
+                                 target="_blank"),
+                          "visitez notre Github pour en savoir plus sur le projet, sur le choix des jeux de données, pour mieux comprendre les résultats ou nous contacter."],
             ),
         ],
     )
@@ -238,7 +239,7 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
     chosen_validation = chosen_topics_df[chosen_topics_df["is_validated"].isin([curated_dict[v] for v in valid])]
     chosen_sort_by_df = chosen_validation.sort_values(by=DATASET_COLUMNS[sort_by],
                                                       ascending=True if sort_order == 'Ascendant' and sort_by != "Validé"
-                                                                        else False)
+                                                      else False)
     cards_list = []
 
     for index, dataset_row in chosen_sort_by_df.iterrows():
@@ -300,6 +301,8 @@ def update_automl_model(target_var, pathname):
     if pathname == app.config['url_base_pathname']:
         return None, None
     dataset_id = pathname.split("/")[-1]
+    if dataset_id not in MLJAR_INFO_DICT or target_var not in MLJAR_INFO_DICT[dataset_id]:
+        return html.P("On n'a pas des modèles AutoML pour ce dataset"), None
     models_table, mljlar_profile_url = MLJAR_INFO_DICT[dataset_id][target_var]
     mljar_profile_badge = generate_badge("Full Mljar Profile", url=mljlar_profile_url.as_posix(),
                                          background_color="#6d92ad",
