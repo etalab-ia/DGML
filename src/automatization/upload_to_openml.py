@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 load_dotenv(verbose=True)
 import logging
 import os
-openml_apikey = os.getenv("openml_apikey")
+#openml_apikey = os.getenv("openml_apikey")
 from pathlib import Path
 
 import pandas as pd
@@ -26,9 +26,13 @@ import openml
 from openml.datasets.functions import create_dataset
 
 from open_ml_app.apps.utils import slugify
+import unidecode
+
+openml.config.server = 'https://www.openml.org/api/v1/xml'
+openml.config.apikey = '3d8c7b5bbe13686aab4cb20ba0956898'
 
 # openml.config.start_using_configuration_for_example()
-openml.config.apikey = openml_apikey
+#openml.config.apikey = openml_apikey
 
 def run(doc_path):
     return 1
@@ -54,39 +58,42 @@ def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path
         if not dataset_file:
             logging.debug(f"There was not dataset for {id_dataset}")
         dataset_metadata = routine(dataset_file[0], user_input_tests=None)
-        df_dataset = pd.read_csv(dataset_file[0], sep=dataset_metadata["separator"],
-                                 encoding=dataset_metadata["encoding"])
+        df_dataset = pd.read_csv(dataset_file[0], sep=dataset_metadata["separator"])
         renamed_cols = {k: slugify(k) for k in df_dataset.columns}
         df_dataset.rename(columns=slugify, inplace=True)
-        # enforce the categorical column to have a categorical dtype
+        #attribute_names = []
+        # enforce the categorical column to have a categorical dtype and eventually get attributes
         for cat_var in df_dataset.select_dtypes(include='object').columns.to_list():
             df_dataset[cat_var] = df_dataset[cat_var].astype('category')
+            #categories = df_dataset[cat_var].unique().to_list()
+            #attribute_names.append((cat_var,categories))
+        #for num_var in df_dataset.select_dtypes(include=['float64','int64']).columns.to_list():
+            #attribute_names.append((num_var,"REAL"))
         name = f"dgf_{id_dataset}"
         dataset_info=main_csv[main_csv['dgf_resource_id']==id_dataset]
         description=dataset_info['title'][dataset_info.index.to_list()[0]]
         target_var = slugify(dataset_info['target_variable'][dataset_info.index.to_list()[0]])
-        try:
-            new_dataset = create_dataset(
-                name=name,
-                description=description,
-                creator="dgml_test",
-                contributor="dgml_test",
-                collection_date="20-05-2021",
-                language="French",
-                licence="Undefined",
-                default_target_attribute=target_var,
-                row_id_attribute=None,
-                ignore_attribute=None,
-                citation="dgf test",
-                attributes='auto',
-                data=df_dataset,
-                version_label="example",
-            )
-            data_id = new_dataset.publish()
-            main_csv.loc[main_csv['dgf_resource_id'] == id_dataset, 'openml_id'] = data_id.id
-            main_csv.to_csv(main_csv_file,index=False)
-        except Exception:
-            pass
+        new_dataset = create_dataset(
+            name=name,
+            description='dgml_test',
+            creator="dgml_test",
+            contributor="dgml_test",
+            collection_date="20-05-2021",
+            language="French",
+            licence="Undefined",
+            default_target_attribute=target_var,
+            row_id_attribute=None,
+            ignore_attribute=None,
+            citation="dgml_test",
+            attributes='auto',
+            data=df_dataset,
+            version_label="example",
+        )
+        data_id = new_dataset.publish()
+        main_csv.loc[main_csv['dgf_resource_id'] == id_dataset, 'openml_id'] = data_id.id
+        main_csv.to_csv(main_csv_file,index=False)
+        #except Exception:
+            #pass
 
 
 
