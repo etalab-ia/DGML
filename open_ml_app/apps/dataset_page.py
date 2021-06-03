@@ -45,7 +45,8 @@ def generate_etalab_cards(experiment_path: Path):
 def generate_reuses_cards(resuses_dict: Dict):
     ml_reuses_dict = filter_reuses(resuses_dict)
     if not ml_reuses_dict:
-        return html.P("Aucune réutilisation disponible pour ce jeu de données 😞 Ajoutez votre réutilisation sur data.gouv.fr !")
+        return html.P(
+            "Aucune réutilisation disponible pour ce jeu de données 😞 Ajoutez votre réutilisation sur data.gouv.fr !")
     list_cards = []
     for reuse in ml_reuses_dict:
         reuse_card = dbc.Card(
@@ -128,23 +129,25 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         html.H5(generate_badge("Accueil", url="/dgml/", background_color="#cadae6", new_tab=False)),
         html.Title("DGML: Data Gouv pour le Machine Learning"),
         html.H2([dataset_dict["title"],
-                                html.Img(id="validated-img2",
-                                         src="data:image/png;base64,{}".format(encoded_image_validated),
-                                         style={'height': '3%', 'width': '3%', "float": "right"},
-                                         hidden=not dataset_dict["is_validated"]),
-                                dbc.Tooltip("Ce jeu de données a été sélectionné et analysé manuellement.",
-                                            target="validated-img2",
-                                            style={'font-size': 13}
-                                            )
+                 html.Img(id="validated-img2",
+                          src="data:image/png;base64,{}".format(encoded_image_validated),
+                          style={'height': '3%', 'width': '3%', "float": "right"},
+                          hidden=not dataset_dict["is_validated"]),
+                 dbc.Tooltip("Ce jeu de données a été sélectionné et analysé manuellement.",
+                             target="validated-img2",
+                             style={'font-size': 13}
+                             )
                  ]),
         html.P(dataset_dict["description"]),
         # html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
         html.H4(
-            generate_badge("Jeu de données sur data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#6d92ad")),
+            generate_badge("Jeu de données sur data.gouv.fr", url=dataset_dict['dgf_dataset_url'],
+                           background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Dictionnaire des variables"),
         dictionary_table,
-        html.H4(generate_badge("Dictionnaire des variables complet", url=dataset_dict['dict_url'], background_color="#6d92ad")),
+        html.H4(generate_badge("Dictionnaire des variables complet", url=dataset_dict['dict_url'],
+                               background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Statistiques Descriptives"),
 

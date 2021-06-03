@@ -66,7 +66,6 @@ def description_card():
     return html.Div(
         id="description-card",
         children=[
-            html.H5("Data Gouv pour le Machine Learning (DGML)"),
             html.H3("Bienvenue sur DGML!"),
             html.Div(
                 id="intro",

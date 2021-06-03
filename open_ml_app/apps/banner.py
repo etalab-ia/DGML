@@ -15,7 +15,8 @@ def get_banner():
                     )],
                 href="https://www.etalab.gouv.fr/"
             ),
-            html.H2(["Data Gouv pour le Machine Learning (DGML)", html.Sup("β")]),
+            html.H2(["Data Gouv pour le Machine Learning (DGML)", html.Sup("β")],
+                    style={"fontFamily": "Acumin"}),
 
             html.A(
                 id='gh-link',
