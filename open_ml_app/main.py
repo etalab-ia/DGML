@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 
 from apps.dataset_page import generate_dataset_page
 from apps.utils import generate_kpi_card, DATASET_COLUMNS, generate_badge, MLJAR_INFO_DICT
+
 BASE_PATH = Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
@@ -55,9 +56,6 @@ def check_if_resource(df):
 
 
 df = check_if_resource(df)
-
-
-
 
 
 def description_card():
