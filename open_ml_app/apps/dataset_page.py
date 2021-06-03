@@ -7,11 +7,11 @@ import dash_core_components as dcc
 import dash_html_components as html
 import pandas as pd
 from pathlib import Path
-from .utils import get_dataset_info, generate_kpi_card, get_reuses, filter_reuses, generate_badge, slugify
+from .utils import get_dataset_info, generate_kpi_card, get_reuses, filter_reuses, generate_badge, slugify, \
+    MLJAR_INFO_DICT
 
 # Path
 
-#jupyter_logo = base64.b64encode(open(DATA_PATH.parent.joinpath("jupyter_logo.png"), 'rb').read()).decode()
 DATA_PATH = Path("./assets/datasets")
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
 
@@ -119,6 +119,7 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
 
     target_vars = [var_path.stem.split("_")[1] for var_path in
                    DATA_PATH.joinpath(f"resources/{dataset_id}/").glob("automl*")]
+    target_vars = list(MLJAR_INFO_DICT[dataset_id].keys())
     statistics_df = generate_stats_df(dataset_dict["dgf_resource_id"], table_type="statistics_summary.csv")
     pandas_profile_url = DATA_PATH.joinpath(f"resources/{dataset_id}/{dataset_id}_pandas_profile.html")
     experiments_url = DATA_PATH.joinpath(f"resources/{dataset_id}/our_experiments/")
@@ -180,7 +181,7 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
                       multi=False,
                       value=target_vars[0],
                       clearable=False,
-                      style={"min-width": "300px", "marginLeft": "3px"}
+                      style={"min-width": "250px", "width": "auto", "marginLeft": "3px"}
 
                   ),
                   html.P("as target variable.", style={"marginLeft": "6px"})

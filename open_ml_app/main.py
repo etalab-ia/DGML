@@ -11,7 +11,8 @@ import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
 
 from apps.dataset_page import generate_dataset_page
-from apps.utils import generate_kpi_card, DATASET_COLUMNS, generate_badge
+from apps.utils import generate_kpi_card, DATASET_COLUMNS, generate_badge, MLJAR_INFO_DICT
+from open_ml_app import DATA_PATH
 from open_ml_app.apps.banner import get_banner
 
 load_dotenv(verbose=True)
@@ -31,10 +32,6 @@ app.title = "DGML"
 
 server = app.server
 # app.config.suppress_callback_exceptions = True
-
-# Path
-BASE_PATH = pathlib.Path(__file__).parent.resolve()
-DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
 
 # Read data
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
@@ -58,37 +55,7 @@ def check_if_resource(df):
 df = check_if_resource(df)
 
 
-def get_mljar_info():
-    def generate_mljar_model_tables(available_target_variables):
-        dict_target_vars = {}
-        for tar_var_path in available_target_variables:
-            display_table_path = tar_var_path.joinpath("leaderboard.csv")
 
-            if not display_table_path.exists():
-                html_table = html.H5("MLJAR profile preview not available")
-            else:
-                table_df = pd.read_csv(display_table_path)
-                table_df["metric_value"] = table_df["metric_value"].round(decimals=3)
-                algorithm_urls = [html.A(html.P(n), href=tar_var_path.joinpath(f"{n}/README.html").as_posix(),
-                                         target="_blank")
-                                  for n in table_df.name]
-                table_df["name"] = algorithm_urls
-                html_table = dbc.Table.from_dataframe(table_df, striped=True, size="sm", borderless=True)
-            dict_target_vars[tar_var_path.stem.split("_")[1]] = (
-                html_table, display_table_path.parent.joinpath("README.html"))
-        return dict_target_vars
-
-    dict_dataset_mljar = {}
-    dataset_folders = [pathlib.Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
-    for dataset_id in dataset_folders:
-        available_target_variables = {var_path.stem.split("_")[1]: var_path for var_path in
-                                      DATA_PATH.joinpath(f"resources/{dataset_id}/").glob("automl*")
-                                      if var_path.joinpath("leaderboard.csv").exists()}
-        dict_dataset_mljar[dataset_id] = generate_mljar_model_tables(available_target_variables.values())
-    return dict_dataset_mljar
-
-
-MLJAR_INFO_DICT = get_mljar_info()
 
 
 def description_card():
