@@ -1,4 +1,5 @@
 import base64
+from pathlib import Path
 
 import dash
 import dash_core_components as dcc
@@ -6,14 +7,15 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 import pandas as pd
-import pathlib
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
 
 from apps.dataset_page import generate_dataset_page
 from apps.utils import generate_kpi_card, DATASET_COLUMNS, generate_badge, MLJAR_INFO_DICT
-from open_ml_app import DATA_PATH
-from open_ml_app.apps.banner import get_banner
+BASE_PATH = Path(__file__).parent.resolve()
+DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
+
+from apps.banner import get_banner
 
 load_dotenv(verbose=True)
 
@@ -47,7 +49,7 @@ add_nb_lines_category(df)
 
 
 def check_if_resource(df):
-    dataset_folders = [pathlib.Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
+    dataset_folders = [Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
     filtered_df = df[df['dgf_resource_id'].isin(dataset_folders)]
     return filtered_df
 

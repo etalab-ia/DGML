@@ -8,8 +8,8 @@ import dash_html_components as html
 
 import pandas as pd
 import requests
+DATA_PATH = Path("./assets/datasets")
 
-from open_ml_app import DATA_PATH
 
 NB_FEATURES_CATEGORIES = {
     "<10": (1, 10),
