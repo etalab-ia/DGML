@@ -9,7 +9,7 @@
 
 
 <style type="text/css">
-    pre { line-height: 125%; margin: 0; }
+    pre { line-height: 125%; }
 td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
 td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
@@ -14393,21 +14393,6 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Preprocessing-fait-par-AutoML">Preprocessing fait par AutoML<a class="anchor-link" href="#Preprocessing-fait-par-AutoML">&#182;</a></h3><p>Il n'est pas évident de comprendre, à partir du rapport html qui est généré, quelles tâches de preprocessing sont faites dans la <strong>pipeline de AutoML</strong> qui permet d' aboutir aux résultats observés. <br>
-Pour mieux comprendre les résultats, on peut s'intéresser au fichier <code>framework.json</code> de chaque modèle. Par exemple, on peut consulter ce fichier pour le modèle <code>Xgboost</code> ici:
-<a href="https://github.com/etalab-ia/DGML/blob/main/docs/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/4_Default_Xgboost/framework.json">https://github.com/etalab-ia/DGML/blob/main/docs/automodels/6ff09b59-84ca-4346-a8d1-3587ed94da15/4_Default_Xgboost/framework.json</a><br>
-On observe:</p>
-<ol>
-<li>L'imputation des <strong>valeurs manquantes</strong> est faite en remplaçant par la valeur médiane</li>
-<li>L'<strong>encoding</strong> des variables catégorielles est fait en transformant le nom de chaque catégorie en un entier</li>
-<li>Les colonnes contenant du <strong>texte</strong> sont transformées à l'aide de <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html"><code>TfidVectorizer</code></a></li>
-</ol>
-<p>Ces informations sont disponibles pour tous les algorithmes.</p>
-
-</div>
 </div>
 </body>
 
