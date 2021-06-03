@@ -9,7 +9,7 @@
 
 
 <style type="text/css">
-    pre { line-height: 125%; }
+    pre { line-height: 125%; margin: 0; }
 td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
 td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
@@ -14366,13 +14366,13 @@ On s'intéressera à une tâche de régression et à une tâche de classificatio
 <span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;long&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;geo_point_2d&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
 
 <span class="c1">#modification du type des variables catégorielles</span>
-<span class="n">categorical_var</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nom_com&#39;</span><span class="p">,</span><span class="s1">&#39;insee_com&#39;</span><span class="p">,</span><span class="s1">&#39;nom_station&#39;</span><span class="p">,</span><span class="s1">&#39;code_station&#39;</span><span class="p">,</span><span class="s1">&#39;typologie&#39;</span><span class="p">,</span><span class="s1">&#39;influence&#39;</span><span class="p">,</span><span class="s1">&#39;nom_poll&#39;</span><span class="p">,</span><span class="s1">&#39;id_poll_ue&#39;</span><span class="p">]</span>
-<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">categorical_var</span><span class="p">:</span>
-    <span class="n">data_conc_pollu</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_conc_pollu</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cat</span><span class="o">.</span><span class="n">codes</span>
+<span class="c1">#categorical_var = [&#39;nom_com&#39;,&#39;insee_com&#39;,&#39;nom_station&#39;,&#39;code_station&#39;,&#39;typologie&#39;,&#39;influence&#39;,&#39;nom_poll&#39;,&#39;id_poll_ue&#39;]</span>
+<span class="c1">#for c in categorical_var:</span>
+    <span class="c1">#data_conc_pollu[c] = data_conc_pollu[c].astype(&#39;category&#39;).cat.codes</span>
 
 <span class="c1">#modification du type des variables en datetime</span>
-<span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;date_debut&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;date_debut&#39;</span><span class="p">],</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S&#39;</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;date_fin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;date_fin&#39;</span><span class="p">],</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S&#39;</span><span class="p">,</span> <span class="n">utc</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1">#data_conc_pollu[&#39;date_debut&#39;] = pd.to_datetime(data_conc_pollu[&#39;date_debut&#39;],format=&#39;%Y-%m-%dT%H:%M:%S&#39;, utc=True)</span>
+<span class="c1">#data_conc_pollu[&#39;date_fin&#39;] = pd.to_datetime(data_conc_pollu[&#39;date_fin&#39;],format=&#39;%Y-%m-%dT%H:%M:%S&#39;, utc=True)</span>
 
 <span class="c1">#création de nouvelles colonnes</span>
 <span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;jour_semaine_debut&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_conc_pollu</span><span class="p">[</span><span class="s1">&#39;date_debut&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">weekday</span>

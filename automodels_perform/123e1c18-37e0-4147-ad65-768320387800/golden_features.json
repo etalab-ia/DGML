@@ -1,0 +1,78 @@
+{
+    "new_features": [
+        {
+            "feature1": "NbChambres",
+            "feature2": "Capacite_accueil",
+            "operation": "multiply",
+            "score": 0.5213398116
+        },
+        {
+            "feature1": "NbChambres",
+            "feature2": "Capacite_accueil",
+            "operation": "sum",
+            "score": 0.5253633652
+        },
+        {
+            "feature1": "Capacite_accueil",
+            "feature2": "Latitude",
+            "operation": "multiply",
+            "score": 0.5439428007
+        },
+        {
+            "feature1": "Capacite_accueil",
+            "feature2": "Latitude",
+            "operation": "sum",
+            "score": 0.5439428007
+        },
+        {
+            "feature1": "Climatisation",
+            "feature2": "Capacite_accueil",
+            "operation": "sum",
+            "score": 0.5488332766
+        },
+        {
+            "feature1": "Capacite_accueil",
+            "feature2": "logement_fumeur",
+            "operation": "diff",
+            "score": 0.5501830171
+        },
+        {
+            "feature1": "seche_linge",
+            "feature2": "Capacite_accueil",
+            "operation": "sum",
+            "score": 0.5521425338
+        },
+        {
+            "feature1": "television_cable",
+            "feature2": "Capacite_accueil",
+            "operation": "sum",
+            "score": 0.5533661855
+        },
+        {
+            "feature1": "Piscine",
+            "feature2": "Capacite_accueil",
+            "operation": "sum",
+            "score": 0.5535836644
+        },
+        {
+            "feature1": "Portier",
+            "feature2": "Capacite_accueil",
+            "operation": "sum",
+            "score": 0.5541491819
+        }
+    ],
+    "new_columns": [
+        "NbChambres_multiply_Capacite_accueil",
+        "NbChambres_sum_Capacite_accueil",
+        "Capacite_accueil_multiply_Latitude",
+        "Capacite_accueil_sum_Latitude",
+        "Climatisation_sum_Capacite_accueil",
+        "Capacite_accueil_diff_logement_fumeur",
+        "seche_linge_sum_Capacite_accueil",
+        "television_cable_sum_Capacite_accueil",
+        "Piscine_sum_Capacite_accueil",
+        "Portier_sum_Capacite_accueil"
+    ],
+    "result_file": "AutoML_2/golden_features.json",
+    "ml_task": "regression"
+}

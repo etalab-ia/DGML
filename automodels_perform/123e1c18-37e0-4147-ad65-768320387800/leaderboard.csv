@@ -1,0 +1,9 @@
+name,model_type,metric_type,metric_value,train_time
+1_Linear,Linear,rmse,40.3491438971192,17.02
+2_Default_LightGBM,LightGBM,rmse,41.88092840947438,35.51
+3_Default_Xgboost,Xgboost,rmse,42.21510236357521,27.57
+4_Default_CatBoost,CatBoost,rmse,41.61128267837446,56.08
+9_LightGBM,LightGBM,rmse,41.716751011358895,34.62
+5_Xgboost,Xgboost,rmse,42.25602686694625,36.88
+1_Linear_GoldenFeatures,Linear,rmse,40.703171962439875,7.44
+Ensemble,Ensemble,rmse,39.31044706541147,0.15
