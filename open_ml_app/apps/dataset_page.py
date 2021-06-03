@@ -169,15 +169,15 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Auto Machine Learning"),
         html.Div([html.P(children=f"Modèles entraînés en utilisant comme target variable : "),
-                  dcc.Dropdown(
-                      id="task-model-select",
-                      options=[{"label": i, "value": i} for i in ["Classification", "Regression"]],
-                      multi=False,
-                      value="Classification",
-                      clearable=False,
-                      style={"min-width": "120px", "marginLeft": "3px"}
-                  ),
-                  html.P("using ", style={"marginLeft": "6px"}),
+                  # dcc.Dropdown(
+                  #     id="task-model-select",
+                  #     options=[{"label": i, "value": i} for i in ["Classification", "Regression"]],
+                  #     multi=False,
+                  #     value="Classification",
+                  #     clearable=False,
+                  #     style={"min-width": "120px", "marginLeft": "3px"}
+                  # ),
+                  # html.P("using ", style={"marginLeft": "6px"}),
                   dcc.Dropdown(
                       id="target-var-model-select",
                       options=[{"label": i, "value": i} for i in target_vars],
@@ -187,7 +187,7 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
                       style={"min-width": "250px", "width": "auto", "marginLeft": "3px"}
 
                   ),
-                  html.P("as target variable.", style={"marginLeft": "6px"})
+                  # html.P("as target variable.", style={"marginLeft": "6px"})
 
                   ], style={"display": 'flex'}),
         html.Div(id="mljar-div", style={"height": "300px", "overflow": 'auto'}),
