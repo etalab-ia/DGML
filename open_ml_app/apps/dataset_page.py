@@ -16,6 +16,15 @@ DATA_PATH = Path("./assets/datasets")
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
 
 
+def generate_code_snippet(openml_id: str):
+    snippet = dcc.Markdown(f'''
+      ```py
+      from sklearn.datasets import fetch_openml
+      X,y =  fetch_openml(data_id={openml_id}, as_frame=True, return_X_y=True)
+      ```
+      ''')
+    return snippet
+
 def generate_etalab_cards(experiment_path: Path):
     notebook_html = [Path(p) for p in glob.glob(experiment_path.as_posix() + "/*.html")]
 
@@ -112,41 +121,42 @@ def generate_stats_df(dataset_id: str, table_type: str = "statistics_summary.csv
 def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
     dataset_id = dataset_url.split("/")[-1]
     dataset_row = datasets_df[datasets_df["dgf_resource_id"] == dataset_id].iloc[0]
+
     if dataset_row.empty:
         return dbc.Container(html.H2("This dataset was not found in our catalog."))
-    dataset_dict = get_dataset_info(dataset_row)
     target_variable = dataset_row["target_variable"]
-    dictionary_table = generate_table(dataset_dict["dgf_resource_id"], table_type="dict_data.csv")
+    openml_id = dataset_row["openml_id"]
+    dictionary_table = generate_table(dataset_row["dgf_resource_id"], table_type="dict_data.csv")
 
     target_vars = [var_path.stem.split("_")[1] for var_path in
                    DATA_PATH.joinpath(f"resources/{dataset_id}/").glob("automl*")]
     target_vars = list(MLJAR_INFO_DICT[dataset_id].keys())
-    statistics_df = generate_stats_df(dataset_dict["dgf_resource_id"], table_type="statistics_summary.csv")
+    statistics_df = generate_stats_df(dataset_row["dgf_resource_id"], table_type="statistics_summary.csv")
     pandas_profile_url = DATA_PATH.joinpath(f"resources/{dataset_id}/{dataset_id}_pandas_profile.html")
     experiments_url = DATA_PATH.joinpath(f"resources/{dataset_id}/our_experiments/")
     container = dbc.Container([
         # html.H4(generate_badge("Go back", url="/openml/", background_color="red")),
         html.H5(generate_badge("Accueil", url="/dgml/", background_color="#cadae6", new_tab=False)),
         html.Title("DGML: Data Gouv pour le Machine Learning"),
-        html.H2([dataset_dict["title"],
+        html.H2([dataset_row["title"],
                  html.Img(id="validated-img2",
                           src="data:image/png;base64,{}".format(encoded_image_validated),
                           style={'height': '3%', 'width': '3%', "float": "right"},
-                          hidden=not dataset_dict["is_validated"]),
+                          hidden=not dataset_row["is_validated"]),
                  dbc.Tooltip("Ce jeu de données a été sélectionné et analysé manuellement.",
                              target="validated-img2",
                              style={'font-size': 13}
                              )
                  ]),
-        html.P(dataset_dict["description"]),
+        html.P(dataset_row["description"]),
         # html.H4(generate_badge("Dataset in data.gouv.fr", url=dataset_dict['dgf_dataset_url'], background_color="#5783B7")),
         html.H4(
-            generate_badge("Jeu de données sur data.gouv.fr", url=dataset_dict['dgf_dataset_url'],
+            generate_badge("Jeu de données sur data.gouv.fr", url=dataset_row['dgf_dataset_url'],
                            background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Dictionnaire des variables"),
         dictionary_table,
-        html.H4(generate_badge("Dictionnaire des variables complet", url=dataset_dict['dict_url'],
+        html.H4(generate_badge("Dictionnaire des variables complet", url=dataset_row['dict_url'],
                                background_color="#6d92ad")),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Statistiques Descriptives"),
@@ -194,15 +204,21 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         html.H4(id="mljar-link-badge", children=None),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Réutilisations Machine Learning (data.gouv.fr)"),
-        generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
+        generate_reuses_cards(get_reuses(dataset_row["dgf_dataset_id"])),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Nos Expériences"),
         # html.P("Check out our experiments on this dataset : "),
         generate_etalab_cards(experiments_url),
         # html.H4(generate_badge("See notebook", url=dataset_dict['etalab_xp_url'], background_color="#cadae6")),
         html.Hr(style={"marginBottom": "20px"}),
-        # html.H3("Load Data"),
-        # html.Hr(style={"marginBottom": "20px"}),
+        html.H3("Load Data Snippet"),
+        html.P(["This dataset has been uploaded to the",
+                html.A(" OpenML", href="https://www.openml.org/search?type=data", target="_blank"),
+                " dataset repository. You can quickly load it in Python thanks to the",
+                html.A(" scikit-learn", href="https://scikit-learn.org/stable/", target="_blank"),
+               " loader: "]),
+        generate_code_snippet(openml_id=str(openml_id)),
+        html.Hr(style={"marginBottom": "20px"}),
     ])
 
     return container
