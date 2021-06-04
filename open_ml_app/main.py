@@ -1,4 +1,5 @@
 import base64
+from pathlib import Path
 
 import dash
 import dash_core_components as dcc
@@ -6,12 +7,16 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 
 import pandas as pd
-import pathlib
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
 
 from apps.dataset_page import generate_dataset_page
-from apps.utils import generate_kpi_card, DATASET_COLUMNS
+from apps.utils import generate_kpi_card, DATASET_COLUMNS, generate_badge, MLJAR_INFO_DICT
+
+BASE_PATH = Path(__file__).parent.resolve()
+DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
+
+from apps.banner import get_banner
 
 load_dotenv(verbose=True)
 
@@ -31,12 +36,6 @@ app.title = "DGML"
 server = app.server
 # app.config.suppress_callback_exceptions = True
 
-# Path
-BASE_PATH = pathlib.Path(__file__).parent.resolve()
-DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
-
-
-
 # Read data
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
 df = pd.read_csv(DATA_PATH.joinpath("open_data_ml_datasets.csv"))
@@ -51,9 +50,10 @@ add_nb_lines_category(df)
 
 
 def check_if_resource(df):
-    folders = [pathlib.Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
-    filtered_df = df[df['dgf_resource_id'].isin(folders)]
+    dataset_folders = [Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
+    filtered_df = df[df['dgf_resource_id'].isin(dataset_folders)]
     return filtered_df
+
 
 df = check_if_resource(df)
 
@@ -66,7 +66,6 @@ def description_card():
     return html.Div(
         id="description-card",
         children=[
-            html.H5("Data Gouv pour le Machine Learning (DGML)"),
             html.H3("Bienvenue sur DGML!"),
             html.Div(
                 id="intro",
@@ -79,9 +78,11 @@ def description_card():
                           "Cliquez sur un jeu de données pour voir: ses statistiques, les résultats ",
                           "de l'entraînement et test automatique d'algorithmes de Machine Learning sur les données, ainsi que des ",
                           "exemples de code et des réutilisations qui vont vous guider dans la mise en oeuvre de votre modèle de Machine Learning avec ces données.",
-                          html.Br(),"DGML a été développé par le ",
-                          html.A("Lab IA d'Etalab: ", href="https://www.etalab.gouv.fr/datasciences-et-intelligence-artificielle",
-                                 target="_blank"), "visitez notre Github pour en savoir plus sur le projet, sur le choix des jeux de données, pour mieux comprendre les résultats ou nous contacter."],
+                          html.Br(), "DGML a été développé par le ",
+                          html.A("Lab IA d'Etalab: ",
+                                 href="https://www.etalab.gouv.fr/datasciences-et-intelligence-artificielle",
+                                 target="_blank"),
+                          "visitez notre Github pour en savoir plus sur le projet, sur le choix des jeux de données, pour mieux comprendre les résultats ou nous contacter."],
             ),
         ],
     )
@@ -98,35 +99,35 @@ def generate_control_card():
             html.P("Tâche"),
             dcc.Checklist(
                 id="task-select",
-                options=[{"label": i, "value": i} for i in task_list],
+                options=[{"label": f" {i}", "value": i} for i in task_list],
                 value=task_list,
             ),
             html.Br(),
             html.P("Nombre de colonnes"),
             dcc.Checklist(
                 id="features-select",
-                options=[{"label": i, "value": i} for i in nb_features_bins],
+                options=[{"label": f" {i}", "value": i} for i in nb_features_bins],
                 value=nb_features_bins,
             ),
             html.Br(),
             html.P("Nombre de lignes"),
             dcc.Checklist(
                 id="lines-select",
-                options=[{"label": i, "value": i} for i in nb_lines_bins],
+                options=[{"label": f" {i}", "value": i} for i in nb_lines_bins],
                 value=nb_lines_bins,
             ),
             html.Br(),
             html.P("Validation"),
             dcc.Checklist(
                 id="valid-select",
-                options=[{'label': l, "value": l} for l in ["Sélectionné", "Automatique"]],
+                options=[{'label': f" {l}", "value": l} for l in ["Sélectionné", "Automatique"]],
                 value=["Sélectionné", "Automatique"],
             ),
             html.Br(),
             html.P("Thème"),
             dcc.Dropdown(
                 id="topic-select",
-                options=[{"label": i, "value": i} for i in topic_list],
+                options=[{"label": f" {i}", "value": i} for i in topic_list],
                 multi=True,
                 value=topic_list,
                 clearable=False
@@ -135,7 +136,7 @@ def generate_control_card():
             html.P("Filtrer par:"),
             dcc.Dropdown(
                 id="sort-by",
-                options=[{"label": i, "value": i} for i in DATASET_COLUMNS],
+                options=[{"label": f" {i}", "value": i} for i in DATASET_COLUMNS],
                 value="Validé",
                 clearable=False
             ),
@@ -148,7 +149,7 @@ def generate_control_card():
             html.Br(),
             html.Div(
                 id="reset-btn-outer",
-                children=html.Button(id="reset-btn", children="Reset", n_clicks=0),
+                children=html.Button(id="reset-btn", children="Reset", n_clicks=0, hidden=True),
             ),
 
         ],
@@ -160,25 +161,24 @@ app_layout = html.Div(
     id="app-container",
     children=[
         # Banner
-        # html.Div(
-        #     id="banner",
-        #     className="banner",
-        #     children=[html.Img(src=app.get_asset_url("plotly_logo.png"))],
-        # ),
-        # Left column
-        html.Div(
-            id="left-column",
-            className="four columns",
-            children=[description_card(), generate_control_card()]
-        ),
-        # Right column
-        html.Div(
-            id="right-column",
-            className="seven columns",
-            children=[
-                html.Div(id="dataset-card-div")
-            ],
-        ),
+        get_banner(),
+        html.Div(id='app-page-content',
+                 children=[
+                     # Left column
+                     html.Div(
+                         id="left-column",
+                         className="four columns",
+                         children=[description_card(), generate_control_card()]
+                     ),
+                     # Right column
+                     html.Div(
+                         id="right-column",
+                         className="seven columns",
+                         children=[
+                             html.Div(id="dataset-card-div")
+                         ],
+                     )
+                 ])
     ],
 )
 
@@ -205,7 +205,7 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
     chosen_validation = chosen_topics_df[chosen_topics_df["is_validated"].isin([curated_dict[v] for v in valid])]
     chosen_sort_by_df = chosen_validation.sort_values(by=DATASET_COLUMNS[sort_by],
                                                       ascending=True if sort_order == 'Ascendant' and sort_by != "Validé"
-                                                                        else False)
+                                                      else False)
     cards_list = []
 
     for index, dataset_row in chosen_sort_by_df.iterrows():
@@ -255,7 +255,26 @@ def display_page(pathname):
     if pathname == app.config['url_base_pathname']:
         return app_layout
     else:
-        return generate_dataset_page(pathname, df, app)
+        return generate_dataset_page(pathname, df)
+
+
+#
+@app.callback([Output('mljar-div', 'children'),
+               Output('mljar-link-badge', 'children')],
+              [Input('target-var-model-select', 'value'),
+               Input('url', 'pathname')])
+def update_automl_model(target_var, pathname):
+    if pathname == app.config['url_base_pathname']:
+        return None, None
+    dataset_id = pathname.split("/")[-1]
+    if dataset_id not in MLJAR_INFO_DICT or target_var not in MLJAR_INFO_DICT[dataset_id]:
+        return html.P("On n'a pas des modèles AutoML pour ce dataset"), None
+    models_table, mljlar_profile_url = MLJAR_INFO_DICT[dataset_id][target_var]
+    mljar_profile_badge = generate_badge("Full Mljar Profile", url=mljlar_profile_url.as_posix(),
+                                         background_color="#6d92ad",
+                                         new_tab=True)
+
+    return models_table, mljar_profile_badge
 
 
 @app.callback(

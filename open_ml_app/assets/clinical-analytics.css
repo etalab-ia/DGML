@@ -10,6 +10,89 @@
     src: url("Acumin-RPro.otf") format("opentype");
 }
 
+#app-page-content {
+    margin: 0px;
+    margin-top: 0px; /* hide border between header and content */
+    width: 100%;
+    height: auto;
+    min-height: calc(100vh - 60px);
+    position: absolute;
+    top: 60px;
+}
+
+#app-page-header {
+    width: 100%;
+    height: 60px !important;
+    position: absolute;
+    top: 0px;
+    border-bottom-color: #eaeaea;
+    border-bottom-style: solid;
+}
+
+#app-page-header > a > img {
+    height: 57px;
+    width: 90px;
+    float: left;
+    padding: 15px;
+    padding-bottom: 0px;
+    transition-duration: 500ms;
+    vertical-align: middle;
+}
+
+#app-page-header > a > img:hover {
+    filter: brightness(2);
+}
+
+#app-page-header h2 {
+    font-size: 22pt;
+    font-family: 'Open Sans';
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+    position: absolute;
+    top: -5px;
+    display: inline-block;
+}
+
+#dashbio-logo > img {
+    width: 90px;
+    vertical-align: middle;
+    horizontal-align: middle;
+    height: 57px;
+    margin-bottom: 2cm;
+
+}
+
+#app-page-header > img {
+    height: 36px;
+    float: right;
+    margin-top: 12px;
+    margin-right: 10px;
+    transition-duration: 500ms;
+}
+#gh-link {
+    text-decoration: none;
+    font-size: 10pt;
+    font-family: sans-serif;
+    color: white;
+    border: solid 1px white;
+    border-radius: 2px;
+    padding: 2px;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-weight: 100;
+    position: relative;
+    top: 15px;
+    float: right;
+    margin-right: 20px;
+    margin-left: 0px;
+    transition-duration: 400ms;
+}
+#gh-link:hover {
+    color: #dfe8f3 !important;
+    border-color: #dfe8f3 !important;
+}
+
 
 #app-container {
     width: 100%;
