@@ -1,9 +1,46 @@
+'''
+This script is the processing pipeline used to create the "automatic" datasets files shown in DGML.
+ The automatic datasets are those that are not curated but created by this script.
+ There are ___ steps in this pipeline:
+
+   1. Get csv files' paths from dataset_path input parameter
+   2. Filter csv paths according to a specific_ids text file
+   3. Load DGF catalog to retrieve info about datasets
+   4. For each dataset (csv) path, do:
+        a. Return the csv dataframe and its metadata load_wrapper()
+        b. Create an output folder with the id of the dataset as name
+        c. Discard datasets not passing the first level constraints
+        d. Generate pandas profiling. Create file {id}_pandas_profile.html
+        e. Generate pandas profiling summary. Create file statistics_summary.csv
+        f. Get data dictionary. Create file dict_data.csv
+        g. Returns clean dataset before mljar.
+        h. Discard empty datasets and datasets with less than 3 columns. Save
+           its pandas profile report.
+        i. For each target variable (column) in the dataset, do:
+            1. Remove missing values in target variable column
+            2. Run mljar process. Save output files in {dataset_id}/{automl_target-var}/
+            3. Compute and store a score to this mljar run with this dataset and with this target var
+            4. Add a new line to the open_data_ml_datasets.csv file with the info of this dataset
+               (pandas profile + mljar profile for this run, etc)
+
+
+
+Notes:
+    1. We remove non-ascii characters within the categorical (nominal) values (it does not work if we don't do this)
+    2. We remove the lines with missing values in the target variable
+
+Usage:
+    my_script.py <datasets_folder> <output_snippet_folder> <main_csv_file> [options]
+
+Arguments:
+    <datasets_folder>                     A folder with dgf resources ids and csv files within
+    <output_snippet_folder>               A folder with dgf resources ids and csv files within
+    <main_csv_file>                       The path of the main csv file used in the website
+'''
+
 import glob
 import logging
 import os
-import re
-import shutil
-import unicodedata
 from pathlib import Path
 from typing import Union, Optional
 from pandas.util import hash_pandas_object
@@ -15,8 +52,8 @@ from fs.glob import GlobMatch
 from supervised.model_framework import ModelFramework
 
 from get_dataset import latest_catalog, info_from_catalog, load_dataset
-from get_mljar import prepare_to_mljar, generate_mljar
-from get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_dict_data
+from get_mljar import prepare_for_mljar, generate_mljar
+from get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_data_dictionary
 from open_ml_app.apps.utils import slugify
 
 load_dotenv("./.env")
@@ -36,10 +73,16 @@ OUTPUT_DIR = Path('../../open_ml_app/assets/datasets/test')
 
 SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
 
-AUTOML_MODE = 'Perform'
+AUTOML_MODE = 'Perform'  # ["Perform", "Explain"]
 
 
 def get_specific_ids(specific_ids_path: Optional[Path] = None):
+    """
+    If there is a specific_ids_path file, take the ids within and process them
+    exclusively.
+    :param specific_ids_path:  The path of a text file with id per line
+    :return: List of read ids from the specific_ids_path file
+    """
     if not SPECIFIC_IDS_PATH or not specific_ids_path.exists():
         return
     with open(specific_ids_path) as filo:
@@ -54,6 +97,12 @@ def create_output_folder(output_dir):
 
 
 def get_mljar_info(output_dir, automl_report):
+    """
+
+    :param output_dir:
+    :param automl_report:
+    :return:
+    """
     # 1. Move the leaderboard.csv file (automl summary) to the upper level
     automl_report.get_leaderboard().to_csv(output_dir.joinpath("leaderboard.csv"), index=False)
 
@@ -165,6 +214,11 @@ def load_dataset_wrapper(dataset_name: Union[Path, str]):
 
 def get_csv_paths(datasets_path: str):
     def create_files_iterator(remote_globber: GlobMatch):
+        """
+
+        :param remote_globber:
+        :return:
+        """
         temp_path = Path("/tmp").joinpath(Path(remote_globber.path).stem.split("--")[1] + ".csv")
         with open(temp_path, "wb") as tmp:
             my_fs.download(remote_globber.path, tmp)
@@ -207,7 +261,6 @@ def main():
     automl_mode = AUTOML_MODE
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for ix, dataset_path in enumerate(dataset_paths):
-        current_output_dir = None
         if specific_ids and dataset_path.stem not in specific_ids:
             logging.warning(f"We are only analysing specific ids. Id {dataset_path.stem} is not a specified id. Trying "
                             f"next...")
@@ -231,10 +284,11 @@ def main():
             logging.info(f"Dataset {id_data}: passed the first-level constraints")
             profiling = generate_pandas_profiling(id_data, data_df, output_dir=current_output_dir, config_path=None)
             statistics_summary = get_statistics_summary(profiling, output_dir=current_output_dir)
-            get_dict_data(id_data, profiling, output_dir=current_output_dir)
+
+            get_data_dictionary(profiling, output_dir=current_output_dir)
             logging.info(f"Dataset {id_data}: Successfully generated Pandas Profiling.")
-            prep_data, columns_to_drop = prepare_to_mljar(data=data_df, profiling=profiling,
-                                                          csv_data=csv_detective_data)
+            prep_data, columns_to_drop = prepare_for_mljar(data=data_df, profiling=profiling,
+                                                           csv_data=csv_detective_data)
             logging.info(f"Dataset {id_data}: removed the following columns: {columns_to_drop}")
             logging.info(f"Dataset {id_data}: the following columns are left: {list(prep_data.columns)}")
             if prep_data is not None and len(prep_data.columns) < 3:
@@ -268,12 +322,6 @@ def main():
 
         except Exception:
             logging.exception(f"Dataset {dataset_path}: Fatal error while treating file")
-        finally:
-            if current_output_dir is not None and not len(list(current_output_dir.iterdir())):
-                shutil.rmtree(current_output_dir.as_posix())
-
-
-
 
 
 if __name__ == "__main__":

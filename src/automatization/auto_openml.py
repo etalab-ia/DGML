@@ -84,10 +84,10 @@ def main():
         if check_constraints(data):
             profiling = generate_pandas_profiling(id, data, output_dir=output_dir, config_path=None)
             statistics_summary = get_statistics_summary(profiling, output_dir=output_dir)
-            get_dict_data(id, profiling, output_dir=output_dir)
+            get_data_dictionary(profiling, output_dir=output_dir)
             print("Successfully generated Pandas Profiling.")
-            prep_data = prepare_to_mljar(data=data, target_variable=param["target"],
-                                         profiling=profiling)
+            prep_data = prepare_for_mljar(data=data, target_variable=param["target"],
+                                          profiling=profiling)
             automl = generate_mljar(data=prep_data, target_variable=param["target"], output_dir=output_dir)
             get_mljar_info(output_dir=output_dir, automl_report=automl)
             # plot_mljar_table(id)

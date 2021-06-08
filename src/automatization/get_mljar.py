@@ -18,7 +18,7 @@ from supervised.automl import AutoML
 # d. drop columns with 100% of distinct values (such as IDs)
 
 
-def prepare_to_mljar(data, profiling, csv_data=None):
+def prepare_for_mljar(data, profiling, csv_data=None):
     """This function returns a dataset properly prepared to be used by mljar
     :param csv_data:
     :param:     id: id of the dgf resource (must be a txt, csv or xls file)
