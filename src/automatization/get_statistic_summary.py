@@ -57,7 +57,7 @@ def get_statistics_summary(profiling, output_dir):
     return df
 
 
-def get_dict_data(id, profiling, output_dir):
+def get_data_dictionary(profiling, output_dir):
     """This function returns a csv file called dict_data containing a list of all the variables together with their detected types and
     two empty columns. These two should then be manually updated if a dictionary is available. If not, manually delete the two central columns.
     -----------------------------------------------
