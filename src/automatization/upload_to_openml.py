@@ -32,7 +32,7 @@ from openml.datasets.functions import create_dataset
 
 from open_ml_app.apps.utils import slugify
 
-# openml.config.start_using_configuration_for_example()
+openml.config.start_using_configuration_for_example()
 openml.config.apikey = openml_apikey
 
 
@@ -40,7 +40,6 @@ def run(doc_path):
     return 1
 
 
-# TO DO: This code retrieves the info from the main_csv, we need to include it directly into full_auto_openml.py
 
 def split_cell_value(value):
     if len(value) > 256:
@@ -74,7 +73,7 @@ def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path
 
         dataset_info = main_csv[main_csv['dgf_resource_id'] == id_dataset]
         description = dataset_info['title'][dataset_info.index.to_list()[0]]
-
+        description = description.encode('utf-8').decode('ascii', 'ignore')
         target_var = slugify(dataset_info['target_variable'][dataset_info.index.to_list()[0]])
         df_dataset.rename(columns=slugify, inplace=True)
 
