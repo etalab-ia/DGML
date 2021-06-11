@@ -1,6 +1,6 @@
 csv-detective==0.4.1
 dash-bootstrap-components==0.11.3
-fastapi==0.63.0
+fastapi==0.65.2
 imagehash==4.2.0
 jupyter==1.0.0
 markdown==3.3.4
