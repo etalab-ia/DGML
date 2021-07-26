@@ -8,9 +8,9 @@ import os
 def latest_catalog():
     """This function returns the pandas dataframe of the latest version of dgf resource catalog
     (https://www.data.gouv.fr/en/datasets/catalogue-des-donnees-de-data-gouv-fr/#_)"""
-    #dgf_catalog = 'https://www.data.gouv.fr/fr/datasets/r/4babf5f2-6a9c-45b5-9144-ca5eae6a7a6d'  # latest url of the catalog
-    dgf_catalog = './latest_dgf_catalog.zip' # latest downloaded csv
-    dgf_catalog_df = pd.read_csv(dgf_catalog, delimiter=";", compression='zip',error_bad_lines=False)
+    # dgf_catalog = 'https://www.data.gouv.fr/fr/datasets/r/4babf5f2-6a9c-45b5-9144-ca5eae6a7a6d'  # latest url of the catalog
+    dgf_catalog = './data/latest_dgf_catalog.zip'  # latest downloaded csv
+    dgf_catalog_df = pd.read_csv(dgf_catalog, delimiter=";", compression='zip', error_bad_lines=False)
     pd.set_option('display.max_colwidth', None)  # to stop pandas from "cutting" long urls
     return dgf_catalog_df
 
@@ -39,6 +39,7 @@ def info_from_catalog(id: str, catalog: pd.DataFrame):
     catalog_dict = {'url_resource': url, 'format': file_format, 'url_dgf': dgf_page, 'format_is_nan': format_is_nan}
     return catalog_dict
 
+
 def is_referenced(url, id, catalog_info):
     """Given the url of  a resource from the catalog, this function returns True if the resource is referenced by data.gouv.fr
     False otherwise
@@ -49,7 +50,7 @@ def is_referenced(url, id, catalog_info):
     downloadable = 'attachment' in headers.get('Content-Disposition', '')
     # download_zip = 'application/zip' in headers.get('Content-Type','')
     if not downloadable:
-        #if not os.path.isfile(f'./datasets/resources/{id}/{id}.csv') :
+        # if not os.path.isfile(f'./datasets/resources/{id}/{id}.csv') :
         if not Path().home().joinpath(f'open_ML/datasets/resources/{id}/{id}.csv'):
             raise Exception(f'This id is associated to a dataset not referenced by data.gouv.fr. \n '
                             f'Please download the dataset from here: {dgf_page}\n'
@@ -77,10 +78,12 @@ def detect_csv(request):
     url_dict = {'encoding': encoding, 'separator': sep}
     return url_dict
 
-def load_dataset_without_url(id,):
+
+def load_dataset_without_url(id, ):
     pass
 
-def load_dataset(id, catalog_info, output_dir = None):
+
+def load_dataset(id, catalog_info, output_dir=None):
     """This function loads a csv in the datasets folder/creates a pandas dataframe given its id if the dataset is referenced by data.gouv.fr.
     Otherwise, you get an error and you should manually upload it.
     Remark: on data.gouv.fr, datasets are available in various "formats": json, shp, csv, zip, document, xls, pdf, html, xlsx,geojson etc.
@@ -133,7 +136,8 @@ def load_dataset(id, catalog_info, output_dir = None):
                 'a compressed file having one of these extensions.')
         return dataframe
     else:
-        dataframe = pd.read_csv(Path().home().joinpath(f'open_ML/datasets/resources/{id}/{id}.csv'), sep=None, engine='python')
+        dataframe = pd.read_csv(Path().home().joinpath(f'open_ML/datasets/resources/{id}/{id}.csv'), sep=None,
+                                engine='python')
         return dataframe
 
 

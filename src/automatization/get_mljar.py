@@ -4,7 +4,7 @@ from open_ml_app.apps.utils import slugify
 
 logger = logging.getLogger()
 
-from get_statistic_summary import *
+from src.automatization.get_statistic_summary import *
 import numpy as np
 from sklearn.model_selection import train_test_split
 from supervised.automl import AutoML

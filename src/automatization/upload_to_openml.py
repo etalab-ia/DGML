@@ -49,13 +49,13 @@ def split_cell_value(value):
         return value
 
 
-def main(datasets_folder: Path, output_snippet_folder: Path, main_csv_file: Path):
+def main(datasets_folder: Path, output_folder: Path, main_csv_file: Path):
     doc_paths = []
     job_output = []
     if not datasets_folder.exists():
         raise FileNotFoundError(datasets_folder.as_posix())
-    if not output_snippet_folder.exists():
-        raise FileNotFoundError(output_snippet_folder.as_posix())
+    if not output_folder.exists():
+        raise FileNotFoundError(output_folder.as_posix())
     if not main_csv_file.exists():
         raise FileNotFoundError(main_csv_file.as_posix())
 
@@ -133,5 +133,5 @@ if __name__ == '__main__':
     datasets_folder = Path(parser.datasets_folder)
     output_snippet_folder = Path(parser.output_snippet_folder)
     main_csv_file = Path(parser.main_csv_file)
-    main(datasets_folder=datasets_folder, output_snippet_folder=output_snippet_folder,
+    main(datasets_folder=datasets_folder, output_folder=output_snippet_folder,
          main_csv_file=main_csv_file)

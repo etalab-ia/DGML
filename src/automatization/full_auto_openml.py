@@ -29,13 +29,6 @@ Notes:
     1. We remove non-ascii characters within the categorical (nominal) values (it does not work if we don't do this)
     2. We remove the lines with missing values in the target variable
 
-Usage:
-    my_script.py <datasets_folder> <output_snippet_folder> <main_csv_file> [options]
-
-Arguments:
-    <datasets_folder>                     A folder with dgf resources ids and csv files within
-    <output_snippet_folder>               A folder with dgf resources ids and csv files within
-    <main_csv_file>                       The path of the main csv file used in the website
 '''
 
 import glob
@@ -43,6 +36,8 @@ import logging
 import os
 from pathlib import Path
 from typing import Union, Optional
+
+import fire
 from pandas.util import hash_pandas_object
 from dotenv import load_dotenv
 import fs
@@ -50,10 +45,10 @@ import pandas as pd
 from csv_detective.explore_csv import routine
 from fs.glob import GlobMatch
 from supervised.model_framework import ModelFramework
-
-from get_dataset import latest_catalog, info_from_catalog, load_dataset
-from get_mljar import prepare_for_mljar, generate_mljar
-from get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_data_dictionary
+#
+from src.automatization.get_dataset import latest_catalog, info_from_catalog, load_dataset
+from src.automatization.get_mljar import prepare_for_mljar, generate_mljar
+from src.automatization.get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_data_dictionary
 from open_ml_app.apps.utils import slugify
 
 load_dotenv("./.env")
@@ -67,13 +62,11 @@ logging.basicConfig(
         logging.StreamHandler()
     ]
 )
-DATASETS_PATH = os.getenv("DATASETS_PATH", '../../open_ml_app/assets/datasets_50_best/csvs')
+# DATASETS_PATH = os.getenv("DATASETS_PATH", '../../open_ml_app/assets/datasets_50_best/csvs')
 
-OUTPUT_DIR = Path('../../open_ml_app/assets/datasets/test')
+# SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
 
-SPECIFIC_IDS_PATH = Path("../../data/specific_ids.txt")
-
-AUTOML_MODE = 'Perform'  # ["Perform", "Explain"]
+# AUTOML_MODE = 'Perform'  # ["Perform", "Explain"]
 
 
 def get_specific_ids(specific_ids_path: Optional[Path] = None):
@@ -83,7 +76,7 @@ def get_specific_ids(specific_ids_path: Optional[Path] = None):
     :param specific_ids_path:  The path of a text file with id per line
     :return: List of read ids from the specific_ids_path file
     """
-    if not SPECIFIC_IDS_PATH or not specific_ids_path.exists():
+    if specific_ids_path is None or not specific_ids_path.exists():
         return
     with open(specific_ids_path) as filo:
         specific_ids = [l.strip() for l in filo.readlines()]
@@ -212,7 +205,7 @@ def load_dataset_wrapper(dataset_name: Union[Path, str]):
     return dataset_df, id_data, csv_data
 
 
-def get_csv_paths(datasets_path: str):
+def get_csv_paths(datasets_path: Path):
     def create_files_iterator(remote_globber: GlobMatch):
         """
 
@@ -226,8 +219,10 @@ def get_csv_paths(datasets_path: str):
 
     """Return the paths of each dataset in the source CSVs folder, whether local or through a sftp connection"""
     # 1. If the dataset_path is local, just return the lisst of csv files
-    if "sftp" not in datasets_path:
-        csv_paths = [Path(p) for p in glob.glob(DATASETS_PATH + f"/*.csv", recursive=True)]
+    if "sftp" not in datasets_path.as_posix():
+        if not datasets_path.exists():
+            raise FileNotFoundError(f"File {datasets_path} not found. Please choose another csv folder")
+        csv_paths = [Path(p) for p in glob.glob(datasets_path.as_posix() + f"/*.csv", recursive=True)]
     else:
         # 2. Try to connect to this remote resource (only dealing with sftp)
         # noinspection PyBroadException
@@ -249,31 +244,46 @@ def generate_score(statistics_summary, columns_to_drop, automl):
     prop_missing = statistics_summary['Percentage of missing cells'] / 100
     prop_not_retained = len(columns_to_drop) / statistics_summary['Number of variables']
     best_metric = automl.get_leaderboard()['metric_value'].min()
-    score = 1 / (0.3 * (prop_missing) + 0.4 * (prop_not_retained) + 0.3 * (best_metric))
+    score = 1 / (0.3 * prop_missing + 0.4 * prop_not_retained + 0.3 * best_metric)
     return score
 
 
-def main():
-    global OUTPUT_DIR
+def main(dataset_path: str,
+         output_dir: str,
+         specific_ids_path: str = None,
+         automl_mode: str = "Perform"):
+    """
+
+    :param dataset_path: Folder with CSVs files
+    :param output_dir: Folder were the output is saved
+    :param specific_ids_path: Path to a text file with a file name per line. Only this files will be treated
+    :param automl_mode: "perform" ou "explain". Perform maximizes the model performance. Explain maximizes the
+                        explicability of the models.
+    :return: None
+    """
+
+
     seen_dataframes = set()
-    dataset_paths = get_csv_paths(DATASETS_PATH)
-    specific_ids = get_specific_ids(SPECIFIC_IDS_PATH)
-    automl_mode = AUTOML_MODE
+    output_dir = Path(output_dir)
+    dataset_path = Path(dataset_path)
+    dataset_paths = get_csv_paths(dataset_path)
+    specific_ids = get_specific_ids(specific_ids_path)
+    automl_mode = automl_mode
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
-    for ix, dataset_path in enumerate(dataset_paths):
+    for ix, path in enumerate(dataset_paths):
         if specific_ids and dataset_path.stem not in specific_ids:
-            logging.warning(f"We are only analysing specific ids. Id {dataset_path.stem} is not a specified id. Trying "
+            logging.warning(f"We are only analysing specific ids. Id {path.stem} is not a specified id. Trying "
                             f"next...")
             continue
         try:
-            data_df, id_data, csv_detective_data = load_dataset_wrapper(dataset_path)
+            data_df, id_data, csv_detective_data = load_dataset_wrapper(path)
             df_hash = hash_pandas_object(data_df).sum()
             if df_hash in seen_dataframes:
                 logging.info(f"Dataset {id_data}: Same hash dataset already treated. Skipping dataset.")
                 continue
             seen_dataframes.add(df_hash)
             logging.info(f"Treating Dataset {id_data} ({ix})")
-            current_output_dir = OUTPUT_DIR.joinpath(id_data)
+            current_output_dir = output_dir.joinpath(id_data)
             create_output_folder(current_output_dir)
             logging.info(f"Dataset {id_data}: Successfully loaded dataset.")
             if not check_constraints(data_df):
@@ -294,7 +304,7 @@ def main():
             if prep_data is not None and len(prep_data.columns) < 3:
                 logging.warning(f"Dataset {id_data}: We have less than 3 columns. "
                                 f"We will only generate the pandas profiling")
-                fill_main_csv(id_=id_data, catalog=catalog, output_dir=OUTPUT_DIR,
+                fill_main_csv(id_=id_data, catalog=catalog, output_dir=output_dir,
                               statistics_summary=statistics_summary, score='')
                 continue
             for target_variable in prep_data.columns:
@@ -313,7 +323,7 @@ def main():
                                            automl=automl)
                     logging.info(f"Dataset {id_data}: The score is: {score[0]}")
                     fill_main_csv(id_=id_data, catalog=catalog, statistics_summary=statistics_summary,
-                                  output_dir=OUTPUT_DIR, target_variable=target_variable,
+                                  output_dir=output_dir, target_variable=target_variable,
                                   task=task, score=score[0], automl=automl)
                     logging.info(f"Dataset {id_data}: Added info to main datasets csv.")
                 except Exception:
@@ -321,8 +331,8 @@ def main():
                     continue
 
         except Exception:
-            logging.exception(f"Dataset {dataset_path}: Fatal error while treating file")
+            logging.exception(f"Dataset {path}: Fatal error while treating file")
 
 
 if __name__ == "__main__":
-    main()
+    fire.Fire(main)

@@ -1,6 +1,6 @@
 import pandas_profiling
 from pandas_profiling import ProfileReport
-from get_dataset import *
+from src.automatization.get_dataset import *
 import matplotlib
 
 matplotlib.use('Agg')
