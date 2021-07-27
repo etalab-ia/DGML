@@ -34,20 +34,18 @@ def info_from_catalog(id: str, catalog: pd.DataFrame):
 
 
 def is_referenced(url, id, catalog_info):
-    """Given the url of  a resource from the catalog, this function returns True if the resource is referenced by data.gouv.fr
+    """Given the url of  a resource from the catalog, this function returns True
+    if the resource is referenced by data.gouv.fr
     False otherwise
     :param      :url: url of a resource in the catalog
     :type       :url: string"""
     dgf_page = catalog_info['url_dgf']
     headers = requests.head(url).headers
     downloadable = 'attachment' in headers.get('Content-Disposition', '')
-    # download_zip = 'application/zip' in headers.get('Content-Type','')
     if not downloadable:
-        # if not os.path.isfile(f'./datasets/resources/{id}/{id}.csv') :
-        if not Path().home().joinpath(f'open_ML/datasets/resources/{id}/{id}.csv'):
-            raise Exception(f'This id is associated to a dataset not referenced by data.gouv.fr. \n '
-                            f'Please download the dataset from here: {dgf_page}\n'
-                            f'Then manually upload it in the corresponding folder and name it: {id}.csv')
+        raise Exception(f'This id is associated to a dataset not referenced by data.gouv.fr. \n '
+                        f'Please download the dataset from here: {dgf_page}\n'
+                        f'Then manually upload it in the corresponding folder and name it: {id}.csv')
     return downloadable
 
 
@@ -136,7 +134,3 @@ def load_dataset(id, catalog_info, output_dir=None):
 
 def save_dataset(dataframe, id, output_dir):
     dataframe.to_csv(output_dir.joinpath(f"{id}.csv"))
-
-# Remark on separators detection : the 'python engine' in pd.read_csv/read_table  works pretty well most of the time. However, it does not handle well some
-# exceptions (see for instance the dataset: 90a98de0-f562-4328-aa16-fe0dd1dca60f).
-# Improvements/to do: detect_csv:  separators detection should be handled better (not very robust, possibly does not cover all the exceptions)

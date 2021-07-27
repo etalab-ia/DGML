@@ -61,6 +61,7 @@ logging.basicConfig(
     ]
 )
 
+
 def get_specific_ids(specific_ids_path: Optional[Path] = None):
     """
     If there is a specific_ids_path file, take the ids within and process them
@@ -101,7 +102,7 @@ def get_mljar_info(output_dir, automl_report):
 
 def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../app/assets/datasets/"),
                   target_variable=None, task=None, score='', automl=None):
-    """This function adds a new row in open_ml_datasets.csv containing info of a chosen dataset."""
+    """This function adds a new row in dgml_datasets.csv containing info of a chosen dataset."""
     main_csv_path = output_dir.joinpath('dgml_datasets.csv')
     new_row = {}
     dict_main_df = {'title': 'dataset.title', 'dgf_dataset_url': 'dataset.url',
@@ -259,7 +260,6 @@ def main(dataset_path: str,
                         explicability of the models.
     :return: None
     """
-
 
     seen_dataframes = set()
     output_dir = Path(output_dir)

@@ -34,7 +34,6 @@ app = dash.Dash(
 app.title = "DGML"
 
 server = app.server
-# app.config.suppress_callback_exceptions = True
 
 # Read data
 encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
