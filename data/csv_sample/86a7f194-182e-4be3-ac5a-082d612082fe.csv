@@ -1,0 +1,1341 @@
+<!DOCTYPE html><html lang="fr">
+  <head>
+    
+
+    
+    
+
+
+
+
+<meta charset="utf-8" />
+<title>Immeubles protégés au titre des Monuments Historiques - Data.gouv.fr</title>
+<meta property="og:title" content="Immeubles protégés au titre des Monuments Historiques - Data.gouv.fr" />
+<link rel="author" href="http://www.etalab.gouv.fr/" />
+<meta name="description" content="Liste et localisation des Immeubles protégés au titre des…" />
+
+<meta property="og:description" content="Liste et localisation des Immeubles protégés au titre des…" />
+<meta property="og:image" content="https://static.data.gouv.fr/avatars/cf/f1ce1cb584470c8b83a9839dd9c83e-100.jpg" />
+<meta name="keywords" content="opendata, udata, jeu de données, monument, patrimoine" />
+<meta name="theme-static-root" content="https://static.data.gouv.fr/_themes/gouvfr/" />
+<meta name="static-root" content="https://static.data.gouv.fr/static/" />
+<meta name="api-root" content="/api/1/" />
+<meta name="admin-root" content="/fr/admin/" />
+<meta name="api-specs" content="https://www.data.gouv.fr/api/1/swagger.json"/>
+<meta name="auth-url" content="/fr/login" />
+<meta name="github" content="https://github.com/etalab/udata" />
+<link rel="alternate" href="/en/datasets/immeubles-proteges-au-titre-des-monuments-historiques/" hreflang="en" /><link rel="alternate" href="/es/datasets/immeubles-proteges-au-titre-des-monuments-historiques/" hreflang="es" />
+
+
+<link rel="alternate" type="application/rdf+xml" href="/datasets/5890bf73a3a72974c1f0dc84/rdf.xml" />
+
+<link rel="alternate" type="application/x-turtle" href="/datasets/5890bf73a3a72974c1f0dc84/rdf.ttl" />
+
+<link rel="alternate" type="application/ld+json" href="/datasets/5890bf73a3a72974c1f0dc84/rdf.json" />
+
+<link rel="alternate" type="application/trig" href="/datasets/5890bf73a3a72974c1f0dc84/rdf.trig" />
+
+<link rel="alternate" type="text/n3" href="/datasets/5890bf73a3a72974c1f0dc84/rdf.n3" />
+
+<link rel="alternate" type="application/n-triples" href="/datasets/5890bf73a3a72974c1f0dc84/rdf.nt" />
+
+
+
+<meta name="sentry" content="https://c6623f611eea494aaa3be1d4deb63384@sentry.data.gouv.fr/3"
+    data-release=""
+    data-tags="%7B%22udata%22%3A%20%221.6.6%22%2C%20%22udata-ckan%22%3A%20%221.2.0%22%2C%20%22udata-croquemort%22%3A%20%221.0.3%22%2C%20%22udata-geoplatform%22%3A%20%221.0.1%22%2C%20%22udata-gouvfr%22%3A%20%221.6.4%22%2C%20%22udata-ods%22%3A%20%221.2.3%22%2C%20%22udata-piwik%22%3A%20%221.4.0%22%2C%20%22udata-recommendations%22%3A%20%221.0.1%22%2C%20%22udata-tabular-preview%22%3A%20%221.0.0%22%7D"
+/>
+
+<meta name="csrf-token" content="IjdkYWJmNzBjODBhODYyMDM0MGJlODQwNjZjMDZlMTlhMzE3MzQ1Yzki.D4881w.jgYnX2C6gfHlIENzaiRyg1G-PzA" />
+<meta name="site-title" content="Data.gouv.fr" />
+
+
+
+<meta name="check-urls" content="true" />
+<meta name="unchecked-types" content="%5B%22api%22%5D" />
+<meta name="territory-enabled" content="true">
+<meta name="delete-me-enabled" content="true">
+<meta name="dataset-max-resources-uncollapsed" content="6">
+<meta name="markdown-config" content="%7B%22attributes%22%3A%20%7B%22a%22%3A%20%5B%22href%22%2C%20%22title%22%5D%2C%20%22abbr%22%3A%20%5B%22title%22%5D%2C%20%22acronym%22%3A%20%5B%22title%22%5D%7D%2C%20%22styles%22%3A%20%5B%5D%2C%20%22tags%22%3A%20%5B%22a%22%2C%20%22abbr%22%2C%20%22acronym%22%2C%20%22b%22%2C%20%22br%22%2C%20%22blockquote%22%2C%20%22code%22%2C%20%22dd%22%2C%20%22dl%22%2C%20%22dt%22%2C%20%22em%22%2C%20%22i%22%2C%20%22li%22%2C%20%22ol%22%2C%20%22pre%22%2C%20%22small%22%2C%20%22strong%22%2C%20%22ul%22%2C%20%22sup%22%2C%20%22sub%22%5D%7D" />
+
+<meta name="map-config" content="%7B%22init%22%3A%20%7B%22center%22%3A%20%5B42%2C%202.4%5D%2C%20%22level%22%3A%200%2C%20%22zoom%22%3A%204%7D%2C%20%22tiles%22%3A%20%7B%22config%22%3A%20%7B%22attribution%22%3A%20%22%26copy%3B%3Ca%20href%3D%5C%22http%3A//openstreetmap.org/copyright%5C%22%3EOpenStreetMap%3C/a%3E/%3Ca%20href%3D%5C%22https%3A//cartodb.com/attributions%5C%22%3ECartoDB%3C/a%3E%22%2C%20%22subdomains%22%3A%20%22abcd%22%7D%2C%20%22hidpi%22%3A%20%22https%3A//static.data.gouv.fr/tiles/light_all/%7Bz%7D/%7Bx%7D/%7By%7D%402x.png%22%2C%20%22url%22%3A%20%22https%3A//static.data.gouv.fr/tiles/light_all/%7Bz%7D/%7Bx%7D/%7By%7D.png%22%7D%7D" />
+<meta name="tags-config" content="%7B%22MAX_LENGTH%22%3A%2096%2C%20%22MIN_LENGTH%22%3A%203%7D" />
+
+
+<script id="json_ld" type="application/ld+json">{"@context": "http://schema.org", "@id": "5890bf73a3a72974c1f0dc84", "@type": "Dataset", "alternateName": "immeubles-proteges-au-titre-des-monuments-historiques", "author": {"@context": "http://schema.org", "@type": "GovernmentOrganization", "alternateName": "ministere-de-la-culture-et-de-la-communication", "description": "Le Minist\u00e8re de la culture a pour mission de rendre accessible au plus grand nombre les \u0153uvres culturelles mondiales et celles de la France. A ce titre, il conduit la politique de sauvegarde, de protection et de mise en valeur du patrimoine culturel dans toutes ses composantes, il favorise la cr\u00e9ation des \u0153uvres de l'art et de l'esprit et le d\u00e9veloppement des pratiques et de l'\u00e9ducation artistique et culturelle sur l'ensemble du territoire. Le Minist\u00e8re de la culture veille au d\u00e9veloppement des industries cr\u00e9atives et culturelles. Il contribue au d\u00e9veloppement des nouvelles technologies de diffusion et de valorisation du patrimoine culturel mat\u00e9riel et immat\u00e9riel. Les donn\u00e9es publiques en mati\u00e8re de culture et de communication sont accessibles sur une plateforme d\u00e9di\u00e9e https://data.culture.gouv.fr synchronis\u00e9e avec la plateforme www.data.gouv.fr.Cette initiative s\u2019inscrit dans le cadre de l\u2019engagement du Minist\u00e8re de la culture en faveur de l'ouverture et du partage des donn\u00e9es publiques, ainsi que dans le d\u00e9veloppement d\u2019une \u00e9conomie num\u00e9rique culturelle.", "logo": "https://static.data.gouv.fr/avatars/cf/f1ce1cb584470c8b83a9839dd9c83e-100.jpg", "name": "Minist\u00e8re de la Culture", "url": "https://www.data.gouv.fr/fr/organizations/ministere-de-la-culture-et-de-la-communication/"}, "contributedDistribution": [], "dateCreated": "2017-01-31T17:46:43.216000", "dateModified": "2018-05-07T12:03:57.206000", "description": "Liste et localisation des Immeubles prot\u00e9g\u00e9s au titre des Monuments Historiques. La g\u00e9olocalisation est effectu\u00e9e \u00e0 partir du code INSEE.", "distribution": [{"@id": "9c9fdb40-5b4d-4296-9efd-0093d1bc7d15", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=csv&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-14T05:00:32.225000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-14T05:00:32.225000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "csv", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 103}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=csv&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-10T08:06:38.706000"}], "fileFormat": "text/csv", "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 294}, "name": "Export au format CSV", "url": "https://www.data.gouv.fr/fr/datasets/r/9c9fdb40-5b4d-4296-9efd-0093d1bc7d15"}, {"@id": "28c4161b-3a62-43a5-903c-aeb909b01cd0", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=json&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-14T05:00:32.226000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-14T05:00:32.226000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "json", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 103}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=json&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-10T06:32:10.503000"}], "fileFormat": "application/json", "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 2}, "name": "Export au format JSON", "url": "https://www.data.gouv.fr/fr/datasets/r/28c4161b-3a62-43a5-903c-aeb909b01cd0"}, {"@id": "7bdd7b9b-7199-41bf-89cc-c49ca44c87ca", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=geojson&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-14T05:00:32.226000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-14T05:00:32.226000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "json", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 103}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=geojson&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-10T06:32:03.796000"}], "fileFormat": "application/vnd.geo+json", "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 2}, "name": "Export au format GeoJSON", "url": "https://www.data.gouv.fr/fr/datasets/r/7bdd7b9b-7199-41bf-89cc-c49ca44c87ca"}, {"@id": "bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=shp&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-14T05:00:32.226000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-14T05:00:32.226000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "shp", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 103}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr//explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=shp&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-10T08:06:35.275000"}], "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 52}, "name": "Export au format Shapefile", "url": "https://www.data.gouv.fr/fr/datasets/r/bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49"}, {"@id": "852f7230-cdb8-4d19-8442-eb90aada351a", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=csv&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-16T05:00:19.791000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-16T05:00:19.791000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "csv", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 103}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=csv&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-10T06:32:02.639000"}], "fileFormat": "text/csv", "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 5}, "name": "Export au format CSV", "url": "https://www.data.gouv.fr/fr/datasets/r/852f7230-cdb8-4d19-8442-eb90aada351a"}, {"@id": "ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=json&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-16T05:00:19.791000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-16T05:00:19.791000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "json", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 104}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=json&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-10T08:06:33.750000"}], "fileFormat": "application/json", "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 0}, "name": "Export au format JSON", "url": "https://www.data.gouv.fr/fr/datasets/r/ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5"}, {"@id": "ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=geojson&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-16T05:00:19.792000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-16T05:00:19.792000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "json", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 46}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=geojson&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-09T15:07:15.338000"}], "fileFormat": "application/vnd.geo+json", "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 0}, "name": "Export au format GeoJSON", "url": "https://www.data.gouv.fr/fr/datasets/r/ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4"}, {"@id": "05535a31-2dca-44f2-96b9-fea8b16ca371", "@type": "DataDownload", "contentUrl": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=shp&timezone=Europe/Berlin&use_labels_for_header=true", "dateCreated": "2018-03-16T05:00:19.792000", "dateModified": "2017-08-02T09:25:13", "datePublished": "2018-03-16T05:00:19.792000", "description": "R\u00e9gion: new_name[text] D\u00e9partement: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Pr\u00e9cision sur la Protection: ppro[text] Date de Protection: dpro[text] Statut: stat[text] Adresse: adrs[text] INSEE: insee[text] AFFECTATAIRE: affe[text] ETUDE: etud[text] R\u00e9f\u00e9rence: ref[text] Coordonn\u00e9es INSEE: coordonnees_insee[geo_point_2d] Code d\u00e9partement: code_departement[text] Ancienne r\u00e9gion: reg[text] R\u00e9gion normalis\u00e9e: reg_normalized[text]", "encodingFormat": "shp", "extras": [{"@type": "http://schema.org/PropertyValue", "name": "check:available", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "check:count-availability", "value": 46}, {"@type": "http://schema.org/PropertyValue", "name": "check:status", "value": 200}, {"@type": "http://schema.org/PropertyValue", "name": "check:url", "value": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/download?format=shp&timezone=Europe/Berlin&use_labels_for_header=true"}, {"@type": "http://schema.org/PropertyValue", "name": "check:date", "value": "2019-04-09T15:07:15.184000"}], "interactionStatistic": {"@type": "InteractionCounter", "interactionType": {"@type": "DownloadAction"}, "userInteractionCount": 0}, "name": "Export au format Shapefile", "url": "https://www.data.gouv.fr/fr/datasets/r/05535a31-2dca-44f2-96b9-fea8b16ca371"}], "extras": [{"@type": "http://schema.org/PropertyValue", "name": "harvest:domain", "value": "data.culturecommunication.gouv.fr"}, {"@type": "http://schema.org/PropertyValue", "name": "harvest:source_id", "value": "5890bf69c751df4121ae0a65"}, {"@type": "http://schema.org/PropertyValue", "name": "ods:has_records", "value": true}, {"@type": "http://schema.org/PropertyValue", "name": "ods:url", "value": "https://data.culturecommunication.gouv.fr/explore/dataset/liste-des-immeubles-proteges-au-titre-des-monuments-historiques/"}, {"@type": "http://schema.org/PropertyValue", "name": "harvest:remote_id", "value": "liste-des-immeubles-proteges-au-titre-des-monuments-historiques"}, {"@type": "http://schema.org/PropertyValue", "name": "harvest:last_update", "value": "2018-05-07T12:03:57.203339"}], "keywords": "monument,patrimoine", "license": "https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf", "name": "Immeubles prot\u00e9g\u00e9s au titre des Monuments Historiques", "url": "https://www.data.gouv.fr/fr/datasets/immeubles-proteges-au-titre-des-monuments-historiques/"}</script>
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://static.data.gouv.fr/static/common.4e7962db4c3bf2a3ade622394028adbe.css">
+    
+    <link rel="stylesheet" href="https://static.data.gouv.fr/static/dataset.d41d8cd98f00b204e9800998ecf8427e.css">
+    
+    
+    
+
+<link href="https://static.data.gouv.fr/_themes/gouvfr/theme.5da2c56d6dcb85e4e17598cac93206fb.css" rel="stylesheet">
+
+    
+    <link href="/fr/datasets/recent.atom"
+        rel="alternate" type="application/atom+xml"
+        title="Jeux de données recents" />
+
+    <link href="/fr/reuses/recent.atom"
+        rel="alternate" type="application/atom+xml"
+        title="Réutilisations récentes" />
+
+    
+<link rel="canonical" href="/fr/datasets/immeubles-proteges-au-titre-des-monuments-historiques/" />
+<link rel="alternate" type="application/json+oembed"
+    href="/api/1/oembed?url=https%3A%2F%2Fwww.data.gouv.fr%2Ffr%2Fdatasets%2Fimmeubles-proteges-au-titre-des-monuments-historiques%2F"
+    title="Immeubles%20prot%C3%A9g%C3%A9s%20au%20titre%20des%20Monuments%20Historiques" />
+
+
+    
+<link rel="shortcut icon" href="https://static.data.gouv.fr/_themes/gouvfr/img/favicon.png?_=1.6.4">
+
+
+  </head>
+
+  <body class="dataset-display theme-default">
+    
+    <section class="header">
+    <!--[if lte IE 8]>
+    <div class="iewarning">
+        Internet Explorer 8 et en dessous ne sont plus supportés. Mettez à jour ou changez de navigateur pour accéder à ce site. <a href="http://browsehappy.com/">Plus d'informations →</a>
+    </div>
+    <![endif]-->
+    <div class="container">
+        <nav class="navbar navbar-default navbar-static-top">
+            <header class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target=".navbar-collapse, .subnav-collapse, .sidebg-collapse">
+                    <span class="sr-only">Navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/fr/">Data.gouv.fr</a>
+                <p class="navbar-text pull-right">Plateforme ouverte des données publiques françaises</p>
+            </header>
+        </nav>
+    </div>
+</section>
+
+<section class="topmenu collapse navbar-collapse">
+    <div class="container">
+        <nav class="navbar navbar-default navbar-static-top">
+            <ul class="nav navbar-nav links">
+                
+                <li >
+                    <a href="https://doc.data.gouv.fr">Découvrez l’OpenData</a>
+                    
+                </li>
+                
+                <li class="dropdown dropdown-hover">
+                    <a href="/fr/datasets/">Données</a>
+                    
+                    <ul class="dropdown-menu" role="menu">
+                        
+                        <li><a href="/fr/datasets/">Jeux de données</a></li>
+                        
+                        <li><a href="/fr/reuses/">Réutilisations</a></li>
+                        
+                        <li><a href="/fr/organizations/">Organisations</a></li>
+                        
+                    </ul>
+                    
+                </li>
+                
+                <li >
+                    <a href="/fr/dashboard/">Tableau de bord</a>
+                    
+                </li>
+                
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                
+                <li class="dropdown language">
+                    <button class="btn btn-link dropdown-toggle" data-toggle="dropdown">
+                        <img src="https://static.data.gouv.fr/_themes/gouvfr/img/flags/fr.png?_=1.6.4"
+                            alt="Current locale flag"
+                            width="16" height="16" />
+                    </button>
+                    <ul class="dropdown-menu">
+                        
+                        <li>
+                            <a href="https://www.data.gouv.fr/fr/datasets/immeubles-proteges-au-titre-des-monuments-historiques/">
+                                <img src="https://static.data.gouv.fr/_themes/gouvfr/img/flags/fr.png?_=1.6.4"
+                                    alt="Français flag"
+                                    width="16" height="16" />
+                                Français
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.data.gouv.fr/en/datasets/immeubles-proteges-au-titre-des-monuments-historiques/">
+                                <img src="https://static.data.gouv.fr/_themes/gouvfr/img/flags/en.png?_=1.6.4"
+                                    alt="English flag"
+                                    width="16" height="16" />
+                                English
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="https://www.data.gouv.fr/es/datasets/immeubles-proteges-au-titre-des-monuments-historiques/">
+                                <img src="https://static.data.gouv.fr/_themes/gouvfr/img/flags/es.png?_=1.6.4"
+                                    alt="Español flag"
+                                    width="16" height="16" />
+                                Español
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                
+                
+                <li>
+                    <a title="Connexion / Inscription"
+                        href="/fr/login?next=https%3A%2F%2Fwww.data.gouv.fr%2Ffr%2Fdatasets%2Fimmeubles-proteges-au-titre-des-monuments-historiques%2F">
+                        <span class="fa fa-fw fa-sign-in"></span>
+                        Connexion / Inscription
+                    </a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</section>
+    
+    
+<nav class="navbar navbar-static-top navbar-subnav ">
+    <div class="container">
+        <div class="cover-marianne"></div>
+
+        <div class="search_bar row" role="search">
+            
+            
+                
+                
+            
+            <div class="col-sm-4 col-md-6 col-lg-6 col-xs-12">
+                <site-search v-ref:search action="/fr/search/" placeholder="Recherche"
+    
+    
+    >
+    <form class="site-search" action="/fr/search/">
+        <div class="input-group ">
+            <div class="input-group-btn">
+                <button class="btn" type="submit"><i class="fa fa-search"></i></button>
+            </div>
+            <label for="search" class="hidden">Recherche</label>
+            <input id="search" name="q" type="search" class="form-control" placeholder="Recherche" />
+        </div>
+    </form>
+</site-search>
+            </div>
+
+            
+            
+            <div class="col-sm-4 col-md-3 col-lg-3 col-xs-12">
+                <button class="dropdown-toggle btn-block btn-light" data-toggle="dropdown">
+                    Thématiques
+                    <span class="fa fa-chevron-down pull-right hidden-sm"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="topics">
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/agriculture-et-alimentation/">
+                            Agriculture et Alimentation
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/culture/">
+                            Culture, Communications
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/economie-et-emploi/">
+                            Comptes, Économie et Emploi
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/education-et-recherche/">
+                            Éducation, Recherche, Formation
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/international-et-europe/">
+                            International, Europe
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/logement-developpement-durable-et-energie/">
+                            Environnement, Énergie, Logement
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/sante-et-social/">
+                            Santé et Social
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/societe/">
+                             Société, Droit, Institutions
+                        </a>
+                    </li>
+                    
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="/fr/topics/territoires-et-transports/">
+                            Territoires, Transports, Tourisme
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+            
+
+            
+            <div class="col-sm-4 col-md-3 col-lg-3 col-xs-12">
+                <button class="btn btn-primary btn-transparent btn-block btn-md btn-left"
+                        title="Contribuez !"
+                        @click="$refs.publishActionModal.show">
+                    <span class="fa fa-plus"></span>
+                    Contribuez !
+                </button>
+            </div>
+        </div>
+
+    </div>
+</nav>
+
+
+    <notification-zone></notification-zone>
+
+    
+      
+    
+    
+<!-- Placeholder for non-routable modals -->
+<div v-el:modal></div>
+<section class="content certified">
+    <div class="container dataset-container">
+        <div class="row">
+
+            <div class="col-md-9 col-sm-9">
+                <div class="page-header">
+                    <h2>Immeubles protégés au titre des Monuments Historiques
+                        
+                    </h2>
+
+                    <div class="row">
+                        <p class="col-md-12">
+                            
+                                <small>
+                                    
+                                    <strong>Ce jeu de données provient d'un service public certifié</strong><br/>
+                                    
+                                </small>
+                            
+                            
+                            
+                            
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12">
+                    <div class="markdown"><p>Liste et localisation des Immeubles protégés au titre des Monuments Historiques.</p>
+<p>La géolocalisation est effectuée à partir du code INSEE.</p></div>
+                    </div>
+                </div>
+
+                <div class="resources-list">
+                    <div class="resources-list-header">
+                        <h3>Ressources</h3>
+                        
+                    </div>
+
+                    
+                    
+                    
+                    
+                        
+                        
+                            
+                            
+<article id="resource-9c9fdb40-5b4d-4296-9efd-0093d1bc7d15" class="card resource-card "
+    @click.prevent="showResource('9c9fdb40-5b4d-4296-9efd-0093d1bc7d15', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format CSV</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    csv
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    294
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('9c9fdb40-5b4d-4296-9efd-0093d1bc7d15')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/9c9fdb40-5b4d-4296-9efd-0093d1bc7d15/check/'"
+                                  :need-check="false">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/9c9fdb40-5b4d-4296-9efd-0093d1bc7d15" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/9c9fdb40-5b4d-4296-9efd-0093d1bc7d15">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                            
+                            
+<article id="resource-28c4161b-3a62-43a5-903c-aeb909b01cd0" class="card resource-card "
+    @click.prevent="showResource('28c4161b-3a62-43a5-903c-aeb909b01cd0', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format JSON</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    json
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    2
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('28c4161b-3a62-43a5-903c-aeb909b01cd0')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/28c4161b-3a62-43a5-903c-aeb909b01cd0/check/'"
+                                  :need-check="false">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/28c4161b-3a62-43a5-903c-aeb909b01cd0" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/28c4161b-3a62-43a5-903c-aeb909b01cd0">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                            
+                            
+<article id="resource-7bdd7b9b-7199-41bf-89cc-c49ca44c87ca" class="card resource-card "
+    @click.prevent="showResource('7bdd7b9b-7199-41bf-89cc-c49ca44c87ca', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format GeoJSON</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    json
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    2
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('7bdd7b9b-7199-41bf-89cc-c49ca44c87ca')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/7bdd7b9b-7199-41bf-89cc-c49ca44c87ca/check/'"
+                                  :need-check="false">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/7bdd7b9b-7199-41bf-89cc-c49ca44c87ca" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/7bdd7b9b-7199-41bf-89cc-c49ca44c87ca">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                            
+                            
+<article id="resource-bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49" class="card resource-card "
+    @click.prevent="showResource('bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format Shapefile</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    shp
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    52
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49/check/'"
+                                  :need-check="false">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/bdaf7a02-3ff0-4c1f-ad03-b09ad52dff49">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                            
+                            
+<article id="resource-852f7230-cdb8-4d19-8442-eb90aada351a" class="card resource-card "
+    @click.prevent="showResource('852f7230-cdb8-4d19-8442-eb90aada351a', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format CSV</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    csv
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    5
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('852f7230-cdb8-4d19-8442-eb90aada351a')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/852f7230-cdb8-4d19-8442-eb90aada351a/check/'"
+                                  :need-check="false">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/852f7230-cdb8-4d19-8442-eb90aada351a" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/852f7230-cdb8-4d19-8442-eb90aada351a">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                            
+                            
+<article id="resource-ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5" class="card resource-card "
+    @click.prevent="showResource('ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format JSON</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    json
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    0
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5/check/'"
+                                  :need-check="false">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/ab5bbeb4-94c0-43c9-b2c0-fb101bff48b5">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                            
+                            <div v-if="isTypeListVisible('main')" v-cloak transition="expand">
+                            
+                            
+<article id="resource-ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4" class="card resource-card "
+    @click.prevent="showResource('ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format GeoJSON</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    json
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    0
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4/check/'"
+                                  :need-check="true">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/ed406e17-ef8d-40f9-bf92-1ed6fc3a39d4">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                            
+                            
+<article id="resource-05535a31-2dca-44f2-96b9-fea8b16ca371" class="card resource-card "
+    @click.prevent="showResource('05535a31-2dca-44f2-96b9-fea8b16ca371', false)">
+
+    
+
+    <div class="card-body">
+        <h4 class="ellipsis">Export au format Shapefile</h4>
+        <div class="resource-card-description">Région: new_name[text] Département: nom_dept[text] Commune: commune[text] Appellation courante: tico[text] Siecle: scle[text] AUTEUR: autr[text] Précision sur la Protection:…</div>
+    </div>
+
+    <footer>
+        <div class="card-footer">
+            <ul>
+                <li v-tooltip title="Information du fichier">
+                    <span class="fa fa-file"></span>
+                    shp
+                    
+                </li>
+                <li v-tooltip title="Nombre de téléchargements">
+                    <span class="fa fa-cloud-download"></span>
+                    0
+                </li>
+                
+                <li class="healthcheck-container">
+                    <availability v-if="isCheckEnabled('main')"
+                                  :resource="getResourceById('05535a31-2dca-44f2-96b9-fea8b16ca371')"
+                                  :checkurl="'/api/1/datasets/5890bf73a3a72974c1f0dc84/resources/05535a31-2dca-44f2-96b9-fea8b16ca371/check/'"
+                                  :need-check="true">
+                    </availability>
+                </li>
+                
+            </ul>
+        </div>
+        <div class="resource-card-actions btn-toolbar">
+            
+            
+            <a @click.stop href="https://www.data.gouv.fr/fr/datasets/r/05535a31-2dca-44f2-96b9-fea8b16ca371" class="btn btn-sm btn-primary" download>Télécharger</a>
+            
+            <a @click.stop class="btn btn-sm btn-default" v-tooltip title="Copier le lien dans le presse-papiers" v-clipboard="https://www.data.gouv.fr/fr/datasets/r/05535a31-2dca-44f2-96b9-fea8b16ca371">
+                <span class="fa fa-clipboard"></span>
+            </a>
+            
+        </div>
+    </footer>
+</article>
+                        
+                        
+                            </div>
+                            <p class="text-center expander">
+                                <button type="button" class="btn btn-default" @click.prevent="expandResources($event, 'main')">
+                                    <span class="fa fa-list" ></span>
+                                    Voir les 8 ressources de type Fichier principal
+                                </button>
+                            </p>
+                        
+                    
+
+                    
+
+                </div>
+                
+
+                
+                <div class="row opinion"><div class="col-xs-12">
+                    <div class="btn-toolbar pull-right">
+                        
+                        
+                        <div class="btn-group btn-group-sm">
+                            <button type="button" class="btn btn-warning" @click="$refs.discussions.start('')">
+                                <span class="fa fa-envelope-o"></span>
+                                Contacter le producteur
+                            </button>
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            
+
+
+<follow-button
+    
+    url="/api/1/datasets/5890bf73a3a72974c1f0dc84/followers/"
+    classes="btn-primary"
+    tooltip-placement="top"
+    :followers="2"
+    >
+</follow-button>
+
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            
+<share-button title="Immeubles protégés au titre des Monuments Historiques" url="https://www.data.gouv.fr/fr/datasets/immeubles-proteges-au-titre-des-monuments-historiques/"></share-button>
+
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            
+
+
+<integrate-button title="Intégrer"
+    object-type="dataset" object-id="5890bf73a3a72974c1f0dc84"
+    widget-url="https://static.data.gouv.fr/static/oembed.js"
+    root-url="https://www.data.gouv.fr/"
+    >
+</integrate-button>
+
+                        </div>
+                        <div class="btn-group btn-group-sm">
+                            
+<issues-button subject-id="5890bf73a3a72974c1f0dc84" subject-class="Dataset"
+    >
+</issues-button>
+
+                        </div>
+                    </div>
+                </div></div>
+                
+                
+            </div>
+            
+
+            
+            <aside class="col-md-3 col-sm-3">
+
+                
+                
+                <div class="panel panel-default text-center">
+                    <div class="panel-body">
+                        <h3 class="text-left">Producteur</h3>
+                        
+                            
+<img src="https://static.data.gouv.fr/_themes/gouvfr/img/certified-stamp.png?_=1.6.4" alt="certified" class="certified"
+    v-popover.literal="L'identité de ce service public est certifiée par Etalab"
+    popover-title="Service public certifié"
+    popover-placement="left" popover-trigger="hover"/>
+
+<a href="https://www.data.gouv.fr/fr/organizations/ministere-de-la-culture-et-de-la-communication/"
+   title="Ministère de la Culture">
+    <img src="https://static.data.gouv.fr/avatars/cf/f1ce1cb584470c8b83a9839dd9c83e.jpg"
+        alt="Ministère de la Culture" class="organization-logo producer img-responsive"/>
+</a>
+
+<h4>Ministère de la Culture</h4>
+
+<div class="caption text-left">
+
+<p>
+    Le Ministère de la culture a pour mission de rendre accessible au plus grand nombre les œuvres culturelles mondiales et celles de la France. A ce titre, il conduit la politique…
+</p>
+
+<a href="/fr/organizations/ministere-de-la-culture-et-de-la-communication/"
+    class="btn btn-sm btn-block btn-left btn-warning">
+    <span class="fa fa-users"></span>
+    Voir le profil
+</a>
+<button type="button" class="btn btn-sm btn-block btn-left btn-warning" @click="$refs.discussions.start('')"
+    v-tooltip="'Contacter le producteur'" tooltip-placement="left">
+    <span class="fa fa-envelope-o"></span>
+    
+    Contacter
+</button>
+<follow-button with-label classes="btn-block btn-sm btn-left btn-warning"
+    
+    url="/api/1/organizations/534fff91a3a7292c64a77f73/followers/"
+    tooltip="Je serai informé de l'activité de cette organisation"
+    >
+</follow-button>
+</div>
+                        
+                    </div>
+                </div>
+                
+
+                
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h3>Informations</h3>
+
+                        <ul class="list-unstyled infos-list">
+
+                            
+                            
+
+                            
+                            
+                            <li>
+                                <a href v-tooltip title="Licence"><span class="fa fa-fw fa-copyright"></span></a>
+                                <a href="https://www.etalab.gouv.fr/wp-content/uploads/2014/05/Licence_Ouverte.pdf">
+                                Licence Ouverte / Open Licence
+                                </a>
+                            </li>
+                            
+
+                            
+                            
+
+                            
+                            <li>
+                                <a href v-tooltip title="Fréquence">
+                                    <span class="fa fa-fw fa-files-o"></span>
+                                </a>
+                                Inconnu
+                            </li>
+                            
+
+                            <li>
+                                <a href v-tooltip title="Date de création">
+                                    <span class="fa fa-fw fa-clock-o"></span>
+                                </a>
+                                31 janvier 2017
+                            </li>
+
+                            <li>
+                                <a href v-tooltip title="Date de modification">
+                                    <span class="fa fa-fw fa-refresh"></span>
+                                </a>
+                                7 mai 2018
+                            </li>
+
+                            <li>
+                                <a href v-tooltip title="Dernière mise à jour de ressource">
+                                    <span class="fa fa-fw fa-download"></span>
+                                </a>
+                                16 mars 2018
+                            </li>
+
+                            
+                            
+                        </ul>
+
+                        <ul class="tags">
+                            
+                            <li>
+                                <a href="/fr/search/?tag=monument"
+                                class="label label-default"
+                                title="monument">
+                                    monument
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a href="/fr/search/?tag=patrimoine"
+                                class="label label-default"
+                                title="patrimoine">
+                                    patrimoine
+                                </a>
+                            </li>
+                            
+                            <li>
+                                <a @click="suggestTag"
+                                    class="label label-primary suggest-tag"
+                                    title="Suggérer un mot-clé avec un nouveau fil de discussion"
+                                    v-tooltip tooltip-placement="right">
+                                    Suggérer un mot-clé
+                                </a>
+                            </li>
+                        </ul>
+
+                        <button type="button" @click="showDetails"
+                            class="btn btn-primary btn-extras btn-block btn-sm btn-left"
+                            title="Détails">
+                            <span class="fa fa-info-circle"></span>
+                            Détails
+                        </button>
+
+                    </div>
+                </div>
+
+                
+                
+
+                
+                
+
+            </aside>
+        </div>
+    </div>
+</section>
+
+
+<section class="community_container" id="community">
+    <header>
+        <div class="container">
+            <div class="cover-communaute"></div>
+            <div class="page-header">
+                <h2>Contributions communautaires</h2>
+                <small>Explorer avec Data.gouv.fr</small>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <h3 id="community-resources">Ressources communautaires</h3>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="resources-list">
+                
+                <a class="card resource-card add"
+                    href="/fr/admin/community-resource/new/?dataset_id=5890bf73a3a72974c1f0dc84">
+                    <div class="card-logo"><span>+</span></div>
+                    <div class="card-body">
+                        <h4>Ajouter une ressource communautaire</h4>
+                    </div>
+                </a>
+                </div>
+            </div>
+
+            <div class="col-sm-3 note">
+                <p>Vous avez construit une base de données plus complète que celles présentées ici ? C'est le moment de la partager !</p>
+            </div>
+        </div>
+
+        
+        <h3 id="community-reuses">Réutilisations</h3>
+        <div class="row">
+            <div class="col-sm-9 reuses-list">
+                <div class="card-list card-list--columned">
+                    
+
+                    <div class="col-sm-6">
+                         <a class="card reuse-card card--with-cover add" v-el:add-reuse
+    href="/fr/admin/reuse/new/?dataset_id=5890bf73a3a72974c1f0dc84"
+    @click="addReuse($event)">
+    <div class="card-cover"><span>+</span></div>
+    <div class="card-body">
+        <h4>Ajouter une réutilisation</h4>
+    </div>
+</a>
+					</div>
+
+                </div>
+            </div>
+            <div class="col-sm-3 note">
+                <p>Vous avez réutilisé ces données et publié un article, une infographie, ou une application ?
+C'est le moment de vous faire connaître !
+Référencez votre travail en quelques clics et augmentez votre visibilité.</p>
+            </div>
+        </div>
+        
+
+        <h3 id="community-discussions">Discussions</h3>
+        <div class="row">
+            <div class="col-sm-9">
+                <discussion-threads v-ref:discussions
+                    subject-id="5890bf73a3a72974c1f0dc84"
+                    subject-class="Dataset">
+                </discussion-threads>
+            </div>
+            <div class="col-sm-3 note">
+                <p>Discussion entre l'organisation et la communauté à propos de ce jeu de données.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    
+<section class="footer">
+    <div class="container">
+        <footer class="row">
+
+            <section class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
+                <h5>L'Open Data</h5>
+                <ul>
+                    
+                    <li>
+                        <a href="https://doc.data.gouv.fr">Documentation</a>
+                        
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/reference">Données de référence</a>
+                        
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/licences">Licences</a>
+                        
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/apidoc/">API</a>
+                        
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/terms/">Conditions générales d&#39;utilisation</a>
+                        
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/suivi">Politique de confidentialité</a>
+                        
+                    </li>
+                    
+                </ul>
+            </section>
+            <section class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
+                <h5>Thématiques</h5>
+                <ul>
+                    
+                    <li>
+                        <a href="/fr/topics/agriculture-et-alimentation/" title="Agriculture et Alimentation">
+                        Agriculture et Alimentation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/culture/" title="Culture, Communications">
+                        Culture, Communications
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/economie-et-emploi/" title="Comptes, Économie et Emploi">
+                        Comptes, Économie et Emploi
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/education-et-recherche/" title="Éducation, Recherche, Formation">
+                        Éducation, Recherche, Formation
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/international-et-europe/" title="International, Europe">
+                        International, Europe
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/logement-developpement-durable-et-energie/" title="Environnement, Énergie, Logement">
+                        Environnement, Énergie, Logement
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/sante-et-social/" title="Santé et Social">
+                        Santé et Social
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/societe/" title=" Société, Droit, Institutions">
+                         Société, Droit, Institutions
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <a href="/fr/topics/territoires-et-transports/" title="Territoires, Transports, Tourisme">
+                        Territoires, Transports, Tourisme
+                        </a>
+                    </li>
+                    
+                </ul>
+            </section>
+
+            <section class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
+                <h5>Réseau</h5>
+                <ul>
+                    
+                    <li><a href="http://www.gouvernement.fr">Gouvernement.fr</a></li>
+                    
+                    <li><a href="http://www.france.fr">France.fr</a></li>
+                    
+                    <li><a href="http://www.legifrance.gouv.fr">Legifrance.gouv.fr</a></li>
+                    
+                    <li><a href="http://www.service-public.fr">Service-public.fr</a></li>
+                    
+                    <li><a href="http://opendatafrance.net">Opendata France</a></li>
+                    
+                    <li><a href="http://www.cada.fr">CADA.fr</a></li>
+                    
+                    <li><a href="https://www.etalab.gouv.fr">Etalab.gouv.fr</a></li>
+                    
+                </ul>
+            </section>
+
+            <section class="col-xs-6 col-sm-3 col-md-4 col-lg-4 social">
+                <h5>Contactez-nous</h5>
+                <a href="https://twitter.com/datagouvfr" title="Twitter">
+                    <span class="fa fa-twitter-square"></span>
+                </a>
+                <a href="https://fb.me/etalab" title="Facebook">
+                    <span class="fa fa-facebook-square"></span>
+                </a>
+                <a href="https://github.com/etalab" title="github">
+                    <span class="fa fa-github-square"></span>
+                </a>
+                <a href="m&#x61;ilto:info%40data&#46;gouv&#46;fr">
+                    <span class="fa fa-envelope-square"></span>
+                </a>
+                <span tabindex="-1" title="Flux" class="feed-icon"
+                    v-popover popover-placement="top" popover-class="rss-popover">
+                    <span class="fa fa-rss-square"></span>
+                    <span data-popover-content>
+                        <a title="Jeux de données" href="/fr/datasets/recent.atom">
+                            <span class="fa fa-rss"></span>
+                            Jeux de données
+                        </a>
+                        <br/>
+                        <a title="Réutilisations" href="/fr/reuses/recent.atom">
+                            <span class="fa fa-rss"></span>
+                            Réutilisations
+                        </a>
+                    </span>
+                </span>
+            </section>
+
+            <section class="col-xs-9 col-xs-offset-3 col-sm-offset-0 col-sm-2 col-md-2 col-lg-2">
+                <a href="http://www.etalab.gouv.fr" title="Aller sur le blog d'Etalab">
+                  <svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.1" xml:space="preserve" width="282.35001" height="82.125" viewBox="0 0 282.35001 82.125" class="logo"><style>.s0{fill:#a2a2a3;}</style><g transform="matrix(1.25,0,0,-1.25,0,82.125)"><path d="m14.1527 27.0371c6.6653 0 8.6504 0.3602 9.3715 0.9024 0.2672 0.1804 0.5403 0.5402 0.5403 1.7117 0 2.5226-1.7125 5.6789-6.9379 5.6789-5.3184 0-9.91527-4.8688-10.00394-7.8418 0-0.1817 0-0.4512 0.63164-0.4512l6.3984 0zM8.56445 24.3348c-2.34414 0-2.4332-0.1805-2.4332-2.4344 0-9.1035 5.31525-16.85157 14.95665-16.85157 2.9766 0 5.5019 0.90156 8.2914 4.41484 0.9023 0.27071 1.5344-0.26953 1.6234-1.07969C28.032 2.25273 21.5391 0 16.8563 0 10.9949 0 6.40156 2.52227 3.78672 5.95039 1.08633 9.46367 0 13.6992 0 17.6641 0 28.7477 7.30313 38.032 18.1176 38.032c7.748 0 12.7961-5.3164 12.7961-10.7254 0-1.2605-0.1809-1.9804-0.3617-2.341-0.2704-0.5418-1.5286-0.6308-5.3153-0.6308l-16.67225 0M48.7551 32.9859c-1.5281 0-1.6172-0.2703-1.6172-2.1636l0-16.8535c0-5.22583 0.632-10.00396 6.5793-10.00396 0.8988 0 1.7062 0.18164 2.4332 0.45118 0.8101 0.27343 1.9824 1.26171 2.2496 1.26171 0.7211 0 1.0863-0.98828 0.9023-1.53125C57.6785 2.25273 54.4379 0 49.8383 0 42.0867 0 40.4668 4.32695 40.4668 9.73438l0 20.63672c0 2.4336-0.0859 2.6148-1.8875 2.6148l-2.5285 0c-0.5403 0.3618-0.6289 1.3528-0.2699 1.893 2.6113 0.8102 4.8699 1.9809 5.766 2.7938 1.1719 1.0789 2.8844 3.5125 3.7867 5.3164 0.4539 0.1812 1.534 0.1812 1.8934-0.4504l0-4.0559c0-1.623 0.0918-1.7117 1.6203-1.7117l10.0039 0c1.0801-0.8137 0.8988-3.2469 0.0886-3.7852l-10.1847 0M75.977 4.05742c1.7984 0 4.6 1.34961 5.496 2.25235 1.0801 1.08281 1.1723 2.34453 1.1723 4.23513l0.1813 5.3145c0 0.9941-0.3621 1.1719-0.9024 1.1719-0.5398 0-2.0742-0.3586-3.6976-0.9012-5.3149-1.7992-7.9297-3.1496-7.9297-6.66643 0-1.53398 1.0804-5.40625 5.6801-5.40625zM81.5621 19.916c1.3535 0.4512 1.4422 1.2656 1.5348 2.6145l0.0886 4.1461c0.0887 3.3371-0.9914 7.8418-6.5824 7.8418-2.5191 0-5.5851-1.2625-5.7656-4.0571-0.0895-1.4437-0.1781-2.5218-0.8965-3.064-1.3558-1.0821-3.7867-1.711-5.1398-1.711-0.8102 0-1.2645 0.4485-1.2645 1.2602 0 4.6859 10.1852 11.0855 16.7641 11.0855 6.4875 0 9.6422-3.7871 9.3722-10.5437L89.1328 11.8086c-0.1812-4.14844 0.6317-7.84376 4.1453-7.84376 0.9028 0 1.7157 0.27344 2.2555 0.54414 0.4453 0.26915 0.9023 0.62891 1.1727 0.62891 0.3558 0 0.632-0.54023 0.632-1.17305C97.3383 3.51758 94.1809 0 89.7645 0 87.598 0 85.4352 0.810547 83.9066 2.79883 83.5445 3.33594 83.0043 4.05742 82.4645 4.05742 81.832 4.05742 80.752 3.24727 78.9477 2.25273 76.9684 1.17266 74.9859 0 72.4605 0 69.8461 0 67.6824 0.724609 66.1543 2.07539 64.4391 3.60625 63.359 5.86133 63.359 8.38398c0 3.51642 1.7125 5.58482 7.4785 7.65982l10.7246 3.8722M111.215 11.3574c0-6.49021 0.178-7.39256 3.425-7.83982l2.16-0.27031c0.629-0.44844 0.451-1.98282-0.175-2.252348-2.977 0.177738-5.591 0.269528-8.749 0.269528-3.24 0-5.944-0.09179-8.6502-0.269528C98.5961 1.26445 98.4156 2.79883 99.0473 3.24727l2.0747 0.27031c3.333 0.44726 3.424 1.34961 3.424 7.83982l0 40.734c0 5.3149-0.091 5.8563-2.792 7.4793l-0.905 0.5422c-0.452 0.2699-0.452 1.5312 0 1.7996 2.255 0.7211 6.487 2.0742 9.734 3.7867 0.362 0 0.721-0.1797 0.902-0.5402-0.092-2.7035-0.27-7.2113-0.27-11.1762l0-42.6254M134.647 4.05742c1.798 0 4.594 1.34961 5.497 2.25235 1.08 1.08281 1.171 2.34453 1.171 4.23513l0.181 5.3145c0 0.9941-0.362 1.1719-0.908 1.1719-0.537 0-2.068-0.3586-3.692-0.9012-5.315-1.7992-7.929-3.1496-7.929-6.66643 0-1.53398 1.083-5.40625 5.68-5.40625zm5.585 15.85858c1.353 0.4512 1.446 1.2656 1.535 2.6145l0.088 4.1461c0.092 3.3371-0.991 7.8418-6.576 7.8418-2.525 0-5.591-1.2625-5.769-4.0571-0.092-1.4437-0.181-2.5218-0.902-3.064-1.353-1.0821-3.784-1.711-5.137-1.711-0.81 0-1.261 0.4485-1.261 1.2602 0 4.6859 10.182 11.0855 16.761 11.0855 6.487 0 9.641-3.7871 9.375-10.5437l-0.543-15.6797c-0.182-4.14844 0.632-7.84376 4.148-7.84376 0.897 0 1.706 0.27344 2.249 0.54414 0.448 0.26915 0.9 0.62891 1.173 0.62891 0.358 0 0.635-0.54023 0.635-1.17305C156.008 3.51758 152.848 0 148.435 0c-2.164 0-4.331 0.810547-5.859 2.79883-0.358 0.53711-0.898 1.25859-1.442 1.25859-0.629 0-1.712-0.81015-3.517-1.80469C135.635 1.17266 133.656 0 131.131 0c-2.615 0-4.778 0.724609-6.307 2.07539-1.712 1.53086-2.796 3.78594-2.796 6.30859 0 3.51642 1.716 5.58482 7.482 7.65982l10.722 3.8722M168.713 13.5215c0-3.1582 0.721-5.95002 2.252-7.84377 1.534-1.89062 3.965-2.97343 6.849-2.97343 8.469 0 11.805 7.21054 11.805 14.9598 0 9.2824-4.771 16.4937-13.698 16.4937-2.7 0-4.87-0.6336-6.125-1.4422-0.902-0.632-1.083-1.6234-1.083-5.1386l0-14.0555zm-6.669 38.5699c0 5.3149-0.089 5.8563-2.795 7.4793l-0.902 0.5422c-0.449 0.2699-0.449 1.5312 0 1.7996 2.074 0.8117 6.397 1.984 9.825 3.7867 0.359 0 0.722-0.1797 0.899-0.5402-0.177-3.1531-0.358-7.2113-0.358-11.1762l0-17.0324c0-1.5328 0.358-1.8902 0.898-1.8902 2.348 1.35 5.951 2.9718 10.367 2.9718 10.273 0 17.211-7.7484 17.211-17.6648C197.189 8.38398 188.539 0 176.461 0c-3.33 0-5.856 0.541016-7.659 1.17266-1.894 0.54023-3.06 1.17187-3.787 1.17187-0.721 0-1.443-0.72344-1.888-1.349608-0.092-0.092578-0.181-0.092578-0.361-0.092578-0.366 0-0.722 0.181636-0.903 0.540236 0.092 1.26172 0.181 2.97344 0.181 7.65976l0 42.98906" fill="#a2a2a3"/><path d="m178.21 52.398c0-1.53 1.003-2.5964 2.394-2.5964 0.917 0 1.647 0.4406 2.224 1.0515l0 3.3942c-0.53 0.457-1.224 0.8129-2.157 0.8129-1.476 0-2.461-1.1539-2.461-2.6622zm5.784-3.905c0-0.8973-0.236-1.5926-0.659-2.102-0.611-0.7453-1.627-1.0527-2.75-1.0527-1.136 0-2.016 0.3547-2.458 0.7812-0.258 0.2543-0.374 0.5414-0.374 0.8301 0 0.4922 0.358 0.8805 0.847 0.8805 0.423 0 0.712-0.3203 0.712-0.727 0-0.1707-0.046-0.339-0.148-0.4742 0.218-0.1383 0.69-0.2887 1.421-0.2887 0.712 0 1.391 0.1856 1.813 0.7106 0.271 0.341 0.43 0.7793 0.43 1.393l0 1.4074c-0.595-0.611-1.307-1.0664-2.409-1.0664-1.884 0-3.434 1.4925-3.434 3.5945 0 1.9539 1.431 3.7148 3.581 3.7148 0.967 0 1.732-0.3894 2.311-0.9308l0 0.7976 2.29 0 0-1.0375-1.173 0 0-6.4304M192.464 52.3457c0 1.5957-1.013 2.7313-2.492 2.7313-1.476 0-2.494-1.1356-2.494-2.7313 0-1.6121 1.018-2.7309 2.494-2.7309 1.479 0 2.492 1.1188 2.492 2.7309zm-6.208 0c0 2.0359 1.473 3.7484 3.716 3.7484 2.24 0 3.716-1.6937 3.716-3.7484 0-2.0543-1.476-3.75-3.716-3.75-2.255 0-3.716 1.6816-3.716 3.75M196.051 49.5625c-0.221 0.3883-0.34 0.9008-0.34 1.4773l0 3.8836-1.154 0 0 1.0375 2.326 0 0-4.6996c0-0.4082 0.064-0.7336 0.199-0.9699 0.225-0.4238 0.596-0.6094 1.185-0.6094 0.902 0 1.7 0.5758 2.378 1.2735l0 3.9679-1.188 0 0 1.0375 2.36 0 0-6.2109 1.154 0 0-1.0176-2.292 0 0 1.3395c-0.675-0.7981-1.663-1.4762-2.7-1.4762-0.949 0-1.572 0.3563-1.928 0.9668M204.398 54.9234l-0.948 0 0 1.0375 3.357 0 0-1.0004-1.154 0 2.139-4.7707 2.12 4.7707-1.19 0 0 1.0004 3.344 0 0-1.0375-0.948 0-3.038-6.4304-0.644 0-3.038 6.4304M211.784 49.6621c0 0.5957 0.443 1.0715 1.031 1.0715 0.595 0 1.038-0.4758 1.038-1.0715 0-0.5902-0.443-1.0664-1.038-1.0664-0.588 0-1.031 0.4762-1.031 1.0664M218.452 60.234c-0.223-0.0508-0.426-0.1504-0.558-0.3395-0.261-0.3023-0.396-0.7945-0.396-1.5097l0-2.4239 1.872 0 0-1.0375-1.872 0 0-5.1734 1.412 0 0-1.0176-3.75 0 0 1.0176 1.172 0 0 5.1734-1.292 0 0 1.0375 1.292 0 0 2.1524c0 1.1722 0.206 1.9531 0.761 2.5117 0.424 0.4098 0.933 0.6629 1.648 0.6629 0.782 0 1.32-0.3742 1.32-0.968 0-0.4758-0.32-0.798-0.731-0.798-0.473 0-0.742 0.3066-0.878 0.7121M225.885 55.1461c0-0.457-0.36-0.8652-0.814-0.8652-0.441 0-0.748 0.2882-0.865 0.6086-0.546-0.1532-1.206-0.7961-1.561-1.5247l0-3.6148 1.356 0 0-1.0176-3.68 0 0 1.0176 1.154 0 0 5.1734-1.154 0 0 1.0375 2.271 0 0-1.6464c0.561 1.0019 1.424 1.7796 2.21 1.7796 0.712 0 1.083-0.457 1.083-0.948" fill="#a2a2a3"/></g></svg>
+                </a><br />
+                <a href="https://github.com/opendatateam/udata/" title="Moteur open-source">udata</a>
+                <a href="https://pypi.org/project/udata/1.6.6/" title="Version déployée">1.6.6</a>
+                <br/>
+                <a href="https://github.com/etalab/udata-gouvfr/" title="Extension pour Data.gouv.fr">udata-gouvfr</a>
+                <a href="https://pypi.org/project/udata-gouvfr/1.6.4/" title="Version déployée">1.6.4</a>
+            </section>
+
+            <p class="bottom-right"><a href="#">Haut de page</a></p>
+
+        </footer>
+    </div>
+</section>
+
+    <modal v-ref:publish-action-modal :visible="false">
+    <div class="modal-body">
+        <div class="list-group actions-list">
+            <a class="list-group-item" href="/fr/admin/dataset/new/">
+                <div class="action-icon">
+                    <span class="fa fa-cubes fa-3x"></span>
+                </div>
+                <h4 class="list-group-item-heading">
+                    
+                    Publiez un jeu de données
+                </h4>
+                 <p class="list-group-item-text">
+                
+                Contribuez et ajoutez un nouveau jeu de données au catalogue de ce site
+                </p>
+            </a>
+
+            <a class="list-group-item" href="/fr/admin/reuse/new/">
+                <div class="action-icon">
+                    <span class="fa fa-retweet fa-3x"></span>
+                </div>
+                <h4 class="list-group-item-heading">
+                    
+                    Publiez une réutilisation
+                </h4>
+                <p class="list-group-item-text">
+                
+                Contribuez et ajoutez une nouvelle réutilisation au catalogue de ce site.
+                </p>
+            </a>
+
+            <a class="list-group-item" href="/fr/admin/organization/new/">
+                <div class="action-icon">
+                    <span class="fa fa-building-o fa-3x"></span>
+                </div>
+                <h4 class="list-group-item-heading">
+                    
+                    Créez ou trouvez votre organisation
+                </h4>
+                <p class="list-group-item-text">
+                
+                Vous pouvez créer une nouvelle organisation ou trouver la vôtre
+                </p>
+            </a>
+        </div>
+    </div>
+</modal>
+    
+
+
+    <script src="https://static.data.gouv.fr/static/common.832e3450f9a2f3b7c6b7.js"></script>
+    
+    <script src="https://static.data.gouv.fr/static/dataset.832e3450f9a2f3b7c6b7.js"></script>
+    
+    
+
+    
+    
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  
+  
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u=(("https:" == document.location.protocol) ? "https" : "http") + "://stats.data.gouv.fr/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0]; g.type='text/javascript';
+    g.defer=true; g.async=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+  
+  
+  _paq.push(['trackVisibleContentImpressions']);
+  
+  
+  
+  
+  _paq.push(['trackPageView']);
+  
+
+  
+  var PIWIK_GOALS = {"NEW_DATASET": 7, "NEW_FOLLOW": 3, "NEW_REUSE": 6, "RESOURCE_DOWNLOAD": 4, "RESOURCE_REDIRECT": 10, "SHARE": 11};
+  // Wait for uData object to be present
+  window.addEventListener("load", function() {
+    for (var goal in PIWIK_GOALS) {
+      var value = PIWIK_GOALS[goal];
+      uData.pubsub.subscribe(goal, function () {
+        uData.log.debug('Tracking goal', goal, 'with value', value);
+        _paq.push(['trackGoal', value]);
+      });
+    }
+  }, false);
+  
+
+
+</script>
+<noscript><p><img src="http://stats.data.gouv.fr/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+
+    
+
+  </body>
+</html>

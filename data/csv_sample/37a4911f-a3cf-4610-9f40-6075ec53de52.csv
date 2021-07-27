@@ -1,0 +1,6 @@
+"schema";"uuid";"id";"type";"isHarvested";"title";"abstract"
+"iso19139";"4b5545df-2fed-4be1-bf00-ddd11b4f8759";"687219";"METADATA";"n";"Service WMS";"-- Description du service WMS --"
+"iso19139";"331edfc7-effa-4ae2-8092-84ea1d51324e";"687220";"METADATA";"n";"Service WFS";"-- Description du service WFS --"
+"iso19139";"b6c3fa99-0994-4f57-be7d-eea3fb834fa3";"687221";"METADATA";"n";"Service de téléchargement simple de la plateforme";"Service de téléchargement simple"
+"iso19139";"7cbec110-486f-11df-963a-0026b92e22f7";"738";"METADATA";"n";"GEOFLA : limites des communes en France";"GEOFLA® est un produit numérique décrivant le découpage administratif de la France métropolitaine, des départements d'outre mer, ou de la collectivité départementale de Mayotte.
+Il est dérivé de la Base de Données Cartographiques (BD CARTO®) pour sa partie géométrique, et de la Base de Données Administratives pour sa partie descriptive."
