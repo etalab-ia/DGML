@@ -1,8 +1,0 @@
-[
-  {
-    "id": "a27a4212-6732-408e-85e4-819ce897046b",
-    "target": "PrixNuitee",
-    "task": "regression",
-    "output_dir": "./datasets/resources"
-  }
-]
