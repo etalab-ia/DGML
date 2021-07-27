@@ -48,6 +48,7 @@ from src.get_dataset import latest_catalog, info_from_catalog, load_dataset
 from src.get_mljar import prepare_for_mljar, generate_mljar
 from src.get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_data_dictionary
 from app.apps.utils import slugify
+import json
 
 load_dotenv(".env")
 logging.root.handlers = []
@@ -154,24 +155,36 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../app/asse
     return main_df
 
 
-def check_constraints(data):
-    """This function checks that the given dataset respects the following constraints:
-    * 200 <= number of lines <= 2*10⁶
-    * 3 <= number of columns <= 500
-    * nb_lines / nb_columns >=10
-    * has both numerical and categorical variables
-    * < 30% missing values overall
-    :param:     :data: dataset we want to check
-    :type:      :data: pandas dataframe
+def check_constraints(data, parameters):
+    """This function filters the datasets in the datasets folder according to the basic constraints defined in the config file
+    (config/filters.json).
+    In fact, only datasets that have the following characteristics will be included in DGML's analysis:
+    * minimal  NUMBER OF LINES (param: min_lines)
+    * maximal number of lines (param: max_lines)
+    * minimal NUMBER OF COLUMNS (param: min_cols)
+    * maximal number of columns (param: max_cols)
+    * minimal LINES/COLUMNS RATIO ; ex. if 10: the dataset contains at least 10 times more
+    lines than columns (param: lines_cols/ratio)
+    * the presence of BOTH NUMERICAL AND CATEGORICAL VARIABLES ; if TRUE: the dataset must contain
+    both categorical and numerical variables (param: num_and_cat)
+    * the maximum percentage of MISSING VALUES (param:max_missing_values)
     """
     passed_constraints = False
     nb_lines = len(data)
     nb_columns = len(data.columns)
     check_categorical = data.select_dtypes(include='object').empty
     check_numerical = data.select_dtypes(include=['float64', 'int64']).empty
+    for param in parameters:
+        min_lines = float(param['min_lines'])
+        max_lines = float(param['max_lines'])
+        min_cols = float(param['min_cols'])
+        max_cols = float(param['max_cols'])
+        lines_cols_ratio = float(param['lines_cols/ratio'])
+        max_missing = float(param['max_missing_values'])
     total_nan = data.isna().sum().sum() / (nb_lines * nb_columns)
-    if (200 <= nb_lines <= 2 * (10 ** 6)) and (3 <= nb_columns <= 500) and ((nb_lines / nb_columns) >= 10) and (
-            check_categorical is False) and (check_numerical is False) and (total_nan <= 0.30):
+    if (min_lines <= nb_lines <= max_lines) and (min_cols <= nb_columns <= max_cols) and (
+            (nb_lines / nb_columns) >= lines_cols_ratio) and (
+            check_categorical is False) and (check_numerical is False) and (total_nan <= max_missing):
         passed_constraints = True
     return passed_constraints
 
@@ -217,7 +230,7 @@ def get_csv_paths(datasets_path: Path):
         return Path(tmp.name)
 
     """Return the paths of each dataset in the source CSVs folder, whether local or through a sftp connection"""
-    # 1. If the dataset_path is local, just return the lisst of csv files
+    # 1. If the dataset_path is local, just return the list of csv files
     if "sftp" not in datasets_path.as_posix():
         if not datasets_path.exists():
             raise FileNotFoundError(f"File {datasets_path} not found. Please choose another csv folder")
@@ -245,6 +258,16 @@ def generate_score(statistics_summary, columns_to_drop, automl):
     best_metric = automl.get_leaderboard()['metric_value'].min()
     score = 1 / (0.3 * prop_missing + 0.4 * prop_not_retained + 0.3 * best_metric)
     return score
+
+
+def read_parameters(parameters_file: Path):
+    """This function reads the config file containing the parameters needed for filtering datasets."""
+    if parameters_file.exists():
+        with open(parameters_file) as fout:
+            parameters = json.load(fout)
+    else:
+        raise FileNotFoundError(f"Config file {parameters_file.as_posix()} does not exist.")
+    return parameters
 
 
 def main(dataset_path: str,
@@ -285,7 +308,8 @@ def main(dataset_path: str,
             logging.info(f"Dataset {id_data}: Successfully loaded dataset.")
             create_folder(current_output_dir)
             create_folder(current_output_dir / "our_experiments")
-            if not check_constraints(data_df):
+            parameters = read_parameters(Path('src/config/filters.json'))
+            if not check_constraints(data_df, parameters=parameters):
                 logging.warning(
                     f"The Dataset {id_data} did not pass the first-level constraints. It seems not adequate for Machine "
                     f"Learning")
