@@ -107,7 +107,7 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../app/asse
     main_csv_path = output_dir.joinpath('dgml_datasets.csv')
     new_row = {}
     dict_main_df = {'title': 'dataset.title', 'dgf_dataset_url': 'dataset.url',
-                    'dgf_dataset_id': 'dataset.id', 'dgf_resource_url': 'url'}
+                    'dgf_dataset_id': 'dataset.id', 'dgf_resource_url': 'url','description':'description'}
     for key, item in dict_main_df.items():
         new_row[key] = catalog[catalog['id'] == id_][item].values.item()
     new_row['nb_lines'] = statistics_summary['Number of lines'][0]
