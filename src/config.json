@@ -1,0 +1,17 @@
+{
+  "paths": {
+    "dataset_path": "./data/csv_sample/",
+    "output_path": "/tmp/dgml",
+    "specific_ids_path": "./data/specific_datasets.txt",
+    "automl_mode": "Explain"
+  },
+  "filters": {
+    "min_lines": 200,
+    "max_lines": 2000000,
+    "min_cols": 3,
+    "max_cols": 500,
+    "lines_cols/ratio": 10,
+    "max_missing_values": 0.3
+  }
+}
+

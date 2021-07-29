@@ -8,14 +8,13 @@ import dash_html_components as html
 import pandas as pd
 from pathlib import Path
 
-from src.utils import slugify
 from .utils import (
     generate_kpi_card,
     get_reuses,
     filter_reuses,
     generate_badge,
     MLJAR_INFO_DICT,
-    load_data_path,
+    load_data_path, slugify,
 )
 
 DATA_PATH = load_data_path()

@@ -1,4 +1,6 @@
 import json
+import re
+import unicodedata
 from pathlib import Path
 from typing import Dict, Tuple, Union, Optional
 
@@ -10,10 +12,10 @@ import requests
 
 
 def load_data_path():
-    data_path = Path(json.load(open("filters.json"))["DATA_PATH"])
+    data_path = Path(json.load(open("../src/config.json"))["paths"]["output_path"])
     if not data_path.exists():
         raise FileNotFoundError(
-            f"The output DGML folder {data_path} does not exist. Set the correct DATA_PATH in filters.json.")
+            f"The output DGML folder {data_path} does not exist. Set the correct DATA_PATH in config.json.")
     return data_path
 
 
@@ -208,5 +210,25 @@ def get_mljar_info():
         )
     return dict_dataset_mljar
 
+
+def slugify(value, allow_unicode=False):
+    """
+    Taken from https://github.com/django/django/blob/master/django/utils/text.py
+    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
+    dashes to single dashes. Remove characters that aren't alphanumerics,
+    underscores, or hyphens. Convert to lowercase. Also strip leading and
+    trailing whitespace, dashes, and underscores.
+    """
+    value = str(value)
+    if allow_unicode:
+        value = unicodedata.normalize("NFKC", value)
+    else:
+        value = (
+            unicodedata.normalize("NFKD", value)
+                .encode("ascii", "ignore")
+                .decode("ascii")
+        )
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    return re.sub(r"[-\s]+", "-", value).strip("-_")
 
 MLJAR_INFO_DICT = get_mljar_info()

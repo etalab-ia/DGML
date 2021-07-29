@@ -28,6 +28,7 @@ Notes:
 """
 
 import glob
+import json
 import logging
 import shutil
 from pathlib import Path
@@ -184,31 +185,35 @@ def fill_main_csv(
     return main_df
 
 
-def check_constraints(data):
-    """
-    This function checks that the given dataset respects the following constraints:
-
-    * 200 <= number of lines <= 2*10⁶
-    * 3 <= number of columns <= 500
-    * nb_lines / nb_columns >=10
-    * has both numerical and categorical variables
-    * < 30% missing values overall
-    :param: :data: dataset we want to check :type: :data: pandas dataframe
+def check_constraints(data, parameters):
+    """This function filters the datasets in the datasets folder according to the basic constraints defined in the config file
+    (config/config.json).
+    In fact, only datasets that have the following characteristics will be included in DGML's analysis:
+    * minimal  NUMBER OF LINES (param: min_lines)
+    * maximal number of lines (param: max_lines)
+    * minimal NUMBER OF COLUMNS (param: min_cols)
+    * maximal number of columns (param: max_cols)
+    * minimal LINES/COLUMNS RATIO ; ex. if 10: the dataset contains at least 10 times more
+    lines than columns (param: lines_cols/ratio)
+    * the presence of BOTH NUMERICAL AND CATEGORICAL VARIABLES ; if TRUE: the dataset must contain
+    both categorical and numerical variables (param: num_and_cat)
+    * the maximum percentage of MISSING VALUES (param:max_missing_values)
     """
     passed_constraints = False
     nb_lines = len(data)
     nb_columns = len(data.columns)
-    check_categorical = data.select_dtypes(include="object").empty
-    check_numerical = data.select_dtypes(include=["float64", "int64"]).empty
+    check_categorical = data.select_dtypes(include='object').empty
+    check_numerical = data.select_dtypes(include=['float64', 'int64']).empty
+    min_lines = float(parameters['min_lines'])
+    max_lines = float(parameters['max_lines'])
+    min_cols = float(parameters['min_cols'])
+    max_cols = float(parameters['max_cols'])
+    lines_cols_ratio = float(parameters['lines_cols/ratio'])
+    max_missing = float(parameters['max_missing_values'])
     total_nan = data.isna().sum().sum() / (nb_lines * nb_columns)
-    if (
-            (200 <= nb_lines <= 2 * (10 ** 6))
-            and (3 <= nb_columns <= 500)
-            and ((nb_lines / nb_columns) >= 10)
-            and (check_categorical is False)
-            and (check_numerical is False)
-            and (total_nan <= 0.30)
-    ):
+    if (min_lines <= nb_lines <= max_lines) and (min_cols <= nb_columns <= max_cols) and (
+            (nb_lines / nb_columns) >= lines_cols_ratio) and (
+            check_categorical is False) and (check_numerical is False) and (total_nan <= max_missing):
         passed_constraints = True
     return passed_constraints
 
@@ -304,26 +309,33 @@ def generate_score(statistics_summary, columns_to_drop, automl):
     return score
 
 
-def main(
-        dataset_path: str,
-        output_dir: str,
-        specific_datasets_path: str = None,
-        automl_mode: str = "Explain",
-):
-    """
+def read_parameters(parameters_file: Path):
+    """This function reads the config file containing the parameters needed for filtering datasets."""
+    if parameters_file.exists():
+        with open(parameters_file) as fout:
+            parameters = json.load(fout)
+    else:
+        raise FileNotFoundError(f"Config file {parameters_file.as_posix()} does not exist.")
+    return parameters
 
-    :param dataset_path: Folder with CSVs files :param output_dir: Folder were the output is saved :param
-    specific_datasets_path: Path to a text file with a file name per line. Only this files will be treated :param
-    automl_mode: "perform" ou "explain". Perform maximizes the model performance. Explain maximizes the explicability
-    of the models. :return: None
+
+def main(config_path: str):
     """
+    :param config_path: Path of the config file
+    """
+    config_path = Path(config_path)
+    parameters = read_parameters(config_path)["paths"]
+    dataset_path = parameters["dataset_path"]
+    output_path = parameters["output_path"]
+    specific_ids_path = parameters["specific_ids_path"]
+    automl_mode = parameters["automl_mode"]
 
     seen_dataframes = set()
-    output_dir = Path(output_dir)
+    output_path = Path(output_path)
     dataset_path = Path(dataset_path)
     dataset_paths = get_csv_paths(dataset_path)
 
-    specific_datasets = get_specific_datasets(specific_datasets_path)
+    specific_datasets = get_specific_datasets(specific_ids_path)
     automl_mode = automl_mode
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
     for ix, path in enumerate(dataset_paths):
@@ -343,11 +355,12 @@ def main(
                 continue
             seen_dataframes.add(df_hash)
             logging.info(f"Treating Dataset {id_data} ({ix})")
-            current_output_dir = output_dir.joinpath(id_data)
+            current_output_dir = output_path.joinpath(id_data)
             logging.info(f"Dataset {id_data}: Successfully loaded dataset.")
             create_folder(current_output_dir, delete_if_exist=True)
             create_folder(current_output_dir / "our_experiments")
-            if not check_constraints(data_df):
+            filter_parameters = read_parameters(config_path)["filters"]
+            if not check_constraints(data_df, parameters=filter_parameters):
                 logging.warning(
                     f"The Dataset {id_data} did not pass the first-level constraints. It seems not adequate for Machine "
                     f"Learning"
@@ -387,7 +400,7 @@ def main(
                 fill_main_csv(
                     id_=id_data,
                     catalog=catalog,
-                    output_dir=output_dir,
+                    output_dir=output_path,
                     statistics_summary=statistics_summary,
                     score="",
                 )
@@ -426,7 +439,7 @@ def main(
                         id_=id_data,
                         catalog=catalog,
                         statistics_summary=statistics_summary,
-                        output_dir=output_dir,
+                        output_dir=output_path,
                         target_variable=target_variable,
                         task=task,
                         score=score[0],

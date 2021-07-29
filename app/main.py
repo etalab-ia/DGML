@@ -11,7 +11,7 @@ import pandas as pd
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
 
-from app.apps.dataset_page import generate_dataset_page
+from apps.dataset_page import generate_dataset_page
 from apps.utils import (
     generate_kpi_card,
     DATASET_COLUMNS,
