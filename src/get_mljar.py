@@ -1,7 +1,7 @@
 import logging
 
-from app.apps.utils import slugify
 from src.get_statistic_summary import rejected_var, is_a_warning_col
+from src.utils import slugify
 
 logger = logging.getLogger()
 

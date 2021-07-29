@@ -48,7 +48,7 @@ from src.get_statistic_summary import (
     get_statistics_summary,
     get_data_dictionary,
 )
-from app.apps.utils import slugify
+from src.utils import slugify
 
 load_dotenv(".env")
 logging.root.handlers = []

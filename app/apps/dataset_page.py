@@ -8,18 +8,17 @@ import dash_html_components as html
 import pandas as pd
 from pathlib import Path
 
-
+from src.utils import slugify
 from .utils import (
     generate_kpi_card,
     get_reuses,
     filter_reuses,
     generate_badge,
-    slugify,
     MLJAR_INFO_DICT,
+    load_data_path,
 )
 
-DATA_PATH = Path("/tmp/dgml")
-# from ..main import DATA_PATH
+DATA_PATH = load_data_path()
 
 ASSETS_PATH = Path("./assets/")
 

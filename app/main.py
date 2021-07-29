@@ -1,7 +1,6 @@
 import base64
 import os
 from pathlib import Path
-import argparse
 
 import dash
 import dash_core_components as dcc
@@ -18,6 +17,7 @@ from apps.utils import (
     DATASET_COLUMNS,
     generate_badge,
     MLJAR_INFO_DICT,
+    load_data_path
 )
 
 from apps.banner import get_banner
@@ -28,13 +28,7 @@ from apps.utils import (
     NB_LINES_CATEGORIES,
 )
 
-parser = argparse.ArgumentParser()
-parser.add_argument("input_dgml_path", help="Folder with the DGML output computed by prepare_dgml_data")
-args = parser.parse_args()
-DATA_PATH = Path(args.input_dgml_path)
-if not DATA_PATH.exists():
-    raise FileNotFoundError(f"The output DGML folder {DATA_PATH} does not exist. Please choose another one.")
-# DATA_PATH = Path("/tmp/dgml")
+DATA_PATH = load_data_path()
 ASSETS_PATH = Path("./assets/")
 
 load_dotenv(verbose=True)
@@ -245,7 +239,8 @@ def generate_dataset_block(
         ascending=True if sort_order == "Ascendant" and sort_by != "Validé" else False,
     )
     cards_list = []
-
+    # Keep only one line per resource in the main page
+    chosen_sort_by_df = chosen_sort_by_df.drop_duplicates("dgf_resource_id")
     for index, dataset_row in chosen_sort_by_df.iterrows():
         main_dataset_card = html.Div(
             dbc.Card(

@@ -1,5 +1,4 @@
-import re
-import unicodedata
+import json
 from pathlib import Path
 from typing import Dict, Tuple, Union, Optional
 
@@ -9,7 +8,16 @@ import dash_html_components as html
 import pandas as pd
 import requests
 
-DATA_PATH = Path("/tmp/dgml")
+
+def load_data_path():
+    data_path = Path(json.load(open("filters.json"))["DATA_PATH"])
+    if not data_path.exists():
+        raise FileNotFoundError(
+            f"The output DGML folder {data_path} does not exist. Set the correct DATA_PATH in filters.json.")
+    return data_path
+
+
+DATA_PATH = load_data_path()
 
 NB_FEATURES_CATEGORIES = {
     "<10": (1, 10),
@@ -42,27 +50,6 @@ def get_category(categories_dict: Dict[str, Tuple[int, int]], value: int):
             return cat
     else:
         return None
-
-
-def slugify(value, allow_unicode=False):
-    """
-    Taken from https://github.com/django/django/blob/master/django/utils/text.py
-    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
-    dashes to single dashes. Remove characters that aren't alphanumerics,
-    underscores, or hyphens. Convert to lowercase. Also strip leading and
-    trailing whitespace, dashes, and underscores.
-    """
-    value = str(value)
-    if allow_unicode:
-        value = unicodedata.normalize("NFKC", value)
-    else:
-        value = (
-            unicodedata.normalize("NFKD", value)
-            .encode("ascii", "ignore")
-            .decode("ascii")
-        )
-    value = re.sub(r"[^\w\s-]", "", value.lower())
-    return re.sub(r"[-\s]+", "-", value).strip("-_")
 
 
 def add_nb_features_category(df: pd.DataFrame):
@@ -148,11 +135,11 @@ def filter_reuses(reuses_dict: Dict):
 
 
 def generate_badge(
-    title: str,
-    url: str,
-    background_color: str,
-    font_color: str = "#333333",
-    new_tab: bool = False,
+        title: str,
+        url: str,
+        background_color: str,
+        font_color: str = "#333333",
+        new_tab: bool = False,
 ):
     if pd.isna(url):
         title = f"{title} non disponible 😞"
