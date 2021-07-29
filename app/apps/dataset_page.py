@@ -18,8 +18,8 @@ from .utils import (
     MLJAR_INFO_DICT,
 )
 
-# DATA_PATH = Path("/tmp/dgml")
-from ..main import DATA_PATH
+DATA_PATH = Path("/tmp/dgml")
+# from ..main import DATA_PATH
 
 ASSETS_PATH = Path("./assets/")
 
