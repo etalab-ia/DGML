@@ -1,5 +1,7 @@
 import base64
+import os
 from pathlib import Path
+import argparse
 
 import dash
 import dash_core_components as dcc
@@ -10,18 +12,32 @@ import pandas as pd
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
 
-from apps.dataset_page import generate_dataset_page
-from apps.utils import generate_kpi_card, DATASET_COLUMNS, generate_badge, MLJAR_INFO_DICT
-
-BASE_PATH = Path(__file__).parent.resolve()
-DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
+from app.apps.dataset_page import generate_dataset_page
+from apps.utils import (
+    generate_kpi_card,
+    DATASET_COLUMNS,
+    generate_badge,
+    MLJAR_INFO_DICT,
+)
 
 from apps.banner import get_banner
+from apps.utils import (
+    add_nb_features_category,
+    add_nb_lines_category,
+    NB_FEATURES_CATEGORIES,
+    NB_LINES_CATEGORIES,
+)
+
+parser = argparse.ArgumentParser()
+parser.add_argument("input_dgml_path", help="Folder with the DGML output computed by prepare_dgml_data")
+args = parser.parse_args()
+DATA_PATH = Path(args.input_dgml_path)
+if not DATA_PATH.exists():
+    raise FileNotFoundError(f"The output DGML folder {DATA_PATH} does not exist. Please choose another one.")
+# DATA_PATH = Path("/tmp/dgml")
+ASSETS_PATH = Path("./assets/")
 
 load_dotenv(verbose=True)
-
-from apps.utils import add_nb_features_category, add_nb_lines_category, NB_FEATURES_CATEGORIES, NB_LINES_CATEGORIES, \
-    get_dataset_info
 
 app = dash.Dash(
     __name__,
@@ -35,26 +51,38 @@ app.title = "DGML"
 
 server = app.server
 
-# Read data
-encoded_image_validated = base64.b64encode(open(DATA_PATH.parent.joinpath("quality.png"), 'rb').read()).decode()
-df = pd.read_csv(DATA_PATH.joinpath("dgml_datasets.csv"))
-
-task_list = df["task"].unique()
-nb_features_bins = list(NB_FEATURES_CATEGORIES.keys())
-nb_lines_bins = list(NB_LINES_CATEGORIES.keys())
-topic_list = df["topic"].unique()
-
-add_nb_features_category(df)
-add_nb_lines_category(df)
+encoded_image_validated = base64.b64encode(
+    open(ASSETS_PATH / "quality.png", "rb").read()
+).decode()
 
 
-def check_if_resource(df):
-    dataset_folders = [Path(paths).stem for paths in DATA_PATH.joinpath(f"resources/").glob('*')]
-    filtered_df = df[df['dgf_resource_id'].isin(dataset_folders)]
-    return filtered_df
+def load_datasets_info():
+    datasets_df = pd.read_csv(DATA_PATH.joinpath("dgml_datasets.csv"))
+    task_list = datasets_df["task"].dropna().unique()
+    nb_features_bins = list(NB_FEATURES_CATEGORIES.keys())
+    nb_lines_bins = list(NB_LINES_CATEGORIES.keys())
+    topic_list = datasets_df["topic"].unique()
+    add_nb_features_category(datasets_df)
+    add_nb_lines_category(datasets_df)
+
+    def check_if_dataset_available(
+            df: pd.DataFrame, remove_empty_datasets: bool = True
+    ):
+        #  Keep folders that have files inside only if the remove_remove_empty_datasets arg is set
+        available_folders = [
+            path.stem
+            for path in DATA_PATH.glob("*")
+            if path.is_dir() and next(os.walk(path))[2] and remove_empty_datasets
+        ]
+
+        filtered_df = df[df["dgf_resource_id"].isin(available_folders)]
+        return filtered_df
+
+    datasets_df = check_if_dataset_available(datasets_df)
+    return datasets_df, task_list, nb_features_bins, nb_lines_bins, topic_list
 
 
-df = check_if_resource(df)
+datasets_df, task_list, nb_features_bins, nb_lines_bins, topic_list = load_datasets_info()
 
 
 def description_card():
@@ -68,20 +96,29 @@ def description_card():
             html.H3("Bienvenue sur DGML!"),
             html.Div(
                 id="intro",
-                children=["Data Gouv pour le Machine Learning (DGML) est le catalogue des jeux de données de",
-                          html.A(" data.gouv.fr", href="https://www.data.gouv.fr",
-                                 target="_blank"),
-                          " pour le Machine Learning. ",
-                          html.Br(),
-
-                          "Cliquez sur un jeu de données pour voir: ses statistiques, les résultats ",
-                          "de l'entraînement et test automatique d'algorithmes de Machine Learning sur les données, ainsi que des ",
-                          "exemples de code et des réutilisations qui vont vous guider dans la mise en oeuvre de votre modèle de Machine Learning avec ces données.",
-                          html.Br(), "DGML a été développé par le ",
-                          html.A("Lab IA d'Etalab: ",
-                                 href="https://www.etalab.gouv.fr/datasciences-et-intelligence-artificielle",
-                                 target="_blank"),
-                          "visitez notre Github pour en savoir plus sur le projet, sur le choix des jeux de données, pour mieux comprendre les résultats ou nous contacter."],
+                children=[
+                    "Data Gouv pour le Machine Learning (DGML) est le catalogue des jeux de données de",
+                    html.A(
+                        " data.gouv.fr",
+                        href="https://www.data.gouv.fr",
+                        target="_blank",
+                    ),
+                    " pour le Machine Learning. ",
+                    html.Br(),
+                    "Cliquez sur un jeu de données pour voir: ses statistiques, les résultats ",
+                    "de l'entraînement et test automatique d'algorithmes de Machine Learning sur les données, ainsi que"
+                    " des exemples de code et des réutilisations qui vont vous guider dans la mise en oeuvre de votre "
+                    "modèle de Machine Learning avec ces données.",
+                    html.Br(),
+                    "DGML a été développé par le ",
+                    html.A(
+                        "Lab IA d'Etalab: ",
+                        href="https://www.etalab.gouv.fr/datasciences-et-intelligence-artificielle",
+                        target="_blank",
+                    ),
+                    "visitez notre Github pour en savoir plus sur le projet, sur le choix des jeux de données, pour"
+                    " mieux comprendre les résultats ou nous contacter.",
+                ],
             ),
         ],
     )
@@ -119,7 +156,10 @@ def generate_control_card():
             html.P("Validation"),
             dcc.Checklist(
                 id="valid-select",
-                options=[{'label': f" {l}", "value": l} for l in ["Sélectionné", "Automatique"]],
+                options=[
+                    {"label": f" {l}", "value": l}
+                    for l in ["Sélectionné", "Automatique"]
+                ],
                 value=["Sélectionné", "Automatique"],
             ),
             html.Br(),
@@ -129,7 +169,7 @@ def generate_control_card():
                 options=[{"label": f" {i}", "value": i} for i in topic_list],
                 multi=True,
                 value=topic_list,
-                clearable=False
+                clearable=False,
             ),
             html.Br(),
             html.P("Filtrer par:"),
@@ -137,7 +177,7 @@ def generate_control_card():
                 id="sort-by",
                 options=[{"label": f" {i}", "value": i} for i in DATASET_COLUMNS],
                 value="Validé",
-                clearable=False
+                clearable=False,
             ),
             html.Br(),
             dcc.RadioItems(
@@ -148,11 +188,12 @@ def generate_control_card():
             html.Br(),
             html.Div(
                 id="reset-btn-outer",
-                children=html.Button(id="reset-btn", children="Reset", n_clicks=0, hidden=True),
+                children=html.Button(
+                    id="reset-btn", children="Reset", n_clicks=0, hidden=True
+                ),
             ),
-
         ],
-        style={"width": "100%"}
+        style={"width": "100%"},
     )
 
 
@@ -161,85 +202,106 @@ app_layout = html.Div(
     children=[
         # Banner
         get_banner(),
-        html.Div(id='app-page-content',
-                 children=[
-                     # Left column
-                     html.Div(
-                         id="left-column",
-                         className="four columns",
-                         children=[description_card(), generate_control_card()]
-                     ),
-                     # Right column
-                     html.Div(
-                         id="right-column",
-                         className="seven columns",
-                         children=[
-                             html.Div(id="dataset-card-div")
-                         ],
-                     )
-                 ])
+        html.Div(
+            id="app-page-content",
+            children=[
+                # Left column
+                html.Div(
+                    id="left-column",
+                    className="four columns",
+                    children=[description_card(), generate_control_card()],
+                ),
+                # Right column
+                html.Div(
+                    id="right-column",
+                    className="seven columns",
+                    children=[html.Div(id="dataset-card-div")],
+                ),
+            ],
+        ),
     ],
 )
 
-url_bar_and_content_div = html.Div([
-    dcc.Location(id='url', refresh=False),
-    html.Div(id='page-content')
-])
+url_bar_and_content_div = html.Div(
+    [dcc.Location(id="url", refresh=False), html.Div(id="page-content")]
+)
 
 app.layout = url_bar_and_content_div
 
 
-# app.validation_layout = html.Div([
-#     url_bar_and_content_div,
-#     generate_dataset_page("test")
-# ])
-
-
-def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_order, reset_click):
+def generate_dataset_block(
+        tasks, features, lines, valid, topics, sort_by, sort_order, reset_click
+):
     curated_dict = {"Sélectionné": True, "Automatique": False}
-    chosen_tasks_df = df[df.task.isin(tasks)]
+    chosen_tasks_df = datasets_df[datasets_df.task.isin(tasks)]
     chosen_features_df = chosen_tasks_df[chosen_tasks_df.nb_features_cat.isin(features)]
     chosen_lines_df = chosen_features_df[chosen_features_df.nb_lines_cat.isin(lines)]
     chosen_topics_df = chosen_lines_df[chosen_lines_df.topic.isin(topics)]
-    chosen_validation = chosen_topics_df[chosen_topics_df["is_validated"].isin([curated_dict[v] for v in valid])]
-    chosen_sort_by_df = chosen_validation.sort_values(by=DATASET_COLUMNS[sort_by],
-                                                      ascending=True if sort_order == 'Ascendant' and sort_by != "Validé"
-                                                      else False)
+    chosen_validation = chosen_topics_df[
+        chosen_topics_df["is_validated"].isin([curated_dict[v] for v in valid])
+    ]
+    chosen_sort_by_df = chosen_validation.sort_values(
+        by=DATASET_COLUMNS[sort_by],
+        ascending=True if sort_order == "Ascendant" and sort_by != "Validé" else False,
+    )
     cards_list = []
 
     for index, dataset_row in chosen_sort_by_df.iterrows():
-        dataset_dict = get_dataset_info(dataset_row)
-
-        main_dataset_card = html.Div(dbc.Card(
-            [
-                dbc.CardBody(
-                    [
-                        html.H4(
-                            [
-                                dcc.Link(f"{dataset_dict['title']}", href=f"{app.config['url_base_pathname']}"
-                                                                          f"{dataset_dict['dgf_resource_id']}"),
-                                html.Img(id="validated-img",
-                                         src="data:image/png;base64,{}".format(encoded_image_validated),
-                                         style={'height': '3%', 'width': '3%', "float": "right"},
-                                         hidden=not dataset_dict["is_validated"]),
-                                dbc.Tooltip("Ce jeu de données a été sélectionné et analysé manuellement.",
-                                            target="validated-img",
-                                            style={'font-size': 13}
-                                            )
-                            ],
-                            className="card-title"),
-                        dbc.CardDeck([
-                            # profiling
-                            generate_kpi_card("Tâche proposée", f"{dataset_dict['task']}"),
-                            generate_kpi_card("Thème", f"{dataset_dict['topic']}"),
-                            generate_kpi_card("Colonnes", dataset_dict['nb_features']),
-                            generate_kpi_card("Lignes", dataset_dict['nb_lines']),
-                        ]),
-                    ]
-                ),
-            ],
-        ),
-            style={"marginTop": "20px"}
+        main_dataset_card = html.Div(
+            dbc.Card(
+                [
+                    dbc.CardBody(
+                        [
+                            html.H4(
+                                [
+                                    dcc.Link(
+                                        f"{dataset_row['title']}",
+                                        href=f"{app.config['url_base_pathname']}"
+                                             f"{dataset_row['dgf_resource_id']}",
+                                    ),
+                                    html.Img(
+                                        id="validated-img",
+                                        src="data:image/png;base64,{}".format(
+                                            encoded_image_validated
+                                        ),
+                                        style={
+                                            "height": "3%",
+                                            "width": "3%",
+                                            "float": "right",
+                                        },
+                                        hidden=not dataset_row["is_validated"],
+                                    ),
+                                    dbc.Tooltip(
+                                        "Ce jeu de données a été sélectionné et analysé manuellement.",
+                                        target="validated-img",
+                                        style={"font-size": 13},
+                                    ),
+                                ],
+                                className="card-title",
+                            ),
+                            dbc.CardDeck(
+                                [
+                                    # profiling
+                                    generate_kpi_card(
+                                        "Tâche proposée",
+                                        f"{dataset_row['task']}",
+                                    ),
+                                    generate_kpi_card(
+                                        "Thème", f"{dataset_row['topic']}"
+                                    ),
+                                    generate_kpi_card(
+                                        "Colonnes", dataset_row["nb_features"]
+                                    ),
+                                    generate_kpi_card(
+                                        "Lignes", dataset_row["nb_lines"]
+                                    ),
+                                ]
+                            ),
+                        ]
+                    ),
+                ],
+            ),
+            style={"marginTop": "20px"},
         )
 
         cards_list.append(main_dataset_card)
@@ -248,30 +310,38 @@ def generate_dataset_block(tasks, features, lines, valid, topics, sort_by, sort_
 
 
 # Index callbacks
-@app.callback(Output('page-content', 'children'),
-              Input('url', 'pathname'))
+@app.callback(Output("page-content", "children"), Input("url", "pathname"))
 def display_page(pathname):
-    if pathname == app.config['url_base_pathname']:
+    if pathname == app.config["url_base_pathname"]:
         return app_layout
     else:
-        return generate_dataset_page(pathname, df)
+        try:
+            dataset_page = generate_dataset_page(pathname, datasets_df)
+        except Exception as e:
+            dataset_page = html.P(f"Could not generate this dataset page :( Error {e}")
+        return dataset_page
 
 
-#
-@app.callback([Output('mljar-div', 'children'),
-               Output('mljar-link-badge', 'children')],
-              [Input('target-var-model-select', 'value'),
-               Input('url', 'pathname')])
+@app.callback(
+    [Output("mljar-div", "children"), Output("mljar-link-badge", "children")],
+    [Input("target-var-model-select", "value"), Input("url", "pathname")],
+)
 def update_automl_model(target_var, pathname):
-    if pathname == app.config['url_base_pathname']:
+    if pathname == app.config["url_base_pathname"]:
         return None, None
     dataset_id = pathname.split("/")[-1]
-    if dataset_id not in MLJAR_INFO_DICT or target_var not in MLJAR_INFO_DICT[dataset_id]:
+    if (
+            dataset_id not in MLJAR_INFO_DICT
+            or target_var not in MLJAR_INFO_DICT[dataset_id]
+    ):
         return html.P("On n'a pas des modèles AutoML pour ce dataset"), None
     models_table, mljlar_profile_url = MLJAR_INFO_DICT[dataset_id][target_var]
-    mljar_profile_badge = generate_badge("Full Mljar Profile", url=mljlar_profile_url.as_posix(),
-                                         background_color="#6d92ad",
-                                         new_tab=True)
+    mljar_profile_badge = generate_badge(
+        "Full Mljar Profile",
+        url=mljlar_profile_url.as_posix(),
+        background_color="#6d92ad",
+        new_tab=True,
+    )
 
     return models_table, mljar_profile_badge
 
@@ -289,7 +359,9 @@ def update_automl_model(target_var, pathname):
         Input("reset-btn", "n_clicks"),
     ],
 )
-def update_dataset_block(task, feature, line, valid, topic, sort_by, sort_order, reset_click):
+def update_dataset_block(
+        task, feature, line, valid, topic, sort_by, sort_order, reset_click
+):
     reset = False
     # Find which one has been triggered
     ctx = dash.callback_context
@@ -299,7 +371,9 @@ def update_dataset_block(task, feature, line, valid, topic, sort_by, sort_order,
         if prop_id == "reset-btn":
             reset = True
     # Return to original hm(no colored annotation) by resetting
-    return generate_dataset_block(task, feature, line, valid, topic, sort_by, sort_order, reset_click)
+    return generate_dataset_block(
+        task, feature, line, valid, topic, sort_by, sort_order, reset_click
+    )
 
 
 # Run the server
