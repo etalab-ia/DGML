@@ -29,6 +29,7 @@ Notes:
 
 import glob
 import logging
+import shutil
 from pathlib import Path
 from typing import Union, Optional
 
@@ -56,7 +57,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler("debug.log", mode="w"),
+        logging.FileHandler(f"./logs/{Path(__file__).stem}.log", mode="w"),
         logging.StreamHandler(),
     ],
 )
@@ -77,7 +78,9 @@ def get_specific_datasets(specific_datasets_path: Optional[Path] = None):
     return specific_datasets
 
 
-def create_folder(output_dir):
+def create_folder(output_dir, delete_if_exist: bool = False):
+    if output_dir.exists() and delete_if_exist:
+        shutil.rmtree(output_dir)
     if not output_dir.exists():
         output_dir.mkdir(parents=True)
 
@@ -111,14 +114,14 @@ def get_mljar_info(output_dir, automl_report):
 
 
 def fill_main_csv(
-    id_,
-    catalog,
-    statistics_summary,
-    output_dir=Path("../app/assets/datasets/"),
-    target_variable=None,
-    task=None,
-    score="",
-    automl=None,
+        id_,
+        catalog,
+        statistics_summary,
+        output_dir=Path("../app/assets/datasets/"),
+        target_variable=None,
+        task=None,
+        score="",
+        automl=None,
 ):
     """This function adds a new row in dgml_datasets.csv containing info of a chosen dataset."""
     main_csv_path = output_dir.joinpath("dgml_datasets.csv")
@@ -128,6 +131,7 @@ def fill_main_csv(
         "dgf_dataset_url": "dataset.url",
         "dgf_dataset_id": "dataset.id",
         "dgf_resource_url": "url",
+        "description": "description"
     }
     for key, item in dict_main_df.items():
         new_row[key] = catalog[catalog["id"] == id_][item].values.item()
@@ -198,12 +202,12 @@ def check_constraints(data):
     check_numerical = data.select_dtypes(include=["float64", "int64"]).empty
     total_nan = data.isna().sum().sum() / (nb_lines * nb_columns)
     if (
-        (200 <= nb_lines <= 2 * (10 ** 6))
-        and (3 <= nb_columns <= 500)
-        and ((nb_lines / nb_columns) >= 10)
-        and (check_categorical is False)
-        and (check_numerical is False)
-        and (total_nan <= 0.30)
+            (200 <= nb_lines <= 2 * (10 ** 6))
+            and (3 <= nb_columns <= 500)
+            and ((nb_lines / nb_columns) >= 10)
+            and (check_categorical is False)
+            and (check_numerical is False)
+            and (total_nan <= 0.30)
     ):
         passed_constraints = True
     return passed_constraints
@@ -291,20 +295,20 @@ def generate_score(statistics_summary, columns_to_drop, automl):
     """
     prop_missing = statistics_summary["Percentage of missing cells"] / 100
     prop_not_retained = (
-        len(columns_to_drop) / statistics_summary["Number of variables"]
+            len(columns_to_drop) / statistics_summary["Number of variables"]
     )
     best_metric = automl.get_leaderboard()["metric_value"].min()
     score = 1 / (
-        0.3 * prop_missing + 0.4 * prop_not_retained + 0.3 * best_metric
+            0.3 * prop_missing + 0.4 * prop_not_retained + 0.3 * best_metric
     )
     return score
 
 
 def main(
-    dataset_path: str,
-    output_dir: str,
-    specific_datasets_path: str = None,
-    automl_mode: str = "Explain",
+        dataset_path: str,
+        output_dir: str,
+        specific_datasets_path: str = None,
+        automl_mode: str = "Explain",
 ):
     """
 
@@ -341,7 +345,7 @@ def main(
             logging.info(f"Treating Dataset {id_data} ({ix})")
             current_output_dir = output_dir.joinpath(id_data)
             logging.info(f"Dataset {id_data}: Successfully loaded dataset.")
-            create_folder(current_output_dir)
+            create_folder(current_output_dir, delete_if_exist=True)
             create_folder(current_output_dir / "our_experiments")
             if not check_constraints(data_df):
                 logging.warning(

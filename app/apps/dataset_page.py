@@ -18,7 +18,9 @@ from .utils import (
     MLJAR_INFO_DICT,
 )
 
-DATA_PATH = Path("/tmp/dgml")
+# DATA_PATH = Path("/tmp/dgml")
+from ..main import DATA_PATH
+
 ASSETS_PATH = Path("./assets/")
 
 encoded_image_validated = base64.b64encode(

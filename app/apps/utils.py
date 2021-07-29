@@ -11,7 +11,6 @@ import requests
 
 DATA_PATH = Path("/tmp/dgml")
 
-
 NB_FEATURES_CATEGORIES = {
     "<10": (1, 10),
     ">=10<100": (10, 100),
