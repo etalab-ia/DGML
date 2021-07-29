@@ -1,0 +1,11 @@
+[
+  {
+    "min_lines":"200",
+    "max_lines": " 2000000",
+    "min_cols": "3",
+    "max_cols": "500",
+    "lines_cols/ratio": "10",
+    "max_missing_values": "0.3"
+  }
+]
+
