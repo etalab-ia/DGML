@@ -9,8 +9,9 @@ from dash.dependencies import Input, Output
 
 import pandas as pd
 import dash_bootstrap_components as dbc
-from dotenv import load_dotenv
-
+import sys
+print(f"{sys.path}")
+print(f"{os.getcwd()}")
 from apps.dataset_page import generate_dataset_page
 from apps.utils import (
     generate_kpi_card,
@@ -30,8 +31,6 @@ from apps.utils import (
 
 DATA_PATH = load_data_path()
 ASSETS_PATH = Path("./assets/")
-
-load_dotenv(verbose=True)
 
 app = dash.Dash(
     __name__,

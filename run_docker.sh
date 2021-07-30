@@ -4,4 +4,4 @@ echo "Build image"
 docker build -t dgml .
 
 echo "Run container"
-docker run -d -p 8050:80 --name dgml-app dgml
+docker run -d -p 8050:80 --name dgml dgml

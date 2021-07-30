@@ -1,7 +1,7 @@
 {
   "paths": {
     "dataset_path": "./data/csv_sample/",
-    "output_path": "/tmp/dgml",
+    "output_path": "/dgml",
     "specific_ids_path": "./data/specific_datasets.txt",
     "automl_mode": "Explain"
   },
