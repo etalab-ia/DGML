@@ -49,6 +49,7 @@ from src.get_mljar import prepare_for_mljar, generate_mljar
 from src.get_statistic_summary import generate_pandas_profiling, get_statistics_summary, get_data_dictionary
 from app.apps.utils import slugify
 import json
+import zipfile
 
 load_dotenv(".env")
 logging.root.handlers = []
@@ -117,6 +118,10 @@ def fill_main_csv(id_, catalog, statistics_summary, output_dir=Path("../app/asse
         new_row['automl_url'] = ''
         new_row['target_variable'] = ''
         new_row['task'] = ''
+    elif task is 'EDA':
+        new_row['automl_url'] = ''
+        new_row['target_variable'] = ''
+        new_row['task'] = 'EDA'
     else:
         new_row['automl_url'] = ''
         new_row['target_variable'] = target_variable
@@ -189,7 +194,6 @@ def check_constraints(data, parameters):
     return passed_constraints
 
 
-# TO DO: add these parameters to a config file
 def load_dataset_wrapper(dataset_name: Union[Path, str]):
     csv_data = None
     if isinstance(dataset_name, Path):
@@ -270,6 +274,15 @@ def read_parameters(parameters_file: Path):
     return parameters
 
 
+def extract_compressed_csv(dataset_path):
+    """This function checks if a given dataset_path contains compressed csv files and extracts them if needed."""
+    list_compressed = [Path(p) for p in glob.glob(dataset_path.joinpath("./*.zip").as_posix())]
+    if len(list_compressed)!=0:
+        for compressed_csv in list_compressed:
+            with zipfile.ZipFile(compressed_csv, 'r') as zip_ref:
+                zip_ref.extractall(dataset_path)
+
+
 def main(dataset_path: str,
          output_dir: str,
          specific_ids_path: str = None,
@@ -287,6 +300,7 @@ def main(dataset_path: str,
     seen_dataframes = set()
     output_dir = Path(output_dir)
     dataset_path = Path(dataset_path)
+    extract_compressed_csv(dataset_path)
     dataset_paths = get_csv_paths(dataset_path)
     specific_ids = get_specific_ids(specific_ids_path)
     automl_mode = automl_mode
@@ -328,7 +342,7 @@ def main(dataset_path: str,
                 logging.warning(f"Dataset {id_data}: We have less than 3 columns. "
                                 f"We will only generate the pandas profiling")
                 fill_main_csv(id_=id_data, catalog=catalog, output_dir=output_dir,
-                              statistics_summary=statistics_summary, score='')
+                              statistics_summary=statistics_summary, score='',task='EDA')
                 continue
             for target_variable in prep_data.columns:
                 try:
