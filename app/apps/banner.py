@@ -8,8 +8,9 @@ def get_banner():
         id="app-page-header",
         children=[
             html.A(
-                id="dashbio-logo",
-                children=[html.Img(src="./assets/MarianneLogo-3-90x57.png")],
+                id="marianne-logo",
+                children=[html.Img(src="https://www.etalab.gouv.fr/wp-content/uploads/2019/04/cropped-MarianneLogo-3"
+                                       "-90x57.png")],
                 href="https://www.etalab.gouv.fr/",
             ),
             html.H2(
@@ -26,7 +27,7 @@ def get_banner():
             html.Img(
                 src="data:image/png;base64,{}".format(
                     base64.b64encode(
-                        open("./assets/GitHub-Mark-64px.png", "rb").read()
+                        open("./app/assets/GitHub-Mark-64px.png", "rb").read()
                     ).decode()
                 )
             ),

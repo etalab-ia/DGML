@@ -9,11 +9,8 @@ from dash.dependencies import Input, Output
 
 import pandas as pd
 import dash_bootstrap_components as dbc
-import sys
-print(f"{sys.path}")
-print(f"{os.getcwd()}")
-from apps.dataset_page import generate_dataset_page
-from apps.utils import (
+from app.apps.dataset_page import generate_dataset_page
+from app.apps.utils import (
     generate_kpi_card,
     DATASET_COLUMNS,
     generate_badge,
@@ -21,8 +18,8 @@ from apps.utils import (
     load_data_path
 )
 
-from apps.banner import get_banner
-from apps.utils import (
+from app.apps.banner import get_banner
+from app.apps.utils import (
     add_nb_features_category,
     add_nb_lines_category,
     NB_FEATURES_CATEGORIES,
@@ -30,7 +27,7 @@ from apps.utils import (
 )
 
 DATA_PATH = load_data_path()
-ASSETS_PATH = Path("./assets/")
+ASSETS_PATH = Path("./app/assets/")
 
 app = dash.Dash(
     __name__,
@@ -372,4 +369,4 @@ def update_dataset_block(
 
 # Run the server
 if __name__ == "__main__":
-    app.run_server(debug=True, port=8050)
+    app.run_server()

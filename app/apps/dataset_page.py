@@ -19,7 +19,7 @@ from .utils import (
 
 DATA_PATH = load_data_path()
 
-ASSETS_PATH = Path("./assets/")
+ASSETS_PATH = Path("./app/assets/")
 
 encoded_image_validated = base64.b64encode(
     open(ASSETS_PATH / "quality.png", "rb").read()

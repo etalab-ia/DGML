@@ -12,7 +12,7 @@ import requests
 
 
 def load_data_path():
-    data_path = Path(json.load(open("../src/config.json"))["paths"]["output_path"])
+    data_path = Path(json.load(open("./src/config.json"))["paths"]["output_path"])
     if not data_path.exists():
         raise FileNotFoundError(
             f"The output DGML folder {data_path} does not exist. Set the correct DATA_PATH in config.json.")

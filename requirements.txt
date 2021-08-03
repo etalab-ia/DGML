@@ -12,15 +12,14 @@ fs.sshfs
 gunicorn
 imagehash
 jupyter
-mkl-fft
-mkl-random
-mkl-service
+#mkl-fft
+#mkl-random
+#mkl-service
 mljar-supervised
 openml
 pandas-profiling
 pip-chill
 python-dotenv
-sqlitedict
 uvicorn
 # alembic # Installed as dependency for optuna
 # appdirs # Installed as dependency for black, fs
