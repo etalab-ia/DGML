@@ -23,7 +23,7 @@ run_prepare_dgml_data_docker:
 
 deploy_app_docker:
 	docker rm dgml
-	docker run  -p 8050:80 --env-file ./deploy_docker.env --name dgml dgml
-
+	docker run  -d -p 8050:80 --env-file ./deploy_docker.env --name dgml dgml
+	echo "Go to http://localhost:8050/dgml"
 all: run_prepare_dgml_data deploy_app
 all_docker: build_docker run_prepare_dgml_data_docker deploy_app_docker
