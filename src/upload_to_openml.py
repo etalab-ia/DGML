@@ -56,9 +56,7 @@ def main(datasets_folder: Path, output_folder: Path, main_csv_file: Path):
 
     main_csv = pd.read_csv(main_csv_file)
     list_subfolders_with_paths = [
-        Path(f.path)
-        for f in os.scandir(datasets_folder.as_posix())
-        if f.is_dir()
+        Path(f.path) for f in os.scandir(datasets_folder.as_posix()) if f.is_dir()
     ]
     for path in list_subfolders_with_paths:
         id_dataset = path.name
@@ -83,14 +81,10 @@ def main(datasets_folder: Path, output_folder: Path, main_csv_file: Path):
         df_dataset = df_dataset[df_dataset[target_var].notna()]
 
         # enforce the categorical column to have a categorical dtype
-        for cat_var in df_dataset.select_dtypes(
-            include="object"
-        ).columns.to_list():
+        for cat_var in df_dataset.select_dtypes(include="object").columns.to_list():
             df_dataset[cat_var] = df_dataset[cat_var].astype("category")
             df_dataset[cat_var] = df_dataset[cat_var].apply(
-                lambda x: split_cell_value(x)
-                .encode("utf-8")
-                .decode("ascii", "ignore")
+                lambda x: split_cell_value(x).encode("utf-8").decode("ascii", "ignore")
             )
 
         name = f"dgf_{id_dataset}"

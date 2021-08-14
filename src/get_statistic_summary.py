@@ -8,7 +8,8 @@ matplotlib.use("Agg")
 def generate_pandas_profiling(id, data, output_dir, config_path=None):
     """
     Returns the Pandas Profiling of this dataset. The name of the output html file is id.html
-    -------------------------------------------- :param: id: id of the dataset :type: id: string
+    --------------------------------------------
+    :param: id: id of the dataset :type: id: string
     """
     if (len(data) < 10000) and (len(data.columns)) < 30:
         profiling = ProfileReport(data)
@@ -21,8 +22,10 @@ def generate_pandas_profiling(id, data, output_dir, config_path=None):
 def get_statistics_summary(profiling, output_dir):
     """
     Returns a csv file containing all the relevant dataset statistics from pandas profiling. This summary is the info
-    pandas profiling info we display in the web page ----------------------------------------------- :param: id: id of
-    the dataset :type: id: string
+    pandas profiling info we display in the web page
+    ----------------------------------------------
+    :param: id: id of the dataset
+    :type: id: string
     """
     get_description = profiling.get_description()
     table = get_description["table"]
@@ -74,17 +77,20 @@ def get_data_dictionary(profiling, output_dir):
     """
     This function returns a csv file called dict_data containing a list of all the variables together with their
     detected types and two empty columns. These two should then be manually updated if a dictionary is available. If
-    not, manually delete the two central columns. ----------------------------------------------- :param: id: id of the
-    dataset :type: id: str :param: profiling: Pandas Profiling :type: profiling: pandas profiling :param: output_dir:
-    output directory for the csv :type: output_dir: str
+    not, manually delete the two central columns.
+    -----------------------------------------------
+    :param: id: id of the dataset
+    :type: id: str
+    :param: profiling: Pandas Profiling
+    :type: profiling: pandas profiling
+    :param: output_dir: output directory for the csv
+    :type: output_dir: str
     """
     data_dict = {}
     get_description = profiling.get_description()
     variables_description = get_description["variables"]
     for variable in variables_description:
-        data_dict.update(
-            {str(variable): [variables_description[variable]["type"]]}
-        )
+        data_dict.update({str(variable): [variables_description[variable]["type"]]})
     dict_df = pd.DataFrame.from_dict(data_dict, orient="index")
     dict_df = dict_df.reset_index()
     dict_df = dict_df.rename(columns={"index": "Name", 0: "Detected Type"})
@@ -106,8 +112,10 @@ def get_data_dictionary(profiling, output_dir):
 def is_a_warning_col(col_name, profiling):
     """
     This function tells whether a given column in the dataset is an high cardinality or high correlation column.
-    :param: :col_name: name of a column in a pandas df :type: :col_name: str :param: :profiling: pandas profiling of
-    tha dataset cotainining col_name :type: :profiling: pandas profile report
+    :param: :col_name: name of a column in a pandas df
+    :type: :col_name: str
+    :param: :profiling: pandas profiling of the dataset containing col_name
+    :type: :profiling: pandas profile report
     """
     get_description = profiling.get_description()
     messages = get_description["messages"]
@@ -117,9 +125,7 @@ def is_a_warning_col(col_name, profiling):
     for message in range(len(messages)):
         for warning in warnings:
             if warning in str(messages[message]).split("column ", 1)[0]:
-                warning_columns.append(
-                    str(messages[message]).split("column ", 1)[1]
-                )
+                warning_columns.append(str(messages[message]).split("column ", 1)[1])
     if col_name in warning_columns:
         is_warning = True
     return is_warning
@@ -128,7 +134,9 @@ def is_a_warning_col(col_name, profiling):
 def rejected_var(profiling):
     """
     This function returns a list of the variables detected as unsupported by Pandas Profiling.
-    ----------------------------------- :param: id: id of the dataset :type: id: string
+    -----------------------------------
+    :param: id: id of the dataset
+    :type: id: string
     """
     rejected = list(profiling.get_rejected_variables())
     return rejected

@@ -49,7 +49,7 @@ from src.get_statistic_summary import (
     get_statistics_summary,
     get_data_dictionary,
 )
-from src.utils import slugify
+from src.utils import slugify, load_zip_file
 
 load_dotenv(".env")
 logging.root.handlers = []
@@ -106,23 +106,21 @@ def get_mljar_info(output_dir, automl_report):
         )
     ]
     model_file_paths = [
-        p
-        for p in model_file_paths
-        if p.suffix not in [".csv", ".png", ".log", ".svg"]
+        p for p in model_file_paths if p.suffix not in [".csv", ".png", ".log", ".svg"]
     ]
     for model_path in model_file_paths:
         model_path.unlink()
 
 
 def fill_main_csv(
-        id_,
-        catalog,
-        statistics_summary,
-        output_dir=Path("../app/assets/datasets/"),
-        target_variable=None,
-        task=None,
-        score="",
-        automl=None,
+    id_,
+    catalog,
+    statistics_summary,
+    output_dir=Path("../app/assets/datasets/"),
+    target_variable=None,
+    task=None,
+    score="",
+    automl=None,
 ):
     """This function adds a new row in dgml_datasets.csv containing info of a chosen dataset."""
     main_csv_path = output_dir.joinpath("dgml_datasets.csv")
@@ -132,7 +130,7 @@ def fill_main_csv(
         "dgf_dataset_url": "dataset.url",
         "dgf_dataset_id": "dataset.id",
         "dgf_resource_url": "url",
-        "description": "description"
+        "description": "description",
     }
     for key, item in dict_main_df.items():
         new_row[key] = catalog[catalog["id"] == id_][item].values.item()
@@ -186,48 +184,54 @@ def fill_main_csv(
 
 
 def check_constraints(data, parameters):
-    """This function filters the datasets in the datasets folder according to the basic constraints defined in the config file
-    (config/config.json).
-    In fact, only datasets that have the following characteristics will be included in DGML's analysis:
-    * minimal  NUMBER OF LINES (param: min_lines)
+    """
+    This function filters the datasets in the datasets folder according to the basic constraints defined in the config
+    file (config/config.json). In fact, only datasets that have the following characteristics will be included in
+    DGML's analysis:
+
+    * minimal NUMBER OF LINES (param: min_lines)
     * maximal number of lines (param: max_lines)
     * minimal NUMBER OF COLUMNS (param: min_cols)
     * maximal number of columns (param: max_cols)
     * minimal LINES/COLUMNS RATIO ; ex. if 10: the dataset contains at least 10 times more
-    lines than columns (param: lines_cols/ratio)
-    * the presence of BOTH NUMERICAL AND CATEGORICAL VARIABLES ; if TRUE: the dataset must contain
-    both categorical and numerical variables (param: num_and_cat)
-    * the maximum percentage of MISSING VALUES (param:max_missing_values)
+    lines than columns (param: lines_cols/ratio) * the presence of BOTH NUMERICAL AND CATEGORICAL VARIABLES ; if TRUE:
+    the dataset must contain both categorical and numerical variables (param: num_and_cat) * the maximum percentage of
+    MISSING VALUES (param:max_missing_values)
     """
     passed_constraints = False
     nb_lines = len(data)
     nb_columns = len(data.columns)
-    check_categorical = data.select_dtypes(include='object').empty
-    check_numerical = data.select_dtypes(include=['float64', 'int64']).empty
-    min_lines = float(parameters['min_lines'])
-    max_lines = float(parameters['max_lines'])
-    min_cols = float(parameters['min_cols'])
-    max_cols = float(parameters['max_cols'])
-    lines_cols_ratio = float(parameters['lines_cols/ratio'])
-    max_missing = float(parameters['max_missing_values'])
+    check_categorical = data.select_dtypes(include="object").empty
+    check_numerical = data.select_dtypes(include=["float64", "int64"]).empty
+    min_lines = float(parameters["min_lines"])
+    max_lines = float(parameters["max_lines"])
+    min_cols = float(parameters["min_cols"])
+    max_cols = float(parameters["max_cols"])
+    lines_cols_ratio = float(parameters["lines_cols/ratio"])
+    max_missing = float(parameters["max_missing_values"])
     total_nan = data.isna().sum().sum() / (nb_lines * nb_columns)
-    if (min_lines <= nb_lines <= max_lines) and (min_cols <= nb_columns <= max_cols) and (
-            (nb_lines / nb_columns) >= lines_cols_ratio) and (
-            check_categorical is False) and (check_numerical is False) and (total_nan <= max_missing):
+    if (
+        (min_lines <= nb_lines <= max_lines)
+        and (min_cols <= nb_columns <= max_cols)
+        and ((nb_lines / nb_columns) >= lines_cols_ratio)
+        and (check_categorical is False)
+        and (check_numerical is False)
+        and (total_nan <= max_missing)
+    ):
         passed_constraints = True
     return passed_constraints
 
 
-# TO DO: add these parameters to a config file
 def load_dataset_wrapper(dataset_name: Union[Path, str]):
     csv_data = None
+    zip_dir = None
     if isinstance(dataset_name, Path):
+        if dataset_name.suffix == ".zip":
+            dataset_name, zip_dir = load_zip_file(dataset_name)
         try:
             csv_data = routine(dataset_name.as_posix(), num_rows=200)
         except Exception as e:
-            logging.exception(
-                f"Dataset {dataset_name}: csv-detective analysis failed"
-            )
+            logging.exception(f"Dataset {dataset_name}: csv-detective analysis failed")
             raise e
 
         encoding = csv_data.get("encoding", "latin-1")
@@ -242,10 +246,12 @@ def load_dataset_wrapper(dataset_name: Union[Path, str]):
         dataset_df = load_dataset(id=dataset_name, catalog_info=catalog_info)
         id_data = dataset_name
 
+    if zip_dir:
+        zip_dir.cleanup()
     return dataset_df, id_data, csv_data
 
 
-def get_csv_paths(datasets_path: Path):
+def get_file_paths(datasets_path: Path, extension="csv"):
     def create_files_iterator(remote_globber: GlobMatch):
         """
 
@@ -253,23 +259,23 @@ def get_csv_paths(datasets_path: Path):
         :return:
         """
         temp_path = Path("/tmp").joinpath(
-            Path(remote_globber.path).stem.split("--")[1] + ".csv"
+            Path(remote_globber.path).stem.split("--")[1] + f".{extension}"
         )
         with open(temp_path, "wb") as tmp:
             my_fs.download(remote_globber.path, tmp)
         return Path(tmp.name)
 
     """Return the paths of each dataset in the source CSVs folder, whether local or through a sftp connection"""
-    # 1. If the dataset_path is local, just return the lisst of csv files
+    # 1. If the dataset_path is local, just return the list of csv files
     if "sftp" not in datasets_path.as_posix():
         if not datasets_path.exists():
             raise FileNotFoundError(
                 f"File {datasets_path} not found. Please choose another csv folder"
             )
-        csv_paths = [
+        tables_paths = [
             Path(p)
             for p in glob.glob(
-                datasets_path.as_posix() + f"/*.csv", recursive=True
+                datasets_path.as_posix() + f"/*.{extension}", recursive=True
             )
         ]
     else:
@@ -277,14 +283,14 @@ def get_csv_paths(datasets_path: Path):
         # noinspection PyBroadException
         try:
             my_fs = fs.open_fs(datasets_path)
-            csv_paths = (
+            tables_paths = (
                 create_files_iterator(path)
-                for path in my_fs.glob("**/*.csv").__iter__()
+                for path in my_fs.glob(f"**/*.{extension}").__iter__()
             )
         except Exception as e:
             logging.exception(f"Connecting to {datasets_path} did not work")
             raise e
-    return csv_paths
+    return tables_paths
 
 
 def generate_score(statistics_summary, columns_to_drop, automl):
@@ -299,13 +305,9 @@ def generate_score(statistics_summary, columns_to_drop, automl):
       leaderboard.csv
     """
     prop_missing = statistics_summary["Percentage of missing cells"] / 100
-    prop_not_retained = (
-            len(columns_to_drop) / statistics_summary["Number of variables"]
-    )
+    prop_not_retained = len(columns_to_drop) / statistics_summary["Number of variables"]
     best_metric = automl.get_leaderboard()["metric_value"].min()
-    score = 1 / (
-            0.3 * prop_missing + 0.4 * prop_not_retained + 0.3 * best_metric
-    )
+    score = 1 / (0.3 * prop_missing + 0.4 * prop_not_retained + 0.3 * best_metric)
     return score
 
 
@@ -315,7 +317,9 @@ def read_parameters(parameters_file: Path):
         with open(parameters_file) as fout:
             parameters = json.load(fout)
     else:
-        raise FileNotFoundError(f"Config file {parameters_file.as_posix()} does not exist.")
+        raise FileNotFoundError(
+            f"Config file {parameters_file.as_posix()} does not exist."
+        )
     return parameters
 
 
@@ -333,8 +337,10 @@ def main(config_path: str):
     seen_dataframes = set()
     output_path = Path(output_path)
     dataset_path = Path(dataset_path)
-    dataset_paths = get_csv_paths(dataset_path)
-
+    dataset_paths = get_file_paths(dataset_path, extension="zip")
+    if not dataset_paths:
+        logging.exception(f"We did not found any csv file in {dataset_path}. Exiting.")
+        raise Exception(f"We did not found any csv file in {dataset_path}. Exiting.")
     specific_datasets = get_specific_datasets(specific_ids_path)
     automl_mode = automl_mode
     catalog = latest_catalog()  # or fixed_catalog to use our catalog
@@ -366,9 +372,7 @@ def main(config_path: str):
                     f"Learning"
                 )
                 continue
-            logging.info(
-                f"Dataset {id_data}: passed the first-level constraints"
-            )
+            logging.info(f"Dataset {id_data}: passed the first-level constraints")
             profiling = generate_pandas_profiling(
                 id_data,
                 data_df,
@@ -380,9 +384,7 @@ def main(config_path: str):
             )
 
             get_data_dictionary(profiling, output_dir=current_output_dir)
-            logging.info(
-                f"Dataset {id_data}: Successfully generated Pandas Profiling."
-            )
+            logging.info(f"Dataset {id_data}: Successfully generated Pandas Profiling.")
             prep_data, columns_to_drop = prepare_for_mljar(
                 data=data_df, profiling=profiling, csv_data=csv_detective_data
             )
@@ -421,9 +423,7 @@ def main(config_path: str):
                         output_dir=mljar_output_dir,
                         automl_mode=automl_mode,
                     )
-                    get_mljar_info(
-                        output_dir=mljar_output_dir, automl_report=automl
-                    )
+                    get_mljar_info(output_dir=mljar_output_dir, automl_report=automl)
                     # plot_mljar_table(id)
                     logging.info(
                         f"Dataset {id_data}: Successfully generated AutoML report."
@@ -445,9 +445,7 @@ def main(config_path: str):
                         score=score[0],
                         automl=automl,
                     )
-                    logging.info(
-                        f"Dataset {id_data}: Added info to main datasets csv."
-                    )
+                    logging.info(f"Dataset {id_data}: Added info to main datasets csv.")
                 except Exception:
                     logging.exception(
                         f"Dataset {id_data}: Fatal error while testing var {target_variable}"
@@ -455,9 +453,7 @@ def main(config_path: str):
                     continue
 
         except Exception:
-            logging.exception(
-                f"Dataset {path}: Fatal error while treating file"
-            )
+            logging.exception(f"Dataset {path}: Fatal error while treating file")
 
 
 if __name__ == "__main__":

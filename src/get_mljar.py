@@ -20,10 +20,15 @@ from supervised.automl import AutoML
 
 def prepare_for_mljar(data, profiling, csv_data=None):
     """
-    This function returns a dataset properly prepared to be used by mljar :param csv_data: :param: id: id of the dgf
-    resource (must be a txt, csv or xls file) :type: id: string :param: target_variable: name of the target variable of
-    the chosen ML task :type: target_variable: string :param: task: chosen ML task (regression, binary_classification,
-    multi_classification :type: task: string
+    This function returns a dataset properly prepared to be used by mljar
+    :param csv_data:
+    :param: id: id of the dgf resource (must be a txt, csv or xls file)
+    :type: id: string
+    :param: target_variable: name of the target variable of
+    the chosen ML task
+    :type: target_variable: string
+    :param: task: chosen ML task (regression, binary_classification, multi_classification
+    :type: task: string
     """
     columns_to_drop = []
     # 1. Check total number of NaN in dataset
@@ -38,20 +43,12 @@ def prepare_for_mljar(data, profiling, csv_data=None):
 
     # 3. Remove pandas profiling warning variables
     columns_to_drop.extend(
-        [
-            col
-            for col in data.columns
-            if is_a_warning_col(col, profiling=profiling)
-        ]
+        [col for col in data.columns if is_a_warning_col(col, profiling=profiling)]
     )
 
     # 4. Remove variables with more than 70% of NaNs
     columns_to_drop.extend(
-        [
-            col
-            for col in data.columns
-            if data[col].isna().sum() / len(data) > 0.7
-        ]
+        [col for col in data.columns if data[col].isna().sum() / len(data) > 0.7]
     )
 
     # 5. Remove redundant variables
@@ -75,11 +72,7 @@ def prepare_for_mljar(data, profiling, csv_data=None):
 
     # 7. Remove url columns
     columns_to_drop.extend(
-        [
-            col
-            for col in pandas_cat_col
-            if (str(data[col][1]).startswith("https"))
-        ]
+        [col for col in pandas_cat_col if (str(data[col][1]).startswith("https"))]
     )
 
     # 8. Remove csv-detective detected columns
@@ -99,16 +92,17 @@ def prepare_for_mljar(data, profiling, csv_data=None):
 
 def generate_mljar(data, target_variable, output_dir, automl_mode):
     """
-     This function takes a properly prepared dataframe and performs AutoML on it. The generated output is the html
-     report.
-     ------------------------------------------------
-     :param: :data: dataframe on which we want to perform a given ML task
-     :type: :data: pandas dataframe
-     :param: :target_variable: chosen target_variable for the ML task
-     :type: :target_variable: string :param: :output_dir: directory path for the mljar report :type: :output_dir: Path
-     :param: :automl_mode: mode for AutoMl computing: choose 'Perform' to have more visualisations and features (but
-     slower and not always better performing; choose 'Explain' otherwise
-     """
+    This function takes a properly prepared dataframe and performs AutoML on it. The generated output is the html
+    report. ------------------------------------------------
+    :param: :data: dataframe on which we want to perform a
+    given ML task
+    :type: :data: pandas dataframe
+    :param: :target_variable: chosen target_variable for the ML task
+    :type: :target_variable: string
+    :param: :output_dir: directory path for the mljar report :type: :output_dir: Path
+    :param: :automl_mode: mode for AutoMl computing: choose 'Perform' to have more visualisations and features (but
+    slower and not always better performing; choose 'Explain' otherwise
+    """
     y = data[target_variable].values
     X = data.drop(columns=[target_variable])
     X_train, X_test, y_train, y_test = train_test_split(

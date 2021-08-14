@@ -11,15 +11,11 @@ fs.sshfs==1.0.0
 gunicorn==20.0.4
 imagehash==4.2.0
 jupyter==1.0.0
-mkl-fft==1.2.0
-mkl-random==1.1.1
-mkl-service==2.3.0
 mljar-supervised==0.10.6
 openml==0.12.1
 pandas-profiling==3.0.0
 pip-chill==1.0.1
 python-dotenv==0.15.0
-sqlitedict==1.7.0
 uvicorn==0.13.3
 # alembic==1.6.5 # Installed as dependency for optuna
 # appdirs==1.4.4 # Installed as dependency for fs

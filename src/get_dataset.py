@@ -28,9 +28,7 @@ def info_from_catalog(id: str, catalog: pd.DataFrame):
 
     url = catalog[catalog["id"] == id]["url"]
     if url.empty:
-        raise Exception(
-            f"The dataset with id {id} was not found in DGF catalog"
-        )
+        raise Exception(f"The dataset with id {id} was not found in DGF catalog")
     url = url.values.item()
 
     file_format = catalog[catalog["id"] == id]["format"].values.item()
@@ -89,8 +87,8 @@ def load_dataset(id, catalog_info):
     referenced by data.gouv.fr. Otherwise, you get an error and you should manually upload it. Remark: on data.gouv.fr,
     datasets are available in various "formats": json, shp, csv, zip, document, xls, pdf, html, xlsx,geojson etc. to
     this day, our repository only contains files with .csv,.txt, .xls extensions, therefore we only treat these
-    extensions. ------------------- :param: id: id of the dgf resource (must be a txt, csv or xls file) :type: id:
-    string
+    extensions. ------------------- :param: id: id of the dgf resource (must be a txt, csv or xls file) :type:
+    id:string
     """
     url = catalog_info["url_resource"]
     referenced = is_referenced(url=url, id=id, catalog_info=catalog_info)
