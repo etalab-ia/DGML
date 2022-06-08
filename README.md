@@ -42,7 +42,7 @@ Pour lancer l'application, depuis votre ligne de commande, à la racine:
  
  ### Libraries utilisées
  
- - [pandas profiling](https://pandas-profiling.github.io/pandas-profiling/docs/master/rtd/) pour le profiling statistique
+ - [pandas profiling](https://pandas-profiling.ydata.ai/docs/master/rtd/) pour le profiling statistique
  - [mljar-supervised](https://supervised.mljar.com/) pour l'entraînement et test automatique des algortihmes de Machine Learning
  
  ### Ressources
