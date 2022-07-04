@@ -190,7 +190,7 @@ def generate_dataset_page(dataset_url: str, datasets_df: pd.DataFrame):
         html.H4(id="mljar-link-badge", children=None),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Réutilisations Machine Learning (data.gouv.fr)"),
-        generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
+        #generate_reuses_cards(get_reuses(dataset_dict["dgf_dataset_id"])),
         html.Hr(style={"marginBottom": "20px"}),
         html.H3("Nos Expériences"),
         # html.P("Check out our experiments on this dataset : "),
