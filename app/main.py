@@ -9,12 +9,15 @@ from dash.dependencies import Input, Output
 import pandas as pd
 import dash_bootstrap_components as dbc
 from dotenv import load_dotenv
-
+import json
 from apps.dataset_page import generate_dataset_page
 from apps.utils import generate_kpi_card, DATASET_COLUMNS, generate_badge, MLJAR_INFO_DICT
 
 BASE_PATH = Path(__file__).parent.resolve()
 DATA_PATH = BASE_PATH.joinpath("assets/datasets").resolve()
+
+with open("conf.json", "r") as f:
+    URL_MAIN = json.load(f)["URL_MAIN"]
 
 from apps.banner import get_banner
 
@@ -27,7 +30,7 @@ app = dash.Dash(
     __name__,
     external_stylesheets=[dbc.themes.BOOTSTRAP],
     suppress_callback_exceptions=True,
-    url_base_pathname="/dgml/",
+    url_base_pathname=URL_MAIN,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
 

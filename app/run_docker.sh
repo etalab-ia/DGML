@@ -1,3 +1,5 @@
+echo "Prepare conf"
+cp conf.prod.json conf.json
 echo "Remove image"
 docker rm -f open-ml-app
 echo "Build image"
